@@ -21,7 +21,6 @@ driver/enable_input=true
 [autoload]
 
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
-Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
 GameSettings="*res://globals/game_settings.tscn"
 GlobalSignalBus="*res://globals/global_signal_bus.gd"
@@ -42,7 +41,7 @@ window/stretch/scale=4.0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/create_png/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/gdscript_formatter/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/create_png/plugin.cfg", "res://addons/gdscript_formatter/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [input]
 
