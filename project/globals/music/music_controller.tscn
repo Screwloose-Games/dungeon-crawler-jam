@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dht5lwkmw57nu"]
+
+[ext_resource type="Script" uid="uid://djfdn7g087l3t" path="res://global_scripts/music/music_controller.gd" id="1_ui40s"]
+[ext_resource type="AudioStream" uid="uid://cca0bnoa8rccm" path="res://common/audio/music/aud_dungeon_music.wav" id="2_yunea"]
+
+[node name="music_controller" type="Node"]
+process_mode = 3
+script = ExtResource("1_ui40s")
+music = ExtResource("2_yunea")
+
+[node name="music_player" type="AudioStreamPlayer" parent="."]
+volume_db = -7.5
+bus = &"Music"

@@ -1,0 +1,73 @@
+[gd_scene load_steps=4 format=3 uid="uid://cday7frinuw4b"]
+
+[ext_resource type="Texture2D" uid="uid://d1saoawy2e1te" path="res://common/images/square.png" id="1_3rosv"]
+[ext_resource type="PackedScene" uid="uid://cownbpi7cglwy" path="res://common/ui/components/nine_patch_rect/nine_patch_rect.tscn" id="2_hgjxh"]
+[ext_resource type="Script" path="res://common/ui/main_menu/main_menu_button.gd" id="3_gn5bg"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="PauseMenu" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="PauseMenu"]
+modulate = Color(0.286275, 0.286275, 0.286275, 0.713726)
+layout_mode = 2
+texture = ExtResource("1_3rosv")
+
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenu"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="NinePatchRect" parent="PauseMenu/PanelContainer" instance=ExtResource("2_hgjxh")]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Paused
+"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ResumeButton" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Resume"
+
+[node name="OptionsButton" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Options"
+
+[node name="MainMenuButton" type="Button" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Main Menu"
+script = ExtResource("3_gn5bg")

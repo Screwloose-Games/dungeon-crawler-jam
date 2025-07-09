@@ -1,0 +1,14 @@
+{
+  "yaml.schemas": {
+    "./schemas/github-issue-form-template-schema.json": [".github/ISSUE_TEMPLATE/*.yaml"]
+  },
+  "files.trimTrailingWhitespace": false,
+  "editor.trimAutoWhitespace": false,
+  "[yaml]": {
+      "editor.tabSize": 2,
+      "editor.insertSpaces": true
+},
+"godotTools.editorPath.godot4": "godot",
+"python-envs.defaultEnvManager": "ms-python.python:system",
+"python-envs.pythonProjects": []
+}

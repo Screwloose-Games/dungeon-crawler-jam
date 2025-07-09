@@ -1,0 +1,73 @@
+@startuml
+
+class QuestStep {
+  +signal progressed
+  +signal completed(quest_step: QuestStep)
+
+  +description: String
+  +goal: int
+  +prerequisites: Array[int]
+  +play_dialogue: String
+  +marker_id: String
+
+  markers: Array[QuestMarker3D]
+}
+
+class Quest {
+  +signal quest_state_changed
+  +signal quest_completed(giver: String)
+
+  +id: String
+  +name: String
+  +quest_giver: String
+  +description: String
+  +community_board_text: String
+  +steps: Array[QuestStep]
+  +unlock_on_accept: Array[String]
+  +unlock_on_complete: Array[String]
+  +resource_rewards: Dictionary[ResourcesManager.ResourceType, int]
+  +next_quest: Quest
+}
+
+class QuestManager {
+  +signal quest_started(quest_id: String)
+  +signal quest_started_res(quest: Quest)
+  +signal quests_changed
+  +signal quest_completed(giver: String)
+  +signal quest_cancelled(quest: Quest)
+  +signal structure_built(name: String)
+  +signal crop_planted(name: String)
+
+  quests: Array[Quest]
+  quest_markers: Array[QuestMarker3D]
+  unlocked_quests: Array[Quest]
+}
+
+class SignalQuestStep {
+  <<abstract>>
+}
+
+class EnterAreaQuestStep {
+  +area_id: String
+  +start_time_hour: int
+  +end_time_hour: int
+  +margin_of_error_minutes: int
+}
+
+class DaysPassedQuestStep
+
+class BuildStructQuestStep {
+  +structure_name: String
+}
+
+
+Quest --> QuestStep : contains >
+Quest --> Quest : starts >
+QuestManager --> Quest : manages >
+QuestStep --> QuestMarker3D : references >
+
+EnterAreaQuestStep --|> SignalQuestStep
+DaysPassedQuestStep --|> SignalQuestStep
+BuildStructQuestStep --|> SignalQuestStep
+
+@enduml

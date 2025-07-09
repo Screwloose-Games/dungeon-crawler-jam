@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cownbpi7cglwy"]
+
+[ext_resource type="Texture2D" uid="uid://bvq6ku3xo3weu" path="res://common/ui/components/nine_patch_rect/nine_patch_rect.png" id="1_f24s5"]
+
+[node name="NinePatchRect" type="NinePatchRect"]
+texture_filter = 1
+texture = ExtResource("1_f24s5")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4

@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=3 uid="uid://kjf6gpexy1jl"]
+
+[ext_resource type="Script" uid="uid://m8ra1k6w7nve" path="res://common/ui/overlays/upgrade_overlay/weapon_upgrade_row.gd" id="1_r1kak"]
+[ext_resource type="Texture2D" uid="uid://8jaluair0mqq" path="res://common/ui/art/slider_handle.png" id="2_vu88x"]
+[ext_resource type="Texture2D" uid="uid://br3prk3apgv7i" path="res://common/ui/overlays/upgrade_overlay/art/ui_add_point_icon.png" id="3_3fc1v"]
+[ext_resource type="Script" uid="uid://cjy6dto21jwph" path="res://common/ui/overlays/upgrade_overlay/power_increment.gd" id="3_mcovj"]
+[ext_resource type="Texture2D" uid="uid://6cveandhlrcw" path="res://common/ui/overlays/upgrade_overlay/art/ui_upgrade_increment_icon.png" id="4_vu88x"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5kf35"]
+texture = ExtResource("2_vu88x")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="Theme" id="Theme_mcovj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kf35"]
+atlas = ExtResource("4_vu88x")
+region = Rect2(7, 2, 18, 28)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vaj7j"]
+load_path = "res://.godot/imported/ui_upgrade_increment_icon.png-bfc6934a4efaa59bbdc93e0f37bb3c52.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_waid6"]
+atlas = SubResource("CompressedTexture2D_vaj7j")
+region = Rect2(38, 1, 20, 30)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3fc1v"]
+
+[node name="UpgradeRow" type="HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+size_flags_horizontal = 3
+alignment = 1
+script = ExtResource("1_r1kak")
+
+[node name="HBoxContainerLeft" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainerLeft"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_5kf35")
+
+[node name="UpgradeIcon" type="TextureRect" parent="HBoxContainerLeft/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = SubResource("Theme_mcovj")
+expand_mode = 2
+
+[node name="PowerIncrement" type="TextureRect" parent="HBoxContainerLeft"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 30)
+layout_mode = 2
+texture = SubResource("AtlasTexture_5kf35")
+script = ExtResource("3_mcovj")
+off_texture = SubResource("AtlasTexture_5kf35")
+on_texture = SubResource("AtlasTexture_waid6")
+
+[node name="PowerIncrement2" type="TextureRect" parent="HBoxContainerLeft"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 30)
+layout_mode = 2
+texture = SubResource("AtlasTexture_5kf35")
+script = ExtResource("3_mcovj")
+off_texture = SubResource("AtlasTexture_5kf35")
+on_texture = SubResource("AtlasTexture_waid6")
+
+[node name="PowerIncrement3" type="TextureRect" parent="HBoxContainerLeft"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 30)
+layout_mode = 2
+texture = SubResource("AtlasTexture_5kf35")
+script = ExtResource("3_mcovj")
+off_texture = SubResource("AtlasTexture_5kf35")
+on_texture = SubResource("AtlasTexture_waid6")
+
+[node name="HBoxContainerRight" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="UpgradeButton" type="Button" parent="HBoxContainerRight"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_constants/icon_max_width = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_3fc1v")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3fc1v")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3fc1v")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3fc1v")
+icon = ExtResource("3_3fc1v")
+flat = true
+expand_icon = true

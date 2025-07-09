@@ -1,0 +1,213 @@
+[gd_scene load_steps=23 format=3 uid="uid://dyb6nwaiae8ea"]
+
+[ext_resource type="Script" uid="uid://nblr465pgu85" path="res://components/buildable_surface.gd" id="1_5i2rm"]
+[ext_resource type="Texture2D" uid="uid://b5xmoaivoh8wn" path="res://components/buildable_surface_use_icons.png" id="2_q4s4m"]
+[ext_resource type="Texture2D" uid="uid://2agutxxmcxdl" path="res://assets/square-grid.png" id="3_phaic"]
+[ext_resource type="Script" uid="uid://3wlfdlwljewv" path="res://components/buildable_area_3d.gd" id="4_phaic"]
+[ext_resource type="PackedScene" uid="uid://74l5iu6uynq6" path="res://components/interactable_area_3d.tscn" id="5_74j1h"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ii5o6"]
+texture = ExtResource("2_q4s4m")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_sl285"]
+sources/0 = SubResource("TileSetAtlasSource_ii5o6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ctqt"]
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+albedo_color = Color(1, 0.992157, 0, 0.25098)
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_61rxh"]
+material = SubResource("StandardMaterial3D_4ctqt")
+orientation = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yj0xb"]
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+albedo_color = Color(1, 0.992157, 0, 0.25098)
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_gco2h"]
+material = SubResource("StandardMaterial3D_yj0xb")
+orientation = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qgdfq"]
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+albedo_color = Color(1, 0, 0, 0.25098)
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_6cebu"]
+material = SubResource("StandardMaterial3D_qgdfq")
+orientation = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_phaic"]
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+albedo_color = Color(1, 0, 0, 0.25098)
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_74j1h"]
+material = SubResource("StandardMaterial3D_phaic")
+orientation = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_snj21"]
+albedo_color = Color(1, 0.458824, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_snj21"]
+material = SubResource("StandardMaterial3D_snj21")
+size = Vector2(16, 16)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_74j1h"]
+transparency = 1
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+albedo_color = Color(0.776471, 0.85098, 0.231373, 1)
+albedo_texture = ExtResource("3_phaic")
+disable_receive_shadows = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_v4cgo"]
+material = SubResource("StandardMaterial3D_74j1h")
+orientation = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_af6sc"]
+albedo_color = Color(0.340339, 0.340339, 0.340339, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_x3fli"]
+material = SubResource("StandardMaterial3D_af6sc")
+orientation = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5i2rm"]
+size = Vector3(9.69629, 1, 7.49023)
+
+[node name="BuildableSurface" type="Node3D"]
+editor_description = "By default it is a 8x8 grid centered on the node's location.
+The node location x and z need to be whole world coordinates (i.e. Vector3(4.0,6.5,4.0) is valid, but Vector3(4.1,4.5,3.8) will cause the grid not to overlap with the mouse).
+If the size or shape needs to be adjusted then you need to make editable children and paint the shape in the tilemap and adjust the Area3D/CollisionShape3D."
+script = ExtResource("1_5i2rm")
+is_active = true
+
+[node name="SurfaceMap" type="TileMap" parent="."]
+scale = Vector2(0.2, 0.2)
+tile_set = SubResource("TileSet_sl285")
+format = 2
+layer_0/tile_data = PackedInt32Array(-65538, 131072, 7, -2, 131072, 7, 65534, 131072, 7, 131070, 131072, 7, -65537, 131072, 7, -1, 131072, 7, 65535, 131072, 7, 131071, 131072, 7, -131072, 131072, 7, -65536, 131072, 7, 0, 131072, 7, 65536, 131072, 7, -131071, 131072, 7, -65535, 131072, 7, 1, 131072, 7, 65537, 131072, 7, -196612, 131072, 7, -131076, 131072, 7, -65540, 131072, 7, -4, 131072, 7, 65532, 131072, 7, 131068, 131072, 7, 196604, 131072, 7, 262140, 131072, 7, -196611, 131072, 7, -131075, 131072, 7, -65539, 131072, 7, -3, 131072, 7, 65533, 131072, 7, 131069, 131072, 7, 196605, 131072, 7, 262141, 131072, 7, -196610, 131072, 7, -131074, 131072, 7, 196606, 131072, 7, 262142, 131072, 7, -196609, 131072, 7, -131073, 131072, 7, 196607, 131072, 7, 262143, 131072, 7, -262144, 131072, 7, -196608, 131072, 7, 131072, 131072, 7, 196608, 131072, 7, -262143, 131072, 7, -196607, 131072, 7, 131073, 131072, 7, 196609, 131072, 7, -262142, 131072, 7, -196606, 131072, 7, -131070, 131072, 7, -65534, 131072, 7, 2, 131072, 7, 65538, 131072, 7, 131074, 131072, 7, 196610, 131072, 7, -262141, 131072, 7, -196605, 131072, 7, -131069, 131072, 7, -65533, 131072, 7, 3, 131072, 7, 65539, 131072, 7, 131075, 131072, 7, 196611, 131072, 7)
+
+[node name="SelectionPlaceholder" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_61rxh")
+skeleton = NodePath("../..")
+
+[node name="SelectionPlaceholder" type="MeshInstance3D" parent="SelectionPlaceholder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_gco2h")
+skeleton = NodePath("../../..")
+
+[node name="StructurePlaceholder" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, -1, 0)
+
+[node name="SelectionPlaceholder" type="MeshInstance3D" parent="StructurePlaceholder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.06, 0.5)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_6cebu")
+skeleton = NodePath("../../..")
+
+[node name="SelectionPlaceholder" type="MeshInstance3D" parent="StructurePlaceholder/SelectionPlaceholder"]
+cast_shadow = 0
+mesh = SubResource("QuadMesh_74j1h")
+skeleton = NodePath("../../../..")
+
+[node name="SurfaceDebugHint" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("PlaneMesh_snj21")
+
+[node name="Preview" type="Node3D" parent="."]
+visible = false
+
+[node name="Preview" type="MeshInstance3D" parent="Preview"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_v4cgo")
+skeleton = NodePath("../../..")
+
+[node name="AlwaysOnPreview" type="Node3D" parent="."]
+
+[node name="Preview" type="MeshInstance3D" parent="AlwaysOnPreview"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_x3fli")
+skeleton = NodePath("../../..")
+
+[node name="BuildableInteract" type="Node" parent="." node_paths=PackedStringArray("buildable_surface")]
+script = ExtResource("4_phaic")
+buildable_surface = NodePath("..")
+
+[node name="InteractableBuildableArea" parent="." instance=ExtResource("5_74j1h")]
+unique_name_in_owner = true
+collision_layer = 16
+label_text = "Build"
+toggleable = true
+
+[node name="CollisionShape3D" parent="InteractableBuildableArea" index="0"]
+shape = SubResource("BoxShape3D_5i2rm")
+
+[editable path="InteractableBuildableArea"]
