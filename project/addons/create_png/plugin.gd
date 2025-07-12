@@ -13,10 +13,11 @@ func _enter_tree():
 	command_palette.add_command(command_name, "File/Create", Callable(self, "_prompt_for_filename"))
 
 
-func _exit_tree():
-	# Remove menu item and command when the plugin is disabled
-	var command_palette = get_editor_interface().get_command_palette()
-	command_palette.remove_command(command_name)
+#func _exit_tree():
+## Remove menu item and command when the plugin is disabled
+#var command_palette = get_editor_interface().get_command_palette()
+#if command_palette
+#command_palette.remove_command(command_name)
 
 
 func _prompt_for_filename():
