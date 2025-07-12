@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://o8ll87nb3ty1"]
+
+[ext_resource type="Script" uid="uid://ycye2pxe3lrk" path="res://levels/battles/battle/scripts/unit/unit_node.gd" id="1_ilobj"]
+[ext_resource type="Resource" uid="uid://cdcfvr8yx37yy" path="res://levels/battles/battle/scripts/unit/resources/unit_skeleton.tres" id="2_iapmn"]
+[ext_resource type="SpriteFrames" uid="uid://dfq76jptl8yqn" path="res://assets/art/character/npc/skeleton.res" id="3_06uyp"]
+
+[node name="UnitNode" type="Node2D"]
+script = ExtResource("1_ilobj")
+unit = ExtResource("2_iapmn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = ExtResource("3_06uyp")
+animation = &"attack"
