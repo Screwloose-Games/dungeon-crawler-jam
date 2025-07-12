@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Unit" load_steps=7 format=3 uid="uid://cdcfvr8yx37yy"]
+
+[ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/scripts/ability.gd" id="1_e4jav"]
+[ext_resource type="Script" uid="uid://c1n1gnpms4ens" path="res://levels/battles/battle/scripts/unit/unit.gd" id="1_y6s5j"]
+[ext_resource type="Script" uid="uid://brp5ns0pmjttu" path="res://levels/battles/battle/scripts/movement.gd" id="2_jj6w5"]
+[ext_resource type="Texture2D" uid="uid://caqfq5wc6ptgv" path="res://assets/art/character/npc/skeleton_portrait.png" id="2_nw4pq"]
+[ext_resource type="SpriteFrames" uid="uid://dfq76jptl8yqn" path="res://assets/art/character/npc/skeleton.res" id="3_wwygt"]
+
+[sub_resource type="Resource" id="Resource_lxlmf"]
+script = ExtResource("2_jj6w5")
+movement_points_per_ap = 2
+metadata/_custom_type_script = "uid://brp5ns0pmjttu"
+
+[resource]
+script = ExtResource("1_y6s5j")
+name = ""
+description = ""
+abilities = Array[ExtResource("1_e4jav")]([])
+movement = SubResource("Resource_lxlmf")
+sprite_frames = ExtResource("3_wwygt")
+portrait = ExtResource("2_nw4pq")
+metadata/_custom_type_script = "uid://c1n1gnpms4ens"
