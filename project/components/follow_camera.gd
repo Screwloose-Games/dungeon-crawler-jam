@@ -34,21 +34,12 @@ func _process(delta: float) -> void:
 	if shake_timer > 0.0:
 		shake_timer -= delta
 		var shake_factor = shake_timer / shake_duration
-		shake_offset = (
-			Vector3(randf() * 2 - 1, randf() * 2 - 1, randf() * 2 - 1)
-			* shake_intensity
-			* shake_factor
-		)
+		shake_offset = (Vector3(randf() * 2 - 1, randf() * 2 - 1, randf() * 2 - 1) * shake_intensity * shake_factor)
 	else:
 		shake_offset = Vector3.ZERO
 
 	# Smoothly follow the target
-	var target_position = (
-		target.global_position
-		+ starting_transform.normalized() * zoom_distance
-		- Vector3(0, v_offset, 0)
-		+ shake_offset
-	)
+	var target_position = target.global_position + starting_transform.normalized() * zoom_distance - Vector3(0, v_offset, 0) + shake_offset
 	global_position = global_position.lerp(target_position, lerp_speed * delta)
 
 
