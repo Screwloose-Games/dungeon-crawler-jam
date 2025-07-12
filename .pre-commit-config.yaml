@@ -12,7 +12,7 @@ repos:
         require_serial: true
         types: [gdscript]
         additional_dependencies: [setuptools]
-        exclude: ^addons/
+        exclude: ^project/addons/
       - id: gdformat
         name: gdformat
         description: "gdformat - formatter for GDScript"
@@ -22,4 +22,4 @@ repos:
         require_serial: true
         types: [gdscript]
         additional_dependencies: [setuptools]
-        exclude: ^addons/
+        exclude: ^project/addons/

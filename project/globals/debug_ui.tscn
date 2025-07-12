@@ -1,38 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b061t0r5qdbh6"]
+[gd_scene load_steps=4 format=3 uid="uid://b061t0r5qdbh6"]
 
 [ext_resource type="Script" uid="uid://dymscuems4irn" path="res://globals/debug_ui.gd" id="1_7ny8s"]
-[ext_resource type="Script" uid="uid://d6gh3spmgbp0" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="2_2j3hm"]
 [ext_resource type="Script" uid="uid://btd27cbw2fm4u" path="res://globals/debug_ui/start_quest_debug_ui.gd" id="2_tb76i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tb76i"]
 bg_color = Color(1, 0, 0, 1)
-
-[sub_resource type="Texture2D" id="Texture2D_tb76i"]
-resource_local_to_scene = false
-resource_name = ""
-script = ExtResource("2_2j3hm")
-path = "Skip"
-show_mode = 0
-force_type = 0
-metadata/_custom_type_script = "uid://d6gh3spmgbp0"
-
-[sub_resource type="Texture2D" id="Texture2D_ekx6d"]
-resource_local_to_scene = false
-resource_name = ""
-script = ExtResource("2_2j3hm")
-path = "ToggleUi"
-show_mode = 0
-force_type = 0
-metadata/_custom_type_script = "uid://d6gh3spmgbp0"
-
-[sub_resource type="Texture2D" id="Texture2D_re1eu"]
-resource_local_to_scene = false
-resource_name = ""
-script = ExtResource("2_2j3hm")
-path = "Debug"
-show_mode = 0
-force_type = 0
-metadata/_custom_type_script = "uid://d6gh3spmgbp0"
 
 [node name="DebugUi" type="CanvasLayer"]
 script = ExtResource("1_7ny8s")
@@ -117,7 +89,6 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="DebugUIContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-texture = SubResource("Texture2D_tb76i")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="DebugUIContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
@@ -130,7 +101,6 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="DebugUIContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-texture = SubResource("Texture2D_ekx6d")
 expand_mode = 1
 
 [node name="Label2" type="Label" parent="DebugUIContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
@@ -143,7 +113,6 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="DebugUIContainer/MarginContainer/VBoxContainer/HBoxContainer4"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-texture = SubResource("Texture2D_re1eu")
 expand_mode = 1
 
 [node name="Label3" type="Label" parent="DebugUIContainer/MarginContainer/VBoxContainer/HBoxContainer4"]
@@ -175,7 +144,6 @@ size_flags_vertical = 4
 [node name="TextureRect" type="TextureRect" parent="LabelMarginContainer/VBoxContainer/HBoxContainer4"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-texture = SubResource("Texture2D_re1eu")
 expand_mode = 1
 
 [node name="Label3" type="Label" parent="LabelMarginContainer/VBoxContainer/HBoxContainer4"]
@@ -188,7 +156,6 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="LabelMarginContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-texture = SubResource("Texture2D_tb76i")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="LabelMarginContainer/VBoxContainer/HBoxContainer2"]
@@ -201,7 +168,6 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="LabelMarginContainer/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-texture = SubResource("Texture2D_ekx6d")
 expand_mode = 1
 
 [node name="Label2" type="Label" parent="LabelMarginContainer/VBoxContainer/HBoxContainer3"]

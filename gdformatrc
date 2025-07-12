@@ -1,3 +1,4 @@
 excluded_directories: !!set
   .git: null
   addons: null
+  project/addons: null

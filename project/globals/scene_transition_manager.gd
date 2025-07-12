@@ -53,13 +53,14 @@ func _on_fade_out_position(source: Node3D, target: Node3D, transition_instance: 
 	change_position(source, target)
 
 	if source.has_node("Camera3D"):
+		pass
 		#var camera = source.get_node("Camera3D")
-		var cams = PhantomCameraManager.get_phantom_camera_3ds()
-		var camera = cams[0]
-		camera.follow_damping = false
-		camera.global_position = source.global_position
-		await get_tree().process_frame
-		camera.follow_damping = true
+		#var cams = PhantomCameraManager.get_phantom_camera_3ds()
+		#var camera = cams[0]
+		#camera.follow_damping = false
+		#camera.global_position = source.global_position
+		#await get_tree().process_frame
+		#camera.follow_damping = true
 	transition_instance.fade_in()
 
 
