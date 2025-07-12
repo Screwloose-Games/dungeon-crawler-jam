@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ycye2pxe3lrk" path="res://levels/battles/battle/scripts/unit/unit_node.gd" id="1_ilobj"]
 [ext_resource type="Resource" uid="uid://cdcfvr8yx37yy" path="res://levels/battles/battle/scripts/unit/resources/unit_skeleton.tres" id="2_iapmn"]
-[ext_resource type="SpriteFrames" uid="uid://dfq76jptl8yqn" path="res://assets/art/character/npc/skeleton.res" id="3_06uyp"]
+[ext_resource type="SpriteFrames" uid="uid://dfq76jptl8yqn" path="res://assets/art/character/npc/skeleton/skeleton.res" id="3_06uyp"]
 
 [node name="UnitNode" type="Node2D"]
 script = ExtResource("1_ilobj")
