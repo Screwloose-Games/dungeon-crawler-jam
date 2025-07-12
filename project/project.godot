@@ -31,12 +31,6 @@ SoundManager="*res://globals/sound_manager/sound_manager.tscn"
 directories/dch_directory={}
 directories/dtl_directory={}
 
-[display]
-
-window/size/viewport_width=1200
-window/size/viewport_height=800
-window/stretch/scale=4.0
-
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/create_png/plugin.cfg", "res://addons/gdscript_formatter/plugin.cfg", "res://addons/gut/plugin.cfg")
