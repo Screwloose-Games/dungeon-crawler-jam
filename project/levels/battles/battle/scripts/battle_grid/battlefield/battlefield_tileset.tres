@@ -1,0 +1,5 @@
+[gd_resource type="TileSet" format=3 uid="uid://iqq6vuqse1mq"]
+
+[resource]
+custom_data_layer_0/name = "TileType"
+custom_data_layer_0/type = 2
