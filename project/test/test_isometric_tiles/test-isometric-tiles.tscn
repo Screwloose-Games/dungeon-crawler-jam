@@ -22,6 +22,8 @@ texture_region_size = Vector2i(30, 32)
 [sub_resource type="TileSet" id="TileSet_wv0ia"]
 tile_shape = 1
 tile_size = Vector2i(30, 16)
+custom_data_layer_0/name = ""
+custom_data_layer_0/type = 0
 sources/3 = SubResource("TileSetAtlasSource_wv0ia")
 
 [node name="Test-isometric-tiles" type="Node2D"]

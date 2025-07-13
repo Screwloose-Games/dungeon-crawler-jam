@@ -1,6 +1,8 @@
 class_name Ability
 extends Resource
 
-var number_of_targets: int
-var stages: Array[AbilityStage]
-var constraints: Array[TileConstraint]
+@export var name: String
+@export var description: String
+@export var number_of_targets: int
+@export var constraints: Array[TileConstraint]
+@export var stages: Array[AbilityStage]

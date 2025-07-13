@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Unit" load_steps=7 format=3 uid="uid://b1kyik0bsjfow"]
+
+[ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/scripts/ability.gd" id="1_sc0gg"]
+[ext_resource type="Script" uid="uid://brp5ns0pmjttu" path="res://levels/battles/battle/scripts/movement.gd" id="2_m1sb7"]
+[ext_resource type="Texture2D" uid="uid://caqfq5wc6ptgv" path="res://assets/art/character/npc/skeleton/skeleton_portrait.png" id="3_fq4tn"]
+[ext_resource type="Script" uid="uid://c1n1gnpms4ens" path="res://levels/battles/battle/scripts/unit/unit.gd" id="4_k8w6h"]
+[ext_resource type="SpriteFrames" uid="uid://duj425ywhbw4c" path="res://assets/art/character/npc/viscera/viscera.res" id="5_sc0gg"]
+
+[sub_resource type="Resource" id="Resource_lxlmf"]
+script = ExtResource("2_m1sb7")
+movement_points_per_ap = 2
+metadata/_custom_type_script = "uid://brp5ns0pmjttu"
+
+[resource]
+script = ExtResource("4_k8w6h")
+name = "Viscera"
+description = "Artillery"
+abilities = Array[ExtResource("1_sc0gg")]([])
+movement = SubResource("Resource_lxlmf")
+sprite_frames = ExtResource("5_sc0gg")
+portrait = ExtResource("3_fq4tn")
+metadata/_custom_type_script = "uid://c1n1gnpms4ens"
