@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://fmwc5lkah11v"
+path="res://.godot/imported/paladin.aseprite-e8f19698ad9c67cb9fc3f4c1c0ad662f.res"
+
+[deps]
+
+source_file="res://assets/art/character/player/paladin/paladin.aseprite"
+dest_files=["res://.godot/imported/paladin.aseprite-e8f19698ad9c67cb9fc3f4c1c0ad662f.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c47jdm7mnkmcy"
+path="res://.godot/imported/warlock.aseprite-706cf6ef26a94f446f09a746882b0141.res"
+
+[deps]
+
+source_file="res://assets/art/character/player/warlock/warlock.aseprite"
+dest_files=["res://.godot/imported/warlock.aseprite-706cf6ef26a94f446f09a746882b0141.res"]
+
+[params]
+
