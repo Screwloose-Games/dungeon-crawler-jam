@@ -1,7 +1,7 @@
 class_name Commander
 extends Resource
 
-enum CommanderType 
+enum CommanderType
 {
 	HUMAN,
 	AI,
