@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dhl38dr3ysiyc"
-path="res://.godot/imported/Bridgnorth-Bold.ttf-cd7c895e3db31a94c82c46ac72a445d2.fontdata"
+uid="uid://ddwq8m7dijx3b"
+path="res://.godot/imported/main_menu.ttf-1cda116b12b13b2f2fce6399ef7f730b.fontdata"
 
 [deps]
 
-source_file="res://common/ui/fonts/bridgnorth/Bridgnorth-Bold.ttf"
-dest_files=["res://.godot/imported/Bridgnorth-Bold.ttf-cd7c895e3db31a94c82c46ac72a445d2.fontdata"]
+source_file="res://common/fonts/main_menu.ttf"
+dest_files=["res://.godot/imported/main_menu.ttf-1cda116b12b13b2f2fce6399ef7f730b.fontdata"]
 
 [params]
 

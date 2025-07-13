@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cpwb870aw2anb"]
+
+[ext_resource type="FontFile" uid="uid://bdfcopkbkfva0" path="res://common/fonts/main_menu.ttf" id="1_00eai"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f5n0t"]
+
+[resource]
+default_font = ExtResource("1_00eai")
+default_font_size = 64
+PanelContainer/styles/panel = SubResource("StyleBoxEmpty_f5n0t")
