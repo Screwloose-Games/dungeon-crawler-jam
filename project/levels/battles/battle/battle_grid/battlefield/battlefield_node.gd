@@ -2,6 +2,8 @@
 class_name BattlefieldNode
 extends Node2D
 
+const TILE_DATA_LAYER = "TileType"
+
 @export_custom(PROPERTY_HINT_NONE, "", 2) var tile_data: Dictionary[Vector2i, Battlefield.TileType]
 @onready var floors: TileMapLayer = $Floors
 
@@ -18,5 +20,5 @@ func _on_tile_map_changed():
 
 
 func convert_tile_data(pos: Vector2i, data: TileData):
-	var tile_type = data.get_custom_data("TileType") as Battlefield.TileType
+	var tile_type = data.get_custom_data(TILE_DATA_LAYER) as Battlefield.TileType
 	tile_data[pos] = tile_type
