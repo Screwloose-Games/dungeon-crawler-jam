@@ -1,35 +1,28 @@
-[gd_resource type="Resource" script_class="BattleScenario" load_steps=19 format=3 uid="uid://dj46ja1socuji"]
+[gd_resource type="Resource" script_class="BattleScenario" load_steps=17 format=3 uid="uid://dj46ja1socuji"]
 
 [ext_resource type="Script" uid="uid://djddfblilmucd" path="res://levels/battles/battle/end_condition/battle_end_condition.gd" id="1_haqrg"]
 [ext_resource type="Script" uid="uid://sr2agdyju43u" path="res://levels/battles/battle/battle_scenario.gd" id="2_haqrg"]
 [ext_resource type="Script" uid="uid://div78sfeq8md1" path="res://levels/battles/battle/end_condition/last_standing_end_condition.gd" id="2_q642w"]
 [ext_resource type="PackedScene" uid="uid://crt4v22yg30a" path="res://levels/battles/battle/battle_grid/battlefield/example_battlefield.tscn" id="3_h0d0n"]
-[ext_resource type="Script" uid="uid://dhqk8ma33q5vb" path="res://levels/battles/battle/battle_grid/battle_grid.gd" id="3_ledow"]
 [ext_resource type="Script" uid="uid://csttd1rppjnco" path="res://levels/battles/battle/team.gd" id="3_q642w"]
 [ext_resource type="Script" uid="uid://dqy4vdo8hqsk5" path="res://levels/battles/battle/commander.gd" id="4_ledow"]
 [ext_resource type="Script" uid="uid://kxw3kblmvh0b" path="res://levels/battles/battle/battle_grid/battlefield/battlefield.gd" id="4_qksev"]
 [ext_resource type="PackedScene" uid="uid://d4e5najwcpfi4" path="res://levels/battles/battle/battle_grid/grid_object_layout/example_grid_object_layout.tscn" id="5_ot768"]
 [ext_resource type="Script" uid="uid://bi1g3t40pyhyp" path="res://levels/battles/battle/battle_grid/grid_object_layout/grid_object_layout.gd" id="6_wl414"]
 
-[sub_resource type="Resource" id="Resource_ledow"]
-script = ExtResource("2_q642w")
-metadata/_custom_type_script = "uid://div78sfeq8md1"
-
-[sub_resource type="Resource" id="Resource_s70j8"]
+[sub_resource type="Resource" id="Resource_ot768"]
 script = ExtResource("4_qksev")
 scene = ExtResource("3_h0d0n")
 metadata/_custom_type_script = "uid://kxw3kblmvh0b"
 
-[sub_resource type="Resource" id="Resource_vrc85"]
+[sub_resource type="Resource" id="Resource_ledow"]
+script = ExtResource("2_q642w")
+metadata/_custom_type_script = "uid://div78sfeq8md1"
+
+[sub_resource type="Resource" id="Resource_wl414"]
 script = ExtResource("6_wl414")
 scene = ExtResource("5_ot768")
 metadata/_custom_type_script = "uid://bi1g3t40pyhyp"
-
-[sub_resource type="Resource" id="Resource_ot768"]
-script = ExtResource("3_ledow")
-battlefield = SubResource("Resource_s70j8")
-grid_object_layout = SubResource("Resource_vrc85")
-metadata/_custom_type_script = "uid://dhqk8ma33q5vb"
 
 [sub_resource type="Resource" id="Resource_ks5kt"]
 script = ExtResource("4_ledow")
@@ -62,5 +55,6 @@ script = ExtResource("2_haqrg")
 teams = Array[ExtResource("3_q642w")]([SubResource("Resource_83wba"), SubResource("Resource_qksev")])
 team_relationships = Array[int]([3])
 end_conditions = Array[ExtResource("1_haqrg")]([SubResource("Resource_ledow")])
-grid = SubResource("Resource_ot768")
+battlefield = SubResource("Resource_ot768")
+grid_object_layouts = Array[ExtResource("6_wl414")]([SubResource("Resource_wl414")])
 metadata/_custom_type_script = "uid://sr2agdyju43u"

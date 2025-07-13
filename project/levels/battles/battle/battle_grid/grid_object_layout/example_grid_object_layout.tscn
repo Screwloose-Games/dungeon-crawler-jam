@@ -1,44 +1,43 @@
-[gd_scene load_steps=11 format=3 uid="uid://d4e5najwcpfi4"]
+[gd_scene load_steps=10 format=3 uid="uid://d4e5najwcpfi4"]
 
 [ext_resource type="Script" uid="uid://cvo0q7cgahf8r" path="res://levels/battles/battle/battle_grid/grid_object_layout/grid_object_layout_node.gd" id="1_5m2eb"]
 [ext_resource type="TileSet" uid="uid://d14815kbba136" path="res://levels/battles/battle/battle_grid/grid_object_layout/grid_object_tileset.tres" id="2_356e3"]
 [ext_resource type="Script" uid="uid://csr3qmm41n0pg" path="res://levels/battles/battle/battle_grid/grid_object_layout/grid_object_cell.gd" id="2_8510w"]
-[ext_resource type="Script" uid="uid://1x5njd5yi8p8" path="res://levels/battles/battle/battle_grid/grid_object_layout/tile_effect.gd" id="3_6ss3o"]
 [ext_resource type="Resource" uid="uid://cdcfvr8yx37yy" path="res://levels/battles/battle/unit/resources/unit_skeleton.tres" id="4_6ss3o"]
+
+[sub_resource type="Resource" id="Resource_8510w"]
+script = ExtResource("2_8510w")
+unit = ExtResource("4_6ss3o")
+effect = Array[int]([])
 
 [sub_resource type="Resource" id="Resource_6ss3o"]
 script = ExtResource("2_8510w")
 unit = ExtResource("4_6ss3o")
-effect = Array[ExtResource("3_6ss3o")]([])
+effect = Array[int]([])
 
 [sub_resource type="Resource" id="Resource_8a3sa"]
 script = ExtResource("2_8510w")
 unit = ExtResource("4_6ss3o")
-effect = Array[ExtResource("3_6ss3o")]([])
+effect = Array[int]([])
 
 [sub_resource type="Resource" id="Resource_tbadn"]
 script = ExtResource("2_8510w")
 unit = ExtResource("4_6ss3o")
-effect = Array[ExtResource("3_6ss3o")]([])
+effect = Array[int]([])
 
 [sub_resource type="Resource" id="Resource_d3irb"]
 script = ExtResource("2_8510w")
 unit = ExtResource("4_6ss3o")
-effect = Array[ExtResource("3_6ss3o")]([])
-
-[sub_resource type="Resource" id="Resource_pmgb7"]
-script = ExtResource("2_8510w")
-unit = ExtResource("4_6ss3o")
-effect = Array[ExtResource("3_6ss3o")]([])
+effect = Array[int]([])
 
 [node name="ExampleGridObjectLayout" type="Node2D"]
 script = ExtResource("1_5m2eb")
 tile_data = Dictionary[Vector2i, ExtResource("2_8510w")]({
-Vector2i(1, 1): SubResource("Resource_8a3sa"),
-Vector2i(3, 1): SubResource("Resource_pmgb7"),
-Vector2i(4, 0): SubResource("Resource_6ss3o"),
-Vector2i(5, 3): SubResource("Resource_tbadn"),
-Vector2i(6, -1): SubResource("Resource_d3irb")
+Vector2i(1, 1): SubResource("Resource_6ss3o"),
+Vector2i(3, 1): SubResource("Resource_d3irb"),
+Vector2i(4, 0): SubResource("Resource_8510w"),
+Vector2i(5, 3): SubResource("Resource_8a3sa"),
+Vector2i(6, -1): SubResource("Resource_tbadn")
 })
 
 [node name="Units" type="TileMapLayer" parent="."]

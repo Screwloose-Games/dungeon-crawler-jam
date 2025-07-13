@@ -6,8 +6,7 @@ const UNIT_DATA_LAYER = "UnitRef"
 const EFFECT_DATA_LAYER = "EffectType"
 const TIME_BETWEEN_SYNCS = 10
 
-#@export_custom(PROPERTY_HINT_NONE, "", 2) var tile_data: Dictionary[Vector2i, GridObjectCell]
-@export var tile_data: Dictionary[Vector2i, GridObjectCell]
+@export_custom(PROPERTY_HINT_NONE, "", 2) var tile_data: Dictionary[Vector2i, ObjectLayoutCell]
 @export_tool_button("Sync TileData") var sync_tile_data_tool_button = _on_tiles_changed
 
 var time_since_sync: float
@@ -79,7 +78,7 @@ func convert_effects_data(pos: Vector2i, data: TileData):
 func create_or_get_cell(pos: Vector2i):
 	if tile_data.has(pos):
 		return tile_data[pos]
-	tile_data[pos] = GridObjectCell.new()
+	tile_data[pos] = ObjectLayoutCell.new()
 	return tile_data[pos]
 
 
