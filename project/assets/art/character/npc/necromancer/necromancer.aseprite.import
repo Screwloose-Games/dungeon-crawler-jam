@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://w88nb8gapfmr"
+path="res://.godot/imported/necromancer.aseprite-7713691fcbeb2e9f4d6d2bb910fa1549.res"
+
+[deps]
+
+source_file="res://assets/art/character/npc/necromancer/necromancer.aseprite"
+dest_files=["res://.godot/imported/necromancer.aseprite-7713691fcbeb2e9f4d6d2bb910fa1549.res"]
+
+[params]
+
