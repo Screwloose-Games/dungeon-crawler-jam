@@ -1,8 +1,8 @@
 class_name GridObjectCell
 extends Resource
 
-var unit: Unit
-var effect: Array[TileEffect]
+@export var unit: Unit
+@export var effect: Array[TileEffect]
 
 
 func _init():

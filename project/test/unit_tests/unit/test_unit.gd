@@ -2,7 +2,7 @@ class_name UnitTest
 extends GdUnitTestSuite
 
 const UNIT_SKELETON := preload(
-	"res://levels/battles/battle/scripts/unit/resources/unit_skeleton.tres"
+	"res://levels/battles/battle/unit/resources/unit_skeleton.tres"
 )
 
 ## Example: https://martinfowler.com/bliki/GivenWhenThen.html

@@ -1,5 +1,44 @@
-[gd_resource type="TileSet" format=3 uid="uid://iqq6vuqse1mq"]
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dfnv5rt2g0jf1"]
+
+[ext_resource type="Texture2D" uid="uid://c7xx7c0tt0vrb" path="res://test/test_isometric_tiles/tbdc_tiles.png" id="1_joagy"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_adjt3"]
+texture = ExtResource("1_joagy")
+texture_region_size = Vector2i(30, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -7)
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -7)
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, -7)
+3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, -7)
+3:0/0/custom_data_0 = 2
+0:1/0 = 0
+0:1/0/texture_origin = Vector2i(0, -7)
+0:1/0/custom_data_0 = 2
+1:1/0 = 0
+1:1/0/texture_origin = Vector2i(0, -7)
+1:1/0/custom_data_0 = 2
+2:1/0 = 0
+2:1/0/texture_origin = Vector2i(0, -7)
+2:1/0/custom_data_0 = 1
+3:1/0 = 0
+3:1/0/texture_origin = Vector2i(0, -7)
+0:2/0 = 0
+0:2/0/texture_origin = Vector2i(0, -7)
+2:2/0 = 0
+2:2/0/texture_origin = Vector2i(0, -7)
+3:2/0 = 0
+3:2/0/texture_origin = Vector2i(0, -7)
+3:2/0/custom_data_0 = 1
+1:2/0 = 0
+1:2/0/texture_origin = Vector2i(0, -7)
 
 [resource]
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(30, 16)
 custom_data_layer_0/name = "TileType"
 custom_data_layer_0/type = 2
+sources/0 = SubResource("TileSetAtlasSource_adjt3")

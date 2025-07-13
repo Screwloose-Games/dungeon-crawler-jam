@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://cnwbodfvwcftd"]
 
-[ext_resource type="Script" uid="uid://byqi826tq1wrp" path="res://levels/battles/battle/scripts/battle_node.gd" id="1_o3tmo"]
-[ext_resource type="Script" uid="uid://cm3dxhaqm7b5i" path="res://levels/battles/battle/scripts/battle_grid/battle_grid.gd" id="2_0e4cs"]
-[ext_resource type="PackedScene" uid="uid://crt4v22yg30a" path="res://levels/battles/battle/scripts/battle_grid/example_battlefield.tscn" id="3_xiqjh"]
-[ext_resource type="Script" uid="uid://kxw3kblmvh0b" path="res://levels/battles/battle/scripts/battlefield.gd" id="4_r50eb"]
-[ext_resource type="Script" uid="uid://bo1fxppsg3haf" path="res://levels/battles/battle/scripts/battle.gd" id="5_6uvca"]
+[ext_resource type="Script" uid="uid://byqi826tq1wrp" path="res://levels/battles/battle/battle_node.gd" id="1_o3tmo"]
+[ext_resource type="Script" uid="uid://cm3dxhaqm7b5i" path="res://levels/battles/battle/battle_grid/battle_grid.gd" id="2_0e4cs"]
+[ext_resource type="PackedScene" uid="uid://crt4v22yg30a" path="res://levels/battles/battle/battle_grid/example_battlefield.tscn" id="3_xiqjh"]
+[ext_resource type="Script" uid="uid://kxw3kblmvh0b" path="res://levels/battles/battle/battlefield.gd" id="4_r50eb"]
+[ext_resource type="Script" uid="uid://bo1fxppsg3haf" path="res://levels/battles/battle/battle.gd" id="5_6uvca"]
 
 [sub_resource type="Resource" id="Resource_brc6y"]
 script = ExtResource("2_0e4cs")
