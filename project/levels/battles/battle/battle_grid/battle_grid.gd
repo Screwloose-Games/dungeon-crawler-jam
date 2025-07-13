@@ -21,8 +21,8 @@ func _load_battlefield_tiles(battlefield: Battlefield):
 	for tile_pos in tiles.keys():
 		var cell = _create_or_get_cell(tile_pos)
 		cell.type = tiles[tile_pos]
-		
-		
+
+
 func _load_grid_object_layout_tiles(layout: GridObjectLayout):
 	var tiles := layout.get_tile_data()
 	for tile_pos in tiles.keys():
@@ -30,8 +30,8 @@ func _load_grid_object_layout_tiles(layout: GridObjectLayout):
 		var cell = _create_or_get_cell(tile_pos)
 		cell.unit = layout_tile.unit
 		cell.effects = layout_tile.effect
-	
-	
+
+
 func _create_or_get_cell(pos: Vector2i):
 	if not cells.has(pos):
 		cells[pos] = BattleGridCell.new()
