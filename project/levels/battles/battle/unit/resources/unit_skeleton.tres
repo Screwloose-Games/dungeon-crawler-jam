@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/action/ability/ability.gd" id="1_e4jav"]
 [ext_resource type="Script" uid="uid://c1n1gnpms4ens" path="res://levels/battles/battle/unit/unit.gd" id="1_y6s5j"]
-[ext_resource type="Script" uid="uid://brp5ns0pmjttu" path="res://levels/battles/battle/unit/movement.gd" id="2_jj6w5"]
+[ext_resource type="Script" path="res://levels/battles/battle/unit/movement.gd" id="2_jj6w5"]
 [ext_resource type="Texture2D" uid="uid://caqfq5wc6ptgv" path="res://assets/art/character/npc/skeleton/skeleton_portrait.png" id="2_nw4pq"]
 [ext_resource type="Script" uid="uid://yckfyhso60js" path="res://levels/battles/battle/action/unit_action.gd" id="4_qkqoh"]
 [ext_resource type="SpriteFrames" uid="uid://dfq76jptl8yqn" path="res://assets/art/character/npc/skeleton/skeleton.res" id="5_jj6w5"]

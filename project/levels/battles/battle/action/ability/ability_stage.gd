@@ -1,6 +1,19 @@
+## Represents a single phase of execution within an [Ability] on the [Battlefield]. [br]
+## Abilities execute through multiple stages in sequence with configurable timing between each. [br]
+## Each stage contains [AbilityEffect] objects that can be logical or visual effects. [br]
+## Stages allow complex abilities to unfold over time with multiple distinct phases.
 class_name AbilityStage
 extends Resource
 
+## The effects to apply during this stage of the ability
+@export var effects: Array[AbilityEffect]
+## Time to wait before executing this stage (in seconds)
+@export var delay_before_execution: float = 0.0
 
+
+## Executes all effects in this stage of the ability. [br]
+## Effects are applied in sequence, each receiving the target tile and casting unit context. [br]
+## [br]
+## [param _order] The action execution order containing target and caster context
 func apply(_order: ActionExecutionOrder):
 	pass

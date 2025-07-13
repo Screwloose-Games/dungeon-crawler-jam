@@ -1,4 +1,6 @@
 @tool
+## An individual, controllable object on the [Grid]. The [Unit] can receive commands [br]
+## from their [Commander] to execute an [UnitAction] via an [ActionExecutionOrder]
 class_name Unit
 extends Resource
 
@@ -10,7 +12,7 @@ signal died
 			name = new_value
 			emit_changed()
 
-@export var description: String
+@export_multiline var description: String
 
 ## Abilities are things like spells or special actions.
 @export var abilities: Array[Ability]
@@ -30,8 +32,13 @@ signal died
 @export var actions: Array[UnitAction]
 
 
-## return all the actions this unit can take.
+## Return all the actions this unit can take.[br]
 func get_actions():
+	pass
+
+
+## Returns all actions that can be executed based on available AP and AP cost.
+func get_available_actions():
 	pass
 
 

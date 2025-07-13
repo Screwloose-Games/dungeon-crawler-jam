@@ -7,6 +7,7 @@ extends Node2D
 @onready var effects: Node2D = $BattleGrid/Effects
 
 
+
 func _ready() -> void:
 	battle.create_from_scenario(battle_scenario)
 	initialize()

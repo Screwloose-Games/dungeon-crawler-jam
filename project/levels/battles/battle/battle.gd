@@ -1,7 +1,14 @@
+## Represents a tactical combat encounter on a [Battlefield] between multiple [Commander] units. [br]
+## Coordinates turn-based gameplay where [Commander] units take actions through [UnitAction] commands. [br]
+## Handles battle initialization, progression, and end conditions.
 class_name Battle
 extends Resource
 
 @export var battle_grid: BattleGrid
+## The scenario definition that describes the battle setup, objectives, and participants
+@export var battle_scenario: BattleScenario
+## The grid-based battlefield where units are positioned and take actions
+
 
 func _ready():
 	pass
