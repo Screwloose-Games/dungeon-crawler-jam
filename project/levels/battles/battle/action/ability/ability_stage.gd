@@ -2,5 +2,5 @@ class_name AbilityStage
 extends Resource
 
 
-func apply(order: ActionExecutionOrder):
+func apply(_order: ActionExecutionOrder):
 	pass
