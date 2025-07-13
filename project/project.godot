@@ -33,7 +33,7 @@ directories/dtl_directory={}
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/create_png/plugin.cfg", "res://addons/gdUnit4/plugin.cfg", "res://addons/gdscript_formatter/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/create_png/plugin.cfg", "res://addons/gdLinter/plugin.cfg", "res://addons/gdUnit4/plugin.cfg", "res://addons/gdscript_formatter/plugin.cfg")
 
 [input]
 
@@ -46,6 +46,10 @@ dialogic_default_action={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_9="Clickable"
 
 [rendering]
 

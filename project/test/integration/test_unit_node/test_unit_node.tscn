@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjk28ott3t0j5"]
+
+[ext_resource type="PackedScene" uid="uid://o8ll87nb3ty1" path="res://levels/battles/battle/scripts/unit/unit_node.tscn" id="1_bqbus"]
+[ext_resource type="Script" uid="uid://caw460fc32bpc" path="res://components/ui/unit_portrait_panel_container.gd" id="2_mhgi4"]
+[ext_resource type="Script" uid="uid://c13xlubfi502p" path="res://components/ui/battle_ui_state.gd" id="4_sb3wb"]
+
+[node name="TestUnitNode" type="Node2D"]
+
+[node name="UnitNode" parent="." instance=ExtResource("1_bqbus")]
+position = Vector2(220, 123)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BottomRightMarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="UnitPortraitPanelContainer" type="PanelContainer" parent="CanvasLayer/Control/BottomRightMarginContainer"]
+layout_mode = 2
+script = ExtResource("2_mhgi4")
+
+[node name="UnitPortraitTextureRect" type="TextureRect" parent="CanvasLayer/Control/BottomRightMarginContainer/UnitPortraitPanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CommanderBattleUIState" type="Node" parent="."]
+script = ExtResource("4_sb3wb")

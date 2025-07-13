@@ -27,7 +27,7 @@ jobs:
         uses: tj-actions/changed-files@v46
         with:
           files: '**/*.gd'
-          files_ignore: 'addons/**'
+          files_ignore: 'project/addons/**'
 
       - name: Early exit if no GD files changed
         if: steps.changed-files.outputs.any_changed != 'true'
