@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cw6b3n1jht80a"
+path="res://.godot/imported/viscera.aseprite-9d54c877e425052bafedfb3e7c0e3a96.res"
+
+[deps]
+
+source_file="res://assets/art/character/npc/viscera/viscera.aseprite"
+dest_files=["res://.godot/imported/viscera.aseprite-9d54c877e425052bafedfb3e7c0e3a96.res"]
+
+[params]
+
