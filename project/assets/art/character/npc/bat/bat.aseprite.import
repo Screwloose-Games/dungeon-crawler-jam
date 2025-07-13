@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dtj1ef3w8vncd"
+path="res://.godot/imported/bat.aseprite-0773f422e175b106b7dbd6d4c13b5ab5.res"
+
+[deps]
+
+source_file="res://assets/art/character/npc/bat/bat.aseprite"
+dest_files=["res://.godot/imported/bat.aseprite-0773f422e175b106b7dbd6d4c13b5ab5.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bahrykm1o0gjy"
+path="res://.godot/imported/zombie.aseprite-3c8c9240ed3784b5a59aec41ed549520.res"
+
+[deps]
+
+source_file="res://assets/art/character/npc/zombie/zombie.aseprite"
+dest_files=["res://.godot/imported/zombie.aseprite-3c8c9240ed3784b5a59aec41ed549520.res"]
+
+[params]
+
