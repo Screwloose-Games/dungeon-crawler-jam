@@ -4,5 +4,5 @@ extends Resource
 var test: int
 
 
-func apply(order: ActionExecutionOrder):
+func apply(_order: ActionExecutionOrder):
 	pass
