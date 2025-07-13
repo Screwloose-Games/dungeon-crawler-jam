@@ -16,6 +16,35 @@ func load(battlefield: Battlefield, layout: GridObjectLayout):
 	print("%d cells loaded" % len(cells))
 
 
+func is_cell_movable(cell_pos: Vector2i, movement_method: Movement.MovementMethod):
+	if not cells.has(cell_pos):
+		return false
+	var cell = cells[cell_pos]
+	if cell.unit != null:
+		return false
+	match cell.type:
+		BattleGridCell.TileType.WALL:
+			return false
+		BattleGridCell.TileType.GROUND:
+			return true
+		BattleGridCell.TileType.PIT:
+			return movement_method == Movement.MovementMethod.FLY
+	
+
+func try_set_unit(cell_pos: Vector2i, unit: Unit) -> bool:
+	if not is_cell_movable(cell_pos, unit.movement.method):
+		return false
+	cells[cell_pos].unit = unit
+	return true
+	
+
+func force_set_unit(cell_pos: Vector2i, unit: Unit) -> bool:
+	if not cells.has(cell_pos):
+		return false
+	cells[cell_pos].unit = unit
+	return true
+	
+	
 func _load_battlefield_tiles(battlefield: Battlefield):
 	var tiles := battlefield.get_tile_data()
 	for tile_pos in tiles.keys():
