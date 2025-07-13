@@ -2,12 +2,12 @@
 class_name GridObjectLayoutNode
 extends Node2D
 
+const UNIT_DATA_LAYER = "UnitRef"
+const EFFECT_DATA_LAYER = "EffectType"
+
 @export_custom(PROPERTY_HINT_NONE, "", 2) var tile_data: Dictionary[Vector2i, GridObjectCell]
 @onready var units: TileMapLayer = $Units
 @onready var effects: Node2D = $Effects
-
-const UNIT_DATA_LAYER = "UnitRef"
-const EFFECT_DATA_LAYER = "EffectType"
 
 
 func _ready() -> void:
