@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=4 uid="uid://crt4v22yg30a"]
 
-[ext_resource type="Script" uid="uid://u1ccysytql3d" path="res://levels/battles/battle/scripts/battle_grid/battlefield/battlefield_node.gd" id="1_xyfbm"]
+[ext_resource type="Script" uid="uid://u1ccysytql3d" path="res://levels/battles/battle/battle_grid/battlefield/battlefield_node.gd" id="1_xyfbm"]
 [ext_resource type="Texture2D" uid="uid://c7xx7c0tt0vrb" path="res://test/test_isometric_tiles/tbdc_tiles.png" id="2_on46x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_adjt3"]
