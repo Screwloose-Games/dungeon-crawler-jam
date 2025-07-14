@@ -1,17 +1,23 @@
+## Represents a single cell position on the [BattleGrid] within a [Battlefield]. [br]
+## Contains information about any [Unit] occupying the position and active effects. [br]
 class_name BattleGridCell
 extends Resource
 
-enum EffectType
-{
+enum EffectType {
 	EXAMPLE_EFFECT,
 }
 
+## Different types of terrain tiles that can exist on the battlefield
 enum TileType {
+	## Open ground that allows free movement and visibility
 	GROUND,
+	## Impassable barriers that block movement and line of sight
 	WALL,
+	## Dangerous terrain that may cause damage or prevent movement if unit can't fly
 	PIT,
 }
 
+## The unit currently occupying this cell position, if any
 var unit: Unit
 var effects: Array[EffectType]
 var type: TileType

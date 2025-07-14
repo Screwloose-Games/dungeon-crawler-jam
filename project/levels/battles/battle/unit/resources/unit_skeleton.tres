@@ -18,6 +18,7 @@ name = "Skeleton"
 description = "Boney simple melee unit"
 abilities = Array[ExtResource("1_e4jav")]([])
 movement = SubResource("Resource_lxlmf")
+action_points_max = 0
 sprite_frames = ExtResource("5_jj6w5")
 portrait = ExtResource("2_nw4pq")
 actions = Array[ExtResource("4_qkqoh")]([])

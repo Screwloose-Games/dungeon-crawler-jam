@@ -1,11 +1,23 @@
+## Manages the spatial grid system for a [Battle] on a [Battlefield]. [br]
+## Combines terrain information from the [Battlefield] with unit and object placement. [br]
+## Used by [Commander] units to determine valid positions and execute [UnitAction] commands. [br]
+## Maintains the state of each [gridCell] including any occupying [Unit] and any [TileEffect].
 class_name BattleGrid
 extends Resource
 
-signal grid_cells_loaded()
+signal grid_cells_loaded
 
+## The battlefield terrain defining tile types and environmental layout
+@export var battlefield: Battlefield
+## Defines initial placement of units and objects on the grid
+@export var grid_object_layout: GridObjectLayout
+
+## Dictionary mapping grid coordinates to their corresponding cell data and occupants
 var cells: Dictionary[Vector2i, BattleGridCell]
+
 ## Only to be used for instantiating the TileMapLayer
 var battlefield_scene: PackedScene
+
 
 func load(battlefield: Battlefield, layout: GridObjectLayout):
 	print("Loading battlegrid")

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MoveAction" load_steps=4 format=3 uid="uid://sjcs1m7vg2lj"]
+
+[ext_resource type="Script" uid="uid://brp5ns0pmjttu" path="res://levels/battles/battle/unit/movement.gd" id="1_m1epv"]
+[ext_resource type="Script" uid="uid://djpwhumdurf5c" path="res://levels/battles/battle/action/move_action/move_action.gd" id="1_u5kuj"]
+
+[sub_resource type="Resource" id="Resource_bh66v"]
+script = ExtResource("1_m1epv")
+movement_points_per_ap = 2
+metadata/_custom_type_script = "uid://brp5ns0pmjttu"
+
+[resource]
+script = ExtResource("1_u5kuj")
+movement = SubResource("Resource_bh66v")
+base_cost = 0
+metadata/_custom_type_script = "uid://djpwhumdurf5c"
