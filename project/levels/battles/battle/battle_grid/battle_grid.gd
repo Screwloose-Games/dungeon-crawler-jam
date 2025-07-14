@@ -5,12 +5,6 @@
 class_name BattleGrid
 extends Resource
 
-signal grid_cells_loaded
-
-## The battlefield terrain defining tile types and environmental layout
-@export var battlefield: Battlefield
-## Defines initial placement of units and objects on the grid
-@export var grid_object_layout: GridObjectLayout
 
 ## Dictionary mapping grid coordinates to their corresponding cell data and occupants
 var cells: Dictionary[Vector2i, BattleGridCell]
@@ -24,7 +18,6 @@ func load(battlefield: Battlefield, layout: GridObjectLayout):
 	battlefield_scene = battlefield.scene
 	_load_battlefield_tiles(battlefield)
 	_load_grid_object_layout_tiles(layout)
-	grid_cells_loaded.emit()
 	print("%d cells loaded" % len(cells))
 
 

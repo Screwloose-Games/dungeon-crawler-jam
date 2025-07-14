@@ -1,28 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4msrqbohquak"]
+[gd_scene load_steps=4 format=3 uid="uid://b4msrqbohquak"]
 
 [ext_resource type="Script" uid="uid://byqi826tq1wrp" path="res://levels/battles/battle/battle_node.gd" id="1_ujlm7"]
 [ext_resource type="Resource" uid="uid://dj46ja1socuji" path="res://levels/battles/test_scenario.tres" id="2_bele3"]
 [ext_resource type="Script" uid="uid://bb2yv7xton18k" path="res://levels/battles/battle/battle_grid/battle_grid_node.gd" id="2_xefej"]
-[ext_resource type="Script" uid="uid://bo1fxppsg3haf" path="res://levels/battles/battle/battle.gd" id="3_336pw"]
-[ext_resource type="Script" uid="uid://dhqk8ma33q5vb" path="res://levels/battles/battle/battle_grid/battle_grid.gd" id="4_h4ykf"]
-
-[sub_resource type="Resource" id="Resource_336pw"]
-script = ExtResource("4_h4ykf")
-metadata/_custom_type_script = "uid://dhqk8ma33q5vb"
-
-[sub_resource type="Resource" id="Resource_l5o5u"]
-script = ExtResource("3_336pw")
-battle_grid = SubResource("Resource_336pw")
-metadata/_custom_type_script = "uid://bo1fxppsg3haf"
 
 [node name="BattleTemplate" type="Node2D"]
 script = ExtResource("1_ujlm7")
 battle_scenario = ExtResource("2_bele3")
-battle = SubResource("Resource_l5o5u")
 
 [node name="BattleGrid" type="Node2D" parent="."]
 script = ExtResource("2_xefej")
-battle_grid = SubResource("Resource_336pw")
 
 [node name="Units" type="Node2D" parent="BattleGrid"]
 

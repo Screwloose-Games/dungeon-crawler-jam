@@ -53,7 +53,7 @@ metadata/_custom_type_script = "uid://csttd1rppjnco"
 [resource]
 script = ExtResource("2_haqrg")
 teams = Array[ExtResource("3_q642w")]([SubResource("Resource_83wba"), SubResource("Resource_qksev")])
-team_relationships = Array[int]([3])
+team_relationships = Array[int]([0, 3, 0, 3])
 end_conditions = Array[ExtResource("1_haqrg")]([SubResource("Resource_ledow")])
 battlefield = SubResource("Resource_ot768")
 grid_object_layouts = Array[ExtResource("6_wl414")]([SubResource("Resource_wl414")])
