@@ -13,5 +13,10 @@ func _ready() -> void:
 	initialize()
 
 
+func _process(_delta: float) -> void:
+	print("BattleGridNode: ", battle_grid_node)
+	print("BattleGrid: ", battle_grid_node.battle_grid)
+	
+
 func initialize():
 	pass

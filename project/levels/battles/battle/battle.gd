@@ -13,9 +13,8 @@ extends Resource
 func _ready():
 	pass
 
-
 func create_from_scenario(scenario: BattleScenario) -> void:
 	# TODO get team information and end conditions
-	var chosen_layout = scenario.grid_object_layouts.pick_random().duplicate()
-	var battlefield = scenario.battlefield.duplicate()
+	var chosen_layout = scenario.grid_object_layouts.pick_random()
+	var battlefield = scenario.battlefield
 	battle_grid.load(battlefield, chosen_layout)
