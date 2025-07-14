@@ -1,10 +1,23 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cpwb870aw2anb"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cpwb870aw2anb"]
 
-[ext_resource type="FontFile" uid="uid://bdfcopkbkfva0" path="res://common/fonts/main_menu.ttf" id="1_00eai"]
+[ext_resource type="FontFile" uid="uid://ddwq8m7dijx3b" path="res://common/fonts/main_menu.ttf" id="1_00eai"]
+[ext_resource type="FontFile" uid="uid://ctd87wi76m7ah" path="res://common/fonts/nmestis.ttf" id="1_f5n0t"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f5n0t"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5n0t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogrh7"]
+bg_color = Color(0.0997443, 0.0133857, 0.182492, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_elbxy"]
+bg_color = Color(0.122252, 0.122252, 0.122252, 1)
 
 [resource]
 default_font = ExtResource("1_00eai")
 default_font_size = 64
-PanelContainer/styles/panel = SubResource("StyleBoxEmpty_f5n0t")
+Button/font_sizes/font_size = 8
+Button/fonts/font = ExtResource("1_00eai")
+ItemList/font_sizes/font_size = 8
+ItemList/fonts/font = ExtResource("1_f5n0t")
+ItemList/styles/hovered = SubResource("StyleBoxFlat_f5n0t")
+ItemList/styles/panel = SubResource("StyleBoxFlat_ogrh7")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_elbxy")

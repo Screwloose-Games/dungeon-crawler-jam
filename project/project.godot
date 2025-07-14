@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Turn Based Dungeon Crawler"
+run/main_scene="uid://bl2uosxojajej"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -30,6 +31,13 @@ SoundManager="*res://globals/sound_manager/sound_manager.tscn"
 
 directories/dch_directory={}
 directories/dtl_directory={}
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/window_width_override=640
+window/size/window_height_override=360
 
 [editor_plugins]
 
