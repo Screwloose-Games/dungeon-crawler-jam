@@ -4,7 +4,7 @@ class_name TerrainTypeConstraint
 extends TargetTileConstraint
 
 ## The required terrain types that the target tile must have
-@export var valid_types: Array[Battlefield.TileType]
+@export var valid_types: Array[BattleGridCell.TileType]
 
 
 ## Validates that the target tile matches the required terrain type. [br]
