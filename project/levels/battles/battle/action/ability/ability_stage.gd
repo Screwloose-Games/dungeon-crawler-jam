@@ -5,15 +5,21 @@
 class_name AbilityStage
 extends Resource
 
+signal complete
+
 ## The effects to apply during this stage of the ability
 @export var effects: Array[AbilityEffect]
-## Time to wait before executing this stage (in seconds)
-@export var delay_before_execution: float = 0.0
+
+var duration: float:
+	get:
+		return effects.reduce(
+			func(accum: float, effect: AbilityEffect): return max(accum, effect.get_duration()), 0
+		)
 
 
 ## Executes all effects in this stage of the ability. [br]
 ## Effects are applied in sequence, each receiving the target tile and casting unit context. [br]
 ## [br]
-## [param _order] The action execution order containing target and caster context
-func apply(_order: ActionExecutionOrder):
+## [param _command] The action execution order containing target and caster context
+func apply(_command: ActionExecutionCommand):
 	pass

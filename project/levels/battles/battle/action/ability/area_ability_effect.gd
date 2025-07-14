@@ -11,5 +11,5 @@ extends AbilityEffect
 
 ## Applies the wrapped effect to all tiles in the defined area. [br]
 ## Each tile position is calculated as target position plus each offset. [br]
-func apply(_order: ActionExecutionOrder):
+func apply(_order: ActionExecutionCommand):
 	pass

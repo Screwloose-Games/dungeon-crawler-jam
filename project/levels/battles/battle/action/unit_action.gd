@@ -5,11 +5,15 @@
 class_name UnitAction
 extends Resource
 
+@export var name: String
+
+@export_multiline var description: String
+
 ## The base cost required to execute this action. [br]
 ## Used as part of the calculation for cost, [member cost].
 @export var base_cost: int
 
-## The final calculated cost to execute this action. [br]
+## The final calculated Action Point cost to execute this action. [br]
 var cost: int:
 	get = get_cost
 

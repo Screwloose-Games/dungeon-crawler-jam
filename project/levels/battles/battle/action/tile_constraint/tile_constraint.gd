@@ -1,9 +1,9 @@
 ## Base class for rules that determine valid targeting for [Ability] actions. [br]
 ## Multiple constraints can be defined per ability and all must be satisfied for a tile to be targetable (AND behavior). [br]
-## Use [AnyTileConstraint] for OR behavior where any constraint can be satisfied. [br]
+## Use [AnyTargetTileConstraint] for OR behavior where any constraint can be satisfied. [br]
 ## Constraints validate conditions such as terrain types, unit presence, range, status effects, and other tactical conditions. [br]
 ## Essential for creating precise targeting rules that define tactical ability behavior.
-class_name TileConstraint
+class_name TargetTileConstraint
 extends Resource
 
 
@@ -14,5 +14,5 @@ extends Resource
 ## [param _to] The target cell being validated for the action [br]
 ## [br]
 ## [b]Returns:[/b] True if the target is valid, false otherwise.
-func is_valid(_from: BattleGridCell, _to: BattleGridCell):
+func is_valid(_command: ActionExecutionCommand):
 	pass

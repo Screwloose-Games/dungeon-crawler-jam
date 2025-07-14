@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwwtm0nf4i6cd"]
+
+[sub_resource type="Animation" id="Animation_gj5r5"]
+resource_name = "start"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_evkx5"]
+_data = {
+&"start": SubResource("Animation_gj5r5")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ehxe0"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"start",
+"speed": 5.0
+}]
+
+[node name="ExplodeEffect" type="Node2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_evkx5")
+}
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ehxe0")
+animation = &"start"

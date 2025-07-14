@@ -10,8 +10,6 @@ extends Resource
 ## Conditions that determine when and how the battle ends
 @export var end_conditions: Array[BattleEndCondition]
 
-
 ## Where the battle takes place
 @export var battlefield: Battlefield
 @export var grid_object_layouts: Array[GridObjectLayout]
-

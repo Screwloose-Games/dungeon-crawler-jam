@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=10 format=3 uid="uid://c552puqfquxpy"]
+
+[ext_resource type="Script" uid="uid://v50hixevnupe" path="res://levels/battles/battle/action/tile_constraint/tile_constraint.gd" id="1_3sgla"]
+[ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/action/ability/ability.gd" id="2_fluwx"]
+[ext_resource type="Script" uid="uid://ct8umold07eie" path="res://levels/battles/battle/action/ability/ability_stage.gd" id="3_5qa1j"]
+[ext_resource type="Script" uid="uid://b27e04h7l1su3" path="res://levels/battles/battle/action/tile_constraint/unit_team_relation_constraint.gd" id="3_hl8nu"]
+[ext_resource type="Script" uid="uid://c3xgtp8yeabd8" path="res://levels/battles/battle/action/ability/ability_effect.gd" id="5_hl8nu"]
+[ext_resource type="Script" uid="uid://bdh8268nm1op" path="res://levels/battles/battle/action/ability/unit_apply_damage_effect.gd" id="6_ppus8"]
+
+[sub_resource type="Resource" id="Resource_fluwx"]
+script = ExtResource("3_hl8nu")
+team_relation = 3
+metadata/_custom_type_script = "uid://b27e04h7l1su3"
+
+[sub_resource type="Resource" id="Resource_r7ssd"]
+script = ExtResource("6_ppus8")
+base_damage = 0
+metadata/_custom_type_script = "uid://bdh8268nm1op"
+
+[sub_resource type="Resource" id="Resource_cjyyn"]
+script = ExtResource("3_5qa1j")
+effects = Array[ExtResource("5_hl8nu")]([SubResource("Resource_r7ssd")])
+metadata/_custom_type_script = "uid://ct8umold07eie"
+
+[resource]
+script = ExtResource("2_fluwx")
+name = "Force Bolt"
+description = "Shoots a bolt of force."
+number_of_targets = 1
+constraints = Array[ExtResource("1_3sgla")]([SubResource("Resource_fluwx")])
+stages = Array[ExtResource("3_5qa1j")]([SubResource("Resource_cjyyn")])
+base_cost = 2
+metadata/_custom_type_script = "uid://bnkmedconmppg"

@@ -2,7 +2,7 @@
 ## Alternates turns with any other [Commander] participating in the battle. [br]
 ## Controls when to end their turn and manages tactical decisions. [br]
 ## Can be either an AI or Human player controlling all [Unit] under their command. [br]
-## Issues commands to [Unit] units through [UnitAction] actions via [ActionExecutionOrder].
+## Issues commands to [Unit] units through [UnitAction] actions via [ActionExecutionCommand].
 class_name Commander
 extends Resource
 
