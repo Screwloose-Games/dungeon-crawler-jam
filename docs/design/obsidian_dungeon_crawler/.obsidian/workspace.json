@@ -1,0 +1,218 @@
+{
+  "main": {
+    "id": "6cf3a758e6070338",
+    "type": "split",
+    "children": [
+      {
+        "id": "237579d7dd647b98",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e5296fbdad3125e7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Turn Based Dungeon Crawler Jam Page/Screenshots/Mechanics Review/Do not see own party in combat/Do not see own party in combat.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Do not see own party in combat"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "2bc5c9ef8ba6b326",
+    "type": "split",
+    "children": [
+      {
+        "id": "d6e7cd9e947905a1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "07c08e0d5f7d08c8",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "20820a39c597d358",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "4b78c0c8b30c8373",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 468.5
+  },
+  "right": {
+    "id": "32bae095c83d0ad2",
+    "type": "split",
+    "children": [
+      {
+        "id": "835b8d01fc5bd1f1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a0974298f5bf5079",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "1d5070a337b63259",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "e6801326f81b7ae0",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "6163b833ad1d47ab",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "obsidian-importer:Open Importer": false
+    }
+  },
+  "active": "07c08e0d5f7d08c8",
+  "lastOpenFiles": [
+    "Turn Based Dungeon Crawler Jam Page/Brainstorm Session, theme- “Swap”/You can swap places with other characters-enemies.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Definitions/Untitled 3.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Definitions/Battlefield.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Definitions/ActionExecutionCommand.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Definitions/BattleGridCell.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Definitions/BattleScenario.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Abilities/Ranged Attack.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Definitions/Commander.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Definitions/Team.md",
+    "AP (ActionPoints).md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Attributes/Untitled.md",
+    "Untitled 2.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Definitions/Unit.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Definitions/TargetUnitConstraint.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Units/Viscera.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Definitions/Untitled 2.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Attributes/Untitled 2.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Definitions/BattleEndCondition.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Definitions/Untitled.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Abilities/Melee Attack.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Definitions/MoveAction.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Definitions/ActionPoint.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Definitions/Obstacle.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Game Design Doc.md",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Definitions/Battle.md",
+    "Turn Based Dungeon Crawler Jam Page/Assets/Video Game Art Assets/Untitled.md",
+    "2025-07-06_10-14-01.gif",
+    "image 2 4.png",
+    "image 1 4.png",
+    "image 20.png",
+    "image 19.png",
+    "image 18.png",
+    "image 17.png",
+    "image 6 2.png",
+    "image 5 2.png",
+    "image 4 2.png",
+    "AP1GczMyGG8QPLWy_JRBvUFLn-ROGGRXXC1naGLOivvrtVwAvb-a2bQq-gHUlfh1YubG7oMMmGfYrVFsvSdsblLWx-Yv8KhgVuHhBACRwsPZZiUOR-07Bo9MxSyA3Bi3mVe0YkIN2y8LuIZQk4j8RILn0PZhzgw1920-h862-s-no-gm1.txt",
+    "Turn Based Dungeon Crawler Jam Page/Screenshots/Mechanics Review/Do not see own party in combat",
+    "Turn Based Dungeon Crawler Jam Page/Screenshots/Mechanics Review/You can use items in combat",
+    "Turn Based Dungeon Crawler Jam Page/Screenshots/Mechanics Review/You navigate the dungeon via an abstract map",
+    "Turn Based Dungeon Crawler Jam Page/Screenshots/Mechanics Review",
+    "Turn Based Dungeon Crawler Jam Page/Assets/Video Game Art Assets",
+    "Turn Based Dungeon Crawler Jam Page/Assets/Animations",
+    "Turn Based Dungeon Crawler Jam Page/Assets",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Units",
+    "Turn Based Dungeon Crawler Jam Page/Game Design Doc/Items"
+  ]
+}
