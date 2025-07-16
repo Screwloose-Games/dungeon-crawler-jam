@@ -12,7 +12,7 @@ signal end_reached
 @export var current_speed: float = 1.0
 @export var enabled: bool = true
 
-var _current_scroll_position: float = 0.0
+var current_scroll_position: float = 0.0
 var scroll_paused: bool = false
 
 
@@ -27,7 +27,7 @@ func _input(event: InputEvent) -> void:
 		or (event is InputEventMouseButton and event.pressed)
 	):
 		SceneTransitionManager.change_scene_with_transition(
-			SceneManager.MAIN_MENU, SceneManager.FADE_TRANSITION
+			SceneManager.main_menu, SceneManager.fade_transition
 		)
 		GlobalSignalBus.title_screen_started.emit()
 
@@ -65,8 +65,8 @@ func _update_text_from_file():
 	var text: String = load_file(attribution_file_path)
 	if text == "":
 		return
-	var _end_of_first_line = text.find("\n") + 1
-	text = text.right(-_end_of_first_line)  # Trims first line "ATTRIBUTION"
+	var end_of_first_line = text.find("\n") + 1
+	text = text.right(-end_of_first_line)  # Trims first line "ATTRIBUTION"
 	text = regex_replace_urls(text)
 	text = regex_replace_titles(text)
 	%CreditsLabel.text = "[center]%s[/center]" % [text]
@@ -78,7 +78,7 @@ func set_file_path(file_path: String):
 
 
 func set_header_and_footer():
-	_current_scroll_position = $ScrollContainer.scroll_vertical
+	current_scroll_position = $ScrollContainer.scroll_vertical
 	%HeaderSpace.custom_minimum_size.y = size.y
 	%FooterSpace.custom_minimum_size.y = size.y
 	%CreditsLabel.custom_minimum_size.x = size.x
@@ -96,8 +96,8 @@ func _end_reached():
 
 
 func is_end_reached():
-	var _end_of_credits_vertical = %CreditsLabel.size.y + %HeaderSpace.size.y
-	return $ScrollContainer.scroll_vertical > _end_of_credits_vertical
+	var end_of_credits_vertical = %CreditsLabel.size.y + %HeaderSpace.size.y
+	return $ScrollContainer.scroll_vertical > end_of_credits_vertical
 
 
 func _check_end_reached():
@@ -109,8 +109,8 @@ func _check_end_reached():
 func _scroll_container(amount: float) -> void:
 	if not visible or not enabled or scroll_paused:
 		return
-	_current_scroll_position += amount
-	$ScrollContainer.scroll_vertical = round(_current_scroll_position)
+	current_scroll_position += amount
+	$ScrollContainer.scroll_vertical = round(current_scroll_position)
 	_check_end_reached()
 
 
@@ -144,7 +144,7 @@ func _start_scroll_timer():
 
 func _on_CreditsLabel_meta_clicked(meta: String):
 	if meta.begins_with("https://"):
-		var _err = OS.shell_open(meta)
+		var err = OS.shell_open(meta)
 
 
 func _on_scroll_reset_timer_timeout():
