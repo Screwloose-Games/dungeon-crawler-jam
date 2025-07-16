@@ -15,7 +15,12 @@ signal died
 @export_multiline var description: String
 
 ## Abilities are things like spells or special actions.
-@export var abilities: Array[Ability]
+@export var abilities: Array[Ability] = []:
+	set(val):
+		if val != abilities:
+			emit_changed()
+			abilities = val
+			init_actions()
 @export var movement: Movement
 
 ## The maximum amount of Action Points this [Unit] can have.[br]
@@ -31,12 +36,119 @@ signal died
 ## Used in the UI when illustrating the unit.
 @export var portrait: Texture2D
 
+@export var health_point_max: int = 10:
+	set(new_value):
+		if health_point_max != new_value:
+			health_point_max = new_value
+			health.maximum = health_point_max
+			emit_changed()
+
+@export var health_points: int = 10:
+	set(new_value):
+		if health_points != new_value:
+			health_points = new_value
+			health.current = health_points
+			emit_changed()
+
+var health: Health:
+	set(new_health):
+		if health != new_health:
+			health = new_health
+			emit_changed()
+			if health:
+				# if not connected, connect the health signals
+				if not health.died.is_connected(_on_health_died):
+					health.died.connect(_on_health_died)
+				if not health.health_changed.is_connected(_on_health_health_changed):
+					health.health_changed.connect(_on_health_health_changed)
+				if not health.maximum_changed.is_connected(_on_health_maximum_changed):
+					health.maximum_changed.connect(_on_health_maximum_changed)
+
 ## The actions that the unit can take.
 ## Units typically have a move action and ways to attack.
 ## An action can be to move, use an item, use an ability.
-@export var actions: Array[UnitAction]
+var actions: Array[UnitAction]:
+	set(val):
+		actions = val
+		emit_changed()
 
-var action_points_current: int = action_points_max
+var action_points_current: int = 0
+
+var cell: BattleGridCell
+
+var team: Team
+
+
+func _on_health_health_changed(new_health: int):
+	health_points = new_health
+
+
+func _on_health_maximum_changed(new_maximum: int):
+	health_point_max = new_maximum
+
+
+func _on_health_died():
+	die()
+
+
+func die():
+	died.emit()
+
+
+func _init(
+	name: String = "",
+	description: String = "",
+	abilities: Array[Ability] = [],
+	movement: Movement = null,
+	action_points_max: int = action_points_max,
+	sprite_frames: SpriteFrames = null,
+	portrait: Texture2D = null,
+	actions: Array[UnitAction] = [],
+	current_grid_cell: BattleGridCell = null,
+	health: Health = null
+) -> void:
+	self.name = name
+	self.description = description
+	self.abilities = abilities
+	self.movement = movement
+	self.action_points_max = action_points_max
+	self.sprite_frames = sprite_frames
+	self.portrait = portrait
+	self.actions = actions
+	self.cell = current_grid_cell
+	self.health = health if health else Health.new(health_point_max, health_point_max)
+	changed.connect(init_actions)
+
+
+func init_actions():
+	var new_actions = init_ability_actions()
+	if new_actions.size() > 0:
+		for action in new_actions:
+			if action not in actions:
+				actions.append(action)
+
+
+func init_move_action():
+	if movement:
+		var action: MoveAction = MoveAction.new()
+		action.movement = movement
+		actions.append(action)
+
+
+func init_ability_actions() -> Array[AbilityAction]:
+	var ability_actions: Array[AbilityAction] = []
+	for ability in abilities:
+		var action = AbilityAction.new()
+		action.ability = ability
+		action.base_cost = ability.base_cost
+		ability_actions.append(action)
+	return ability_actions
+
+
+func add_action(action: UnitAction) -> void:
+	if action not in actions:
+		actions.append(action)
+		emit_changed()
 
 
 ## Return all the actions this unit can execute.[br]
@@ -57,9 +169,11 @@ func can_execute_action(action: UnitAction) -> bool:
 	return action.cost <= action_points_current
 
 
-func hurt():
-	died.emit()
+func damage(amount: int) -> void:
+	if health:
+		health.damage(amount)
 
 
-func execute_action(_action: UnitAction):
-	pass
+func heal(amount: int) -> void:
+	if health:
+		health.heal(amount)

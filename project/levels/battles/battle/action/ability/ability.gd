@@ -17,3 +17,19 @@ extends Resource
 ## The cost in Action Points (AP) to execute this ability
 ## This is the base cost before any modifications from effects or conditions
 @export_range(0, 20, 1) var base_cost: int
+
+
+func _init(
+	name: String = "",
+	description: String = "",
+	number_of_targets: int = 1,
+	constraints: Array[TargetTileConstraint] = [],
+	stages: Array[AbilityStage] = [],
+	base_cost: int = 0
+) -> void:
+	self.name = name
+	self.description = description
+	self.number_of_targets = number_of_targets
+	self.constraints = constraints
+	self.stages = stages
+	self.base_cost = base_cost
