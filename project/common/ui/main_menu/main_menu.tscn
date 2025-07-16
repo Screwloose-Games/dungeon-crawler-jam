@@ -51,7 +51,7 @@ func _on_start_button_pressed():
 
 func _on_credits_pressed():
 		SceneTransitionManager.change_scene_with_transition(
-				SceneManager.CREDITS,
+				SceneManager.credits,
 				transition_path
 		)
 
