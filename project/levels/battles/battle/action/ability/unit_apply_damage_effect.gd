@@ -11,6 +11,21 @@ var damage: int:
 		return base_damage
 
 
+func _init(_base_damage: int = 0) -> void:
+	self.base_damage = _base_damage
+
+
 ## Applies the specified damage to the unit on the target tile. [br]
 func apply(_order: ActionExecutionCommand):
 	pass
+
+
+func apply_damage_to_health(health: Health, damage: int) -> void:
+	if health:
+		health.damage(damage)
+		emit_signal("damage_applied", health, damage)
+
+
+func apply_damage_to_unit(unit: Unit, damage: int) -> void:
+	if unit:
+		apply_damage_to_health(unit.health, damage)

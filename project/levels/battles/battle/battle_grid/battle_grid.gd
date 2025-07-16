@@ -5,9 +5,8 @@
 class_name BattleGrid
 extends Resource
 
-
 ## Dictionary mapping grid coordinates to their corresponding cell data and occupants
-var cells: Dictionary[Vector2i, BattleGridCell]
+@export var cells: Dictionary[Vector2i, BattleGridCell]
 
 ## Only to be used for instantiating the TileMapLayer
 var battlefield_scene: PackedScene

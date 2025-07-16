@@ -4,23 +4,23 @@ extends Resource
 signal died
 signal health_changed(new_health: int)
 signal damaged(amount: int)
-signal max_health_changed(new_max_health: int)
+signal maximum_changed(new_maximum: int)
 signal healable_changed(healable: bool)
 signal healed(amount: int)
 signal invincible_changed(invincible: bool)
 signal revivable_changed(revivable: bool)
 
-@export var max_health: int:
+@export var maximum: int:
 	set(f):
-		max_health = f
-		max_health_changed.emit(max_health)
-@export var health: int:
-	set(new_health):
-		if new_health != health:
-			health = clamp(new_health, 0, max_health)
-			health_changed.emit(health)
+		maximum = f
+		maximum_changed.emit(maximum)
+@export var current: int:
+	set(new_current):
+		if new_current != current:
+			current = clamp(new_current, 0, maximum)
+			health_changed.emit(current)
 			emit_changed()
-			if health <= 0:
+			if current <= 0:
 				die()
 
 @export var invincible: bool = false:
@@ -46,24 +46,24 @@ var is_alive := true
 
 
 func _init(
-	max_health: int = 10,
-	health: int = 10,
+	maximum: int = 10,
+	current: int = 10,
 	invincible: bool = false,
 	healable: bool = true,
 	revivable: bool = false
 ):
-	self.max_health = max_health
-	self.health = health
+	self.maximum = maximum
+	self.current = current
 	self.invincible = invincible
 	self.healable = healable
 	self.revivable = revivable
-	is_alive = health > 0
-	if health > max_health:
-		health = max_health
+	is_alive = current > 0
+	if current > maximum:
+		current = maximum
 
 
-func set_health_to_max():
-	health = max_health
+func set_current_to_maximum():
+	current = maximum
 
 
 func die():
@@ -80,7 +80,7 @@ func damage(amount: int):
 	if invincible:
 		print("Unit is invincible, cannot take damage")
 		return
-	health -= amount
+	current -= amount
 	damaged.emit(amount)
 
 
@@ -88,12 +88,12 @@ func heal(amount: int):
 	if healable == false:
 		print("Unit is not healable")
 		return
-	health += amount
+	current += amount
 	healed.emit(amount)
 
 
 func revive():
-	if health > 0:
+	if current > 0:
 		print("Unit is already alive")
 		return
 	if not revivable:

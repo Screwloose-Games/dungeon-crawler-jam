@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://50crscd7p7bx" path="res://common/audio/sfx/ui/aud_ui_close.wav" id="6_mqj1f"]
 [ext_resource type="PackedScene" uid="uid://bvuixmv4n68a6" path="res://common/ui/options_menu/options_menu.tscn" id="6_ntl50"]
 [ext_resource type="Script" uid="uid://bbffeeruv7sea" path="res://common/ui/main_menu/SFX/main_menu_audio.gd" id="7_oty5u"]
-[ext_resource type="PackedScene" uid="uid://6hew771j0nd" path="res://levels/battles/level_test.tscn" id="8_8wlla"]
+[ext_resource type="PackedScene" uid="uid://6hew771j0nd" path="res://levels/level_test.tscn" id="8_8wlla"]
 [ext_resource type="Texture2D" uid="uid://ccq7f3iwggcxc" path="res://common/ui/art/main_menu_title.png" id="9_8wlla"]
 
 [sub_resource type="Theme" id="Theme_kjcgm"]

@@ -7,6 +7,9 @@ extends Resource
 
 signal complete
 
+@export var name: String
+@export_multiline var description: String
+
 ## The effects to apply during this stage of the ability
 @export var effects: Array[AbilityEffect]
 
@@ -23,3 +26,9 @@ var duration: float:
 ## [param _command] The action execution order containing target and caster context
 func apply(_command: ActionExecutionCommand):
 	pass
+
+
+func _init(name: String = "", description: String = "", effects: Array[AbilityEffect] = []) -> void:
+	self.name = name
+	self.description = description
+	self.effects = effects

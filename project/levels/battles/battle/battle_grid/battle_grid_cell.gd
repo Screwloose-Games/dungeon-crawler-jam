@@ -18,6 +18,16 @@ enum TileType {
 }
 
 ## The unit currently occupying this cell position, if any
-var unit: Unit
+@export var unit: Unit
 var effects: Array[EffectType]
 var type: TileType
+
+
+func _init(
+	unit: Unit = null, type: TileType = TileType.GROUND, effects: Array[EffectType] = []
+) -> void:
+	if unit:
+		unit.cell = self
+	self.unit = unit
+	self.type = type
+	self.effects = effects

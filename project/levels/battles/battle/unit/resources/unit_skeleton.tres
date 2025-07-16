@@ -1,11 +1,42 @@
-[gd_resource type="Resource" script_class="Unit" load_steps=8 format=3 uid="uid://cdcfvr8yx37yy"]
+[gd_resource type="Resource" script_class="Unit" load_steps=16 format=3 uid="uid://cdcfvr8yx37yy"]
 
 [ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/action/ability/ability.gd" id="1_e4jav"]
 [ext_resource type="Script" uid="uid://c1n1gnpms4ens" path="res://levels/battles/battle/unit/unit.gd" id="1_y6s5j"]
+[ext_resource type="Script" uid="uid://v50hixevnupe" path="res://levels/battles/battle/action/tile_constraint/tile_constraint.gd" id="2_13j3v"]
 [ext_resource type="Script" uid="uid://brp5ns0pmjttu" path="res://levels/battles/battle/unit/movement.gd" id="2_jj6w5"]
 [ext_resource type="Texture2D" uid="uid://caqfq5wc6ptgv" path="res://assets/art/character/npc/skeleton/skeleton_portrait.png" id="2_nw4pq"]
-[ext_resource type="Script" uid="uid://yckfyhso60js" path="res://levels/battles/battle/action/unit_action.gd" id="4_qkqoh"]
+[ext_resource type="Script" uid="uid://b27e04h7l1su3" path="res://levels/battles/battle/action/tile_constraint/unit_team_relation_constraint.gd" id="3_qqv34"]
+[ext_resource type="Script" uid="uid://ct8umold07eie" path="res://levels/battles/battle/action/ability/ability_stage.gd" id="4_theot"]
 [ext_resource type="SpriteFrames" uid="uid://dfq76jptl8yqn" path="res://assets/art/character/npc/skeleton/skeleton.res" id="5_jj6w5"]
+[ext_resource type="Script" uid="uid://c3xgtp8yeabd8" path="res://levels/battles/battle/action/ability/ability_effect.gd" id="5_theot"]
+[ext_resource type="Script" uid="uid://bdh8268nm1op" path="res://levels/battles/battle/action/ability/unit_apply_damage_effect.gd" id="6_m56jr"]
+
+[sub_resource type="Resource" id="Resource_m56jr"]
+script = ExtResource("3_qqv34")
+team_relation = 3
+metadata/_custom_type_script = "uid://b27e04h7l1su3"
+
+[sub_resource type="Resource" id="Resource_644i4"]
+script = ExtResource("6_m56jr")
+base_damage = 2
+metadata/_custom_type_script = "uid://bdh8268nm1op"
+
+[sub_resource type="Resource" id="Resource_t3lpx"]
+script = ExtResource("4_theot")
+name = ""
+description = ""
+effects = Array[ExtResource("5_theot")]([SubResource("Resource_644i4")])
+metadata/_custom_type_script = "uid://ct8umold07eie"
+
+[sub_resource type="Resource" id="Resource_buu0w"]
+script = ExtResource("1_e4jav")
+name = "Melee Attack"
+description = ""
+number_of_targets = 1
+constraints = Array[ExtResource("2_13j3v")]([SubResource("Resource_m56jr")])
+stages = Array[ExtResource("4_theot")]([SubResource("Resource_t3lpx")])
+base_cost = 0
+metadata/_custom_type_script = "uid://bnkmedconmppg"
 
 [sub_resource type="Resource" id="Resource_lxlmf"]
 script = ExtResource("2_jj6w5")
@@ -16,10 +47,11 @@ metadata/_custom_type_script = "uid://brp5ns0pmjttu"
 script = ExtResource("1_y6s5j")
 name = "Skeleton"
 description = "Boney simple melee unit"
-abilities = Array[ExtResource("1_e4jav")]([])
+abilities = Array[ExtResource("1_e4jav")]([SubResource("Resource_buu0w")])
 movement = SubResource("Resource_lxlmf")
-action_points_max = 0
+action_points_max = 8
 sprite_frames = ExtResource("5_jj6w5")
 portrait = ExtResource("2_nw4pq")
-actions = Array[ExtResource("4_qkqoh")]([])
+health_point_max = 10
+health_points = 10
 metadata/_custom_type_script = "uid://c1n1gnpms4ens"

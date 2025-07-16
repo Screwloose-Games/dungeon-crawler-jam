@@ -18,3 +18,25 @@ enum CommanderType {
 @export_multiline var description: String
 ## Whether this commander is controlled by human or AI
 @export var type: CommanderType
+
+@export var team: Team
+
+
+func _init(
+	name: String = "",
+	description: String = "",
+	type: CommanderType = CommanderType.HUMAN,
+	team: Team = null
+):
+	self.name = name
+	self.description = description
+	self.type = type
+	self.team = team
+
+
+func can_command_unit(unit: Unit) -> bool:
+	return is_on_same_team(unit)
+
+
+func is_on_same_team(unit: Unit) -> bool:
+	return team and unit and team == unit.team
