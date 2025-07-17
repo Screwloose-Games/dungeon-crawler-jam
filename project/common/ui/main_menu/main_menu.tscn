@@ -1,13 +1,16 @@
-[gd_scene load_steps=35 format=4 uid="uid://daabskcdhrpea"]
+[gd_scene load_steps=38 format=4 uid="uid://daabskcdhrpea"]
 
+[ext_resource type="Theme" uid="uid://cpwb870aw2anb" path="res://common/ui/themes/panel_theme_1.tres" id="1_mqx1g"]
 [ext_resource type="Script" uid="uid://drkkac24eh0sl" path="res://common/ui/viewport_container.gd" id="2_d26fo"]
-[ext_resource type="AudioStream" uid="uid://camm2n4s878j" path="res://common/audio/sfx/ui/aud_ui_navigate.wav" id="4_84s81"]
+[ext_resource type="AudioStream" uid="uid://wfu1v20qrekc" path="res://common/audio/sfx/ui/ui_hover_whisper.wav" id="3_8wlla"]
 [ext_resource type="PackedScene" path="res://common/ui/scene_transitions/fade_transition.tscn" id="4_cec7w"]
-[ext_resource type="AudioStream" uid="uid://cjqacppbmh2tk" path="res://common/audio/sfx/ui/aud_ui_open.wav" id="5_ctl25"]
-[ext_resource type="AudioStream" uid="uid://50crscd7p7bx" path="res://common/audio/sfx/ui/aud_ui_close.wav" id="6_mqj1f"]
+[ext_resource type="AudioStream" uid="uid://gggbi3slcqrj" path="res://common/audio/sfx/ui/ui_confirm_whisper.wav" id="4_kjcgm"]
+[ext_resource type="Texture2D" uid="uid://bu82rsx81bc2j" path="res://assets/art/ui/title_logo.png" id="5_grma1"]
+[ext_resource type="Texture2D" uid="uid://d1jg1f27kip18" path="res://common/ui/themes/background_example.png" id="6_8wlla"]
 [ext_resource type="PackedScene" uid="uid://bvuixmv4n68a6" path="res://common/ui/options_menu/options_menu.tscn" id="6_ntl50"]
 [ext_resource type="Script" uid="uid://bbffeeruv7sea" path="res://common/ui/main_menu/SFX/main_menu_audio.gd" id="7_oty5u"]
 [ext_resource type="PackedScene" uid="uid://6hew771j0nd" path="res://levels/level_test.tscn" id="8_8wlla"]
+[ext_resource type="Texture2D" uid="uid://dem1frhak01ta" path="res://assets/art/ui/title_clean.png" id="8_kjcgm"]
 
 [sub_resource type="Theme" id="Theme_kjcgm"]
 
@@ -623,18 +626,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1152, 0)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Main Menu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer:size")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(150, 216)]
-}
 
 [sub_resource type="Animation" id="Animation_u1ere"]
 resource_name = "main_menu"
@@ -733,6 +724,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_mqx1g")
 
 [node name="Audio Control" type="Control" parent="."]
 layout_mode = 2
@@ -741,23 +733,59 @@ offset_left = 1404.0
 offset_right = 3324.0
 offset_bottom = 1080.0
 script = ExtResource("7_oty5u")
-navigate_sound = ExtResource("4_84s81")
-open_sound = ExtResource("5_ctl25")
-close_sound = ExtResource("6_mqj1f")
+navigate_sound = ExtResource("3_8wlla")
+open_sound = ExtResource("4_kjcgm")
+close_sound = ExtResource("4_kjcgm")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -42.0
-offset_top = -189.0
-offset_right = 6038.0
-offset_bottom = 4523.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.25, 0.25)
+color = Color(0.0196078, 0.0156863, 0.0117647, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_8wlla")
+expand_mode = 1
+
+[node name="CleanTitle" type="TextureRect" parent="."]
+self_modulate = Color(0.533333, 0.431373, 0.415686, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.5
+offset_top = 23.5
+offset_right = 45.5
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_kjcgm")
 stretch_mode = 2
+
+[node name="Logo" type="TextureRect" parent="."]
+self_modulate = Color(0.211765, 0.156863, 0.168627, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -146.5
+offset_top = 74.0
+offset_right = 146.5
+offset_bottom = 217.0
+grow_horizontal = 2
+texture = ExtResource("5_grma1")
 
 [node name="Main Menu" type="AspectRatioContainer" parent="."]
 layout_mode = 1
@@ -775,75 +803,54 @@ script = SubResource("GDScript_q8jcd")
 start_scene_path = ExtResource("8_8wlla")
 transition_path = ExtResource("4_cec7w")
 
-[node name="PanelContainer" type="PanelContainer" parent="Main Menu"]
-texture_filter = 1
+[node name="MarginContainer" type="MarginContainer" parent="Main Menu"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="Main Menu/PanelContainer"]
-texture_filter = 2
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu/PanelContainer/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="Main Menu/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_constants/margin_left = 0
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_bottom = 54
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="VButtonList" type="VBoxContainer" parent="Main Menu/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 0
+size_flags_horizontal = 4
+theme_override_constants/separation = -1
 
-[node name="TextureRect" type="TextureRect" parent="Main Menu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
-texture_filter = 2
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-stretch_mode = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="Main Menu/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer2"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="StartButton" type="Button" parent="Main Menu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="ContinueButton" type="Button" parent="Main Menu/MarginContainer/VButtonList"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Start"
+theme_type_variation = &"MainMenuButton"
+disabled = true
+text = "CONTINUE"
+alignment = 0
 
-[node name="SettingsButton" type="Button" parent="Main Menu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="StartButton" type="Button" parent="Main Menu/MarginContainer/VButtonList"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Settings"
+theme_type_variation = &"MainMenuButton"
+text = "NEW GAME"
+alignment = 0
 
-[node name="CreditsButton" type="Button" parent="Main Menu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="Main Menu/MarginContainer/VButtonList"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Credits"
+theme_type_variation = &"MainMenuButton"
+text = "OPTIONS"
+alignment = 0
 
-[node name="ExitButton" type="Button" parent="Main Menu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="CreditsButton" type="Button" parent="Main Menu/MarginContainer/VButtonList"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Exit"
+theme_type_variation = &"MainMenuButton"
+text = "CREDITS"
+alignment = 0
+
+[node name="ExitButton" type="Button" parent="Main Menu/MarginContainer/VButtonList"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"MainMenuButton"
+text = "QUIT"
+alignment = 0
 
 [node name="Settings Menu" type="AspectRatioContainer" parent="."]
 layout_mode = 1
@@ -852,7 +859,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1152.0
 offset_right = 1152.0
-offset_bottom = 116.0
+offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_d26fo")
@@ -959,14 +966,16 @@ tree_root = SubResource("AnimationNodeStateMachine_11wmy")
 advance_expression_base_node = NodePath("../Main Menu/Menu Control")
 anim_player = NodePath("../AnimationPlayer")
 
-[connection signal="mouse_entered" from="Main Menu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/StartButton" to="Audio Control" method="_on_hover"]
-[connection signal="pressed" from="Main Menu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/StartButton" to="Audio Control" method="_on_open"]
-[connection signal="mouse_entered" from="Main Menu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/SettingsButton" to="Audio Control" method="_on_hover"]
-[connection signal="pressed" from="Main Menu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/SettingsButton" to="Audio Control" method="_on_open"]
-[connection signal="mouse_entered" from="Main Menu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/CreditsButton" to="Audio Control" method="_on_hover"]
-[connection signal="pressed" from="Main Menu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/CreditsButton" to="Audio Control" method="_on_open"]
-[connection signal="mouse_entered" from="Main Menu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/ExitButton" to="Audio Control" method="_on_hover"]
-[connection signal="pressed" from="Main Menu/PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/ExitButton" to="Audio Control" method="_on_close"]
+[connection signal="mouse_entered" from="Main Menu/MarginContainer/VButtonList/ContinueButton" to="Audio Control" method="_on_hover"]
+[connection signal="pressed" from="Main Menu/MarginContainer/VButtonList/ContinueButton" to="Audio Control" method="_on_open"]
+[connection signal="mouse_entered" from="Main Menu/MarginContainer/VButtonList/StartButton" to="Audio Control" method="_on_hover"]
+[connection signal="pressed" from="Main Menu/MarginContainer/VButtonList/StartButton" to="Audio Control" method="_on_open"]
+[connection signal="mouse_entered" from="Main Menu/MarginContainer/VButtonList/SettingsButton" to="Audio Control" method="_on_hover"]
+[connection signal="pressed" from="Main Menu/MarginContainer/VButtonList/SettingsButton" to="Audio Control" method="_on_open"]
+[connection signal="mouse_entered" from="Main Menu/MarginContainer/VButtonList/CreditsButton" to="Audio Control" method="_on_hover"]
+[connection signal="pressed" from="Main Menu/MarginContainer/VButtonList/CreditsButton" to="Audio Control" method="_on_open"]
+[connection signal="mouse_entered" from="Main Menu/MarginContainer/VButtonList/ExitButton" to="Audio Control" method="_on_hover"]
+[connection signal="pressed" from="Main Menu/MarginContainer/VButtonList/ExitButton" to="Audio Control" method="_on_close"]
 [connection signal="mouse_entered" from="Settings Menu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HSlider" to="Audio Control" method="_on_hover"]
 [connection signal="value_changed" from="Settings Menu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HSlider" to="Audio Control" method="_on_slider_hover"]
 [connection signal="mouse_entered" from="Settings Menu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HSlider2" to="Audio Control" method="_on_hover"]

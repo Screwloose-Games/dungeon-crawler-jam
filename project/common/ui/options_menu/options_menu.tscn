@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvuixmv4n68a6"]
+[gd_scene load_steps=8 format=3 uid="uid://bvuixmv4n68a6"]
 
 [ext_resource type="Script" uid="uid://dtr60cafu1bky" path="res://common/ui/options_menu/options_menu.gd" id="1_8l6bt"]
+[ext_resource type="Theme" uid="uid://cpwb870aw2anb" path="res://common/ui/themes/panel_theme_1.tres" id="1_q2wqg"]
 [ext_resource type="Texture2D" uid="uid://b8qsfmsyqhobk" path="res://common/images/square.png" id="2_cpl0d"]
 [ext_resource type="Script" uid="uid://bbffeeruv7sea" path="res://common/ui/main_menu/SFX/main_menu_audio.gd" id="3_v7ya6"]
 [ext_resource type="AudioStream" uid="uid://camm2n4s878j" path="res://common/audio/sfx/ui/aud_ui_navigate.wav" id="4_n82tp"]
@@ -13,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_q2wqg")
 script = ExtResource("1_8l6bt")
 
 [node name="Audio Control" type="Control" parent="."]
@@ -47,7 +49,7 @@ theme_override_constants/separation = 24
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_type_variation = &"HeaderLabel"
+theme_type_variation = &"HeaderLarge"
 text = "Options"
 horizontal_alignment = 1
 vertical_alignment = 1
