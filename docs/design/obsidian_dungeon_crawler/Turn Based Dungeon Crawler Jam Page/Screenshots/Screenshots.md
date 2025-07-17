@@ -19,7 +19,7 @@
 |[[You can spend gold on items]]||
 |[[Your can equip equipment like weapons and armor]]||
 |[[You can cast spells]]||
-|[[You navigate the dungeon via an abstract map]]|[https://lh3.googleusercontent.com/pw/AP1GczMyGG8QPLWy_JRBvUFLn-ROGGRXXC1naGLOivvrtVwAvb-a2bQq-gHUlfh1YubG7oMMmGfYrVFsvSdsblLWx-Yv8KhgVuHhBACRwsPZZiUOR-07Bo9MxSyA3Bi3mVe0YkIN2y8LuIZQk4j8RILn0PZhzg=w1920-h862-s-no-gm?authuser=0](https://lh3.googleusercontent.com/pw/AP1GczMyGG8QPLWy_JRBvUFLn-ROGGRXXC1naGLOivvrtVwAvb-a2bQq-gHUlfh1YubG7oMMmGfYrVFsvSdsblLWx-Yv8KhgVuHhBACRwsPZZiUOR-07Bo9MxSyA3Bi3mVe0YkIN2y8LuIZQk4j8RILn0PZhzg=w1920-h862-s-no-gm?authuser=0)![[AP1GczMyGG8QPLWy_JRBvUFLn-ROGGRXXC1naGLOivvrtVwAvb-a2bQq-gHUlfh1YubG7oMMmGfYrVFsvSdsblLWx-Yv8KhgVuHhBACRwsPZZiUOR-07Bo9MxSyA3Bi3mVe0YkIN2y8LuIZQk4j8RILn0PZhzgw1920-h862-s-no-gm1.txt]]|
+|[[You navigate the dungeon via an abstract map]]|[https://lh3.googleusercontent.com/pw/AP1GczMyGG8QPLWy_JRBvUFLn-ROGGRXXC1naGLOivvrtVwAvb-a2bQq-gHUlfh1YubG7oMMmGfYrVFsvSdsblLWx-Yv8KhgVuHhBACRwsPZZiUOR-07Bo9MxSyA3Bi3mVe0YkIN2y8LuIZQk4j8RILn0PZhzg=w1920-h862-s-no-gm?authuser=0](https://lh3.googleusercontent.com/pw/AP1GczMyGG8QPLWy_JRBvUFLn-ROGGRXXC1naGLOivvrtVwAvb-a2bQq-gHUlfh1YubG7oMMmGfYrVFsvSdsblLWx-Yv8KhgVuHhBACRwsPZZiUOR-07Bo9MxSyA3Bi3mVe0YkIN2y8LuIZQk4j8RILn0PZhzg=w1920-h862-s-no-gm?authuser=0)![[top-level-map.png]]|
 |[[You can use items in combat]]||
   
   
