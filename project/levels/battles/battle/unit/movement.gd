@@ -4,7 +4,7 @@ extends Resource
 enum MovementMethod { WALK, FLY, JUMP }
 
 @export var movement_points_per_ap: int = 2
-var method: MovementMethod = MovementMethod.WALK
+@export var method: MovementMethod = MovementMethod.WALK
 
 var can_move: bool:
 	get:

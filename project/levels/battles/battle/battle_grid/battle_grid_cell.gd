@@ -3,6 +3,8 @@
 class_name BattleGridCell
 extends Resource
 
+signal updated
+
 enum EffectType {
 	EXAMPLE_EFFECT,
 }
@@ -18,7 +20,16 @@ enum TileType {
 }
 
 ## The unit currently occupying this cell position, if any
-@export var unit: Unit
+@export var unit: Unit:
+	set(val):
+		if val != unit:
+			#if unit and unit.cell == self:
+			#unit.cell = null
+			if val:
+				val.cell = self
+			unit = val
+			updated.emit()
+
 var effects: Array[EffectType]
 var type: TileType
 

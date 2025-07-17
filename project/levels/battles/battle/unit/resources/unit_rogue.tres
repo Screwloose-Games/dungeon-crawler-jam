@@ -20,6 +20,7 @@ metadata/_custom_type_script = "uid://bnkmedconmppg"
 [sub_resource type="Resource" id="Resource_lxlmf"]
 script = ExtResource("3_5h84q")
 movement_points_per_ap = 2
+method = 0
 metadata/_custom_type_script = "uid://brp5ns0pmjttu"
 
 [resource]
