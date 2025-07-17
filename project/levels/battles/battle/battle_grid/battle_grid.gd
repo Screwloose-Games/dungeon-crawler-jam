@@ -9,15 +9,17 @@ extends Resource
 @export var cells: Dictionary[Vector2i, BattleGridCell]
 
 ## Only to be used for instantiating the TileMapLayer
-var battlefield_scene: PackedScene
+#var battlefield_scene: PackedScene
+var battlefield: Battlefield
 
 ## Store graph information
 var fly_navigation: NavigationLayer
 var walk_navigation: NavigationLayer
 
+
 func load(battlefield: Battlefield, layout: GridObjectLayout):
 	print("Loading battlegrid")
-	battlefield_scene = battlefield.scene
+	#battlefield_scene = battlefield.scene
 	_load_battlefield_tiles(battlefield)
 	_load_grid_object_layout_tiles(layout)
 	_construct_navigation()
@@ -83,13 +85,13 @@ func _construct_navigation():
 		return
 
 	walk_navigation = NavigationLayer.new(cells, [BattleGridCell.TileType.GROUND])
-	fly_navigation = NavigationLayer.new(cells, [BattleGridCell.TileType.GROUND, BattleGridCell.TileType.PIT])
+	fly_navigation = NavigationLayer.new(
+		cells, [BattleGridCell.TileType.GROUND, BattleGridCell.TileType.PIT]
+	)
 
 
 func get_movement_path(
-		from: BattleGridCell,
-		to: BattleGridCell,
-		movement_method: Movement.MovementMethod
+	from: BattleGridCell, to: BattleGridCell, movement_method: Movement.MovementMethod
 ) -> MovementPath:
 	match movement_method:
 		Movement.MovementMethod.WALK:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bjk28ott3t0j5"]
 
-[ext_resource type="PackedScene" uid="uid://o8ll87nb3ty1" path="res://levels/battles/battle/unit/unit_node.tscn" id="1_bqbus"]
+[ext_resource type="PackedScene" uid="uid://o8ll87nb3ty1" path="res://levels/battles/battle/unit/unit_node_template.tscn" id="1_bqbus"]
 [ext_resource type="Script" uid="uid://caw460fc32bpc" path="res://components/ui/unit_portrait_panel_container.gd" id="2_mhgi4"]
 [ext_resource type="Script" uid="uid://c13xlubfi502p" path="res://components/ui/battle_ui_state.gd" id="4_sb3wb"]
 

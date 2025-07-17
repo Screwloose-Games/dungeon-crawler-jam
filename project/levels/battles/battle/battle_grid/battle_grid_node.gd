@@ -1,15 +1,22 @@
 class_name BattleGridNode
 extends Node2D
 
+const BATTLEFIELD_TEMPLATE = preload(
+	"res://levels/battles/battle/battle_grid/battlefield/battlefield_template.tscn"
+)
+const UNIT_NODE_TEMPLATE = preload("res://levels/battles/battle/unit/unit_node_template.tscn")
+
 var battle_grid: BattleGrid
-var battlefield: Node2D
+var battlefield_node: BattlefieldNode
 var units: Node2D
+
 
 func initialize(_battle_grid: BattleGrid):
 	name = "BattleGrid"
 	battle_grid = _battle_grid
-	battlefield = battle_grid.battlefield_scene.instantiate()
-	add_child(battlefield)
+	battlefield_node = BATTLEFIELD_TEMPLATE.instantiate()
+	battlefield_node.battlefield = battle_grid.battlefield
+	add_child(battlefield_node)
 	_create_units_header_node()
 
 
@@ -28,6 +35,6 @@ func _create_unit_nodes():
 
 func _create_unit_node(unit: Unit):
 	print("Create unit ", unit.name)
-	var unit_node = UnitNode.new()
+	var unit_node: UnitNode = UNIT_NODE_TEMPLATE.instantiate()
 	unit_node.initialize(unit)
 	units.add_child(unit_node)

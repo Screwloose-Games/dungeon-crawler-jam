@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="Battlefield" load_steps=3 format=4 uid="uid://8wmb58hkxvmc"]
+
+[ext_resource type="Script" uid="uid://kxw3kblmvh0b" path="res://levels/battles/battle/battle_grid/battlefield/battlefield.gd" id="1_8uj50"]
+[ext_resource type="TileSet" uid="uid://dfnv5rt2g0jf1" path="res://levels/battles/battle/battle_grid/battlefield/battlefield_tileset.tres" id="2_rcsdw"]
+
+[resource]
+script = ExtResource("1_8uj50")
+tile_data = Dictionary[Vector2i, int]({
+Vector2i(12, 0): 0,
+Vector2i(12, 1): 0,
+Vector2i(12, 2): 0,
+Vector2i(13, -1): 0,
+Vector2i(13, 0): 1,
+Vector2i(13, 1): 0,
+Vector2i(13, 2): 0,
+Vector2i(13, 3): 0,
+Vector2i(14, -1): 0,
+Vector2i(14, 0): 0,
+Vector2i(14, 1): 2,
+Vector2i(14, 2): 0,
+Vector2i(14, 3): 0,
+Vector2i(15, -2): 0,
+Vector2i(15, -1): 0,
+Vector2i(15, 0): 0,
+Vector2i(15, 1): 0,
+Vector2i(15, 2): 0,
+Vector2i(15, 3): 0,
+Vector2i(16, -1): 0,
+Vector2i(16, 0): 2,
+Vector2i(16, 1): 0,
+Vector2i(16, 2): 0,
+Vector2i(16, 3): 0,
+Vector2i(17, -1): 0,
+Vector2i(17, 0): 0,
+Vector2i(17, 1): 0,
+Vector2i(17, 2): 0,
+Vector2i(17, 3): 0
+})
+tile_map_data = PackedByteArray("AAAMAAAAAQAAAAAAAAAMAAEAAQADAAAAAAAMAAIAAQAEAAAAAAANAP//AQABAAAAAAANAAAAAQAGAAAAAAANAAEAAQAFAAAAAAANAAIAAQAAAAAAAAANAAMAAQABAAAAAAAOAP//AQACAAAAAAAOAAAAAQAFAAAAAAAOAAEAAQAJAAAAAQAOAAIAAQABAAAAAAAOAAMAAQADAAAAAAAPAP7/AQACAAAAAAAPAP//AQACAAAAAAAPAAAAAQACAAAAAAAPAAEAAQAFAAAAAAAPAAIAAQADAAAAAAAPAAMAAQACAAAAAAAQAP//AQACAAAAAAAQAAAAAQAJAAAAAAAQAAEAAQACAAAAAAAQAAIAAQACAAAAAAAQAAMAAQACAAAAAAARAP//AQACAAAAAAARAAAAAQACAAAAAAARAAEAAQACAAAAAAARAAIAAQACAAAAAAARAAMAAQACAAAAAAA=")
+tile_set = ExtResource("2_rcsdw")
+metadata/_custom_type_script = "uid://kxw3kblmvh0b"
