@@ -1,36 +1,21 @@
 [gd_resource type="TileSet" load_steps=4 format=3 uid="uid://d14815kbba136"]
 
 [ext_resource type="Resource" uid="uid://cdcfvr8yx37yy" path="res://levels/battles/battle/unit/resources/unit_skeleton.tres" id="1_y5sqp"]
-[ext_resource type="Texture2D" uid="uid://c7xx7c0tt0vrb" path="res://test/test_isometric_tiles/tbdc_tiles.png" id="2_y5sqp"]
+[ext_resource type="Texture2D" uid="uid://b16t75o3qhmmi" path="res://assets/art/character/npc/skeleton/skeleton.png" id="2_y5sqp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vmdla"]
 texture = ExtResource("2_y5sqp")
-texture_region_size = Vector2i(30, 32)
+texture_region_size = Vector2i(32, 64)
 0:0/0 = 0
-0:0/0/texture_origin = Vector2i(0, -7)
+0:0/0/custom_data_0 = ExtResource("1_y5sqp")
 1:0/0 = 0
-1:0/0/texture_origin = Vector2i(0, -7)
 2:0/0 = 0
-2:0/0/texture_origin = Vector2i(0, -7)
-3:0/0 = 0
-3:0/0/texture_origin = Vector2i(0, -7)
 0:1/0 = 0
-0:1/0/texture_origin = Vector2i(0, -7)
 1:1/0 = 0
-1:1/0/texture_origin = Vector2i(0, -7)
 2:1/0 = 0
-2:1/0/texture_origin = Vector2i(0, -7)
-2:1/0/custom_data_0 = ExtResource("1_y5sqp")
 0:2/0 = 0
-0:2/0/texture_origin = Vector2i(0, -7)
 1:2/0 = 0
-1:2/0/texture_origin = Vector2i(0, -7)
 2:2/0 = 0
-2:2/0/texture_origin = Vector2i(0, -7)
-3:2/0 = 0
-3:2/0/texture_origin = Vector2i(0, -7)
-3:1/0 = 0
-3:1/0/texture_origin = Vector2i(0, -7)
 
 [resource]
 tile_shape = 1
@@ -40,4 +25,4 @@ custom_data_layer_0/name = "UnitRef"
 custom_data_layer_0/type = 24
 custom_data_layer_1/name = "EffectType"
 custom_data_layer_1/type = 2
-sources/2 = SubResource("TileSetAtlasSource_vmdla")
+sources/0 = SubResource("TileSetAtlasSource_vmdla")

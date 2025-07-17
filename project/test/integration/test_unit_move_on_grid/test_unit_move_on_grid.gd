@@ -17,10 +17,10 @@ func test_skeleton_unit_can_move_on_grid():
 
 	# And a battle grid with starting and target positions
 	var battle_grid = BattleGrid.new()
-	var starting_cell = BattleGridCell.new(null, BattleGridCell.TileType.GROUND)
-	var target_cell = BattleGridCell.new(null, BattleGridCell.TileType.GROUND)
+	var starting_cell = BattleGridCell.new(UNIT_SKELETON_STARTING_POSITION, null, BattleGridCell.TileType.GROUND)
+	var target_cell = BattleGridCell.new(Vector2i(1, 0), null, BattleGridCell.TileType.GROUND)
 	var starting_position = UNIT_SKELETON_STARTING_POSITION
-	var target_position = Vector2i(1, 0)  # Adjacent cell
+	var target_position = Vector2i(1, 0) # Adjacent cell
 
 	battle_grid.cells[starting_position] = starting_cell
 	battle_grid.cells[target_position] = target_cell

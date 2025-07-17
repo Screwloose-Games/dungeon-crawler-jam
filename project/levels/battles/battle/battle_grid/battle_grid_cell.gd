@@ -32,13 +32,18 @@ enum TileType {
 
 var effects: Array[EffectType]
 var type: TileType
+var position: Vector2i
 
 
 func _init(
-	unit: Unit = null, type: TileType = TileType.GROUND, effects: Array[EffectType] = []
+	position: Vector2i = Vector2i.ZERO,
+	unit: Unit = null,
+	type: TileType = TileType.GROUND,
+	effects: Array[EffectType] = []
 ) -> void:
 	if unit:
 		unit.cell = self
+	self.position = position
 	self.unit = unit
 	self.type = type
 	self.effects = effects

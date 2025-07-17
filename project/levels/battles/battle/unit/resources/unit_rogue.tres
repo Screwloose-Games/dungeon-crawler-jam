@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Unit" load_steps=9 format=3 uid="uid://b7ikqmq7dbfns"]
+[gd_resource type="Resource" script_class="Unit" load_steps=9 format=3 uid="uid://74vp14p65w0j"]
 
 [ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/action/ability/ability.gd" id="1_f6vnl"]
 [ext_resource type="Script" uid="uid://v50hixevnupe" path="res://levels/battles/battle/action/tile_constraint/tile_constraint.gd" id="2_5h84q"]
