@@ -11,21 +11,26 @@ signal selected
 			unit = new_value
 			changed.emit()
 
-@onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
-@onready var clickable_static_body_2d: ClickableStaticBody2D = $ClickableStaticBody2D
+var animated_sprite_2d: AnimatedSprite2D
+var clickable_static_body_2d: ClickableStaticBody2D
 
 
-func _ready() -> void:
-	initialize()
-	changed.connect(_on_unit_changed)
-	unit.changed.connect(_on_unit_changed)
-	unit.died.connect(queue_free)
-	clickable_static_body_2d.clicked.connect(_on_clicked)
+func initialize(unit: Unit):
+	if not changed.is_connected(_on_unit_changed):
+		changed.connect(_on_unit_changed)
+	self.unit = unit
 
 
-func initialize():
-	animated_sprite_2d.sprite_frames = unit.sprite_frames
-	init_dynamic_collision_poly()
+func _create_children():
+	if not clickable_static_body_2d:
+		clickable_static_body_2d = ClickableStaticBody2D.new()
+		clickable_static_body_2d.name = "ClickableStaticBody2D"
+		clickable_static_body_2d.clicked.connect(_on_clicked)
+		add_child(clickable_static_body_2d)
+	if not animated_sprite_2d:
+		animated_sprite_2d = AnimatedSprite2D.new()
+		animated_sprite_2d.name = "AnimatedSprite2D"
+		add_child(animated_sprite_2d)
 
 
 func init_dynamic_collision_poly():
@@ -44,13 +49,27 @@ func _on_resource_updated():
 
 
 func _on_unit_changed():
-	print("unit changed")
-	initialize()
+	_create_children()
+	name = unit.name
+	if not unit.changed.is_connected(_on_unit_changed):
+		unit.changed.connect(_on_unit_changed)
+	if not unit.moved_to.is_connected(_on_unit_moved):
+		unit.moved_to.connect(_on_unit_moved)
+	if not unit.died.is_connected(queue_free):
+		unit.died.connect(queue_free)
+	if not unit.moved_to.is_connected(_on_unit_moved):
+		unit.moved.connect(_on_unit_moved)
+	animated_sprite_2d.sprite_frames = unit.sprite_frames
+	init_dynamic_collision_poly()
+	_on_unit_moved()
 
 
-func _process(_delta: float) -> void:
-	pass
-	# something that upsdates each frame.. unit.movement
+func _on_unit_moved():
+	# TODO pull this from TileMapLayer instead
+	# Also we probably don't want to set position when we move, rather we need
+	# to obey a movement path
+	var grid_transform = Transform2D(Vector2(16, 8), Vector2(-16, 8), Vector2(32, 16))
+	position = grid_transform * Vector2(unit.cell.position)
 
 
 func sprite_to_polygons() -> Array[CollisionPolygon2D]:

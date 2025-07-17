@@ -11,12 +11,16 @@ extends Resource
 ## Only to be used for instantiating the TileMapLayer
 var battlefield_scene: PackedScene
 
+## Store graph information
+var fly_navigation: NavigationLayer
+var walk_navigation: NavigationLayer
 
 func load(battlefield: Battlefield, layout: GridObjectLayout):
 	print("Loading battlegrid")
 	battlefield_scene = battlefield.scene
 	_load_battlefield_tiles(battlefield)
 	_load_grid_object_layout_tiles(layout)
+	_construct_navigation()
 	print("%d cells loaded" % len(cells))
 
 
@@ -62,10 +66,36 @@ func _load_grid_object_layout_tiles(layout: GridObjectLayout):
 		var layout_tile = tiles[tile_pos]
 		var cell = _create_or_get_cell(tile_pos)
 		cell.unit = layout_tile.unit
+		if layout_tile.unit:
+			print("unit")
 		cell.effects = layout_tile.effect
 
 
 func _create_or_get_cell(pos: Vector2i):
 	if not cells.has(pos):
-		cells[pos] = BattleGridCell.new()
+		cells[pos] = BattleGridCell.new(pos)
 	return cells[pos]
+
+
+func _construct_navigation():
+	var keys = cells.keys()
+	if len(keys) == 0:
+		return
+
+	walk_navigation = NavigationLayer.new(cells, [BattleGridCell.TileType.GROUND])
+	fly_navigation = NavigationLayer.new(cells, [BattleGridCell.TileType.GROUND, BattleGridCell.TileType.PIT])
+
+
+func get_movement_path(
+		from: BattleGridCell,
+		to: BattleGridCell,
+		movement_method: Movement.MovementMethod
+) -> MovementPath:
+	match movement_method:
+		Movement.MovementMethod.WALK:
+			return walk_navigation.get_movement_path(from.position, to.position)
+		Movement.MovementMethod.FLY:
+			return fly_navigation.get_movement_path(from.position, to.position)
+		_:
+			assert(false, "MovementMethod not implemented: %s" % movement_method)
+			return null

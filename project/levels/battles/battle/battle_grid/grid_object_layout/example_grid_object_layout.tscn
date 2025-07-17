@@ -33,15 +33,15 @@ effect = Array[int]([])
 [node name="ExampleGridObjectLayout" type="Node2D"]
 script = ExtResource("1_5m2eb")
 tile_data = Dictionary[Vector2i, ExtResource("2_8510w")]({
-Vector2i(1, 1): SubResource("Resource_6ss3o"),
-Vector2i(3, 1): SubResource("Resource_d3irb"),
-Vector2i(4, 0): SubResource("Resource_8510w"),
-Vector2i(5, 3): SubResource("Resource_8a3sa"),
-Vector2i(6, -1): SubResource("Resource_tbadn")
+Vector2i(6, 3): SubResource("Resource_tbadn"),
+Vector2i(14, -8): SubResource("Resource_d3irb"),
+Vector2i(15, 1): SubResource("Resource_8510w"),
+Vector2i(15, 3): SubResource("Resource_6ss3o"),
+Vector2i(23, 7): SubResource("Resource_8a3sa")
 })
 
 [node name="Units" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray(0, 0, 4, 0, 0, 0, 2, 0, 2, 0, 1, 0, 0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 1, 0, 0, 0, 5, 0, 3, 0, 2, 0, 2, 0, 1, 0, 0, 0, 6, 0, 255, 255, 2, 0, 2, 0, 1, 0, 0, 0, 3, 0, 1, 0, 2, 0, 2, 0, 1, 0, 0, 0)
+tile_map_data = PackedByteArray(0, 0, 15, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 248, 255, 0, 0, 0, 0, 0, 0, 0, 0)
 tile_set = ExtResource("2_356e3")
 
 [node name="Effects" type="Node2D" parent="."]

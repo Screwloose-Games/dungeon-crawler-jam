@@ -27,6 +27,10 @@ SceneManager="*res://globals/scene_manager.gd"
 SceneTransitionManager="*res://globals/scene_transition_manager.gd"
 SoundManager="*res://globals/sound_manager/sound_manager.tscn"
 
+[debug]
+
+gdscript/warnings/shadowed_variable=0
+
 [dialogic]
 
 directories/dch_directory={}
@@ -34,11 +38,13 @@ directories/dtl_directory={}
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=360
-window/size/window_width_override=640
-window/size/window_height_override=360
+window/size/viewport_width=1200
+window/size/viewport_height=800
+window/size/window_width_override=1200
+window/size/window_height_override=800
 window/stretch/mode="viewport"
+window/stretch/scale=3.0
+window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
@@ -64,6 +70,7 @@ dialogic_default_action={
 
 textures/canvas_textures/default_texture_filter=0
 textures/default_filters/use_nearest_mipmap_filter=true
+environment/defaults/default_clear_color=Color(0.0784314, 0.0470588, 0.0705882, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true
 
