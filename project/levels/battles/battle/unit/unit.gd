@@ -5,6 +5,7 @@ class_name Unit
 extends Resource
 
 signal died
+signal moved_to(new_cell: BattleGridCell)
 
 @export var name: String:
 	set(new_value):
@@ -33,6 +34,7 @@ signal died
 		if sprite_frames != new_value:
 			sprite_frames = new_value
 			emit_changed()
+
 ## Used in the UI when illustrating the unit.
 @export var portrait: Texture2D
 
@@ -74,7 +76,19 @@ var actions: Array[UnitAction]:
 
 var action_points_current: int = 0
 
-var cell: BattleGridCell
+## Todo: Fix
+var cell: BattleGridCell:
+	set(new_cell):
+		if cell != new_cell:
+			if not new_cell:
+				if cell:
+					cell.unit = null
+					cell = new_cell
+				return
+			if cell and cell.unit == self:
+				cell.unit = null
+			cell = new_cell
+			cell.unit = self
 
 var team: Team
 
@@ -167,6 +181,22 @@ func get_available_actions() -> Array[UnitAction]:
 ## Determines if the unit can execute a specific action based on its AP. [br]
 func can_execute_action(action: UnitAction) -> bool:
 	return action.cost <= action_points_current
+
+
+## Does not have complete validation, specifically considering movement type
+func move_to_cell(target_cell: BattleGridCell) -> bool:
+	if not target_cell:
+		return false
+
+	if target_cell.unit and target_cell.unit != self:
+		return false
+
+	if cell:
+		cell.unit = null
+	cell = target_cell
+	target_cell.unit = self
+	moved_to.emit(cell)
+	return true
 
 
 func damage(amount: int) -> void:

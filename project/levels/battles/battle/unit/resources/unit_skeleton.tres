@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Unit" load_steps=16 format=3 uid="uid://cdcfvr8yx37yy"]
+[gd_resource type="Resource" script_class="Unit" load_steps=22 format=3 uid="uid://cdcfvr8yx37yy"]
 
 [ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/action/ability/ability.gd" id="1_e4jav"]
 [ext_resource type="Script" uid="uid://c1n1gnpms4ens" path="res://levels/battles/battle/unit/unit.gd" id="1_y6s5j"]
@@ -10,6 +10,8 @@
 [ext_resource type="SpriteFrames" uid="uid://dfq76jptl8yqn" path="res://assets/art/character/npc/skeleton/skeleton.res" id="5_jj6w5"]
 [ext_resource type="Script" uid="uid://c3xgtp8yeabd8" path="res://levels/battles/battle/action/ability/ability_effect.gd" id="5_theot"]
 [ext_resource type="Script" uid="uid://bdh8268nm1op" path="res://levels/battles/battle/action/ability/unit_apply_damage_effect.gd" id="6_m56jr"]
+[ext_resource type="Script" uid="uid://bx0imn0mnt3xt" path="res://levels/battles/battle/action/tile_constraint/unit_present_tile_constraint.gd" id="7_m56jr"]
+[ext_resource type="Script" uid="uid://vp2dh6n2rqv2" path="res://levels/battles/battle/action/ability/ability_move.gd" id="8_theot"]
 
 [sub_resource type="Resource" id="Resource_m56jr"]
 script = ExtResource("3_qqv34")
@@ -38,16 +40,46 @@ stages = Array[ExtResource("4_theot")]([SubResource("Resource_t3lpx")])
 base_cost = 0
 metadata/_custom_type_script = "uid://bnkmedconmppg"
 
+[sub_resource type="Resource" id="Resource_chwk7"]
+script = ExtResource("7_m56jr")
+invert = true
+metadata/_custom_type_script = "uid://bx0imn0mnt3xt"
+
+[sub_resource type="Resource" id="Resource_8mvjk"]
+script = ExtResource("2_jj6w5")
+movement_points_per_ap = 1
+method = 0
+metadata/_custom_type_script = "uid://brp5ns0pmjttu"
+
+[sub_resource type="Resource" id="Resource_kgjua"]
+script = ExtResource("4_theot")
+name = "Move stage"
+description = ""
+effects = Array[ExtResource("5_theot")]([null])
+metadata/_custom_type_script = "uid://ct8umold07eie"
+
+[sub_resource type="Resource" id="Resource_5vwhy"]
+script = ExtResource("8_theot")
+movement = SubResource("Resource_8mvjk")
+name = "Walk"
+description = "Walk to a ground tile"
+number_of_targets = 1
+constraints = Array[ExtResource("2_13j3v")]([SubResource("Resource_chwk7")])
+stages = Array[ExtResource("4_theot")]([SubResource("Resource_kgjua")])
+base_cost = 0
+metadata/_custom_type_script = "uid://vp2dh6n2rqv2"
+
 [sub_resource type="Resource" id="Resource_lxlmf"]
 script = ExtResource("2_jj6w5")
 movement_points_per_ap = 2
+method = 0
 metadata/_custom_type_script = "uid://brp5ns0pmjttu"
 
 [resource]
 script = ExtResource("1_y6s5j")
 name = "Skeleton"
 description = "Boney simple melee unit"
-abilities = Array[ExtResource("1_e4jav")]([SubResource("Resource_buu0w")])
+abilities = Array[ExtResource("1_e4jav")]([SubResource("Resource_buu0w"), SubResource("Resource_5vwhy")])
 movement = SubResource("Resource_lxlmf")
 action_points_max = 8
 sprite_frames = ExtResource("5_jj6w5")
