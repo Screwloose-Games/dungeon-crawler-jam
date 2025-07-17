@@ -5,8 +5,12 @@
 class_name Battlefield
 extends Resource
 
-## The scene containing the visual representation and tile data for this battlefield
-@export var scene: PackedScene
+## The tile data for the visual representation of this battlefield
+@export var tile_data: Dictionary[Vector2i, BattleGridCell.TileType]
+## The tile_map_data [member TileMapLayer.tile_map_data] directly from the [TileMapLayer].
+@export var tile_map_data: PackedByteArray
+## The tile_set [member TileMapLayer.tile_set] directly from the [TileMapLayer].
+@export var tile_set: TileSet
 
 
 ## Extracts tile data from the battlefield scene to create a spatial layout map. [br]
@@ -15,5 +19,4 @@ extends Resource
 ## [br]
 ## [b]Returns:[/b] A dictionary mapping grid positions to their corresponding tile types.
 func get_tile_data() -> Dictionary[Vector2i, BattleGridCell.TileType]:
-	var instance: BattlefieldNode = scene.instantiate()
-	return instance.tile_data
+	return tile_data

@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="BattleScenario" load_steps=17 format=3 uid="uid://dj46ja1socuji"]
+[gd_resource type="Resource" script_class="BattleScenario" load_steps=16 format=3 uid="uid://dj46ja1socuji"]
 
 [ext_resource type="Script" uid="uid://djddfblilmucd" path="res://levels/battles/battle/end_condition/battle_end_condition.gd" id="1_haqrg"]
 [ext_resource type="Script" uid="uid://sr2agdyju43u" path="res://levels/battles/battle/battle_scenario.gd" id="2_haqrg"]
 [ext_resource type="Script" uid="uid://div78sfeq8md1" path="res://levels/battles/battle/end_condition/last_standing_end_condition.gd" id="2_q642w"]
-[ext_resource type="PackedScene" uid="uid://crt4v22yg30a" path="res://levels/battles/battle/battle_grid/battlefield/example_battlefield.tscn" id="3_h0d0n"]
 [ext_resource type="Script" uid="uid://csttd1rppjnco" path="res://levels/battles/battle/team.gd" id="3_q642w"]
 [ext_resource type="Script" uid="uid://dqy4vdo8hqsk5" path="res://levels/battles/battle/commander.gd" id="4_ledow"]
 [ext_resource type="Script" uid="uid://kxw3kblmvh0b" path="res://levels/battles/battle/battle_grid/battlefield/battlefield.gd" id="4_qksev"]
@@ -12,7 +11,38 @@
 
 [sub_resource type="Resource" id="Resource_ot768"]
 script = ExtResource("4_qksev")
-scene = ExtResource("3_h0d0n")
+tile_data = Dictionary[Vector2i, int]({
+Vector2i(12, 0): 0,
+Vector2i(12, 1): 0,
+Vector2i(12, 2): 0,
+Vector2i(13, -1): 0,
+Vector2i(13, 0): 1,
+Vector2i(13, 1): 0,
+Vector2i(13, 2): 0,
+Vector2i(13, 3): 0,
+Vector2i(14, -1): 0,
+Vector2i(14, 0): 0,
+Vector2i(14, 1): 2,
+Vector2i(14, 2): 0,
+Vector2i(14, 3): 0,
+Vector2i(15, -2): 0,
+Vector2i(15, -1): 0,
+Vector2i(15, 0): 0,
+Vector2i(15, 1): 0,
+Vector2i(15, 2): 0,
+Vector2i(15, 3): 0,
+Vector2i(16, -1): 0,
+Vector2i(16, 0): 2,
+Vector2i(16, 1): 0,
+Vector2i(16, 2): 0,
+Vector2i(16, 3): 0,
+Vector2i(17, -1): 0,
+Vector2i(17, 0): 0,
+Vector2i(17, 1): 0,
+Vector2i(17, 2): 0,
+Vector2i(17, 3): 0
+})
+tile_map_data = PackedByteArray()
 metadata/_custom_type_script = "uid://kxw3kblmvh0b"
 
 [sub_resource type="Resource" id="Resource_ledow"]

@@ -1,11 +1,11 @@
-[gd_scene load_steps=4 format=4 uid="uid://crt4v22yg30a"]
+[gd_scene load_steps=4 format=4 uid="uid://bem1sqfnxpm6e"]
 
-[ext_resource type="Script" uid="uid://u1ccysytql3d" path="res://levels/battles/battle/battle_grid/battlefield/battlefield_node.gd" id="1_xyfbm"]
-[ext_resource type="Resource" uid="uid://8wmb58hkxvmc" path="res://levels/battles/battle/battle_grid/battlefield/resources/battlefield_simple.tres" id="2_2h26v"]
-[ext_resource type="TileSet" uid="uid://dfnv5rt2g0jf1" path="res://levels/battles/battle/battle_grid/battlefield/battlefield_tileset.tres" id="2_34jde"]
+[ext_resource type="Script" uid="uid://u1ccysytql3d" path="res://levels/battles/battle/battle_grid/battlefield/battlefield_node.gd" id="1_d0g36"]
+[ext_resource type="Resource" uid="uid://8wmb58hkxvmc" path="res://levels/battles/battle/battle_grid/battlefield/resources/battlefield_simple.tres" id="2_kxbdv"]
+[ext_resource type="TileSet" uid="uid://dfnv5rt2g0jf1" path="res://levels/battles/battle/battle_grid/battlefield/battlefield_tileset.tres" id="3_ip5l2"]
 
 [node name="Battlefield" type="Node2D"]
-script = ExtResource("1_xyfbm")
+script = ExtResource("1_d0g36")
 tile_data = Dictionary[Vector2i, int]({
 Vector2i(-3, -2): 0,
 Vector2i(-3, -1): 0,
@@ -58,11 +58,11 @@ Vector2i(17, 1): 0,
 Vector2i(17, 2): 0,
 Vector2i(17, 3): 0
 })
-battlefield = ExtResource("2_2h26v")
+battlefield = ExtResource("2_kxbdv")
 
 [node name="Floors" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAMAAAAAQAAAAAAAAAMAAEAAQADAAAAAAAMAAIAAQAEAAAAAAANAP//AQABAAAAAAANAAAAAQAGAAAAAAANAAEAAQAFAAAAAAANAAIAAQAAAAAAAAANAAMAAQABAAAAAAAOAP//AQACAAAAAAAOAAAAAQAFAAAAAAAOAAEAAQAJAAAAAQAOAAIAAQABAAAAAAAOAAMAAQADAAAAAAAPAP7/AQACAAAAAAAPAP//AQACAAAAAAAPAAAAAQACAAAAAAAPAAEAAQAFAAAAAAAPAAIAAQADAAAAAAAPAAMAAQACAAAAAAAQAP//AQACAAAAAAAQAAAAAQAJAAAAAAAQAAEAAQACAAAAAAAQAAIAAQACAAAAAAAQAAMAAQACAAAAAAARAP//AQACAAAAAAARAAAAAQACAAAAAAARAAEAAQACAAAAAAARAAIAAQACAAAAAAARAAMAAQACAAAAAAA=")
-tile_set = ExtResource("2_34jde")
+tile_set = ExtResource("3_ip5l2")
 
 [node name="Decoration" type="TileMapLayer" parent="."]
-tile_set = ExtResource("2_34jde")
+tile_set = ExtResource("3_ip5l2")
