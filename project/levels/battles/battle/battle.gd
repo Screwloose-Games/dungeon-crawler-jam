@@ -4,8 +4,6 @@
 class_name Battle
 extends Resource
 
-## The scenario definition that describes the battle setup, objectives, and participants
-@export var battle_scenario: BattleScenario
 
 ## The grid-based battlefield where units are positioned and take actions
 var battle_grid: BattleGrid
@@ -13,30 +11,38 @@ var battle_grid: BattleGrid
 ## The teams that are taking part in this battle
 var teams: Array[Team]
 
-# TODO: Use a better way to represent these relationships
-# as is, its not very clear what each index in the array represents
-# it's also very redundant
-## The relationships between the teams taking part in this battle
-var team_relationships: Array[Team.Relationship]
+## The conditions that determine when the battle can end
+var end_conditions: Array[BattleEndCondition]
+
+var battle_round: BattleRound
 
 func create_from_scenario(scenario: BattleScenario) -> void:
 	teams = scenario.teams
-	team_relationships = scenario.team_relationships
+	end_conditions = scenario.end_conditions
+	_set_team_relationships(scenario.team_relationships)
 	_create_battle_grid(scenario)
+	battle_round = BattleRound.new(teams)
 
 
 func _create_battle_grid(scenario: BattleScenario):
 	var chosen_layout = scenario.grid_object_layouts.pick_random()
 	var battlefield = scenario.battlefield
 	battle_grid = BattleGrid.new()
-	battle_grid.load(battlefield, chosen_layout)
+	battle_grid.load(battlefield, chosen_layout, teams)
 
 
-func get_team_relationship(team_a: Team, team_b: Team) -> Team.Relationship:
-	if team_a == team_b:
-		return Team.Relationship.SAME_TEAM
-	var a_index = teams.find(team_a)
-	var b_index = teams.find(team_b)
+func check_end_condition():
+	for end_condition in end_conditions:
+		var result: BattleResult = end_condition.check_condition(self)
+		if result:
+			GlobalSignalBus.battle_ended.emit(result)
+	return null
 
-	var relationship_index = a_index * len(teams) + b_index
-	return team_relationships[relationship_index]
+
+func _set_team_relationships(team_relationships: Array[TeamRelationshipRecord]):
+	for relation in team_relationships:
+		Team.set_team_relationship(relation.team_a, relation.team_b, relation.relationship)
+
+
+func begin():
+	GlobalSignalBus.battle_started.emit()

@@ -42,6 +42,7 @@ func init_dynamic_collision_poly():
 
 func _on_clicked():
 	selected.emit()
+	GlobalSignalBus.unit_selected.emit(self, null)
 
 
 func _on_resource_updated():

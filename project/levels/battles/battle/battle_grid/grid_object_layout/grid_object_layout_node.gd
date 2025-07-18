@@ -4,6 +4,7 @@ extends Node2D
 
 const UNIT_DATA_LAYER = "UnitRef"
 const EFFECT_DATA_LAYER = "EffectType"
+const TEAM_INDEX_DATA_LAYER = "TeamIndex"
 const TIME_BETWEEN_SYNCS = 10
 
 @export_custom(PROPERTY_HINT_NONE, "", 2) var tile_data: Dictionary[Vector2i, ObjectLayoutCell]
@@ -52,11 +53,15 @@ func _on_tiles_changed():
 func convert_unit_data(pos: Vector2i, data: TileData):
 	if data == null:
 		return
-	var custom_data = data.get_custom_data(UNIT_DATA_LAYER)
-	if not validate_unit(pos, custom_data):
+	var unit_ref = data.get_custom_data(UNIT_DATA_LAYER)
+	if not validate_unit(pos, unit_ref):
 		return
-	var unit := custom_data as Unit
-	create_or_get_cell(pos).unit = unit
+	var unit := unit_ref as Unit
+	var team_index = data.get_custom_data(TEAM_INDEX_DATA_LAYER)
+
+	var cell = create_or_get_cell(pos)
+	cell.unit = unit
+	cell.team_index = team_index
 
 
 ## Retrieve data from all effect layers

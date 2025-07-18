@@ -76,21 +76,33 @@ var actions: Array[UnitAction]:
 
 var action_points_current: int = 0
 
-## Todo: Fix
 var cell: BattleGridCell:
 	set(new_cell):
-		if cell != new_cell:
-			if not new_cell:
-				if cell:
-					cell.unit = null
-					cell = new_cell
-				return
-			if cell and cell.unit == self:
-				cell.unit = null
+		if cell == new_cell:
+			return
+		# Removing cell
+		if not new_cell and cell:
+			cell.unit = null
 			cell = new_cell
-			cell.unit = self
+			return
+		# Remove self from previous cell
+		if cell and cell.unit == self:
+			cell.unit = null
 
-var team: Team
+		cell = new_cell
+		# Add self to new cell
+		cell.unit = self
+
+
+var team: Team:
+	set(new_value):
+		if new_value == team:
+			return
+		if team:
+			GlobalSignalBus.unit_removed_from_team.emit(self, team)
+		team = new_value
+		if team:
+			GlobalSignalBus.unit_added_to_team.emit(self, team)
 
 
 func _on_health_health_changed(new_health: int):
@@ -107,6 +119,8 @@ func _on_health_died():
 
 func die():
 	died.emit()
+	cell = null
+	team = null
 
 
 func _init(

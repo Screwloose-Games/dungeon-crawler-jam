@@ -17,3 +17,6 @@ func initialize():
 	battle_grid.name = "BattleGrid"
 	battle_grid.initialize(battle.battle_grid)
 	add_child(battle_grid)
+
+	# For now, battle begins on scene start
+	battle.begin()

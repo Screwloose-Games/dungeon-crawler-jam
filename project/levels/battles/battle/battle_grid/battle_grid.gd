@@ -8,6 +8,8 @@ extends Resource
 ## Dictionary mapping grid coordinates to their corresponding cell data and occupants
 @export var cells: Dictionary[Vector2i, BattleGridCell]
 
+var teams: Array[Team]
+
 ## Only to be used for instantiating the TileMapLayer
 #var battlefield_scene: PackedScene
 var battlefield: Battlefield
@@ -17,9 +19,9 @@ var fly_navigation: NavigationLayer
 var walk_navigation: NavigationLayer
 
 
-func load(battlefield: Battlefield, layout: GridObjectLayout):
+func load(battlefield: Battlefield, layout: GridObjectLayout, teams: Array[Team]):
 	print("Loading battlegrid")
-	#battlefield_scene = battlefield.scene
+	self.teams = teams
 	_load_battlefield_tiles(battlefield)
 	_load_grid_object_layout_tiles(layout)
 	_construct_navigation()
@@ -69,10 +71,11 @@ func _load_grid_object_layout_tiles(layout: GridObjectLayout):
 		var cell = _create_or_get_cell(tile_pos)
 		if layout_tile.unit:
 			cell.unit = layout_tile.unit.duplicate()
+			cell.unit.team = teams[layout_tile.team_index]
 		cell.effects = layout_tile.effect
 
 
-func _create_or_get_cell(pos: Vector2i):
+func _create_or_get_cell(pos: Vector2i) -> BattleGridCell:
 	if not cells.has(pos):
 		cells[pos] = BattleGridCell.new(pos)
 	return cells[pos]

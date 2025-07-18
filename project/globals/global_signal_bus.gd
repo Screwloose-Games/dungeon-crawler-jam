@@ -7,8 +7,13 @@ signal unit_hurt(unit: Unit, amount: float)
 signal unit_healed(unit: Unit, amount: float)
 signal unit_died(unit: Unit)
 signal commander_turn_started(commander: Commander)
+signal unit_removed_from_team(unit: Unit, team: Team)
+signal unit_added_to_team(unit: Unit, team: Team)
 
 signal battle_grid_cell_selected(battle_grid_cel: BattleGridCell, commander: Commander)
+
+# Team events
+signal team_ended_turn(team: Team)
 
 # levels / menus
 signal changed_level
@@ -24,5 +29,61 @@ signal start_level_requested(level_num: int)
 
 # Battles
 signal battle_started
-signal end_battle_requirements_met
+signal battle_ended(result: BattleResult)
+signal battle_round_started
+signal battle_round_ended
+signal battle_turn_started(team: Team)
+signal battle_turn_ended
 signal level_reset
+
+
+func _init() -> void:
+	unit_removed_from_team.connect(_on_unit_removed_from_team)
+	unit_added_to_team.connect(_on_unit_added_to_team)
+	team_ended_turn.connect(_on_team_ended_turn)
+	battle_started.connect(_on_battle_started)
+	battle_ended.connect(_on_battle_ended)
+	battle_round_started.connect(_on_battle_round_started)
+	battle_round_ended.connect(_on_battle_round_ended)
+	battle_turn_started.connect(_on_battle_turn_started)
+	battle_turn_ended.connect(_on_battle_turn_ended)
+
+
+func _on_unit_selected(unit: Unit, commander: Commander):
+	print("unit_selected: %s %s" % [unit.name, commander.name])
+
+
+func _on_unit_removed_from_team(unit: Unit, team: Team):
+	print("unit_removed_from_team: %s %s" % [unit, team.name])
+
+
+func _on_unit_added_to_team(unit: Unit, team: Team):
+	print("unit_added_to_team: %s %s" % [unit.name, team.name])
+
+
+func _on_team_ended_turn(team: Team):
+	print("team_ended_turn: %s" % team.name)
+
+
+func _on_battle_started():
+	print("battle_started")
+
+
+func _on_battle_ended(result: BattleResult):
+	print("battle_ended: %s" % result.explanation_text)
+
+
+func _on_battle_round_started():
+	print("battle_round_started")
+
+
+func _on_battle_round_ended():
+	print("battle_round_ended")
+
+
+func _on_battle_turn_started(team: Team):
+	print("battle_turn_started: %s" % team.name)
+
+
+func _on_battle_turn_ended():
+	print("battle_turn_ended")
