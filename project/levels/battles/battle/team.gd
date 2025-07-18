@@ -19,7 +19,7 @@ enum Relationship {
 @export var name: String
 
 var relationships: Dictionary[Team, Relationship] = {}
-
+var units: Array[Unit]
 
 static func set_team_relationship(team_a: Team, team_b: Team, relationship: Relationship) -> void:
 	if not team_a or not team_b:
@@ -41,6 +41,22 @@ static func unset_team_relationship(team_a: Team, team_b: Team, relationship: Re
 func _init(_name: String = "", _commander: Commander = null) -> void:
 	self.name = _name
 	self.commander = _commander
+	GlobalSignalBus.unit_added_to_team.connect(_on_unit_added_to_team)
+	GlobalSignalBus.unit_removed_from_team.connect(_on_unit_removed_from_team)
+
+
+func _on_unit_added_to_team(unit: Unit, team: Team):
+	if team != self:
+		return
+	assert(units.find(unit) < 0, "Unit %s already exists in team %s" % [unit.name, name])
+	units.append(unit)
+
+
+func _on_unit_removed_from_team(unit: Unit, team: Team):
+	if team != self:
+		return
+	assert(units.find(unit) >= 0, "Unit %s does not exist in team %s" % [unit.name, name])
+	units.erase(unit)
 
 
 func is_on_same_team(other_team: Team) -> bool:

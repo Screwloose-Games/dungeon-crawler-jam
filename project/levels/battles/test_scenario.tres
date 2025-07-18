@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://djddfblilmucd" path="res://levels/battles/battle/end_condition/battle_end_condition.gd" id="1_haqrg"]
 [ext_resource type="Script" uid="uid://sr2agdyju43u" path="res://levels/battles/battle/battle_scenario.gd" id="2_haqrg"]
-[ext_resource type="Script" uid="uid://div78sfeq8md1" path="res://levels/battles/battle/end_condition/last_standing_end_condition.gd" id="2_q642w"]
 [ext_resource type="Script" uid="uid://csttd1rppjnco" path="res://levels/battles/battle/team.gd" id="3_q642w"]
 [ext_resource type="Script" uid="uid://dqy4vdo8hqsk5" path="res://levels/battles/battle/commander.gd" id="4_ledow"]
 [ext_resource type="Script" uid="uid://kxw3kblmvh0b" path="res://levels/battles/battle/battle_grid/battlefield/battlefield.gd" id="4_qksev"]
 [ext_resource type="PackedScene" uid="uid://d4e5najwcpfi4" path="res://levels/battles/battle/battle_grid/grid_object_layout/example_grid_object_layout.tscn" id="5_ot768"]
+[ext_resource type="Script" uid="uid://cgtgm81y0x2hq" path="res://levels/battles/battle/team_relationship_record.gd" id="6_ks5kt"]
 [ext_resource type="Script" uid="uid://bi1g3t40pyhyp" path="res://levels/battles/battle/battle_grid/grid_object_layout/grid_object_layout.gd" id="6_wl414"]
 
 [sub_resource type="Resource" id="Resource_ot768"]
@@ -45,10 +45,6 @@ Vector2i(17, 3): 0
 tile_map_data = PackedByteArray()
 metadata/_custom_type_script = "uid://kxw3kblmvh0b"
 
-[sub_resource type="Resource" id="Resource_ledow"]
-script = ExtResource("2_q642w")
-metadata/_custom_type_script = "uid://div78sfeq8md1"
-
 [sub_resource type="Resource" id="Resource_wl414"]
 script = ExtResource("6_wl414")
 scene = ExtResource("5_ot768")
@@ -80,11 +76,18 @@ commander = SubResource("Resource_h0d0n")
 name = "Undead"
 metadata/_custom_type_script = "uid://csttd1rppjnco"
 
+[sub_resource type="Resource" id="Resource_s70j8"]
+script = ExtResource("6_ks5kt")
+team_a = SubResource("Resource_83wba")
+team_b = SubResource("Resource_qksev")
+relationship = 0
+metadata/_custom_type_script = "uid://cgtgm81y0x2hq"
+
 [resource]
 script = ExtResource("2_haqrg")
 teams = Array[ExtResource("3_q642w")]([SubResource("Resource_83wba"), SubResource("Resource_qksev")])
-team_relationships = Array[int]([0, 3, 0, 3])
-end_conditions = Array[ExtResource("1_haqrg")]([SubResource("Resource_ledow")])
+team_relationships = Array[ExtResource("6_ks5kt")]([SubResource("Resource_s70j8")])
+end_conditions = Array[ExtResource("1_haqrg")]([])
 battlefield = SubResource("Resource_ot768")
 grid_object_layouts = Array[ExtResource("6_wl414")]([SubResource("Resource_wl414")])
 metadata/_custom_type_script = "uid://sr2agdyju43u"
