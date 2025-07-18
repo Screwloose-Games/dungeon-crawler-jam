@@ -67,9 +67,8 @@ func _load_grid_object_layout_tiles(layout: GridObjectLayout):
 	for tile_pos in tiles.keys():
 		var layout_tile = tiles[tile_pos]
 		var cell = _create_or_get_cell(tile_pos)
-		cell.unit = layout_tile.unit
 		if layout_tile.unit:
-			print("unit")
+			cell.unit = layout_tile.unit.duplicate()
 		cell.effects = layout_tile.effect
 
 
