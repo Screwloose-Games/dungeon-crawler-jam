@@ -20,7 +20,7 @@ texture_region_size = Vector2i(32, 64)
 [resource]
 tile_shape = 1
 tile_layout = 5
-tile_size = Vector2i(30, 16)
+tile_size = Vector2i(32, 16)
 custom_data_layer_0/name = "UnitRef"
 custom_data_layer_0/type = 24
 custom_data_layer_1/name = "EffectType"

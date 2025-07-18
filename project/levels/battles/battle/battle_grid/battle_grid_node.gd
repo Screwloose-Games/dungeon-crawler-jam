@@ -8,7 +8,6 @@ const UNIT_NODE_TEMPLATE = preload("res://levels/battles/battle/unit/unit_node_t
 
 var battle_grid: BattleGrid
 var battlefield_node: BattlefieldNode
-var units: Node2D
 
 
 func initialize(_battle_grid: BattleGrid):
@@ -17,13 +16,6 @@ func initialize(_battle_grid: BattleGrid):
 	battlefield_node = BATTLEFIELD_TEMPLATE.instantiate()
 	battlefield_node.battlefield = battle_grid.battlefield
 	add_child(battlefield_node)
-	_create_units_header_node()
-
-
-func _create_units_header_node():
-	units = Node2D.new()
-	units.name = "Units"
-	add_child(units)
 	_create_unit_nodes()
 
 
@@ -34,7 +26,6 @@ func _create_unit_nodes():
 
 
 func _create_unit_node(unit: Unit):
-	print("Create unit ", unit.name)
 	var unit_node: UnitNode = UNIT_NODE_TEMPLATE.instantiate()
 	unit_node.initialize(unit)
-	units.add_child(unit_node)
+	add_child(unit_node)

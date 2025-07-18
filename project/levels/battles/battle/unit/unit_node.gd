@@ -50,7 +50,7 @@ func _on_resource_updated():
 
 func _on_unit_changed():
 	_create_children()
-	name = unit.name
+	name = "Unit_" + unit.name
 	if not unit.changed.is_connected(_on_unit_changed):
 		unit.changed.connect(_on_unit_changed)
 	if not unit.moved_to.is_connected(_on_unit_moved):
@@ -68,8 +68,9 @@ func _on_unit_moved():
 	# TODO pull this from TileMapLayer instead
 	# Also we probably don't want to set position when we move, rather we need
 	# to obey a movement path
-	var grid_transform = Transform2D(Vector2(16, 8), Vector2(-16, 8), Vector2(32, 16))
+	var grid_transform = Transform2D(Vector2(16, 8), Vector2(-16, 8), Vector2(16, 8))
 	position = grid_transform * Vector2(unit.cell.position)
+	apply_scale(Vector2(.4, .4)) # Temporarily compensating for oversized placeholder art
 
 
 func sprite_to_polygons() -> Array[CollisionPolygon2D]:
