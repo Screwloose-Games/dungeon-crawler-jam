@@ -19,7 +19,9 @@ var fly_navigation: NavigationLayer
 var walk_navigation: NavigationLayer
 
 
-func load(battlefield: Battlefield, layout: GridObjectLayout, teams: Array[Team]):
+func _init(
+	battlefield: Battlefield = null, layout: GridObjectLayout = null, teams: Array[Team] = []
+):
 	print("Loading battlegrid")
 	self.teams = teams
 	_load_battlefield_tiles(battlefield)
