@@ -1,13 +1,13 @@
-[gd_scene load_steps=4 format=4 uid="uid://cinf0j8dukkin"]
+[gd_resource type="Resource" script_class="Battlefield" load_steps=3 format=4 uid="uid://clsl4lydmw3ry"]
 
-[ext_resource type="Script" uid="uid://u1ccysytql3d" path="res://levels/battles/battle/battle_grid/battlefield/battlefield_node.gd" id="1_xyfbm"]
-[ext_resource type="TileSet" uid="uid://dfnv5rt2g0jf1" path="res://levels/battles/battle/battle_grid/battlefield/battlefield_tileset.tres" id="2_34jde"]
-[ext_resource type="Resource" uid="uid://clsl4lydmw3ry" path="res://levels/battles/battle/test_battlefield.tres" id="2_bqq7g"]
+[ext_resource type="Script" uid="uid://kxw3kblmvh0b" path="res://levels/battles/battle/battle_grid/battlefield/battlefield.gd" id="1_hd4td"]
+[ext_resource type="TileSet" uid="uid://dfnv5rt2g0jf1" path="res://levels/battles/battle/battle_grid/battlefield/battlefield_tileset.tres" id="2_lea67"]
 
-[node name="Battlefield" type="Node2D"]
-y_sort_enabled = true
-script = ExtResource("1_xyfbm")
+[resource]
+script = ExtResource("1_hd4td")
 tile_data = Dictionary[Vector2i, int]({
+Vector2i(6, 3): 0,
+Vector2i(12, -1): 0,
 Vector2i(12, 0): 0,
 Vector2i(12, 1): 0,
 Vector2i(12, 2): 0,
@@ -16,6 +16,7 @@ Vector2i(13, 0): 1,
 Vector2i(13, 1): 0,
 Vector2i(13, 2): 0,
 Vector2i(13, 3): 0,
+Vector2i(14, -8): 0,
 Vector2i(14, -1): 0,
 Vector2i(14, 0): 0,
 Vector2i(14, 1): 2,
@@ -36,15 +37,9 @@ Vector2i(17, -1): 0,
 Vector2i(17, 0): 0,
 Vector2i(17, 1): 0,
 Vector2i(17, 2): 0,
-Vector2i(17, 3): 0
+Vector2i(17, 3): 0,
+Vector2i(23, 7): 0
 })
-battlefield = ExtResource("2_bqq7g")
-
-[node name="Floors" type="TileMapLayer" parent="."]
-y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAMAAAAAQAAAAAAAAAMAAEAAQADAAAAAAAMAAIAAQAEAAAAAAANAP//AQABAAAAAAANAAAAAQAGAAAAAAANAAEAAQAFAAAAAAANAAIAAQAAAAAAAAANAAMAAQABAAAAAAAOAP//AQACAAAAAAAOAAAAAQAFAAAAAAAOAAEAAQAJAAAAAQAOAAIAAQABAAAAAAAOAAMAAQADAAAAAAAPAP7/AQACAAAAAAAPAP//AQACAAAAAAAPAAAAAQACAAAAAAAPAAEAAQAFAAAAAAAPAAIAAQADAAAAAAAPAAMAAQACAAAAAAAQAP//AQACAAAAAAAQAAAAAQAJAAAAAAAQAAEAAQACAAAAAAAQAAIAAQACAAAAAAAQAAMAAQACAAAAAAARAP//AQACAAAAAAARAAAAAQACAAAAAAARAAEAAQACAAAAAAARAAIAAQACAAAAAAARAAMAAQACAAAAAAAGAAMAAQACAAAAAAAXAAcAAQACAAAAAAAOAPj/AQACAAAAAAAMAP//AQABAAAAAAA=")
-tile_set = ExtResource("2_34jde")
-
-[node name="Decoration" type="TileMapLayer" parent="."]
-y_sort_enabled = true
-tile_set = ExtResource("2_34jde")
+tile_set = ExtResource("2_lea67")
+metadata/_custom_type_script = "uid://kxw3kblmvh0b"

@@ -9,14 +9,29 @@ const UNIT_NODE_TEMPLATE = preload("res://levels/battles/battle/unit/unit_node_t
 var battle_grid: BattleGrid
 var battlefield_node: BattlefieldNode
 
+var ground_tile_map_layer: TileMapLayer
 
-func initialize(_battle_grid: BattleGrid):
-	name = "BattleGrid"
+
+func _init(_battle_grid: BattleGrid = null) -> void:
 	battle_grid = _battle_grid
+
+
+func initialize():
+	name = "BattleGrid"
 	battlefield_node = BATTLEFIELD_TEMPLATE.instantiate()
 	battlefield_node.battlefield = battle_grid.battlefield
+	if !is_node_ready():
+		await ready
 	add_child(battlefield_node)
+	if !battlefield_node.is_node_ready():
+		await battlefield_node.ready
+	ground_tile_map_layer = battlefield_node.floors
 	_create_unit_nodes()
+
+
+func get_world_location_by_grid_location(grid_location: Vector2i):
+	var local_coord: Vector2 = ground_tile_map_layer.map_to_local(grid_location)
+	return ground_tile_map_layer.to_global(local_coord)
 
 
 func _create_unit_nodes():

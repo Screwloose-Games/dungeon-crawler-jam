@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmv0n6b8atd6c"]
+
+[ext_resource type="Script" uid="uid://0qnscu6u22f2" path="res://test/scenarios/test_battle_unit_movement/test_battle_unit_movement.gd" id="1_0wrne"]
+[ext_resource type="Script" uid="uid://byqi826tq1wrp" path="res://levels/battles/battle/battle_node.gd" id="1_80bkj"]
+[ext_resource type="Resource" uid="uid://dj46ja1socuji" path="res://levels/battles/test_scenario.tres" id="2_xnt1v"]
+
+[node name="TestBattleUnitMovement" type="Node2D"]
+script = ExtResource("1_0wrne")
+
+[node name="BattleTemplate" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_80bkj")
+battle_scenario = ExtResource("2_xnt1v")

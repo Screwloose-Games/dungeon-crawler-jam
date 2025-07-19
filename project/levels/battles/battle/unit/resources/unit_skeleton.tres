@@ -84,6 +84,7 @@ movement = SubResource("Resource_lxlmf")
 action_points_max = 8
 sprite_frames = ExtResource("5_jj6w5")
 portrait = ExtResource("2_nw4pq")
+move_speed = 0.5
 health_point_max = 10
 health_points = 10
 metadata/_custom_type_script = "uid://c1n1gnpms4ens"

@@ -6,15 +6,22 @@
 [ext_resource type="Script" uid="uid://b4cp7k0nkvh7o" path="res://components/clickable_static_body_2d.gd" id="4_ghkny"]
 
 [node name="UnitNode" type="Node2D"]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_ilobj")
 unit = ExtResource("2_ghkny")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
+y_sort_enabled = true
+position = Vector2(0, -20)
 sprite_frames = ExtResource("3_ir3g3")
-animation = &"attack"
+animation = &"idle"
+autoplay = "idle"
 
 [node name="ClickableStaticBody2D" type="StaticBody2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -20)
 collision_layer = 256
 collision_mask = 0
 input_pickable = true

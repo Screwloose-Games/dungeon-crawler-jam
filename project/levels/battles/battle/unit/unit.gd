@@ -36,7 +36,11 @@ signal moved_to(new_cell: BattleGridCell)
 			emit_changed()
 
 ## Used in the UI when illustrating the unit.
+
 @export var portrait: Texture2D
+
+## Cell movement per second
+@export var move_speed: float = 0.5
 
 @export var health_point_max: int = 10:
 	set(new_value):
@@ -92,7 +96,7 @@ var cell: BattleGridCell:
 		cell = new_cell
 		# Add self to new cell
 		cell.unit = self
-
+		moved_to.emit(cell)
 
 var team: Team:
 	set(new_value):
@@ -209,7 +213,7 @@ func move_to_cell(target_cell: BattleGridCell) -> bool:
 		cell.unit = null
 	cell = target_cell
 	target_cell.unit = self
-	moved_to.emit(cell)
+
 	return true
 
 

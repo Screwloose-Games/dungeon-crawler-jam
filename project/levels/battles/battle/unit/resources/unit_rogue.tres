@@ -31,6 +31,7 @@ abilities = Array[ExtResource("1_f6vnl")]([SubResource("Resource_4q6pk")])
 movement = SubResource("Resource_lxlmf")
 action_points_max = 10
 portrait = ExtResource("6_a8b0y")
+move_speed = 0.5
 health_point_max = 10
 health_points = 10
 metadata/_custom_type_script = "uid://c1n1gnpms4ens"
