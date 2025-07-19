@@ -11,14 +11,29 @@ signal selected
 			unit = new_value
 			changed.emit()
 
-var animated_sprite_2d: AnimatedSprite2D
-var clickable_static_body_2d: ClickableStaticBody2D
+@onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
+@onready var clickable_static_body_2d: ClickableStaticBody2D = $ClickableStaticBody2D
+
+
+func _ready():
+	if not unit.moved_to.is_connected(_on_unit_moved):
+		unit.moved_to.connect(_on_unit_moved)
+	init_position()
+
+
+func get_grid_position() -> Vector2i:
+	return unit.cell.position
+
+
+func move_to_location(location: Vector2i):
+	self.position = location
 
 
 func initialize(unit: Unit):
 	if not changed.is_connected(_on_unit_changed):
 		changed.connect(_on_unit_changed)
 	self.unit = unit
+	self.position = unit.cell.position
 
 
 func _create_children():
@@ -50,7 +65,8 @@ func _on_resource_updated():
 
 
 func _on_unit_changed():
-	_create_children()
+	if !is_node_ready():
+		await ready
 	name = "Unit_" + unit.name
 	if not unit.changed.is_connected(_on_unit_changed):
 		unit.changed.connect(_on_unit_changed)
@@ -62,16 +78,28 @@ func _on_unit_changed():
 		unit.moved.connect(_on_unit_moved)
 	animated_sprite_2d.sprite_frames = unit.sprite_frames
 	init_dynamic_collision_poly()
-	_on_unit_moved()
 
 
-func _on_unit_moved():
-	# TODO pull this from TileMapLayer instead
-	# Also we probably don't want to set position when we move, rather we need
-	# to obey a movement path
+func init_position():
 	var grid_transform = Transform2D(Vector2(16, 8), Vector2(-16, 8), Vector2(16, 8))
 	position = grid_transform * Vector2(unit.cell.position)
-	apply_scale(Vector2(.4, .4)) # Temporarily compensating for oversized placeholder art
+
+
+## Only intended to be used to move 1 grid cell at a time.
+func _on_unit_moved(grid_cell: BattleGridCell):
+	var tween = get_tree().create_tween()
+	#var target_position: Vector2 = battle_grid_node.get_world_location_by_grid_location(
+	#grid_cell.position
+	#)
+	# TODO: Handle the transform for grid position to world position.
+	var grid_transform = Transform2D(Vector2(16, 8), Vector2(-16, 8), Vector2(16, 8))
+	var target_position = grid_transform * Vector2(grid_cell.position)
+	tween.tween_property(self, "position", target_position, unit.move_speed)
+	var prev_position = position
+	if target_position.x > prev_position.x:
+		start_moving_right()
+	elif target_position.x < prev_position.x:
+		start_moving_left()
 
 
 func sprite_to_polygons() -> Array[CollisionPolygon2D]:
@@ -89,3 +117,13 @@ func sprite_to_polygons() -> Array[CollisionPolygon2D]:
 				Vector2i(collision_polygon.position) - bitmap.get_size() / 2
 			)
 	return collision_polygons
+
+
+func start_moving_right():
+	transform.x.x = 1.0
+	animated_sprite_2d.play("move_right")
+
+
+func start_moving_left():
+	transform.x.x = -1.0
+	animated_sprite_2d.play("move_right")
