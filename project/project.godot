@@ -26,6 +26,7 @@ GlobalSignalBus="*res://globals/global_signal_bus.gd"
 SceneManager="*res://globals/scene_manager.gd"
 SceneTransitionManager="*res://globals/scene_transition_manager.gd"
 SoundManager="*res://globals/sound_manager/sound_manager.tscn"
+Player="*res://globals/player.gd"
 
 [debug]
 

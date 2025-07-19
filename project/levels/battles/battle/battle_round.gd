@@ -6,13 +6,14 @@ var round_index: int
 var turn_index: int
 var current_turn_team: Team
 
+
 func _init(team_turn_order: Array[Team]):
 	self.turn_order = team_turn_order
 	GlobalSignalBus.team_ended_turn.connect(_on_team_ended_turn)
 	GlobalSignalBus.battle_started.connect(_on_battle_started)
 
 
-func _on_battle_started():
+func _on_battle_started(_battle: Battle):
 	turn_index = 0
 	round_index = 0
 	_next_turn()
