@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://prvi2hqwbi62"]
+
+[ext_resource type="PackedScene" uid="uid://bl2uosxojajej" path="res://common/ui/hud/hud.tscn" id="1_55s5x"]
+
+[node name="TestFullBattleUi" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerHud" parent="CanvasLayer" instance=ExtResource("1_55s5x")]

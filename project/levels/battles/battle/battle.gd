@@ -4,7 +4,6 @@
 class_name Battle
 extends Resource
 
-
 ## The grid-based battlefield where units are positioned and take actions
 var battle_grid: BattleGrid
 
@@ -15,6 +14,7 @@ var teams: Array[Team]
 var end_conditions: Array[BattleEndCondition]
 
 var battle_round: BattleRound
+
 
 func create_from_scenario(scenario: BattleScenario) -> void:
 	teams = scenario.teams
@@ -27,8 +27,7 @@ func create_from_scenario(scenario: BattleScenario) -> void:
 func _create_battle_grid(scenario: BattleScenario):
 	var chosen_layout = scenario.grid_object_layouts.pick_random()
 	var battlefield = scenario.battlefield
-	battle_grid = BattleGrid.new()
-	battle_grid.load(battlefield, chosen_layout, teams)
+	battle_grid = BattleGrid.new(battlefield, chosen_layout, teams)
 
 
 func check_end_condition():

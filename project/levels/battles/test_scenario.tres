@@ -1,49 +1,13 @@
-[gd_resource type="Resource" script_class="BattleScenario" load_steps=16 format=3 uid="uid://dj46ja1socuji"]
+[gd_resource type="Resource" script_class="BattleScenario" load_steps=15 format=3 uid="uid://dj46ja1socuji"]
 
 [ext_resource type="Script" uid="uid://djddfblilmucd" path="res://levels/battles/battle/end_condition/battle_end_condition.gd" id="1_haqrg"]
+[ext_resource type="Resource" uid="uid://clsl4lydmw3ry" path="res://levels/battles/battle/test_battlefield.tres" id="1_ks5kt"]
 [ext_resource type="Script" uid="uid://sr2agdyju43u" path="res://levels/battles/battle/battle_scenario.gd" id="2_haqrg"]
 [ext_resource type="Script" uid="uid://csttd1rppjnco" path="res://levels/battles/battle/team.gd" id="3_q642w"]
 [ext_resource type="Script" uid="uid://dqy4vdo8hqsk5" path="res://levels/battles/battle/commander.gd" id="4_ledow"]
-[ext_resource type="Script" uid="uid://kxw3kblmvh0b" path="res://levels/battles/battle/battle_grid/battlefield/battlefield.gd" id="4_qksev"]
 [ext_resource type="PackedScene" uid="uid://d4e5najwcpfi4" path="res://levels/battles/battle/battle_grid/grid_object_layout/example_grid_object_layout.tscn" id="5_ot768"]
 [ext_resource type="Script" uid="uid://cgtgm81y0x2hq" path="res://levels/battles/battle/team_relationship_record.gd" id="6_ks5kt"]
 [ext_resource type="Script" uid="uid://bi1g3t40pyhyp" path="res://levels/battles/battle/battle_grid/grid_object_layout/grid_object_layout.gd" id="6_wl414"]
-
-[sub_resource type="Resource" id="Resource_ot768"]
-script = ExtResource("4_qksev")
-tile_data = Dictionary[Vector2i, int]({
-Vector2i(12, 0): 0,
-Vector2i(12, 1): 0,
-Vector2i(12, 2): 0,
-Vector2i(13, -1): 0,
-Vector2i(13, 0): 1,
-Vector2i(13, 1): 0,
-Vector2i(13, 2): 0,
-Vector2i(13, 3): 0,
-Vector2i(14, -1): 0,
-Vector2i(14, 0): 0,
-Vector2i(14, 1): 2,
-Vector2i(14, 2): 0,
-Vector2i(14, 3): 0,
-Vector2i(15, -2): 0,
-Vector2i(15, -1): 0,
-Vector2i(15, 0): 0,
-Vector2i(15, 1): 0,
-Vector2i(15, 2): 0,
-Vector2i(15, 3): 0,
-Vector2i(16, -1): 0,
-Vector2i(16, 0): 2,
-Vector2i(16, 1): 0,
-Vector2i(16, 2): 0,
-Vector2i(16, 3): 0,
-Vector2i(17, -1): 0,
-Vector2i(17, 0): 0,
-Vector2i(17, 1): 0,
-Vector2i(17, 2): 0,
-Vector2i(17, 3): 0
-})
-tile_map_data = PackedByteArray()
-metadata/_custom_type_script = "uid://kxw3kblmvh0b"
 
 [sub_resource type="Resource" id="Resource_wl414"]
 script = ExtResource("6_wl414")
@@ -88,6 +52,6 @@ script = ExtResource("2_haqrg")
 teams = Array[ExtResource("3_q642w")]([SubResource("Resource_83wba"), SubResource("Resource_qksev")])
 team_relationships = Array[ExtResource("6_ks5kt")]([SubResource("Resource_s70j8")])
 end_conditions = Array[ExtResource("1_haqrg")]([])
-battlefield = SubResource("Resource_ot768")
+battlefield = ExtResource("1_ks5kt")
 grid_object_layouts = Array[ExtResource("6_wl414")]([SubResource("Resource_wl414")])
 metadata/_custom_type_script = "uid://sr2agdyju43u"
