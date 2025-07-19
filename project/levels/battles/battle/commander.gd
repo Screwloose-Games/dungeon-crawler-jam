@@ -6,6 +6,8 @@
 class_name Commander
 extends Resource
 
+signal unit_selected(unit: Unit)
+
 ## Determines whether this commander is controlled by a human player or AI.
 enum CommanderType {
 	HUMAN,
@@ -20,6 +22,9 @@ enum CommanderType {
 @export var type: CommanderType
 
 @export var team: Team
+
+var selected_unit: Unit
+var selected_action: UnitAction
 
 var is_human: bool:
 	get:
@@ -54,3 +59,18 @@ func can_command_unit(unit: Unit) -> bool:
 
 func is_on_same_team(unit: Unit) -> bool:
 	return team and unit and team == unit.team
+
+
+func select_unit(unit: Unit):
+	if selected_unit == unit:
+		return
+
+	selected_unit = unit
+	unit_selected.emit(unit)
+	selected_action = null
+	if unit.team == self.team:
+		selected_action = unit.get_move_action()
+
+
+func cell_hovered(_cell: BattleGridCell):
+	pass

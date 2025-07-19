@@ -30,6 +30,12 @@ func _init(
 	print("%d cells loaded" % len(cells))
 
 
+func get_cell(tile_position: Vector2i) -> BattleGridCell:
+	if not cells.has(tile_position):
+		return
+	return cells[tile_position]
+
+
 func is_cell_movable(cell_pos: Vector2i, movement_method: Movement.MovementMethod):
 	if not cells.has(cell_pos):
 		return false
@@ -57,6 +63,26 @@ func force_set_unit(cell_pos: Vector2i, unit: Unit) -> bool:
 		return false
 	cells[cell_pos].unit = unit
 	return true
+
+
+func cell_clicked(commander: Commander, tile_position: Vector2i):
+	if not cells.has(tile_position):
+		return
+
+	var cell = cells[tile_position]
+	if not cell.unit:
+		# TODO: Selected cells?
+		return
+
+	commander.select_unit(cell.unit)
+
+
+func cell_hovered(commander: Commander, tile_position: Vector2i):
+	if not cells.has(tile_position):
+		return
+
+	var cell = cells[tile_position]
+	commander.cell_hovered(cell)
 
 
 func _load_battlefield_tiles(battlefield: Battlefield):

@@ -12,12 +12,14 @@ var hover_delay_timer: Timer = Timer.new()
 
 
 func _ready() -> void:
+	return
 	add_child(hover_delay_timer)
 	hover_delay_timer.one_shot = true
 	hover_delay_timer.timeout.connect(func(): Input.set_custom_mouse_cursor(null))
 
 
 func _mouse_enter() -> void:
+	return
 	print("mouse entered")
 	hover_delay_timer.stop()
 	if hover_cursor:
@@ -25,6 +27,7 @@ func _mouse_enter() -> void:
 
 
 func _mouse_exit() -> void:
+	return
 	print("mouse exited")
 	hover_delay_timer.start(hover_delay)
 

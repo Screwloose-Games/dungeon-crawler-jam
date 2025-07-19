@@ -158,6 +158,7 @@ func init_actions():
 		for action in new_actions:
 			if action not in actions:
 				actions.append(action)
+	init_move_action()
 
 
 func init_move_action():
@@ -194,6 +195,14 @@ func get_actions() -> Array[UnitAction]:
 ## Returns all actions that can be executed based on available AP and AP cost.
 func get_available_actions() -> Array[UnitAction]:
 	return actions.filter(can_execute_action)
+
+
+## Returns the move action
+func get_move_action() -> MoveAction:
+	for action in actions:
+		if action is MoveAction:
+			return action
+	return null
 
 
 ## Determines if the unit can execute a specific action based on its AP. [br]
