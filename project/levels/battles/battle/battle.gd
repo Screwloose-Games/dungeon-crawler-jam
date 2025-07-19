@@ -44,4 +44,4 @@ func _set_team_relationships(team_relationships: Array[TeamRelationshipRecord]):
 
 
 func begin():
-	GlobalSignalBus.battle_started.emit()
+	GlobalSignalBus.battle_started.emit(self)

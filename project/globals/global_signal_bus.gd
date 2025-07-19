@@ -28,7 +28,7 @@ signal main_menu_started
 signal start_level_requested(level_num: int)
 
 # Battles
-signal battle_started
+signal battle_started(battle: Battle)
 signal battle_ended(result: BattleResult)
 signal battle_round_started
 signal battle_round_ended
@@ -65,7 +65,7 @@ func _on_team_ended_turn(team: Team):
 	print("team_ended_turn: %s" % team.name)
 
 
-func _on_battle_started():
+func _on_battle_started(_battle: Battle):
 	print("battle_started")
 
 

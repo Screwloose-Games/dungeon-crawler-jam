@@ -21,6 +21,20 @@ enum CommanderType {
 
 @export var team: Team
 
+var is_human: bool:
+	get:
+		return type == CommanderType.HUMAN
+
+
+static func get_first_human_commander(commanders: Array[Commander]) -> Commander:
+	var human_commander_index: int = commanders.find_custom(
+		func(commander: Commander): return commander.is_human
+	)
+	if human_commander_index == -1:
+		push_error("You must have at least 1 human commander")
+		return null
+	return commanders[human_commander_index]
+
 
 func _init(
 	name: String = "",
