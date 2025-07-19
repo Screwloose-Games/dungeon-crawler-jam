@@ -80,7 +80,7 @@ func cell_clicked(commander: Commander, tile_position: Vector2i):
 func cell_hovered(commander: Commander, tile_position: Vector2i):
 	if not cells.has(tile_position):
 		return
-		
+
 	var cell = cells[tile_position]
 	commander.cell_hovered(cell)
 
