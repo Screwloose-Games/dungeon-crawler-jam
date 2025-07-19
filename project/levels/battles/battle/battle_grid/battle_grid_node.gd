@@ -10,10 +10,42 @@ var battle_grid: BattleGrid
 var battlefield_node: BattlefieldNode
 
 var ground_tile_map_layer: TileMapLayer
+var previously_hovered_position: Vector2i
 
 
 func _init(_battle_grid: BattleGrid = null) -> void:
 	battle_grid = _battle_grid
+
+
+func _process(_delta: float):
+	_handle_mouse_input()
+
+
+func _handle_mouse_input():
+	var mouse_position := get_viewport().get_mouse_position()
+	var tile_position = _convert_click_to_tile(mouse_position)
+
+	if Input.is_action_just_pressed("click"):
+		_tile_position_clicked(Player.commander, tile_position)
+	else:
+		_tile_position_hovered(Player.commander, tile_position)
+
+
+func _convert_click_to_tile(click_position: Vector2) -> Vector2i:
+	var local_position := ground_tile_map_layer.to_global(click_position)
+	return ground_tile_map_layer.local_to_map(local_position)
+
+
+func _tile_position_clicked(commander: Commander, tile_pos: Vector2i):
+	battle_grid.cell_clicked(commander, tile_pos)
+
+
+func _tile_position_hovered(commander: Commander, tile_pos: Vector2i):
+	if previously_hovered_position == tile_pos:
+		return
+
+	previously_hovered_position = tile_pos
+	battle_grid.cell_hovered(commander, tile_pos)
 
 
 func initialize():
