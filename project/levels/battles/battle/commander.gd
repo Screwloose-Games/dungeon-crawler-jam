@@ -73,15 +73,22 @@ func select_unit(unit: Unit):
 	selected_action = null
 	if unit.team == self.team:
 		selected_action = unit.get_move_action()
+		print("selected_action ", selected_action)
 
 
 func hover_cell(cell: BattleGridCell):
-	if selected_action and selected_unit:
-		action_execution_command = ActionExecutionCommand.new(
-			selected_unit,
-			self,
-			battle_grid,
-			selected_action,
-			[cell]
-		)
-		selected_action.preview(action_execution_command)
+	print("hover_cell")
+	if not selected_action or not selected_unit:
+		return
+	print("execution_command")
+	action_execution_command = ActionExecutionCommand.new(
+		selected_unit,
+		self,
+		battle_grid,
+		selected_action,
+		[cell]
+	)
+	var preview = selected_action.preview(action_execution_command)
+	if not preview:
+		return
+	GlobalSignalBus.action_preview_requested.emit(preview)

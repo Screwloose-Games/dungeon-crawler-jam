@@ -1,11 +1,11 @@
-class_name ActionPreview
-extends Resource
+class_name ActionPreviewData
+extends RefCounted
 
 var highlighted_cells: Array[BattleGridCell]
 var selected_cells: Array[BattleGridCell]
 var action_point_cost: int
 var expected_damage: Dictionary[Unit, int]
-var path_tiles: Dictionary[Vector2i, int]
+var path_tiles: Dictionary[Vector2i, MovementPath.Orientation]
 
 
 func _init(
@@ -22,5 +22,5 @@ func _init(
 	self.path_tiles = {}
 
 
-func set_path_tiles(_path: MovementPath):
-	return
+func add_movement_path(path: MovementPath) -> void:
+	path_tiles = path.get_path_orientations()

@@ -9,9 +9,6 @@ extends Resource
 @export var cells: Dictionary[Vector2i, BattleGridCell]
 
 var teams: Array[Team]
-
-## Only to be used for instantiating the TileMapLayer
-#var battlefield_scene: PackedScene
 var battlefield: Battlefield
 
 ## Store graph information

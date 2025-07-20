@@ -45,6 +45,11 @@ func _init(_name: String = "", _commander: Commander = null) -> void:
 	GlobalSignalBus.unit_removed_from_team.connect(_on_unit_removed_from_team)
 
 
+func initialize(battle_grid: BattleGrid):
+	commander.team = self
+	commander.battle_grid = battle_grid
+
+
 func _on_unit_added_to_team(unit: Unit, team: Team):
 	if team != self:
 		return
