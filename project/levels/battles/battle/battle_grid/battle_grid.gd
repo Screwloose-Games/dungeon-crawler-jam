@@ -9,9 +9,6 @@ extends Resource
 @export var cells: Dictionary[Vector2i, BattleGridCell]
 
 var teams: Array[Team]
-
-## Only to be used for instantiating the TileMapLayer
-#var battlefield_scene: PackedScene
 var battlefield: Battlefield
 
 ## Store graph information
@@ -79,7 +76,7 @@ func cell_clicked(commander: Commander, tile_position: Vector2i):
 
 func hover_cell(commander: Commander, tile_position: Vector2i):
 	if not cells.has(tile_position):
-		return
+		return commander.stop_hover_cell()
 
 	var cell = cells[tile_position]
 	commander.hover_cell(cell)

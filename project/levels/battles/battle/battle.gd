@@ -22,7 +22,7 @@ func create_from_scenario(scenario: BattleScenario) -> void:
 	_create_battle_grid(scenario)
 	_set_team_relationships(scenario.team_relationships)
 	for team in teams:
-		team.commander.battle_grid = battle_grid
+		team.initialize(battle_grid)
 
 	battle_round = BattleRound.new(teams)
 
