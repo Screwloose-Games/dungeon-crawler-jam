@@ -33,6 +33,10 @@ const BOTTOM_LEFT = Vector2i(0, 1)
 const BOTTOM_RIGHT = Vector2i(1, 0)
 
 var cell_path: Array[BattleGridCell]
+var intermediate_lookup: Dictionary[Array, MovementPath.Orientation] = {
+	[TOP_LEFT, BOTTOM_RIGHT]: Orientation.TOP_LEFT_BOTTOM_RIGHT,
+	[BOTTOM_RIGHT, TOP_LEFT]: Orientation.TOP_LEFT_BOTTOM_RIGHT,
+}
 
 func _init(cell_path: Array[BattleGridCell] = []):
 	self.cell_path = cell_path
@@ -99,12 +103,6 @@ static func _get_orientation_for_terminal(terminal: Vector2i, adjacent: Vector2i
 
 	assert(false, "Unexpected relative point: %s %s" % [terminal, adjacent])
 	return Orientation.CENTER_DOT
-
-
-var intermediate_lookup: Dictionary[Array, MovementPath.Orientation] = {
-	[TOP_LEFT, BOTTOM_RIGHT]: Orientation.TOP_LEFT_BOTTOM_RIGHT,
-	[BOTTOM_RIGHT, TOP_LEFT]: Orientation.TOP_LEFT_BOTTOM_RIGHT,
-}
 
 ## Get the path orientation needed to describe a point in the path that has
 ## both a predecessor and a successor

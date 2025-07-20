@@ -9,8 +9,10 @@ const TIME_BETWEEN_SYNCS = 10
 var tile_data: Dictionary[Vector2i, BattleGridCell.TileType]
 @export var battlefield: Battlefield
 @export_tool_button("Sync TileData") var sync_tile_data_tool_button = _on_tile_map_changed
-@onready var floors: TileMapLayer = $Floors
+
 var time_since_sync: float = 0
+
+@onready var floors: TileMapLayer = $Floors
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():

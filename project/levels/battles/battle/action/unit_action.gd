@@ -38,5 +38,5 @@ func get_constraints() -> Array[TargetTileConstraint]:
 	return []
 
 
-func preview(command: ActionExecutionCommand) -> ActionPreview:
+func preview(_command: ActionExecutionCommand) -> ActionPreview:
 	return null
