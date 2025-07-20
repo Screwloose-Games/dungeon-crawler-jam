@@ -1,21 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://bl2uosxojajej"]
+[gd_scene load_steps=8 format=3 uid="uid://bl2uosxojajej"]
 
+[ext_resource type="Script" uid="uid://qxdn8xbfl8oy" path="res://common/ui/hud/hud.gd" id="1_5qx2s"]
 [ext_resource type="Script" uid="uid://caw460fc32bpc" path="res://components/ui/unit_portrait_panel_container.gd" id="1_616me"]
 [ext_resource type="Texture2D" uid="uid://jc2taotxvhhs" path="res://assets/art/ui/puck_portrait.png" id="2_5qx2s"]
 [ext_resource type="Texture2D" uid="uid://bimt12s8f278y" path="res://assets/art/ui/jerimoth_portrait.png" id="3_githx"]
 [ext_resource type="Texture2D" uid="uid://b4b3v1c03d5n2" path="res://assets/art/ui/xiola_portrait.png" id="4_njm1y"]
 [ext_resource type="Theme" uid="uid://cpwb870aw2anb" path="res://common/ui/themes/panel_theme_1.tres" id="5_nnbdq"]
+[ext_resource type="Script" uid="uid://nqmi4xgew648" path="res://common/ui/hud/end_turn_button.gd" id="7_githx"]
 
 [node name="PlayerHud" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 180.0
-offset_bottom = 360.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+mouse_filter = 2
+script = ExtResource("1_5qx2s")
 
 [node name="PlayerInfoPanel" type="PanelContainer" parent="."]
-layout_mode = 0
+unique_name_in_owner = true
+layout_mode = 1
 offset_right = 180.0
 offset_bottom = 360.0
 theme = ExtResource("5_nnbdq")
@@ -111,9 +118,43 @@ theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 1
 
-[node name="Button" type="Button" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/ButtonMargin"]
+[node name="EndTurnButton" type="Button" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/ButtonMargin"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "END  TURN"
+script = ExtResource("7_githx")
+
+[node name="EnemyPanelRoot" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="EnemyPanelRoot"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -96.0
+offset_bottom = 96.0
+grow_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="EnemyPanelRoot/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="CenterPortrait" type="TextureRect" parent="EnemyPanelRoot/PanelContainer/MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("3_githx")
+stretch_mode = 3

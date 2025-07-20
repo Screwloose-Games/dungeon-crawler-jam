@@ -30,9 +30,8 @@ func _next_turn():
 		GlobalSignalBus.battle_round_started.emit()
 
 	current_turn_team = turn_order[turn_index]
-	begin_turn(current_turn_team)
-
 	turn_index += 1
+	begin_turn(current_turn_team)
 
 
 func begin_turn(team: Team):
@@ -41,5 +40,5 @@ func begin_turn(team: Team):
 
 func _on_team_ended_turn(team: Team):
 	assert(team == current_turn_team, "Team '%s' requested to end turn, but it was not their turn!")
-	GlobalSignalBus.battle_turn_ended.emit()
+	GlobalSignalBus.battle_turn_ended.emit(team)
 	_next_turn()
