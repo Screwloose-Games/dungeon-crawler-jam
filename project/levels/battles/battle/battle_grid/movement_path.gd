@@ -29,11 +29,25 @@ const TOP_RIGHT = Vector2i(0, -1)
 const BOTTOM_LEFT = Vector2i(0, 1)
 const BOTTOM_RIGHT = Vector2i(1, 0)
 
-var cell_path: Array[BattleGridCell]
-var intermediate_lookup: Dictionary[Array, MovementPath.Orientation] = {
+static var _intermediate_lookup: Dictionary[Array, MovementPath.Orientation] = {
+	# Diagonals
 	[TOP_LEFT, BOTTOM_RIGHT]: Orientation.TOP_LEFT_BOTTOM_RIGHT,
 	[BOTTOM_RIGHT, TOP_LEFT]: Orientation.TOP_LEFT_BOTTOM_RIGHT,
+	[TOP_RIGHT, BOTTOM_LEFT]: Orientation.TOP_RIGHT_BOTTOM_LEFT,
+	[BOTTOM_LEFT, TOP_RIGHT]: Orientation.TOP_RIGHT_BOTTOM_LEFT,
+
+	# Turns
+	[TOP_LEFT, TOP_RIGHT]: Orientation.TOP_LEFT_TOP_RIGHT,
+	[TOP_RIGHT, TOP_LEFT]: Orientation.TOP_LEFT_TOP_RIGHT,
+	[TOP_RIGHT, BOTTOM_RIGHT]: Orientation.TOP_RIGHT_BOTTOM_RIGHT,
+	[BOTTOM_RIGHT, TOP_RIGHT]: Orientation.TOP_RIGHT_BOTTOM_RIGHT,
+	[BOTTOM_LEFT, BOTTOM_RIGHT]: Orientation.BOTTOM_LEFT_BOTTOM_RIGHT,
+	[BOTTOM_RIGHT, BOTTOM_LEFT]: Orientation.BOTTOM_LEFT_BOTTOM_RIGHT,
+	[TOP_LEFT, BOTTOM_LEFT]: Orientation.TOP_LEFT_BOTTOM_LEFT,
+	[BOTTOM_LEFT, TOP_LEFT]: Orientation.TOP_LEFT_BOTTOM_LEFT,
 }
+
+var cell_path: Array[BattleGridCell]
 
 func _init(cell_path: Array[BattleGridCell] = []):
 	self.cell_path = cell_path
@@ -73,10 +87,8 @@ static func get_orientation(
 	next: Vector2i
 ) -> MovementPath.Orientation:
 	# No path = CENTER_DOT
-	print(from, current, next)
 	var from_same = from == current
 	var next_same = next == current
-
 	if from_same and next_same:
 		return Orientation.CENTER_DOT
 
@@ -121,39 +133,9 @@ static func _get_orientation_for_intermediate_point(
 	var from_relative = from - intermediate
 	var next_relative = next - intermediate
 
+	var lookup_key = [from_relative, next_relative]
 
-	match [from_relative, next_relative]:
-		# Diagonals
-		[TOP_LEFT, BOTTOM_RIGHT]:
-			return Orientation.TOP_LEFT_BOTTOM_RIGHT
-		[BOTTOM_RIGHT, TOP_LEFT]:
-			return Orientation.TOP_LEFT_BOTTOM_RIGHT
+	if not _intermediate_lookup.has(lookup_key):
+		return Orientation.CENTER_DOT
 
-		[TOP_RIGHT, BOTTOM_LEFT]:
-			return Orientation.TOP_RIGHT_BOTTOM_LEFT
-		[BOTTOM_LEFT, TOP_RIGHT]:
-			return Orientation.TOP_RIGHT_BOTTOM_LEFT
-
-		# Turns
-		[TOP_LEFT, TOP_RIGHT]:
-			return Orientation.TOP_LEFT_TOP_RIGHT
-		[TOP_RIGHT, TOP_LEFT]:
-			return Orientation.TOP_LEFT_TOP_RIGHT
-
-		[TOP_RIGHT, BOTTOM_RIGHT]:
-			return Orientation.TOP_RIGHT_BOTTOM_RIGHT
-		[BOTTOM_RIGHT, TOP_RIGHT]:
-			return Orientation.TOP_RIGHT_BOTTOM_RIGHT
-
-		[BOTTOM_LEFT, BOTTOM_RIGHT]:
-			return Orientation.BOTTOM_LEFT_BOTTOM_RIGHT
-		[BOTTOM_RIGHT, BOTTOM_LEFT]:
-			return Orientation.BOTTOM_LEFT_BOTTOM_RIGHT
-
-		[TOP_LEFT, BOTTOM_LEFT]:
-			return Orientation.TOP_LEFT_BOTTOM_LEFT
-		[BOTTOM_LEFT, TOP_LEFT]:
-			return Orientation.TOP_LEFT_BOTTOM_LEFT
-
-
-	return Orientation.CENTER_DOT
+	return _intermediate_lookup[lookup_key]
