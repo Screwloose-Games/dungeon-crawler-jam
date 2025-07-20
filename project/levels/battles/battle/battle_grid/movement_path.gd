@@ -7,9 +7,6 @@ enum Orientation
 {
 	CENTER_DOT,
 
-	# Name in START_END format where START and END can be any of
-	# CENTER, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT
-
 	# Center to edge
 	CENTER_TOP_RIGHT,
 	CENTER_TOP_LEFT,
@@ -44,42 +41,48 @@ func _init(cell_path: Array[BattleGridCell] = []):
 
 ## Convert the path into a list of path orientations,
 ## that describe the relations between each part of the path
-func get_path_orientations() -> Array[Orientation]:
+func get_path_orientations() -> Dictionary[Vector2i, MovementPath.Orientation]:
 	if not cell_path or len(cell_path) == 0:
-		return []
+		return {}
 
-	var orientations: Array[Orientation]
+	var orientations: Dictionary[Vector2i, MovementPath.Orientation] = {}
 
 	for i in len(cell_path):
-		var current = cell_path[i]
-		var from = null
-		var next = null
+		var current = cell_path[i].position
+		var from: Vector2i = current
+		var next: Vector2i = current
 
-		if i > 1:
-			from = cell_path[i - 1]
+		if i > 0:
+			from = cell_path[i - 1].position
 		if i < len(cell_path) - 1:
-			next = cell_path[i + 1]
+			next = cell_path[i + 1].position
 
-		orientations.append(MovementPath.get_orientation(from, current, next))
+		orientations[current] = MovementPath.get_orientation(from, current, next)
 	return orientations
 
 
 ## Get the path orientation needed to describe the current path
-##  [param from] is the previous cell in the path, may be null,
-##  [param current] is the current cell being evaluated in the path, may not be null
-##  [param next] is the cell to be moved to next in path, may be null
+##  [param from] is the previous cell in the path,
+##  [param current] is the current cell being evaluated in the path
+##  [param next] is the cell to be moved to next in path
 ## It is assumed that the TileMapLayer is using diamond down
 ##  meaning that +X axis is bottom-right, and +Y axis is bottom-left
-static func get_orientation(from: Vector2i, current: Vector2i, next: Vector2i) -> MovementPath.Orientation:
-	assert(current, "Invalid parameter. current may not be null")
-
+static func get_orientation(
+	from: Vector2i,
+	current: Vector2i,
+	next: Vector2i
+) -> MovementPath.Orientation:
 	# No path = CENTER_DOT
-	if not from and not next:
+	print(from, current, next)
+	var from_same = from == current
+	var next_same = next == current
+
+	if from_same and next_same:
 		return Orientation.CENTER_DOT
 
 	# If path start or end, determine direction from center
-	if not from or not next:
-		var adjacent = from if from else next
+	if from_same or next_same:
+		var adjacent = next if from_same else from
 		return _get_orientation_for_terminal(current, adjacent)
 
 	# If from and next are set, check for all remaining cases
@@ -111,12 +114,12 @@ static func _get_orientation_for_intermediate_point(
 	from: Vector2i,
 	next: Vector2i
 ) -> MovementPath.Orientation:
-	if not intermediate or not from or not next:
-		assert(false, "Invalid parameters. All points must be set")
+	if from == intermediate or intermediate == next:
+		assert(false, "Invalid parameters. All points must be unique")
 		return Orientation.CENTER_DOT
 
-	var from_relative = intermediate - from
-	var next_relative = intermediate - next
+	var from_relative = from - intermediate
+	var next_relative = next - intermediate
 
 
 	match [from_relative, next_relative]:
