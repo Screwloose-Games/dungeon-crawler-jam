@@ -92,3 +92,7 @@ func hover_cell(cell: BattleGridCell):
 	if not preview:
 		return
 	GlobalSignalBus.action_preview_requested.emit(preview)
+
+
+func stop_hover_cell():
+	GlobalSignalBus.action_preview_cancelled.emit()

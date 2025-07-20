@@ -27,6 +27,7 @@ func _ready() -> void:
 	initialize()
 	floors.changed.connect(_on_tile_map_changed)
 	GlobalSignalBus.action_preview_requested.connect(_on_action_preview_requested)
+	GlobalSignalBus.action_preview_cancelled.connect(_on_action_preview_cancelled)
 
 
 func initialize():
@@ -56,14 +57,27 @@ func _on_action_preview_requested(preview_data: ActionPreviewData) -> void:
 	_display_path(preview_data.path_tiles)
 
 
+func _on_action_preview_cancelled():
+	_clear_previous_path()
+
+
 func _display_path(path: Dictionary[Vector2i, MovementPath.Orientation]) -> void:
 	_clear_previous_path()
 	for path_segment in path.keys():
 		_draw_path_orientation(path_segment, path[path_segment])
 
 
-func _draw_path_orientation(tile_position: Vector2i, _orientation: MovementPath.Orientation) -> void:
-	paths.set_cell(tile_position, 0, Vector2i(2, 1), 0)
+func _draw_path_orientation(tile_position: Vector2i, orientation: MovementPath.Orientation) -> void:
+	if not PathTileData.orientation_lookup.has(orientation):
+		assert(false, "Unexpected orientation: %s" % orientation)
+		return
+	var path_data = PathTileData.orientation_lookup[orientation]
+	paths.set_cell(
+		tile_position,
+		path_data.atlas_source,
+		path_data.atlas_position,
+		path_data.alternate_tile
+	)
 
 
 func _clear_previous_path() -> void:

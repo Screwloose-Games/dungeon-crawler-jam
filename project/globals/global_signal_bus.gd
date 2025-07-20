@@ -36,6 +36,7 @@ signal battle_turn_started(team: Team)
 signal battle_turn_ended
 signal level_reset
 signal action_preview_requested(preview_data: ActionPreviewData)
+signal action_preview_cancelled
 
 
 func _init() -> void:
