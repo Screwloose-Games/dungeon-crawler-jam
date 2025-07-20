@@ -25,6 +25,8 @@ enum CommanderType {
 
 var selected_unit: Unit
 var selected_action: UnitAction
+var action_execution_command: ActionExecutionCommand
+var battle_grid: BattleGrid
 
 var is_human: bool:
 	get:
@@ -64,6 +66,7 @@ func is_on_same_team(unit: Unit) -> bool:
 func select_unit(unit: Unit):
 	if selected_unit == unit:
 		return
+	print("Commander %s selected unit %s" % [name, unit.name])
 
 	selected_unit = unit
 	unit_selected.emit(unit)
@@ -72,5 +75,13 @@ func select_unit(unit: Unit):
 		selected_action = unit.get_move_action()
 
 
-func cell_hovered(_cell: BattleGridCell):
-	pass
+func hover_cell(cell: BattleGridCell):
+	if selected_action and selected_unit:
+		action_execution_command = ActionExecutionCommand.new(
+			selected_unit,
+			self,
+			battle_grid,
+			selected_action,
+			[cell]
+		)
+		selected_action.preview(action_execution_command)

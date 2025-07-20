@@ -36,10 +36,11 @@ func test_skeleton_unit_has_required_fields():
 
 
 func test_rogue_unit_spends_correct_ap_when_acting():
-	# Given an enemy commander, team, and unit
+	# Given an enemy commander, team, unit, and battle grid
 	var enemy_commander = Commander.new("Player 2", "A mean one", Commander.CommanderType.AI)
 	var enemy_team = Team.new("Enemy Team", enemy_commander)
 	var target_unit := UNIT_SKELETON
+	var battle_grid = BattleGrid.new()
 	target_unit.team = enemy_team
 
 	# And a player commander, team, and unit
@@ -62,14 +63,14 @@ func test_rogue_unit_spends_correct_ap_when_acting():
 	var ability_consting_2_ap: Ability = Ability.new(
 		"Melee Attack",
 		"Basic melee attack ability.",
-		1,  # targets
-		[UnitTeamRelationConstraint.new(Team.Relationship.ENEMY_TEAM)],  # constraints
+		1, # targets
+		[UnitTeamRelationConstraint.new(Team.Relationship.ENEMY_TEAM)], # constraints
 		[
 			AbilityStage.new(
 				"Damage Stage", "Deals damage to the target.", [UnitApplyDamageEffect.new(3)]
 			)
 		],
-		2  # Base cost of 2 AP
+		2 # Base cost of 2 AP
 	)
 
 	# And the action uses the ability
@@ -87,7 +88,7 @@ func test_rogue_unit_spends_correct_ap_when_acting():
 
 	# We create a command to execute the action
 	var command := ActionExecutionCommand.new(
-		attacking_unit, player_commander, action, [battle_grid_cell]
+		attacking_unit, player_commander, battle_grid, action, [battle_grid_cell]
 	)
 
 	# The command IS valid

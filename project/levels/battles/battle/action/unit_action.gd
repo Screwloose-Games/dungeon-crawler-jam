@@ -36,3 +36,7 @@ func get_cost() -> int:
 func get_constraints() -> Array[TargetTileConstraint]:
 	## Returns an empty array by default, override in derived classes to provide specific constraints
 	return []
+
+
+func preview(_command: ActionExecutionCommand) -> ActionPreview:
+	return null

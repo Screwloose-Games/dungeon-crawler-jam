@@ -13,4 +13,19 @@ func _init(
 	_base_cost: int = 1,
 	_movement: Movement = null
 ):
-	super(_name, _description, _base_cost)
+	super (_name, _description, _base_cost)
+
+
+func preview(command: ActionExecutionCommand) -> ActionPreview:
+	# Must have a valid command with a unit with cell position and movement
+	if not command or not command.unit or not command.unit.cell or not command.unit.movement:
+		return
+
+	var path_start = command.unit.cell
+	var path_end = command.targets[0]
+	var move_method = command.unit.movement.method
+
+	command.battle_grid.get_movement_path(path_start, path_end, move_method)
+
+	var preview: ActionPreview = ActionPreview.new()
+	return null

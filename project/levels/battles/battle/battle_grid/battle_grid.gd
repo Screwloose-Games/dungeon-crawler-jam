@@ -77,15 +77,17 @@ func cell_clicked(commander: Commander, tile_position: Vector2i):
 	commander.select_unit(cell.unit)
 
 
-func cell_hovered(commander: Commander, tile_position: Vector2i):
+func hover_cell(commander: Commander, tile_position: Vector2i):
 	if not cells.has(tile_position):
 		return
 
 	var cell = cells[tile_position]
-	commander.cell_hovered(cell)
+	commander.hover_cell(cell)
 
 
 func _load_battlefield_tiles(battlefield: Battlefield):
+	if not battlefield:
+		return
 	var tiles := battlefield.get_tile_data()
 	for tile_pos in tiles.keys():
 		var cell = _create_or_get_cell(tile_pos)
@@ -93,6 +95,8 @@ func _load_battlefield_tiles(battlefield: Battlefield):
 
 
 func _load_grid_object_layout_tiles(layout: GridObjectLayout):
+	if not layout:
+		return
 	var tiles := layout.get_tile_data()
 	for tile_pos in tiles.keys():
 		var layout_tile = tiles[tile_pos]

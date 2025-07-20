@@ -14,7 +14,7 @@ func _ready() -> void:
 	var player = Commander.new("player", "")
 	var enemy_ai = Commander.new("PC", "", Commander.CommanderType.AI)
 	var action = skeleton.actions.get(0)
-	var command = ActionExecutionCommand.new(skeleton, player, action, [rogue.cell])
+	var command = ActionExecutionCommand.new(skeleton, player, null, action, [rogue.cell])
 	test_skeleton_unit_action_points()
 	test_skeleton_unit_melee_ability_action()
 	#command.execute()

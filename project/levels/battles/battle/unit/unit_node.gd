@@ -81,6 +81,8 @@ func _on_unit_changed():
 
 
 func init_position():
+	if not unit or not unit.cell:
+		return
 	var grid_transform = Transform2D(Vector2(16, 8), Vector2(-16, 8), Vector2(16, 8))
 	position = grid_transform * Vector2(unit.cell.position)
 

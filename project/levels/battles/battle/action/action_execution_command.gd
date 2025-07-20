@@ -8,6 +8,7 @@ extends Resource
 @export var commander: Commander
 @export var action: UnitAction
 @export var targets: Array[BattleGridCell]
+var battle_grid: BattleGrid
 
 var team: Team:
 	set(new_value):
@@ -19,6 +20,7 @@ var team: Team:
 func _init(
 	unit: Unit = null,
 	commander: Commander = null,
+	battle_grid: BattleGrid = null,
 	action: UnitAction = null,
 	targets: Array[BattleGridCell] = []
 ) -> void:
@@ -26,6 +28,7 @@ func _init(
 	self.commander = commander
 	self.action = action
 	self.targets = targets
+	self.battle_grid = battle_grid
 	team = commander.team if commander else null
 
 
