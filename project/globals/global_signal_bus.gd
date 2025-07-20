@@ -33,7 +33,7 @@ signal battle_ended(result: BattleResult)
 signal battle_round_started
 signal battle_round_ended
 signal battle_turn_started(team: Team)
-signal battle_turn_ended
+signal battle_turn_ended(team: Team)
 signal level_reset
 signal action_preview_requested(preview_data: ActionPreviewData)
 signal action_preview_cancelled
@@ -88,7 +88,7 @@ func _on_battle_turn_started(team: Team):
 	print("battle_turn_started: %s" % team.name)
 
 
-func _on_battle_turn_ended():
+func _on_battle_turn_ended(_team: Team):
 	print("battle_turn_ended")
 
 

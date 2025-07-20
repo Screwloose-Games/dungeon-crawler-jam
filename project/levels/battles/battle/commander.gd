@@ -7,6 +7,7 @@ class_name Commander
 extends Resource
 
 signal unit_selected(unit: Unit)
+signal ended_turn
 
 ## Determines whether this commander is controlled by a human player or AI.
 enum CommanderType {
@@ -82,11 +83,7 @@ func hover_cell(cell: BattleGridCell):
 		return
 	print("execution_command")
 	action_execution_command = ActionExecutionCommand.new(
-		selected_unit,
-		self,
-		battle_grid,
-		selected_action,
-		[cell]
+		selected_unit, self, battle_grid, selected_action, [cell]
 	)
 	var preview = selected_action.preview(action_execution_command)
 	if not preview:
@@ -96,3 +93,8 @@ func hover_cell(cell: BattleGridCell):
 
 func stop_hover_cell():
 	GlobalSignalBus.action_preview_cancelled.emit()
+
+
+func end_turn():
+	ended_turn.emit()
+	GlobalSignalBus.team_ended_turn.emit(team)

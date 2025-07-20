@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BattleScenario" load_steps=15 format=3 uid="uid://dj46ja1socuji"]
+[gd_resource type="Resource" script_class="BattleScenario" load_steps=16 format=3 uid="uid://dj46ja1socuji"]
 
 [ext_resource type="Script" uid="uid://djddfblilmucd" path="res://levels/battles/battle/end_condition/battle_end_condition.gd" id="1_haqrg"]
 [ext_resource type="Resource" uid="uid://8wmb58hkxvmc" path="res://levels/battles/battle/battle_grid/battlefield/resources/battlefield_simple.tres" id="1_ks5kt"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://d4e5najwcpfi4" path="res://levels/battles/battle/battle_grid/grid_object_layout/example_grid_object_layout.tscn" id="5_ot768"]
 [ext_resource type="Script" uid="uid://cgtgm81y0x2hq" path="res://levels/battles/battle/team_relationship_record.gd" id="6_ks5kt"]
 [ext_resource type="Script" uid="uid://bi1g3t40pyhyp" path="res://levels/battles/battle/battle_grid/grid_object_layout/grid_object_layout.gd" id="6_wl414"]
+[ext_resource type="Script" uid="uid://d1gqwnpkbs706" path="res://levels/battles/battle/commander_ai.gd" id="9_83wba"]
 
 [sub_resource type="Resource" id="Resource_wl414"]
 script = ExtResource("6_wl414")
@@ -28,11 +29,11 @@ name = "Player"
 metadata/_custom_type_script = "uid://csttd1rppjnco"
 
 [sub_resource type="Resource" id="Resource_h0d0n"]
-script = ExtResource("4_ledow")
+script = ExtResource("9_83wba")
 name = "Undead"
-description = "The enemy"
+description = ""
 type = 1
-metadata/_custom_type_script = "uid://dqy4vdo8hqsk5"
+metadata/_custom_type_script = "uid://d1gqwnpkbs706"
 
 [sub_resource type="Resource" id="Resource_qksev"]
 script = ExtResource("3_q642w")
