@@ -66,6 +66,7 @@ func is_on_same_team(unit: Unit) -> bool:
 func select_unit(unit: Unit):
 	if selected_unit == unit:
 		return
+	print("Commander %s selected unit %s" % [name, unit.name])
 
 	selected_unit = unit
 	unit_selected.emit(unit)

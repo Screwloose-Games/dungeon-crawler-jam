@@ -25,7 +25,7 @@ func _handle_mouse_input():
 	var mouse_position := get_viewport().get_mouse_position()
 	var tile_position = _convert_click_to_tile(mouse_position)
 
-	if Input.is_action_just_pressed("click"):
+	if Input.is_action_just_pressed("left_click"):
 		_tile_position_clicked(Player.commander, tile_position)
 	else:
 		_tile_position_hovered(Player.commander, tile_position)
