@@ -11,6 +11,8 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 180.0
 offset_bottom = 360.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
 [node name="PlayerInfoPanel" type="PanelContainer" parent="."]
 layout_mode = 0
@@ -32,9 +34,10 @@ layout_mode = 2
 layout_mode = 2
 alignment = 1
 
-[node name="LeftPortraitContainer" type="PanelContainer" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane"]
+[node name="LeftPortraitContainer" type="PanelContainer" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane" node_paths=PackedStringArray("unit_portrait_texture_rect")]
 layout_mode = 2
 script = ExtResource("1_616me")
+unit_portrait_texture_rect = NodePath("LeftPortraitMargin/LeftPortrait")
 metadata/_custom_type_script = "uid://caw460fc32bpc"
 
 [node name="LeftPortraitMargin" type="MarginContainer" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane/LeftPortraitContainer"]
@@ -49,9 +52,10 @@ size_flags_vertical = 4
 texture = ExtResource("2_5qx2s")
 expand_mode = 1
 
-[node name="CenterPortraitContainer" type="PanelContainer" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane"]
+[node name="CenterPortraitContainer" type="PanelContainer" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane" node_paths=PackedStringArray("unit_portrait_texture_rect")]
 layout_mode = 2
 script = ExtResource("1_616me")
+unit_portrait_texture_rect = NodePath("CenterPortraitMargin/CenterPortrait")
 metadata/_custom_type_script = "uid://caw460fc32bpc"
 
 [node name="CenterPortraitMargin" type="MarginContainer" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane/CenterPortraitContainer"]
@@ -71,9 +75,10 @@ size_flags_vertical = 8
 value = 48.88
 show_percentage = false
 
-[node name="RightPortraitContainer" type="PanelContainer" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane"]
+[node name="RightPortraitContainer" type="PanelContainer" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane" node_paths=PackedStringArray("unit_portrait_texture_rect")]
 layout_mode = 2
 script = ExtResource("1_616me")
+unit_portrait_texture_rect = NodePath("RightPortraitMargin/RightPortrait")
 metadata/_custom_type_script = "uid://caw460fc32bpc"
 
 [node name="RightPortraitMargin" type="MarginContainer" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane/RightPortraitContainer"]

@@ -39,12 +39,11 @@ directories/dtl_directory={}
 
 [display]
 
-window/size/viewport_width=1200
-window/size/viewport_height=800
-window/size/window_width_override=1200
-window/size/window_height_override=800
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="viewport"
-window/stretch/scale=3.0
 window/stretch/scale_mode="integer"
 
 [editor_plugins]
