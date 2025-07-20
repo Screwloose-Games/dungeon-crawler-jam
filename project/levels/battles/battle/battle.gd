@@ -17,10 +17,13 @@ var battle_round: BattleRound
 
 
 func create_from_scenario(scenario: BattleScenario) -> void:
+	_create_battle_grid(scenario)
 	teams = scenario.teams
 	end_conditions = scenario.end_conditions
 	_set_team_relationships(scenario.team_relationships)
-	_create_battle_grid(scenario)
+	for team in teams:
+		team.commander.battle_grid = battle_grid
+
 	battle_round = BattleRound.new(teams)
 
 

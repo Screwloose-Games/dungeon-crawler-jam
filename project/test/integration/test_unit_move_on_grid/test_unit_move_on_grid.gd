@@ -44,7 +44,7 @@ func test_skeleton_unit_can_move_on_grid():
 
 	# WHEN we create a command to move to the target cell
 	var move_command := ActionExecutionCommand.new(
-		skeleton_unit, player_commander, move_action, [target_cell]
+		skeleton_unit, player_commander, battle_grid, move_action, [target_cell]
 	)
 
 	# Verify the basic command setup

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=4 uid="uid://bem1sqfnxpm6e"]
+[gd_scene load_steps=5 format=4 uid="uid://bem1sqfnxpm6e"]
 
 [ext_resource type="Script" uid="uid://u1ccysytql3d" path="res://levels/battles/battle/battle_grid/battlefield/battlefield_node.gd" id="1_d0g36"]
 [ext_resource type="Resource" uid="uid://8wmb58hkxvmc" path="res://levels/battles/battle/battle_grid/battlefield/resources/battlefield_simple.tres" id="2_kxbdv"]
 [ext_resource type="TileSet" uid="uid://dfnv5rt2g0jf1" path="res://levels/battles/battle/battle_grid/battlefield/battlefield_tileset.tres" id="3_ip5l2"]
+[ext_resource type="TileSet" uid="uid://bneuixcnymqe4" path="res://levels/battles/battle/battle_grid/battlefield/path_tileset.tres" id="4_kxbdv"]
 
 [node name="Battlefield" type="Node2D"]
 script = ExtResource("1_d0g36")
@@ -66,3 +67,8 @@ tile_set = ExtResource("3_ip5l2")
 
 [node name="Decoration" type="TileMapLayer" parent="."]
 tile_set = ExtResource("3_ip5l2")
+
+[node name="Paths" type="TileMapLayer" parent="."]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAAQAAIAAgACAAEAAAAPAAIAAgABAAIAAAAPAAEAAgAAAAEAAAAQAAMAAgADAAAAAAAPAAMAAgACAAIAAAAOAAMAAgACAAIAAAANAAMAAgABAAIAAAANAAIAAgABAAEAAAANAAEAAgACAAEAAAAMAAEAAgABAAIAAAAMAAAAAgAAAAEAAAA=")
+tile_set = ExtResource("4_kxbdv")

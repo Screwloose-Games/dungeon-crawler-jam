@@ -45,7 +45,7 @@ func _tile_position_hovered(commander: Commander, tile_pos: Vector2i):
 		return
 
 	previously_hovered_position = tile_pos
-	battle_grid.cell_hovered(commander, tile_pos)
+	battle_grid.hover_cell(commander, tile_pos)
 
 
 func initialize():
