@@ -1,9 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://prvi2hqwbi62"]
+[gd_scene load_steps=4 format=3 uid="uid://prvi2hqwbi62"]
 
 [ext_resource type="PackedScene" uid="uid://bl2uosxojajej" path="res://common/ui/hud/hud.tscn" id="1_55s5x"]
+[ext_resource type="PackedScene" uid="uid://b4msrqbohquak" path="res://levels/battles/battle_template.tscn" id="1_j8gee"]
+[ext_resource type="Script" uid="uid://dpgjyox5ddfp4" path="res://components/pannable.gd" id="3_6w6gb"]
 
 [node name="TestFullBattleUi" type="Node2D"]
 
+[node name="BattleTemplate" parent="." instance=ExtResource("1_j8gee")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Pannable" type="Node" parent="Camera2D"]
+script = ExtResource("3_6w6gb")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="PlayerHud" parent="CanvasLayer" instance=ExtResource("1_55s5x")]
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerHud" parent="CanvasLayer/Control" instance=ExtResource("1_55s5x")]
+layout_mode = 1
