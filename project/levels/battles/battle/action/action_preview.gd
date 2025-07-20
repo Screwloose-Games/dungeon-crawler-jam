@@ -22,5 +22,5 @@ func _init(
 	self.path_tiles = {}
 
 
-func set_path_tiles(path: MovementPath):
+func set_path_tiles(_path: MovementPath):
 	return
