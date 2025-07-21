@@ -9,7 +9,7 @@ func _init(team_relation: Team.Relationship = Team.Relationship.ENEMY_TEAM) -> v
 
 
 ## The team relation that the target unit must have with the unit performing the action. [br]
-func is_valid(command: ActionExecutionCommand):
+func is_valid(command: ActionExecutionCommand) -> bool:
 	var target_units = command.targets.map(func(cell: BattleGridCell) -> Unit: return cell.unit)
 	for target_unit in target_units:
 		if (

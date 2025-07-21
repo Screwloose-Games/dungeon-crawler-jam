@@ -14,5 +14,5 @@ extends Resource
 ## [param _to] The target cell being validated for the action [br]
 ## [br]
 ## [b]Returns:[/b] True if the target is valid, false otherwise.
-func is_valid(_command: ActionExecutionCommand):
-	pass
+func is_valid(_command: ActionExecutionCommand) -> bool:
+	return true

@@ -10,5 +10,8 @@ extends TargetTileConstraint
 ## Validates that the target tile matches the required terrain type. [br]
 ## [br]
 ## [b]Returns:[/b] True if the target tile has the required terrain type, false otherwise.
-func is_valid(_command: ActionExecutionCommand):
-	pass
+func is_valid(command: ActionExecutionCommand) -> bool:
+	for target in command.targets:
+		if valid_types.find(target.type) < 0:
+			return false
+	return true

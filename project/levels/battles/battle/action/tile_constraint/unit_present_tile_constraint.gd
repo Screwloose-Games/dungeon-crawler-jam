@@ -12,14 +12,14 @@ extends TargetTileConstraint
 ## Validates that a unit is present on the target tile. [br]
 ## [br]
 ## [b]Returns:[/b] True if a unit is present on the target tile, false otherwise.
-func is_valid(command: ActionExecutionCommand):
+func is_valid(command: ActionExecutionCommand) -> bool:
 	var valid: bool = _unit_is_present_on_all_targets(command.targets)
 	if invert:
 		return not valid
 	return valid
 
 
-func _unit_is_present_on_all_targets(targets: Array[BattleGridCell]):
+func _unit_is_present_on_all_targets(targets: Array[BattleGridCell]) -> bool:
 	for target_cell in targets:
 		if not target_cell.unit:
 			return false

@@ -35,8 +35,12 @@ signal battle_round_ended
 signal battle_turn_started(team: Team)
 signal battle_turn_ended(team: Team)
 signal level_reset
+
+# Commander
 signal action_preview_requested(preview_data: ActionPreviewData)
-signal action_preview_cancelled
+signal action_preview_cancelled(preview_data: ActionPreviewData)
+signal commander_selected_unit(unit: Unit)
+signal commander_unselected_unit(unit: Unit)
 
 
 func _init() -> void:
@@ -50,6 +54,9 @@ func _init() -> void:
 	battle_turn_started.connect(_on_battle_turn_started)
 	battle_turn_ended.connect(_on_battle_turn_ended)
 	action_preview_requested.connect(_on_action_preview_requested)
+	action_preview_cancelled.connect(_on_action_preview_cancelled)
+	commander_selected_unit.connect(_on_commander_selected_unit)
+	commander_unselected_unit.connect(_on_commander_unselected_unit)
 
 
 func _on_unit_selected(unit: Unit, commander: Commander):
@@ -94,3 +101,15 @@ func _on_battle_turn_ended(_team: Team):
 
 func _on_action_preview_requested(_preview_data: ActionPreviewData):
 	print("action_preview_requested")
+
+
+func _on_action_preview_cancelled(_preview_data: ActionPreviewData):
+	print("action_preview_cancelled")
+
+
+func _on_commander_selected_unit(unit: Unit):
+	print("commander_selected_unit: %s" % unit.name)
+
+
+func _on_commander_unselected_unit(unit: Unit):
+	print("commander_unselected_unit: %s" % unit.name)

@@ -10,7 +10,6 @@ var battle_grid: BattleGrid
 var battlefield_node: BattlefieldNode
 
 var ground_tile_map_layer: TileMapLayer
-var previously_hovered_position: Vector2i
 
 
 func _init(_battle_grid: BattleGrid = null) -> void:
@@ -26,9 +25,11 @@ func _handle_mouse_input():
 	var tile_position = _convert_click_to_tile(mouse_position)
 
 	if Input.is_action_just_pressed("left_click"):
-		_tile_position_clicked(Player.commander, tile_position)
+		_select_cell_position(Player.commander, tile_position)
+	elif Input.is_action_just_pressed("right_click"):
+		_target_cell_position(Player.commander, tile_position)
 	else:
-		_tile_position_hovered(Player.commander, tile_position)
+		_hover_cell_position(Player.commander, tile_position)
 
 
 func _convert_click_to_tile(click_position: Vector2) -> Vector2i:
@@ -36,16 +37,16 @@ func _convert_click_to_tile(click_position: Vector2) -> Vector2i:
 	return ground_tile_map_layer.local_to_map(local_position)
 
 
-func _tile_position_clicked(commander: Commander, tile_pos: Vector2i):
-	battle_grid.cell_clicked(commander, tile_pos)
+func _select_cell_position(commander: Commander, cell_position: Vector2i):
+	battle_grid.select_cell_position(commander, cell_position)
 
 
-func _tile_position_hovered(commander: Commander, tile_pos: Vector2i):
-	if previously_hovered_position == tile_pos:
-		return
+func _hover_cell_position(commander: Commander, cell_position: Vector2i):
+	battle_grid.hover_cell_position(commander, cell_position)
 
-	previously_hovered_position = tile_pos
-	battle_grid.hover_cell(commander, tile_pos)
+
+func _target_cell_position(commander: Commander, cell_position: Vector2i):
+	battle_grid.target_cell_position(commander, cell_position)
 
 
 func initialize():

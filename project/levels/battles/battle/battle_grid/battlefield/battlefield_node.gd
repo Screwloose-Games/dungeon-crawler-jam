@@ -14,6 +14,7 @@ var time_since_sync: float = 0
 
 @onready var floors: TileMapLayer = $Floors
 @onready var paths: TileMapLayer = $Paths
+@onready var highlights: TileMapLayer = $Highlights
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -24,6 +25,8 @@ func _process(delta: float) -> void:
 
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
 	initialize()
 	floors.changed.connect(_on_tile_map_changed)
 	GlobalSignalBus.action_preview_requested.connect(_on_action_preview_requested)
@@ -55,14 +58,20 @@ func convert_tile_data(pos: Vector2i, data: TileData):
 
 func _on_action_preview_requested(preview_data: ActionPreviewData) -> void:
 	_display_path(preview_data.path_tiles)
+	_display_selections(preview_data.selected_cells)
 
 
-func _on_action_preview_cancelled():
+func _display_selections(cells: Array[BattleGridCell]):
+	for cell in cells:
+		highlights.set_cell(cell.position, 0, Vector2i(0, 0), 0)
+
+
+func _on_action_preview_cancelled(_preview_data: ActionPreviewData):
 	_clear_previous_path()
+	_clear_previous_highlights()
 
 
 func _display_path(path: Dictionary[Vector2i, MovementPath.Orientation]) -> void:
-	_clear_previous_path()
 	for path_segment in path.keys():
 		_draw_path_orientation(path_segment, path[path_segment])
 
@@ -78,6 +87,11 @@ func _draw_path_orientation(tile_position: Vector2i, orientation: MovementPath.O
 		path_data.atlas_position,
 		path_data.alternate_tile
 	)
+
+
+func _clear_previous_highlights():
+	for used_cell in highlights.get_used_cells():
+		highlights.erase_cell(used_cell)
 
 
 func _clear_previous_path() -> void:

@@ -48,9 +48,13 @@ static var _intermediate_lookup: Dictionary[Array, MovementPath.Orientation] = {
 }
 
 var cell_path: Array[BattleGridCell]
+var move_count: int:
+	get:
+		return len(cell_path) - 1
 
 func _init(cell_path: Array[BattleGridCell] = []):
 	self.cell_path = cell_path
+	self.move_count = len(cell_path) - 1
 
 
 ## Convert the path into a list of path orientations,
