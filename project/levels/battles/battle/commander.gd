@@ -90,7 +90,7 @@ func select_cell(cell: BattleGridCell) -> void:
 func target_cell(cell: BattleGridCell):
 	if not cell or input_locked:
 		return
-	elif targetted_cells.find(cell) < 0:
+	if targetted_cells.find(cell) < 0:
 		targetted_cells.append(cell)
 	else:
 		targetted_cells.erase(cell)
