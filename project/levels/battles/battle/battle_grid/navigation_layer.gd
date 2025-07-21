@@ -25,6 +25,7 @@ func _init(
 
 
 func get_movement_path(from: Vector2i, to: Vector2i) -> MovementPath:
+	# TODO temporarily remove cells that have units on top, except for the mover
 	if not cell_ids.has(from) or not cell_ids.has(to):
 		return null # Unable to path
 

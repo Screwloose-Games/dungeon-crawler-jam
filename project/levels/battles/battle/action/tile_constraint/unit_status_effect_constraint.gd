@@ -10,5 +10,5 @@ extends TargetTileConstraint
 ## Validates that the unit on the target tile has the required status effect. [br]
 ## [br]
 ## [b]Returns:[/b] True if the target unit has the required status effect, false otherwise.
-func is_valid(_command: ActionExecutionCommand):
-	pass
+func is_valid(_command: ActionExecutionCommand) -> bool:
+	return false # TODO

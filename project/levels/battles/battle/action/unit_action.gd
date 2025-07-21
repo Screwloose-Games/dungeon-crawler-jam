@@ -40,3 +40,7 @@ func get_constraints() -> Array[TargetTileConstraint]:
 
 func preview(_command: ActionExecutionCommand) -> ActionPreviewData:
 	return null
+
+
+func execute(_command: ActionExecutionCommand, _callback: Callable):
+	return null

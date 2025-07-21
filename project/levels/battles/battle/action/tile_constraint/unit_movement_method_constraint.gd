@@ -11,5 +11,8 @@ extends TargetTileConstraint
 ## Validates that the unit on the target tile has the required movement method. [br]
 ## [br]
 ## [b]Returns:[/b] True if the target unit has the required movement method, false otherwise.
-func is_valid(_command: ActionExecutionCommand):
-	pass
+func is_valid(command: ActionExecutionCommand) -> bool:
+	for target in command.targets:
+		if target.unit.movement.method != movement_method:
+			return false
+	return true

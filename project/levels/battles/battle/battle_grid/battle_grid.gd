@@ -33,7 +33,7 @@ func get_cell(tile_position: Vector2i) -> BattleGridCell:
 	return cells[tile_position]
 
 
-func is_cell_movable(cell_pos: Vector2i, movement_method: Movement.MovementMethod):
+func is_cell_movable_to(cell_pos: Vector2i, movement_method: Movement.MovementMethod):
 	if not cells.has(cell_pos):
 		return false
 	var cell = cells[cell_pos]
@@ -49,7 +49,7 @@ func is_cell_movable(cell_pos: Vector2i, movement_method: Movement.MovementMetho
 
 
 func try_set_unit(cell_pos: Vector2i, unit: Unit) -> bool:
-	if not is_cell_movable(cell_pos, unit.movement.method):
+	if not is_cell_movable_to(cell_pos, unit.movement.method):
 		return false
 	cells[cell_pos].unit = unit
 	return true
@@ -62,24 +62,19 @@ func force_set_unit(cell_pos: Vector2i, unit: Unit) -> bool:
 	return true
 
 
-func cell_clicked(commander: Commander, tile_position: Vector2i):
-	if not cells.has(tile_position):
-		return
-
-	var cell = cells[tile_position]
-	if not cell.unit:
-		# TODO: Selected cells?
-		return
-
-	commander.select_unit(cell.unit)
+func select_cell_position(commander: Commander, cell_position: Vector2i):
+	var selected_cell: BattleGridCell = get_cell(cell_position)
+	commander.select_cell(selected_cell)
 
 
-func hover_cell(commander: Commander, tile_position: Vector2i):
-	if not cells.has(tile_position):
-		return commander.stop_hover_cell()
+func target_cell_position(commander: Commander, cell_position: Vector2i):
+	var targeted_cell: BattleGridCell = get_cell(cell_position)
+	commander.target_cell(targeted_cell)
 
-	var cell = cells[tile_position]
-	commander.hover_cell(cell)
+
+func hover_cell_position(commander: Commander, cell_position: Vector2i):
+	var hovered_cell: BattleGridCell = get_cell(cell_position)
+	commander.hover_cell(hovered_cell)
 
 
 func _load_battlefield_tiles(battlefield: Battlefield):

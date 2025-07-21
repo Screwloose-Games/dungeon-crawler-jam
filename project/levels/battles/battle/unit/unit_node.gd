@@ -13,11 +13,12 @@ signal selected
 
 @onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
 @onready var clickable_static_body_2d: ClickableStaticBody2D = $ClickableStaticBody2D
+@onready var selection_sprite: AnimatedSprite2D = $SelectionSprite
 
 
 func _ready():
-	if not unit.moved_to.is_connected(_on_unit_moved):
-		unit.moved_to.connect(_on_unit_moved)
+	if not unit.move_started.is_connected(_on_unit_move_started):
+		unit.move_started.connect(_on_unit_move_started)
 	init_position()
 
 
@@ -34,6 +35,8 @@ func initialize(unit: Unit):
 		changed.connect(_on_unit_changed)
 	self.unit = unit
 	self.position = unit.cell.position
+	GlobalSignalBus.commander_selected_unit.connect(_on_commander_selected_unit)
+	GlobalSignalBus.commander_unselected_unit.connect(_on_commander_unselected_unit)
 
 
 func _create_children():
@@ -70,12 +73,10 @@ func _on_unit_changed():
 	name = "Unit_" + unit.name
 	if not unit.changed.is_connected(_on_unit_changed):
 		unit.changed.connect(_on_unit_changed)
-	if not unit.moved_to.is_connected(_on_unit_moved):
-		unit.moved_to.connect(_on_unit_moved)
+	if not unit.move_started.is_connected(_on_unit_move_started):
+		unit.move_started.connect(_on_unit_move_started)
 	if not unit.died.is_connected(queue_free):
 		unit.died.connect(queue_free)
-	if not unit.moved_to.is_connected(_on_unit_moved):
-		unit.moved.connect(_on_unit_moved)
 	animated_sprite_2d.sprite_frames = unit.sprite_frames
 	init_dynamic_collision_poly()
 
@@ -87,21 +88,23 @@ func init_position():
 	position = grid_transform * Vector2(unit.cell.position)
 
 
-## Only intended to be used to move 1 grid cell at a time.
-func _on_unit_moved(grid_cell: BattleGridCell):
+func _on_unit_move_started(return_signal: ReturnSignal, cell: BattleGridCell):
 	var tween = get_tree().create_tween()
-	#var target_position: Vector2 = battle_grid_node.get_world_location_by_grid_location(
-	#grid_cell.position
-	#)
-	# TODO: Handle the transform for grid position to world position.
+
+	# Inform unit that we are animating the movement,
+	# and it should wait until we are done to complete the move
+	return_signal.register_blocker()
+
 	var grid_transform = Transform2D(Vector2(16, 8), Vector2(-16, 8), Vector2(16, 8))
-	var target_position = grid_transform * Vector2(grid_cell.position)
-	tween.tween_property(self, "position", target_position, unit.move_speed)
+	var target_position = grid_transform * Vector2(cell.position)
+	tween.tween_property(self, "position", target_position, 1.0 / unit.move_speed)
 	var prev_position = position
 	if target_position.x > prev_position.x:
 		start_moving_right()
 	elif target_position.x < prev_position.x:
 		start_moving_left()
+	await tween.finished
+	return_signal.complete_blocker()
 
 
 func sprite_to_polygons() -> Array[CollisionPolygon2D]:
@@ -129,3 +132,13 @@ func start_moving_right():
 func start_moving_left():
 	transform.x.x = -1.0
 	animated_sprite_2d.play("move_right")
+
+
+func _on_commander_selected_unit(unit: Unit):
+	if self.unit == unit:
+		selection_sprite.visible = true
+
+
+func _on_commander_unselected_unit(unit: Unit):
+	if self.unit == unit:
+		selection_sprite.visible = false

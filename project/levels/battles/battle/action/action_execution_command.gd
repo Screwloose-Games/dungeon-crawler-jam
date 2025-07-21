@@ -48,23 +48,23 @@ func is_valid() -> bool:
 	is_valid = is_valid and action != null
 	is_valid = is_valid and targets.size() > 0
 	is_valid = is_valid and satisfies_action_constraints()
-	is_valid = is_valid and can_afford_cost()
+	is_valid = is_valid and unit.can_execute_action(action)
+	if not is_valid:
+		print("Invalid ActionExecutionCommand")
 	return is_valid
 
 
-func can_afford_cost() -> bool:
-	return action.cost <= unit.action_points_current
-
-
 func satisfies_action_constraints() -> bool:
-	if action and action.constraints:
-		for constraint in action.constraints:
-			if not constraint.is_valid(self):
-				return false
+	if not action:
+		return false
+	var constraints = action.get_constraints()
+	for constraint in constraints:
+		if not constraint.is_valid(self):
+			return false
 	return true
 
 
-func execute():
+func execute(callback: Callable):
 	if not unit:
 		push_error("ActionExecutionCommand has no unit assigned.")
 	if not commander:
@@ -75,6 +75,13 @@ func execute():
 		push_error("Invalid ActionExecutionCommand: " + str(self))
 		return
 	spend_action_points()
+	action.execute(self, callback)
+
+
+func preview() -> ActionPreviewData:
+	if is_valid():
+		return action.preview(self)
+	return null
 
 
 func spend_action_points():

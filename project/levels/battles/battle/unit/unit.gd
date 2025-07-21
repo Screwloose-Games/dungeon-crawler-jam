@@ -6,6 +6,7 @@ extends Resource
 
 signal died
 signal moved_to(new_cell: BattleGridCell)
+signal move_started(callback: ReturnSignal, new_cell: BattleGridCell)
 
 @export var name: String:
 	set(new_value):
@@ -40,7 +41,7 @@ signal moved_to(new_cell: BattleGridCell)
 @export var portrait: Texture2D
 
 ## Cell movement per second
-@export var move_speed: float = 0.5
+@export var move_speed: float = 3.0
 
 @export var health_point_max: int = 10:
 	set(new_value):
@@ -98,6 +99,7 @@ var cell: BattleGridCell:
 		cell.unit = self
 		moved_to.emit(cell)
 
+
 var team: Team:
 	set(new_value):
 		if new_value == team:
@@ -144,12 +146,14 @@ func _init(
 	self.abilities = abilities
 	self.movement = movement
 	self.action_points_max = action_points_max
+	self.action_points_current = action_points_max
 	self.sprite_frames = sprite_frames
 	self.portrait = portrait
 	self.actions = actions
 	self.cell = current_grid_cell
 	self.health = health if health else Health.new(health_point_max, health_point_max)
 	changed.connect(init_actions)
+	GlobalSignalBus.battle_turn_started.connect(_on_battle_turn_started)
 
 
 func init_actions():
@@ -200,6 +204,7 @@ func get_available_actions() -> Array[UnitAction]:
 ## Returns the move action
 func get_move_action() -> MoveAction:
 	for action in actions:
+		# if action is AbilityAction and (action as AbilityAction).ability is MoveAbility:
 		if action is MoveAction:
 			return action
 	return null
@@ -234,3 +239,41 @@ func damage(amount: int) -> void:
 func heal(amount: int) -> void:
 	if health:
 		health.heal(amount)
+
+
+## The maximum number of tiles it is possible for this unit to move
+func max_tile_move_count() -> int:
+	return movement.max_move_count(action_points_current)
+
+
+func move_along_path(movement_path: MovementPath, callback: Callable) -> void:
+	if movement_path.move_count <= 0:
+		return
+
+	var ap_to_spend = movement.try_move(movement_path.move_count, action_points_current)
+	assert(ap_to_spend > 0, "Could not afford move")
+
+	action_points_current -= ap_to_spend
+
+	_move_path_part(movement_path, 1, callback)
+
+
+func _move_path_part(movement_path: MovementPath, part: int, callback: Callable) -> void:
+	var next_cell = movement_path.cell_path[part]
+	var return_signal := ReturnSignal.new(
+		func():
+			self.cell = next_cell
+			var next_move: int = part + 1
+			if next_move < len(movement_path.cell_path):
+				_move_path_part(movement_path, next_move, callback)
+			else:
+				callback.call()
+	)
+	move_started.emit(return_signal, next_cell)
+	return_signal.all_participants_registered()
+
+
+func _on_battle_turn_started(team: Team):
+	if team != self.team:
+		return
+	action_points_current = action_points_max

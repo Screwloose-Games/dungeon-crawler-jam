@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Unit" load_steps=9 format=3 uid="uid://74vp14p65w0j"]
+[gd_resource type="Resource" script_class="Unit" load_steps=10 format=3 uid="uid://74vp14p65w0j"]
 
 [ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/action/ability/ability.gd" id="1_f6vnl"]
 [ext_resource type="Script" uid="uid://v50hixevnupe" path="res://levels/battles/battle/action/tile_constraint/tile_constraint.gd" id="2_5h84q"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://ct8umold07eie" path="res://levels/battles/battle/action/ability/ability_stage.gd" id="3_bpqw7"]
 [ext_resource type="Script" uid="uid://c1n1gnpms4ens" path="res://levels/battles/battle/unit/unit.gd" id="5_4q6pk"]
 [ext_resource type="Texture2D" uid="uid://4ioyf8c5qq6q" path="res://assets/art/character/player/rogue/rogue_portrait.png" id="6_a8b0y"]
+[ext_resource type="SpriteFrames" uid="uid://ct5k4kn2rghg0" path="res://assets/art/character/player/rogue/rogue.res" id="7_pkt0h"]
 
 [sub_resource type="Resource" id="Resource_4q6pk"]
 script = ExtResource("1_f6vnl")
@@ -30,8 +31,9 @@ description = "An adventurous fellow! Quick and sharp."
 abilities = Array[ExtResource("1_f6vnl")]([SubResource("Resource_4q6pk")])
 movement = SubResource("Resource_lxlmf")
 action_points_max = 10
+sprite_frames = ExtResource("7_pkt0h")
 portrait = ExtResource("6_a8b0y")
-move_speed = 0.5
+move_speed = 5.0
 health_point_max = 10
 health_points = 10
 metadata/_custom_type_script = "uid://c1n1gnpms4ens"

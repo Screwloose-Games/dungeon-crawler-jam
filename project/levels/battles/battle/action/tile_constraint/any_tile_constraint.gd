@@ -12,7 +12,7 @@ extends TargetTileConstraint
 ## Validates that at least one of the member constraints is satisfied. [br]
 ## [br]
 ## [b]Returns:[/b] True if any member constraint is satisfied, false if all fail.
-func is_valid(command: ActionExecutionCommand):
+func is_valid(command: ActionExecutionCommand) -> bool:
 	for constraint in constraints:
 		if constraint.is_valid(command):
 			return true
