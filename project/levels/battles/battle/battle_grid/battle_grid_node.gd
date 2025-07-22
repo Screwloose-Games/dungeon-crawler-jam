@@ -2,10 +2,10 @@ class_name BattleGridNode
 extends Node2D
 
 const UNIT_NODE_TEMPLATE = preload("res://levels/battles/battle/unit/unit_node_template.tscn")
-@onready var battlefield_node: BattlefieldNode = $Battlefield
 
 var battle_grid: BattleGrid
 var ground_tile_map_layer: TileMapLayer
+@onready var battlefield_node: BattlefieldNode = $Battlefield
 
 
 func initialize(battle_grid: BattleGrid):
