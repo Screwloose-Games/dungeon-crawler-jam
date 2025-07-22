@@ -16,7 +16,7 @@ func _init(
 	_base_cost: int = 1,
 	_ability: Ability = null
 ):
-	super(_name, _description, _base_cost)
+	super (_name, _description, _base_cost)
 	self.ability = _ability
 
 
@@ -32,3 +32,7 @@ func get_constraints() -> Array[TargetTileConstraint]:
 	if ability:
 		return ability.constraints
 	return []
+
+
+func execute(command: ActionExecutionCommand, callback: Callable):
+	ability.execute(command, callback)

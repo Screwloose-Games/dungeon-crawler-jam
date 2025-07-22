@@ -35,8 +35,8 @@ func initialize(unit: Unit):
 		changed.connect(_on_unit_changed)
 	self.unit = unit
 	self.position = unit.cell.position
-	GlobalSignalBus.commander_selected_unit.connect(_on_commander_selected_unit)
-	GlobalSignalBus.commander_unselected_unit.connect(_on_commander_unselected_unit)
+	GlobalSignalBus.player_selected_unit.connect(_on_player_selected_unit)
+	GlobalSignalBus.player_unselected_unit.connect(_on_player_unselected_unit)
 
 
 func _create_children():
@@ -134,11 +134,11 @@ func start_moving_left():
 	animated_sprite_2d.play("move_right")
 
 
-func _on_commander_selected_unit(unit: Unit):
+func _on_player_selected_unit(unit: Unit):
 	if self.unit == unit:
 		selection_sprite.visible = true
 
 
-func _on_commander_unselected_unit(unit: Unit):
+func _on_player_unselected_unit(unit: Unit):
 	if self.unit == unit:
 		selection_sprite.visible = false

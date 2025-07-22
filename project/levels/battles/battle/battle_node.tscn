@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cnwbodfvwcftd"]
 
 [ext_resource type="Script" uid="uid://byqi826tq1wrp" path="res://levels/battles/battle/battle_node.gd" id="1_o3tmo"]
-[ext_resource type="Resource" uid="uid://dj46ja1socuji" path="res://levels/battles/test_scenario.tres" id="2_l306h"]
+[ext_resource type="Resource" uid="uid://dj46ja1socuji" path="res://levels/battles/example_scenario.tres" id="2_l306h"]
 
 [node name="BattleNode" type="Node2D"]
 script = ExtResource("1_o3tmo")

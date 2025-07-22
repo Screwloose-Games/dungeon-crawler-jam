@@ -1,8 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4msrqbohquak"]
+[gd_scene load_steps=4 format=3 uid="uid://b4msrqbohquak"]
 
 [ext_resource type="Script" uid="uid://byqi826tq1wrp" path="res://levels/battles/battle/battle_node.gd" id="1_ujlm7"]
-[ext_resource type="Resource" uid="uid://dj46ja1socuji" path="res://levels/battles/test_scenario.tres" id="2_bele3"]
+[ext_resource type="PackedScene" uid="uid://cjnhsm6pl3j60" path="res://levels/battles/battle/battle_grid/battle_grid_template.tscn" id="3_bele3"]
+[ext_resource type="Script" uid="uid://lu30aog2wfwi" path="res://levels/battles/battle/battle_player_input.gd" id="3_h4ykf"]
 
 [node name="BattleTemplate" type="Node2D"]
 script = ExtResource("1_ujlm7")
-battle_scenario = ExtResource("2_bele3")
+
+[node name="BattleGridNode" parent="." instance=ExtResource("3_bele3")]
+
+[node name="BattlePlayerInput" type="Node2D" parent="."]
+script = ExtResource("3_h4ykf")

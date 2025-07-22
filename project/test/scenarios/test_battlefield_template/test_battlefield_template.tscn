@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b4msrqbohquak" path="res://levels/battles/battle_template.tscn" id="1_jo1gg"]
 [ext_resource type="Script" uid="uid://dfhuayjdopi0e" path="res://test/scenarios/test_battlefield_template/test_battlefield_template.gd" id="1_tbph3"]
-[ext_resource type="Resource" uid="uid://dj46ja1socuji" path="res://levels/battles/test_scenario.tres" id="2_nk5hj"]
+[ext_resource type="Resource" uid="uid://dj46ja1socuji" path="res://levels/battles/example_scenario.tres" id="2_nk5hj"]
 [ext_resource type="PackedScene" uid="uid://bl2uosxojajej" path="res://common/ui/hud/hud.tscn" id="2_tbph3"]
 
 [node name="TestBattlefieldTemplate" type="Node2D"]

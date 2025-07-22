@@ -18,7 +18,7 @@ func _init(_movement_duration: float = 0.5, _instant: bool = false) -> void:
 
 ## Moves the unit from the acting unit's position to the target cell. [br]
 ## If no unit is present on the acting cell, the effect does nothing. [br]
-func apply(order: ActionExecutionCommand):
+func apply(order: ActionExecutionCommand, _return_signal: ReturnSignal):
 	if not order or not order.unit or order.targets.is_empty():
 		return
 

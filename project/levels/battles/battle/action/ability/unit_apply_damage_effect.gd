@@ -16,7 +16,7 @@ func _init(_base_damage: int = 0) -> void:
 
 
 ## Applies the specified damage to the unit on the target tile. [br]
-func apply(_order: ActionExecutionCommand):
+func apply(_order: ActionExecutionCommand, _return_signal: ReturnSignal):
 	pass
 
 

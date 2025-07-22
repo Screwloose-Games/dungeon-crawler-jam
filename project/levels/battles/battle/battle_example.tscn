@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://vpgut26v8bd2"]
+
+[ext_resource type="PackedScene" uid="uid://b4msrqbohquak" path="res://levels/battles/battle_template.tscn" id="1_ylo2p"]
+[ext_resource type="Resource" uid="uid://dj46ja1socuji" path="res://levels/battles/example_scenario.tres" id="2_fmilv"]
+
+[node name="BattleExample" type="Node2D"]
+
+[node name="BattleTemplate" parent="." instance=ExtResource("1_ylo2p")]
+battle_scenario = ExtResource("2_fmilv")

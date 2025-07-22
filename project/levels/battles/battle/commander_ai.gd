@@ -16,10 +16,13 @@ func _init(
 
 
 func _on_battle_turn_started(team: Team):
+	print("battle turn started")
 	if team != self.team:
 		return
 	start_turn()
 
 
 func start_turn():
+	print("Starting AI turn")
 	end_turn.call_deferred()
+	print.call_deferred("done")

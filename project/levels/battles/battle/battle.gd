@@ -28,7 +28,10 @@ func create_from_scenario(scenario: BattleScenario) -> void:
 
 
 func _create_battle_grid(scenario: BattleScenario):
-	var chosen_layout = scenario.grid_object_layouts.pick_random()
+	var chosen_layout: GridObjectLayout = null
+	if scenario.grid_object_layouts and len(scenario.grid_object_layouts) > 0:
+		chosen_layout = scenario.grid_object_layouts.pick_random()
+
 	var battlefield = scenario.battlefield
 	battle_grid = BattleGrid.new(battlefield, chosen_layout, teams)
 

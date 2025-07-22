@@ -62,21 +62,6 @@ func force_set_unit(cell_pos: Vector2i, unit: Unit) -> bool:
 	return true
 
 
-func select_cell_position(commander: Commander, cell_position: Vector2i):
-	var selected_cell: BattleGridCell = get_cell(cell_position)
-	commander.select_cell(selected_cell)
-
-
-func target_cell_position(commander: Commander, cell_position: Vector2i):
-	var targeted_cell: BattleGridCell = get_cell(cell_position)
-	commander.target_cell(targeted_cell)
-
-
-func hover_cell_position(commander: Commander, cell_position: Vector2i):
-	var hovered_cell: BattleGridCell = get_cell(cell_position)
-	commander.hover_cell(hovered_cell)
-
-
 func _load_battlefield_tiles(battlefield: Battlefield):
 	if not battlefield:
 		return

@@ -96,7 +96,7 @@ static func get_orientation(
 	if from_same and next_same:
 		return Orientation.CENTER_DOT
 
-	# If path start or end, determine direction from center
+	# If at path start or end, determine direction from center
 	if from_same or next_same:
 		var adjacent = next if from_same else from
 		return _get_orientation_for_terminal(current, adjacent)
@@ -122,6 +122,7 @@ static func _get_orientation_for_terminal(terminal: Vector2i, adjacent: Vector2i
 
 	assert(false, "Unexpected relative point: %s %s" % [terminal, adjacent])
 	return Orientation.CENTER_DOT
+
 
 ## Get the path orientation needed to describe a point in the path that has
 ## both a predecessor and a successor

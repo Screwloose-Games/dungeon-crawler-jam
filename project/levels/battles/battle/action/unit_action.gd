@@ -42,5 +42,6 @@ func preview(_command: ActionExecutionCommand) -> ActionPreviewData:
 	return null
 
 
-func execute(_command: ActionExecutionCommand, _callback: Callable):
+func execute(_command: ActionExecutionCommand, callback: Callable):
+	callback.call()
 	return null

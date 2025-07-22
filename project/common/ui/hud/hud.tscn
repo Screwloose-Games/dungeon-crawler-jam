@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://bl2uosxojajej"]
 
-[ext_resource type="Script" uid="uid://qxdn8xbfl8oy" path="res://common/ui/hud/hud.gd" id="1_5qx2s"]
+[ext_resource type="Script" path="res://common/ui/hud/hud.gd" id="1_5qx2s"]
 [ext_resource type="Script" uid="uid://caw460fc32bpc" path="res://components/ui/unit_portrait_panel_container.gd" id="1_616me"]
 [ext_resource type="Texture2D" uid="uid://jc2taotxvhhs" path="res://assets/art/ui/puck_portrait.png" id="2_5qx2s"]
 [ext_resource type="Texture2D" uid="uid://bimt12s8f278y" path="res://assets/art/ui/jerimoth_portrait.png" id="3_githx"]
 [ext_resource type="Texture2D" uid="uid://b4b3v1c03d5n2" path="res://assets/art/ui/xiola_portrait.png" id="4_njm1y"]
 [ext_resource type="Theme" uid="uid://cpwb870aw2anb" path="res://common/ui/themes/panel_theme_1.tres" id="5_nnbdq"]
-[ext_resource type="Script" uid="uid://nqmi4xgew648" path="res://common/ui/hud/end_turn_button.gd" id="7_githx"]
+[ext_resource type="Script" path="res://common/ui/hud/end_turn_button.gd" id="7_githx"]
 
 [node name="PlayerHud" type="Control"]
 layout_mode = 3

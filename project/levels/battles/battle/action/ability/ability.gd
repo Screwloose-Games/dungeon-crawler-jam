@@ -33,3 +33,10 @@ func _init(
 	self.constraints = constraints
 	self.stages = stages
 	self.base_cost = base_cost
+
+
+func execute(command: ActionExecutionCommand, callback: Callable):
+	var return_signal = ReturnSignal.new(callback)
+	for stage in stages:
+		stage.execute(command, return_signal)
+	return_signal.all_participants_registered()
