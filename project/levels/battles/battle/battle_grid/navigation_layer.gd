@@ -25,13 +25,22 @@ func _init(
 
 
 func get_movement_path(from: Vector2i, to: Vector2i) -> MovementPath:
-	# TODO temporarily remove cells that have units on top, except for the mover
 	if not cell_ids.has(from) or not cell_ids.has(to):
 		return null # Unable to path
 
 	var from_id = cell_ids[from]
 	var to_id = cell_ids[to]
+
+	# We should not be able to move onto occupied cells
+	# ignore the cell we are currently on so it can be part of the path
+	var occupied_cells = _get_occupied_cells(from)
+	_set_points_disabled(true, occupied_cells)
+
 	var id_path = get_id_path(from_id, to_id)
+
+	# Re-enable occupied cells now that we have the path
+	_set_points_disabled(false, occupied_cells)
+
 	if not id_path:
 		return null # Unable to path
 
@@ -40,6 +49,22 @@ func get_movement_path(from: Vector2i, to: Vector2i) -> MovementPath:
 		var cell = id_to_cell[id]
 		movement_path.cell_path.append(cell)
 	return movement_path
+
+
+func _get_occupied_cells(ignore_cell: Vector2i) -> Array[int]:
+	var points_to_disable: Array[int] = []
+
+	for cell_id in id_to_cell.keys():
+		var cell = id_to_cell[cell_id]
+		if not cell.unit:
+			continue
+		points_to_disable.append(cell_id)
+	return points_to_disable
+
+
+func _set_points_disabled(disabled: bool, cell_ids: Array[int]):
+	for cell_id in cell_ids:
+		set_point_disabled(cell_id, disabled)
 
 
 func _create_connections():
