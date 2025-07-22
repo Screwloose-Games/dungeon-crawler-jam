@@ -24,9 +24,9 @@ var duration: float:
 ## Effects are applied in sequence, each receiving the target tile and casting unit context. [br]
 ## [br]
 ## [param _command] The action execution order containing target and caster context
-func apply(command: ActionExecutionCommand):
+func execute(command: ActionExecutionCommand, return_signal: ReturnSignal):
 	for effect in effects:
-		effect.apply(command)
+		effect.execute(command, return_signal)
 
 
 func _init(name: String = "", description: String = "", effects: Array[AbilityEffect] = []) -> void:

@@ -55,7 +55,7 @@ func test_skeleton_unit_can_move_on_grid():
 	assert_object(move_command.targets[0]).is_equal(target_cell)
 
 	# Check cost affordability
-	assert_bool(move_command.can_afford_cost()).is_true()
+	assert_bool(move_command.is_valid()).is_true()
 
 	# When we execute the command (spending AP)
 	var initial_ap = skeleton_unit.action_points_current

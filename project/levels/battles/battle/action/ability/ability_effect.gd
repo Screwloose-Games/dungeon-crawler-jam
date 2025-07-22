@@ -11,7 +11,7 @@ extends Resource
 
 ## Applies this effect to the [GridCell] or [Unit]. [br]
 ## Override this method in derived classes to implement specific effect behavior. [br]
-func apply(_order: ActionExecutionCommand):
+func apply(_order: ActionExecutionCommand, _return_signal: ReturnSignal):
 	pass
 
 

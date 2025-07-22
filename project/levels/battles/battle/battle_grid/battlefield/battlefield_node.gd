@@ -25,18 +25,17 @@ func _process(delta: float) -> void:
 
 
 func _ready() -> void:
+	floors.changed.connect(_on_tile_map_changed)
 	if Engine.is_editor_hint():
 		return
-	initialize()
-	floors.changed.connect(_on_tile_map_changed)
-	GlobalSignalBus.action_preview_requested.connect(_on_action_preview_requested)
-	GlobalSignalBus.action_preview_cancelled.connect(_on_action_preview_cancelled)
 
 
-func initialize():
+func initialize(battlefield: Battlefield):
 	if battlefield:
 		floors.tile_set = battlefield.tile_set
 		floors.tile_map_data = battlefield.tile_map_data
+	GlobalSignalBus.action_preview_requested.connect(_on_action_preview_requested)
+	GlobalSignalBus.action_preview_cancelled.connect(_on_action_preview_cancelled)
 
 
 func _on_tile_map_changed():

@@ -277,3 +277,4 @@ func _on_battle_turn_started(team: Team):
 	if team != self.team:
 		return
 	action_points_current = action_points_max
+	print("resetting action points")

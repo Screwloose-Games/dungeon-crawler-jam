@@ -6,5 +6,5 @@ extends AbilityEffect
 
 
 ## Swaps the positions of units between two tiles on the battlefield. [br]
-func apply(_order: ActionExecutionCommand):
+func apply(_order: ActionExecutionCommand, _return_signal: ReturnSignal):
 	pass

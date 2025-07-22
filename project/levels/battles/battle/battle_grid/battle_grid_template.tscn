@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjnhsm6pl3j60"]
+
+[ext_resource type="Script" uid="uid://bb2yv7xton18k" path="res://levels/battles/battle/battle_grid/battle_grid_node.gd" id="1_cwl81"]
+[ext_resource type="PackedScene" uid="uid://bem1sqfnxpm6e" path="res://levels/battles/battle/battle_grid/battlefield/battlefield_template.tscn" id="2_uyypp"]
+
+[node name="BattleGridNode" type="Node2D"]
+script = ExtResource("1_cwl81")
+metadata/_custom_type_script = "uid://bb2yv7xton18k"
+
+[node name="Battlefield" parent="." instance=ExtResource("2_uyypp")]
