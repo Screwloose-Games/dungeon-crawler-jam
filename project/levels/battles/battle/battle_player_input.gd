@@ -61,15 +61,18 @@ func _target_cell(cell: BattleGridCell):
 		targetted_cells.erase(cell)
 
 	_clear_action_preview()
-	_update_action_execution_command()
-	input_locked = true
-	action_execution_command.execute(_on_command_completed)
+	if _update_action_execution_command():
+		input_locked = true
+		print("Attempting command execution")
+		action_execution_command.execute(_on_command_completed)
+	targetted_cells = []
 
 
 func _hover_cell(cell: BattleGridCell):
 	if hovered_cell == cell or input_locked:
 		return
 
+	print("hover")
 	hovered_cell = cell
 	_clear_action_preview()
 
@@ -104,7 +107,7 @@ func _clear_action_preview():
 		previous_action_preview = null
 
 
-func _update_action_execution_command(temp_target: BattleGridCell = null):
+func _update_action_execution_command(temp_target: BattleGridCell = null) -> bool:
 	action_execution_command = ActionExecutionCommand.new(
 		selected_unit,
 		Player.commander,
@@ -119,16 +122,23 @@ func _update_action_execution_command(temp_target: BattleGridCell = null):
 		action_execution_command.targets = []
 		action_execution_command.targets.append_array(prev_targets)
 		action_execution_command.targets.append(temp_target)
+	else:
+		action_execution_command.targets = targetted_cells
 
-	if not action_execution_command.is_valid():
-		return
+	if len(action_execution_command.targets) == 0:
+		return false
 
-	var preview = action_execution_command.preview()
-	if not preview:
-		return
-	previous_action_preview = preview
-	GlobalSignalBus.action_preview_requested.emit(preview)
+	var result = action_execution_command.validate()
+
+	if not result.valid:
+		for error in result.get_error_reasons():
+			print(error)
+		return false
+
+	previous_action_preview = result
+	GlobalSignalBus.action_preview_requested.emit(result)
 	action_execution_command.targets = prev_targets
+	return true
 
 
 func _on_command_completed():

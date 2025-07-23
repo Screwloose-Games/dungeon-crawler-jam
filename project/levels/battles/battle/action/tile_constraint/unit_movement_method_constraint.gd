@@ -8,11 +8,24 @@ extends TargetTileConstraint
 @export var movement_method: Movement.MovementMethod
 
 
-## Validates that the unit on the target tile has the required movement method. [br]
-## [br]
-## [b]Returns:[/b] True if the target unit has the required movement method, false otherwise.
-func is_valid(command: ActionExecutionCommand) -> bool:
+## Validates that the unit on the target tile has the required movement method.
+func validate(
+	command: ActionExecutionCommand,
+	preview: ActionPreviewData,
+):
 	for target in command.targets:
 		if target.unit.movement.method != movement_method:
-			return false
-	return true
+			preview.add_error(get_error_message(movement_method))
+
+
+func get_error_message(method: Movement.MovementMethod) -> String:
+	match method:
+		Movement.MovementMethod.FLY:
+			return tr("not_flying")
+		Movement.MovementMethod.WALK:
+			return tr("not_walking")
+		Movement.MovementMethod.JUMP:
+			return tr("not_jumping")
+		_:
+			assert(false, "Movement method not implemented")
+			return "invalid_move_method"

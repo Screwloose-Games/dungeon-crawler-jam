@@ -7,8 +7,9 @@ extends TargetTileConstraint
 @export var status_effect: StatusEffect
 
 
-## Validates that the unit on the target tile has the required status effect. [br]
-## [br]
-## [b]Returns:[/b] True if the target unit has the required status effect, false otherwise.
-func is_valid(_command: ActionExecutionCommand) -> bool:
-	return false # TODO
+## Validates that the unit on the target tile has the required status effect.
+func validate(
+	_command: ActionExecutionCommand,
+	_preview: ActionPreviewData,
+):
+	pass

@@ -15,15 +15,19 @@ func test_skeleton_unit_can_move_on_grid():
 	skeleton_unit.team = player_team
 	skeleton_unit.action_points_current = 5
 
-	# And a battle grid with starting and target positions
-	var battle_grid = BattleGrid.new()
-	var starting_cell = BattleGridCell.new(UNIT_SKELETON_STARTING_POSITION, null, BattleGridCell.TileType.GROUND)
-	var target_cell = BattleGridCell.new(Vector2i(1, 0), null, BattleGridCell.TileType.GROUND)
 	var starting_position = UNIT_SKELETON_STARTING_POSITION
 	var target_position = Vector2i(1, 0) # Adjacent cell
+	# And a battlefield with starting and target positions
+	var battlefield: Battlefield = Battlefield.new()
+	battlefield.tile_data.set(starting_position, BattleGridCell.TileType.GROUND)
+	battlefield.tile_data.set(target_position, BattleGridCell.TileType.GROUND)
+	var battle_grid = BattleGrid.new(battlefield)
 
-	battle_grid.cells[starting_position] = starting_cell
-	battle_grid.cells[target_position] = target_cell
+	# Should have cells set correctly on the BattleGrid
+	var starting_cell = battle_grid.get_cell(starting_position)
+	var target_cell = battle_grid.get_cell(target_position)
+	assert_object(starting_cell).is_not_null()
+	assert_object(target_cell).is_not_null()
 
 	# And the unit is placed at the starting position
 	battle_grid.force_set_unit(starting_position, skeleton_unit)
@@ -40,7 +44,7 @@ func test_skeleton_unit_can_move_on_grid():
 	assert_int(skeleton_unit.movement.method).is_equal(Movement.MovementMethod.WALK)
 
 	# And the unit can execute the move action
-	assert_bool(skeleton_unit.can_execute_action(move_action)).is_true()
+	assert_bool(skeleton_unit.can_afford_action(move_action)).is_true()
 
 	# WHEN we create a command to move to the target cell
 	var move_command := ActionExecutionCommand.new(
@@ -54,15 +58,18 @@ func test_skeleton_unit_can_move_on_grid():
 	assert_int(move_command.targets.size()).is_equal(1)
 	assert_object(move_command.targets[0]).is_equal(target_cell)
 
+	# Get the action preview information
+	var preview = move_command.validate()
+
 	# Check cost affordability
-	assert_bool(move_command.is_valid()).is_true()
+	assert_bool(preview.valid).is_true()
 
 	# When we execute the command (spending AP)
 	var initial_ap = skeleton_unit.action_points_current
-	move_command.spend_action_points()
+	move_command.execute(func(): )
 
 	# THEN the correct action points should be spent
-	var expected_ap_after_move = initial_ap - move_action.cost
+	var expected_ap_after_move = initial_ap - preview.action_point_cost
 	assert_int(skeleton_unit.action_points_current).is_equal(expected_ap_after_move)
 
 	# And when we simulate the movement (this would be handled by the action system)

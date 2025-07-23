@@ -35,8 +35,19 @@ func _init(
 	self.base_cost = base_cost
 
 
+func validate(_command: ActionExecutionCommand) -> ActionPreviewData:
+	var result = ActionPreviewData.new()
+	result.valid = true
+	result.action_point_cost = self.base_cost
+	return result
+
+
 func execute(command: ActionExecutionCommand, callback: Callable):
 	var return_signal = ReturnSignal.new(callback)
 	for stage in stages:
 		stage.execute(command, return_signal)
 	return_signal.all_participants_registered()
+
+
+func get_minimum_ap_cost():
+	return base_cost

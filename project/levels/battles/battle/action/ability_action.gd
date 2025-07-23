@@ -5,33 +5,34 @@ extends UnitAction
 ## The specific ability that this action will execute when performed
 @export var ability: Ability
 
-var constraints: Array[TargetTileConstraint]:
-	get = get_constraints
-
-
 ## Note: Will be Overridden later by any @export values set.
 func _init(
+	_ability: Ability,
 	_name: String = "Ability Action",
 	_description: String = "Execute a specific ability.",
-	_base_cost: int = 1,
-	_ability: Ability = null
+	_tile_constraints: Array[TargetTileConstraint] = []
 ):
-	super (_name, _description, _base_cost)
 	self.ability = _ability
+	super (_name, _description, 0, ability.constraints)
 
 
 ## Calculates the action point cost for executing this ability. [br]
 ## Can be overridden to implement ability-specific cost modifications. [br]
 ## [br]
 ## [b]Returns:[/b] The calculated cost as an integer.
-func get_cost():
-	return base_cost
+func get_minimum_ap_cost():
+	return ability.get_minimum_ap_cost()
 
 
-func get_constraints() -> Array[TargetTileConstraint]:
-	if ability:
-		return ability.constraints
-	return []
+func validate(command: ActionExecutionCommand) -> ActionPreviewData:
+	var result = ActionPreviewData.new()
+
+	check_target_constraints(command, result)
+	if not result.valid:
+		return result
+
+	result.valid = true
+	return result
 
 
 func execute(command: ActionExecutionCommand, callback: Callable):

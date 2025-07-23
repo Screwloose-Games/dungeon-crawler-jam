@@ -6,13 +6,9 @@
 class_name TargetTileConstraint
 extends Resource
 
-
-## Validates whether a target tile is valid for an ability or action. [br]
+## Validates whether the target tiles in [param _command] is valid for an ability or action. [br]
 ## Override this method in derived classes to implement specific constraint logic. [br]
 ## [br]
-## [param _from] The source cell where the action originates [br]
-## [param _to] The target cell being validated for the action [br]
-## [br]
-## [b]Returns:[/b] True if the target is valid, false otherwise.
-func is_valid(_command: ActionExecutionCommand) -> bool:
+## [param preview] should be updated with the details of the validation
+func validate(_command: ActionExecutionCommand, preview: ActionPreviewData):
 	return true

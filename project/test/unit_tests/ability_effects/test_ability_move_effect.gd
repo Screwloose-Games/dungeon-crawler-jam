@@ -40,7 +40,7 @@ func test_apply_valid_movement() -> void:
 	command.targets = [target_cell]
 
 	# When we apply the effect based on the command
-	effect.apply(command)
+	effect.apply(command, ReturnSignal.new(func(): ))
 
 	# THEN the movement should have occurred
 	assert_object(target_cell.unit).is_equal(unit)
@@ -68,7 +68,7 @@ func test_apply_occupied_target_cell() -> void:
 	command.targets = [target_cell]
 
 	# When we apply the move effect
-	effect.apply(command)
+	effect.apply(command, ReturnSignal.new(func(): ))
 
 	# THEN the movement was blocked
 	assert_object(start_cell.unit).is_equal(unit)

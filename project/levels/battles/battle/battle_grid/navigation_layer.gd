@@ -56,7 +56,7 @@ func _get_occupied_cells(ignore_cell: Vector2i) -> Array[int]:
 
 	for cell_id in id_to_cell.keys():
 		var cell = id_to_cell[cell_id]
-		if not cell.unit:
+		if not cell.unit or cell.position == ignore_cell:
 			continue
 		points_to_disable.append(cell_id)
 	return points_to_disable

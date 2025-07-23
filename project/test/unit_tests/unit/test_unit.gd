@@ -44,7 +44,7 @@ func test_rogue_unit_spends_correct_ap_when_acting():
 	target_unit.team = enemy_team
 
 	# And a player commander, team, and unit
-	var player_commander = Commander.new("Jonny", "Really strong", Commander.CommanderType.HUMAN)
+	var player_commander = Commander.new("Jonny", "Really funny", Commander.CommanderType.HUMAN)
 	var player_team = Team.new("Player Team", player_commander)
 	var attacking_unit := UNIT_ROGUE
 	attacking_unit.team = player_team
@@ -60,7 +60,7 @@ func test_rogue_unit_spends_correct_ap_when_acting():
 	attacking_unit.action_points_current = 5
 
 	# And the ability costs 2 Action points
-	var ability_consting_2_ap: Ability = Ability.new(
+	var ability_costing_2_ap: Ability = Ability.new(
 		"Melee Attack",
 		"Basic melee attack ability.",
 		1, # targets
@@ -75,14 +75,14 @@ func test_rogue_unit_spends_correct_ap_when_acting():
 
 	# And the action uses the ability
 	var action_costing_2_ap: UnitAction = AbilityAction.new(
-		"Test Action", "Test action that costs 2 AP", 2, ability_consting_2_ap
+		ability_costing_2_ap, "Test Action", "Test action that costs 2 AP"
 	)
 
 	# And the unit has the action
 	attacking_unit.actions.append(action_costing_2_ap)
 	var action_index: int = attacking_unit.get_actions().find(action_costing_2_ap)
 	var action: UnitAction = attacking_unit.get_actions()[action_index]
-	assert_bool(attacking_unit.can_execute_action(action)).is_true()
+	assert_bool(attacking_unit.can_afford_action(action)).is_true()
 
 	# WHEN
 
@@ -92,12 +92,17 @@ func test_rogue_unit_spends_correct_ap_when_acting():
 	)
 
 	# The command IS valid
-	assert_bool(command.is_valid()).is_true()
+	var preview = command.validate()
+	assert_bool(preview.valid).is_true()
 
 	# When the action is executed
-	command.execute()
+	var callback_called: Array[bool] = [false]
+	var expected_ap_after_action = attacking_unit.action_points_current - preview.action_point_cost
 
-	var expected_ap_after_action = attacking_unit.action_points_current - action.cost
+	command.execute(func(): callback_called[0] = true)
 
 	# Then the unit should have 3 AP left
-	assert_int(attacking_unit.action_points_current).is_equal(3)
+	assert_int(attacking_unit.action_points_current).is_equal(expected_ap_after_action)
+
+	# and the callback should have been called
+	assert_bool(callback_called[0]).is_equal(true)
