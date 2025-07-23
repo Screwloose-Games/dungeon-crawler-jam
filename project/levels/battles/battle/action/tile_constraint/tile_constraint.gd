@@ -10,5 +10,5 @@ extends Resource
 ## Override this method in derived classes to implement specific constraint logic. [br]
 ## [br]
 ## [param preview] should be updated with the details of the validation
-func validate(_command: ActionExecutionCommand, preview: ActionPreviewData):
+func validate(_command: ActionExecutionCommand, _preview: ActionPreviewData):
 	return true
