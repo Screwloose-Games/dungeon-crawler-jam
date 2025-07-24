@@ -26,7 +26,7 @@ var duration: float:
 ## [param _command] The action execution order containing target and caster context
 func execute(command: ActionExecutionCommand, return_signal: ReturnSignal):
 	for effect in effects:
-		effect.execute(command, return_signal)
+		effect.apply(command, return_signal)
 
 
 func _init(name: String = "", description: String = "", effects: Array[AbilityEffect] = []) -> void:

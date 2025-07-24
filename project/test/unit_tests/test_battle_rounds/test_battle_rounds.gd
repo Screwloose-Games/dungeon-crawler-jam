@@ -69,23 +69,12 @@ func test_battle_can_be_started_and_rounds_executed() -> void:
 
 	# Then the first round should start and the human commander should go first
 	assert_int(battle_round.round_index).is_equal(0)
-	assert_int(battle_round.turn_index).is_equal(1)  # incremented after setting current turn
+	assert_int(battle_round.turn_index).is_equal(1) # incremented after setting current turn
 	assert_object(battle_round.current_turn_team).is_equal(player_team)
-
-	var ai_ended_turn: bool = false
-
-	GlobalSignalBus.battle_turn_ended.connect(
-		func(team: Team):
-			if team == ai_commander.team:
-				ai_ended_turn = true
-				print(ai_ended_turn)
-	)
 
 	# When the human commander ends their turn
 	human_commander.end_turn()
 
-	# Then the commander has ended their turn immediately
-	assert_bool(ai_ended_turn)
 
 	# Then the turn should end and move to the AI commander's turn
 	#assert_int(battle_round.turn_index).is_equal(2) # incremented after AI turn starts
@@ -95,13 +84,16 @@ func test_battle_can_be_started_and_rounds_executed() -> void:
 	# When the AI commander ends their turn
 	#ai_commander.end_turn()
 
+	# Then the AI commander has ended their turn immediately
+	await await_idle_frame()
 	# Then the first round should end and the second round should begin
-	assert_int(battle_round.round_index).is_equal(1)  # moved to round 2
-	assert_int(battle_round.turn_index).is_equal(1)  # reset and incremented for new round
-	assert_object(battle_round.current_turn_team).is_equal(player_team)  # player goes first again
+	assert_int(battle_round.round_index).is_equal(1) # moved to round 2
+	assert_int(battle_round.turn_index).is_equal(1) # reset and incremented for new round
+	assert_object(battle_round.current_turn_team).is_equal(player_team) # player goes first again
 
 	# When the player ends their turn again
 	human_commander.end_turn()
+	await_idle_frame()
 
 	# Then we are in round 2
 	assert_int(battle_round.round_index).is_equal(1)

@@ -7,42 +7,45 @@ extends UnitAction
 ## The movement capabilities and constraints for this movement action
 @export var movement: Movement
 
-var tile_constraints: Array[TargetTileConstraint] = []
-
 func _init(
 	_name: String = "Move",
 	_description: String = "Move the unit to a new position.",
-	_base_cost: int = 0,
-	_movement: Movement = null
+	_movement: Movement = null,
+	_tile_constraints: Array[TargetTileConstraint] = []
 ):
-	super (_name, _description, _base_cost)
-
-	var unit_present_constraint = UnitPresentTargetTileConstraint.new()
-	unit_present_constraint.invert = true
-
+	var unit_present_constraint = UnitPresentTargetTileConstraint.new(true)
 	var navigable_constraint = NavigableConstraint.new()
-
 	tile_constraints = [unit_present_constraint, navigable_constraint]
 
-
-func get_constraints() -> Array[TargetTileConstraint]:
-	return tile_constraints
+	super (_name, _description, 0, tile_constraints)
 
 
-func preview(command: ActionExecutionCommand) -> ActionPreviewData:
+func validate(command: ActionExecutionCommand) -> ActionPreviewData:
+	var result = super.validate(command)
+
+	if not result.valid:
+		return result
+
 	var path = get_movement_path(command)
-	if not path:
-		return null
+	assert(path, "Could not path to tile despite NavigableConstraint")
 
-	var preview: ActionPreviewData = ActionPreviewData.new()
-	preview.path_tiles = path.get_path_orientations()
+	result.action_point_cost = command.unit.movement.get_required_ap_to_move(path.move_count)
+	check_unit_ap(command, result)
 
-	return preview
+	result.path_tiles = path.get_path_orientations()
+
+	return result
 
 
 func execute(command: ActionExecutionCommand, callback: Callable):
+	var preview = validate(command)
+
 	var path = get_movement_path(command)
 	assert(path != null, "Invalid path")
+	var unit = command.unit
+
+	unit.spend_action_points(preview.action_point_cost)
+	unit.movement.purchase_movement(path.move_count)
 	command.unit.move_along_path(path, callback)
 
 

@@ -41,48 +41,22 @@ func can_command_unit(unit: Unit) -> bool:
 	return commander and is_on_same_team(commander, unit)
 
 
-func is_valid() -> bool:
-	var is_valid: bool = true
-	is_valid = is_valid and unit != null
-	is_valid = is_valid and commander != null
-	is_valid = is_valid and action != null
-	is_valid = is_valid and targets.size() > 0
-	is_valid = is_valid and satisfies_action_constraints()
-	is_valid = is_valid and unit.can_execute_action(action)
-	if not is_valid:
-		print("Invalid ActionExecutionCommand")
-	return is_valid
-
-
-func satisfies_action_constraints() -> bool:
-	if not action:
+func execute(callback: Callable) -> bool:
+	var preview_data = validate()
+	if not preview_data.valid:
+		callback.call(false)
 		return false
-	var constraints = action.get_constraints()
-	for constraint in constraints:
-		if not constraint.is_valid(self):
-			return false
+
+	action.execute(self, callback)
 	return true
 
 
-func execute(callback: Callable):
-	if not unit:
-		push_error("ActionExecutionCommand has no unit assigned.")
-	if not commander:
-		push_error("ActionExecutionCommand has no commander assigned.")
-	if not action:
-		push_error("ActionExecutionCommand has no action assigned.")
-	if not is_valid():
-		push_error("Invalid ActionExecutionCommand: " + str(self))
-		return
-	spend_action_points()
-	action.execute(self, callback)
+func validate() -> ActionPreviewData:
+	assert(unit, "Unit is not set")
+	assert(commander, "Commander is not set")
+	assert(action, "Action is not set")
 
+	var result = ActionPreviewData.new()
+	result = action.validate(self)
 
-func preview() -> ActionPreviewData:
-	if is_valid():
-		return action.preview(self)
-	return null
-
-
-func spend_action_points():
-	unit.action_points_current -= action.cost
+	return result

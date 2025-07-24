@@ -175,9 +175,7 @@ func init_move_action():
 func init_ability_actions() -> Array[AbilityAction]:
 	var ability_actions: Array[AbilityAction] = []
 	for ability in abilities:
-		var action = AbilityAction.new()
-		action.ability = ability
-		action.base_cost = ability.base_cost
+		var action = AbilityAction.new(ability)
 		ability_actions.append(action)
 	return ability_actions
 
@@ -198,7 +196,7 @@ func get_actions() -> Array[UnitAction]:
 
 ## Returns all actions that can be executed based on available AP and AP cost.
 func get_available_actions() -> Array[UnitAction]:
-	return actions.filter(can_execute_action)
+	return actions.filter(can_afford_action)
 
 
 ## Returns the move action
@@ -211,8 +209,8 @@ func get_move_action() -> MoveAction:
 
 
 ## Determines if the unit can execute a specific action based on its AP. [br]
-func can_execute_action(action: UnitAction) -> bool:
-	return action.cost <= action_points_current
+func can_afford_action(action: UnitAction) -> bool:
+	return action.minimum_ap_cost <= action_points_current
 
 
 ## Does not have complete validation, specifically considering movement type
@@ -250,11 +248,6 @@ func move_along_path(movement_path: MovementPath, callback: Callable) -> void:
 	if movement_path.move_count <= 0:
 		return
 
-	var ap_to_spend = movement.try_move(movement_path.move_count, action_points_current)
-	assert(ap_to_spend > 0, "Could not afford move")
-
-	action_points_current -= ap_to_spend
-
 	_move_path_part(movement_path, 1, callback)
 
 
@@ -277,4 +270,15 @@ func _on_battle_turn_started(team: Team):
 	if team != self.team:
 		return
 	action_points_current = action_points_max
-	print("resetting action points")
+	movement.reset_movement_points()
+
+
+## Spend [param ap_cost] action points
+## Must be validated that the unit has enough action_points to cover the cost
+## before calling this function
+func spend_action_points(ap_cost: int):
+	assert(
+		action_points_current >= ap_cost,
+		"Unable to afford AP cost. Validate before calling spend_action_points"
+	)
+	action_points_current -= ap_cost

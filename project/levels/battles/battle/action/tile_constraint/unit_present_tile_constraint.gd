@@ -9,14 +9,21 @@ extends TargetTileConstraint
 @export var invert: bool = false
 
 
-## Validates that a unit is present on the target tile. [br]
-## [br]
-## [b]Returns:[/b] True if a unit is present on the target tile, false otherwise.
-func is_valid(command: ActionExecutionCommand) -> bool:
+func _init(invert: bool = false):
+	self.invert = invert
+
+
+## Validates that a unit is present on the target tile.
+func validate(command: ActionExecutionCommand, preview: ActionPreviewData):
 	var valid: bool = _unit_is_present_on_all_targets(command.targets)
 	if invert:
-		return not valid
-	return valid
+		valid = not valid
+
+	if not valid:
+		if invert:
+			preview.add_error(tr("tile_occupied"))
+		else:
+			preview.add_error(tr("no_unit"))
 
 
 func _unit_is_present_on_all_targets(targets: Array[BattleGridCell]) -> bool:

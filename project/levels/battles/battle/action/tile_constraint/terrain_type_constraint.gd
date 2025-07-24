@@ -7,11 +7,11 @@ extends TargetTileConstraint
 @export var valid_types: Array[BattleGridCell.TileType]
 
 
-## Validates that the target tile matches the required terrain type. [br]
-## [br]
-## [b]Returns:[/b] True if the target tile has the required terrain type, false otherwise.
-func is_valid(command: ActionExecutionCommand) -> bool:
+## Validates that the target tile matches the required terrain type.
+func validate(
+	command: ActionExecutionCommand,
+	preview: ActionPreviewData,
+):
 	for target in command.targets:
 		if valid_types.find(target.type) < 0:
-			return false
-	return true
+			preview.add_error(tr("no_valid_terrain"))
