@@ -1,3 +1,4 @@
+@tool
 extends Node
 
 # Signals for unit-related events
