@@ -61,7 +61,7 @@ func _target_cell(cell: BattleGridCell):
 		targetted_cells.erase(cell)
 
 	_clear_action_preview()
-	if _update_action_execution_command():
+	if _update_action_execution_command() and selected_unit:
 		input_locked = true
 		print("Attempting command execution")
 		action_execution_command.execute(_on_command_completed)
@@ -126,6 +126,9 @@ func _update_action_execution_command(temp_target: BattleGridCell = null) -> boo
 		action_execution_command.targets = targetted_cells
 
 	if len(action_execution_command.targets) == 0:
+		return false
+
+	if not action_execution_command.is_complete():
 		return false
 
 	var result = action_execution_command.validate()

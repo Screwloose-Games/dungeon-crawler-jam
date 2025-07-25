@@ -52,6 +52,9 @@ func execute(callback: Callable) -> bool:
 
 
 func validate() -> ActionPreviewData:
+	if not is_complete():
+		return null
+
 	assert(unit, "Unit is not set")
 	assert(commander, "Commander is not set")
 	assert(action, "Action is not set")
@@ -60,3 +63,7 @@ func validate() -> ActionPreviewData:
 	result = action.validate(self)
 
 	return result
+
+
+func is_complete():
+	return unit and commander and action

@@ -51,12 +51,14 @@ signal did_action(action: UnitAction)
 			health.maximum = health_point_max
 			emit_changed()
 
-@export var health_points: int = 10:
+@export var health_points: int:
 	set(new_value):
 		if health_points != new_value:
 			health_points = new_value
 			health.current = health_points
 			emit_changed()
+	get:
+		return health.current
 
 var health: Health:
 	set(new_health):
@@ -119,6 +121,7 @@ var team: Team:
 
 func _on_health_health_changed(new_health: int):
 	health_points = new_health
+	emit_changed()
 
 
 func _on_health_maximum_changed(new_maximum: int):
@@ -288,6 +291,7 @@ func spend_action_points(ap_cost: int):
 		"Unable to afford AP cost. Validate before calling spend_action_points"
 	)
 	action_points_current -= ap_cost
+	emit_changed()
 
 
 func can_act() -> bool:

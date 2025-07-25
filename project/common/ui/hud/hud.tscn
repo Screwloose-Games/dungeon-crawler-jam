@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bl2uosxojajej"]
 
-[ext_resource type="Script" path="res://common/ui/hud/hud.gd" id="1_5qx2s"]
+[ext_resource type="Script" uid="uid://qxdn8xbfl8oy" path="res://common/ui/hud/hud.gd" id="1_5qx2s"]
 [ext_resource type="Script" uid="uid://caw460fc32bpc" path="res://components/ui/unit_portrait_panel_container.gd" id="1_616me"]
 [ext_resource type="Texture2D" uid="uid://jc2taotxvhhs" path="res://assets/art/ui/puck_portrait.png" id="2_5qx2s"]
 [ext_resource type="Texture2D" uid="uid://bimt12s8f278y" path="res://assets/art/ui/jerimoth_portrait.png" id="3_githx"]
@@ -10,51 +10,58 @@
 [ext_resource type="Script" uid="uid://nqmi4xgew648" path="res://common/ui/hud/end_turn_button.gd" id="7_githx"]
 [ext_resource type="Texture2D" uid="uid://blomm68lhoktj" path="res://assets/art/ui/EndTurnButton.png" id="7_njm1y"]
 
-[node name="PlayerHud" type="Control"]
+[node name="HudScreen" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PlayerHud" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 196.0
+offset_bottom = 360.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 2
 script = ExtResource("1_5qx2s")
 
-[node name="PlayerInfoPanel" type="PanelContainer" parent="."]
+[node name="PlayerInfoPanel" type="PanelContainer" parent="PlayerHud"]
 unique_name_in_owner = true
-layout_mode = 1
-offset_right = 180.0
+layout_mode = 2
+offset_right = 196.0
 offset_bottom = 360.0
 theme = ExtResource("5_nnbdq")
 
-[node name="InfoPanelMargin" type="MarginContainer" parent="PlayerInfoPanel"]
+[node name="InfoPanelMargin" type="MarginContainer" parent="PlayerHud/PlayerInfoPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VerticalPanes" type="VBoxContainer" parent="PlayerInfoPanel/InfoPanelMargin"]
+[node name="VerticalPanes" type="VBoxContainer" parent="PlayerHud/PlayerInfoPanel/InfoPanelMargin"]
 layout_mode = 2
 
-[node name="StatusPanel" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes" instance=ExtResource("3_nnbdq")]
+[node name="StatusPanel" parent="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes" instance=ExtResource("3_nnbdq")]
 layout_mode = 2
 
-[node name="PortraitPane" type="HBoxContainer" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes"]
+[node name="PortraitPane" type="HBoxContainer" parent="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes"]
 visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="LeftPortraitContainer" type="PanelContainer" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane" node_paths=PackedStringArray("unit_portrait_texture_rect")]
+[node name="LeftPortraitContainer" type="PanelContainer" parent="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane" node_paths=PackedStringArray("unit_portrait_texture_rect")]
 layout_mode = 2
 script = ExtResource("1_616me")
 unit_portrait_texture_rect = NodePath("LeftPortraitMargin/LeftPortrait")
 metadata/_custom_type_script = "uid://caw460fc32bpc"
 
-[node name="LeftPortraitMargin" type="MarginContainer" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane/LeftPortraitContainer"]
+[node name="LeftPortraitMargin" type="MarginContainer" parent="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane/LeftPortraitContainer"]
 layout_mode = 2
 
-[node name="LeftPortrait" type="TextureRect" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane/LeftPortraitContainer/LeftPortraitMargin"]
+[node name="LeftPortrait" type="TextureRect" parent="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane/LeftPortraitContainer/LeftPortraitMargin"]
 texture_filter = 1
 custom_minimum_size = Vector2(28, 28)
 layout_mode = 2
@@ -63,39 +70,39 @@ size_flags_vertical = 4
 texture = ExtResource("2_5qx2s")
 expand_mode = 1
 
-[node name="CenterPortraitContainer" type="PanelContainer" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane" node_paths=PackedStringArray("unit_portrait_texture_rect")]
+[node name="CenterPortraitContainer" type="PanelContainer" parent="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane" node_paths=PackedStringArray("unit_portrait_texture_rect")]
 layout_mode = 2
 script = ExtResource("1_616me")
 unit_portrait_texture_rect = NodePath("CenterPortraitMargin/CenterPortrait")
 metadata/_custom_type_script = "uid://caw460fc32bpc"
 
-[node name="CenterPortraitMargin" type="MarginContainer" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane/CenterPortraitContainer"]
+[node name="CenterPortraitMargin" type="MarginContainer" parent="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane/CenterPortraitContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_bottom = 10
 
-[node name="CenterPortrait" type="TextureRect" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane/CenterPortraitContainer/CenterPortraitMargin"]
+[node name="CenterPortrait" type="TextureRect" parent="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane/CenterPortraitContainer/CenterPortraitMargin"]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("3_githx")
 stretch_mode = 3
 
-[node name="HealthBar" type="ProgressBar" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane/CenterPortraitContainer"]
+[node name="HealthBar" type="ProgressBar" parent="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane/CenterPortraitContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 value = 48.88
 show_percentage = false
 
-[node name="RightPortraitContainer" type="PanelContainer" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane" node_paths=PackedStringArray("unit_portrait_texture_rect")]
+[node name="RightPortraitContainer" type="PanelContainer" parent="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane" node_paths=PackedStringArray("unit_portrait_texture_rect")]
 layout_mode = 2
 script = ExtResource("1_616me")
 unit_portrait_texture_rect = NodePath("RightPortraitMargin/RightPortrait")
 metadata/_custom_type_script = "uid://caw460fc32bpc"
 
-[node name="RightPortraitMargin" type="MarginContainer" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane/RightPortraitContainer"]
+[node name="RightPortraitMargin" type="MarginContainer" parent="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane/RightPortraitContainer"]
 layout_mode = 2
 
-[node name="RightPortrait" type="TextureRect" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane/RightPortraitContainer/RightPortraitMargin"]
+[node name="RightPortrait" type="TextureRect" parent="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes/PortraitPane/RightPortraitContainer/RightPortraitMargin"]
 texture_filter = 1
 custom_minimum_size = Vector2(28, 28)
 layout_mode = 2
@@ -104,18 +111,18 @@ size_flags_vertical = 4
 texture = ExtResource("4_njm1y")
 expand_mode = 1
 
-[node name="ActionPane" type="PanelContainer" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes"]
+[node name="ActionPane" type="PanelContainer" parent="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ActionList" type="ItemList" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/ActionPane"]
+[node name="ActionList" type="ItemList" parent="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes/ActionPane"]
 layout_mode = 2
 theme = ExtResource("5_nnbdq")
 item_count = 2
 item_0/text = "Attack"
 item_1/text = "Holy Shield"
 
-[node name="ButtonMargin" type="MarginContainer" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes"]
+[node name="ButtonMargin" type="MarginContainer" parent="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/margin_left = 1
@@ -123,7 +130,7 @@ theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 1
 
-[node name="EndTurnButton" type="TextureButton" parent="PlayerInfoPanel/InfoPanelMargin/VerticalPanes/ButtonMargin"]
+[node name="EndTurnButton" type="TextureButton" parent="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes/ButtonMargin"]
 unique_name_in_owner = true
 layout_mode = 2
 texture_normal = ExtResource("7_njm1y")
@@ -132,13 +139,10 @@ script = ExtResource("7_githx")
 [node name="EnemyPanelRoot" type="Control" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="EnemyPanelRoot"]
 layout_mode = 1
@@ -161,3 +165,6 @@ texture_filter = 1
 layout_mode = 2
 texture = ExtResource("3_githx")
 stretch_mode = 3
+
+[connection signal="unit_selected" from="PlayerHud" to="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes/StatusPanel" method="_on_player_hud_unit_selected"]
+[connection signal="unit_unselected" from="PlayerHud" to="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes/StatusPanel" method="_on_player_hud_unit_unselected"]
