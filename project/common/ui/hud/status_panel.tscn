@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cp2h8nnlfk0e3"]
+[gd_scene load_steps=9 format=3 uid="uid://cp2h8nnlfk0e3"]
 
 [ext_resource type="Texture2D" uid="uid://bjaxqpheom0jf" path="res://assets/art/ui/character_status_panel/character_pane.png" id="1_eo55m"]
 [ext_resource type="Script" uid="uid://csperson2hpry" path="res://common/ui/hud/status_panel.gd" id="1_u4chb"]
@@ -8,13 +8,22 @@
 [ext_resource type="Theme" uid="uid://cpwb870aw2anb" path="res://common/ui/themes/panel_theme_1.tres" id="5_vu3nl"]
 [ext_resource type="FontFile" uid="uid://ctd87wi76m7ah" path="res://common/fonts/nmestis.ttf" id="6_c4ury"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4chb"]
+bg_color = Color(0.231373, 0.129412, 1, 1)
+
 [node name="CharacterPane" type="MarginContainer"]
+offset_right = -186.24
+offset_bottom = -103.68
+size_flags_vertical = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 script = ExtResource("1_u4chb")
 
-[node name="CharacterPaneBack" type="TextureRect" parent="."]
+[node name="CharacterPaneBack" type="Panel" parent="."]
 layout_mode = 2
-texture = ExtResource("1_eo55m")
-stretch_mode = 2
+theme = ExtResource("5_vu3nl")
 
 [node name="CharacterPortrait" type="TextureRect" parent="CharacterPaneBack"]
 layout_mode = 2
@@ -43,22 +52,37 @@ offset_bottom = 6.0
 texture = ExtResource("3_jaonq")
 stretch_mode = 2
 
-[node name="APClipArea" type="Control" parent="CharacterPaneBack"]
-clip_children = 1
-clip_contents = true
+[node name="AP" type="Control" parent="CharacterPaneBack"]
 anchors_preset = 0
 offset_left = 80.0
 offset_top = 30.0
 offset_right = 175.0
 offset_bottom = 35.0
 
-[node name="APSegments" type="TextureRect" parent="CharacterPaneBack/APClipArea"]
+[node name="APClipArea" type="Control" parent="CharacterPaneBack/AP"]
+clip_children = 1
 clip_contents = true
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 0
+offset_right = 95.0
+offset_bottom = 5.0
+
+[node name="APSegments" type="TextureRect" parent="CharacterPaneBack/AP/APClipArea"]
+clip_contents = true
+layout_mode = 1
 offset_right = 95.0
 offset_bottom = 5.0
 texture = ExtResource("4_gau31")
 stretch_mode = 2
+
+[node name="APUsage" type="PanelContainer" parent="CharacterPaneBack/AP/APClipArea"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_bottom = 5.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_u4chb")
 
 [node name="CharaterNameMargin" type="MarginContainer" parent="CharacterPaneBack"]
 clip_contents = true
@@ -79,3 +103,7 @@ text = "Jerimoth"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="StatusBox" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_eo55m")

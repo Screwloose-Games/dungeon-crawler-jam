@@ -8,6 +8,7 @@
 [node name="TestFullBattleUi" type="Node2D"]
 
 [node name="BattleTemplate" parent="." instance=ExtResource("1_j8gee")]
+position = Vector2(-199, -74)
 battle_scenario = ExtResource("2_pmadr")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -25,5 +26,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PlayerHud" parent="CanvasLayer/Control" instance=ExtResource("1_55s5x")]
+[node name="PlayerHudScreen" parent="CanvasLayer/Control" instance=ExtResource("1_55s5x")]
 layout_mode = 1

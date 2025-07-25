@@ -17,8 +17,8 @@ var current_team_turn: Team:
 
 var shown: bool
 
-@onready var player_info_panel: PanelContainer = %PlayerInfoPanel
 @onready var enemy_panel_root: Control = %EnemyPanelRoot
+@onready var player_info_panel: PanelContainer = %PlayerInfoPanel
 @onready var status_panel: MarginContainer = $PlayerInfoPanel/InfoPanelMargin/VerticalPanes/StatusPanel
 
 
@@ -66,7 +66,7 @@ func show_panel():
 
 func hide_panel():
 	shown = false
-	slide_to(-get_rect().size.x, func(): return not shown)
+	slide_to(-player_info_panel.get_rect().size.x, func(): return not shown)
 
 
 func slide_to(target_x: float, keep_running_condition: Callable):

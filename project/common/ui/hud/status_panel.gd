@@ -13,8 +13,14 @@ var current_unit: Unit
 
 @onready var character_portrait: TextureRect = $CharacterPaneBack/CharacterPortrait
 @onready var hp_clip_area: Control = $CharacterPaneBack/HPClipArea
-@onready var ap_clip_area: Control = $CharacterPaneBack/APClipArea
+@onready var ap_clip_area: Control = $CharacterPaneBack/AP/APClipArea
 @onready var character_name: RichTextLabel = $CharacterPaneBack/CharaterNameMargin/CharacterName
+@onready var ap_usage: PanelContainer = $CharacterPaneBack/AP/APClipArea/APUsage
+
+
+func _ready() -> void:
+	GlobalSignalBus.action_preview_requested.connect(_on_action_preview_requested)
+	GlobalSignalBus.action_preview_cancelled.connect(_on_action_preview_cancelled)
 
 
 func _on_player_hud_unit_selected(unit: Unit) -> void:
@@ -24,18 +30,12 @@ func _on_player_hud_unit_selected(unit: Unit) -> void:
 	_on_unit_changed()
 
 
-func _on_player_hud_unit_unselected(unit: Unit) -> void:
-	pass
-	# if unit.changed.is_connected(_on_unit_changed):
-	# 	unit.changed.disconnect(_on_unit_changed)
-
-
 func _on_unit_changed():
-	set_hp_bar(current_unit)
-	set_ap_bar(current_unit)
+	_set_hp_bar_for_unit(current_unit)
+	_set_ap_bar_for_unit(current_unit)
 
 
-func set_hp_bar(unit: Unit):
+func _set_hp_bar_for_unit(unit: Unit):
 	var hp_bar_width = hp_first_offset + unit.health_points * hp_size
 	var hp_bar_height = hp_clip_area.get_rect().size.y
 	if unit.health_points == 0:
@@ -43,7 +43,20 @@ func set_hp_bar(unit: Unit):
 	hp_clip_area.set_size(Vector2(hp_bar_width, hp_bar_height))
 
 
-func set_ap_bar(unit: Unit):
+func _set_ap_bar_for_unit(unit: Unit):
 	var ap_bar_width = unit.action_points_current * ap_size
-	var ap_bar_height = ap_clip_area.get_rect().size.y
-	ap_clip_area.set_size(Vector2(ap_bar_width, ap_bar_height))
+	ap_clip_area.offset_right = ap_bar_width
+
+
+func _show_ap_cost(cost: int):
+	var used_ap: int = ap_segments - current_unit.action_points_current
+	var width: int = (cost + used_ap) * ap_size
+	ap_usage.offset_left = - width
+
+
+func _on_action_preview_requested(preview: ActionPreviewData):
+	_show_ap_cost(preview.action_point_cost)
+
+
+func _on_action_preview_cancelled(_preview: ActionPreviewData):
+	_show_ap_cost(0)

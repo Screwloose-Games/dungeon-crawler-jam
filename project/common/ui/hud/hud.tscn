@@ -46,6 +46,7 @@ layout_mode = 2
 
 [node name="StatusPanel" parent="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes" instance=ExtResource("3_nnbdq")]
 layout_mode = 2
+size_flags_vertical = 1
 
 [node name="PortraitPane" type="HBoxContainer" parent="PlayerHud/PlayerInfoPanel/InfoPanelMargin/VerticalPanes"]
 visible = false
