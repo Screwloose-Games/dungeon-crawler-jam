@@ -49,8 +49,7 @@ func _set_ap_bar_for_unit(unit: Unit):
 
 
 func _show_ap_cost(cost: int):
-	var used_ap: int = ap_segments - current_unit.action_points_current
-	var width: int = (cost + used_ap) * ap_size
+	var width: int = cost * ap_size
 	ap_usage.offset_left = - width
 
 

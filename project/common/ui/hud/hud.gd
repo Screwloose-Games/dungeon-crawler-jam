@@ -70,7 +70,6 @@ func hide_panel():
 
 
 func slide_to(target_x: float, keep_running_condition: Callable):
-	print("slide_to ", target_x)
 	var target_pos := Vector2(target_x, 0)
 
 	var tween = get_tree().create_tween()
@@ -78,7 +77,6 @@ func slide_to(target_x: float, keep_running_condition: Callable):
 	tween.tween_property(self, "position", target_pos, slide_duration)
 
 	while tween.is_running() and keep_running_condition.call():
-		print(position)
 		await get_tree().process_frame
 
 	tween.kill()
