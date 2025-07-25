@@ -32,17 +32,43 @@ enum TileType {
 var effects: Array[EffectType]
 var type: TileType
 var position: Vector2i
+var grid: BattleGrid
+
+
+static func grid_cells_overlap(
+	cells_1: Array[BattleGridCell], cells_2: Array[BattleGridCell]
+) -> bool:
+	for cell_1 in cells_1:
+		if cell_1 in cells_2:
+			return true
+	return false
+
+
+static func get_overlapping_grid_cells(
+	cells_1: Array[BattleGridCell], cells_2: Array[BattleGridCell]
+) -> Array[BattleGridCell]:
+	var overlapping_cells: Array[BattleGridCell] = []
+	for cell_1 in cells_1:
+		if cell_1 in cells_2:
+			overlapping_cells.append(cell_1)
+	return overlapping_cells
 
 
 func _init(
+	battle_grid: BattleGrid,
 	position: Vector2i = Vector2i.ZERO,
 	unit: Unit = null,
 	type: TileType = TileType.GROUND,
-	effects: Array[EffectType] = []
+	effects: Array[EffectType] = [],
 ) -> void:
 	if unit:
 		unit.cell = self
+	self.grid = battle_grid
 	self.position = position
 	self.unit = unit
 	self.type = type
 	self.effects = effects
+
+
+func get_adjacent_cells() -> Array[BattleGridCell]:
+	return grid.get_adjacent_cells(self)

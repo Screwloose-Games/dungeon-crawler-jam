@@ -42,7 +42,10 @@ signal revivable_changed(revivable: bool)
 			revivable_changed.emit(revivable)
 			emit_changed()
 
-var is_alive := true
+var is_alive: bool = true
+var is_dead: bool:
+	get:
+		return !is_alive
 
 
 func _init(

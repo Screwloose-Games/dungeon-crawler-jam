@@ -7,6 +7,7 @@ extends Resource
 signal died
 signal moved_to(new_cell: BattleGridCell)
 signal move_started(callback: ReturnSignal, new_cell: BattleGridCell)
+signal did_action(action: UnitAction)
 
 @export var name: String:
 	set(new_value):
@@ -71,6 +72,12 @@ var health: Health:
 				if not health.maximum_changed.is_connected(_on_health_maximum_changed):
 					health.maximum_changed.connect(_on_health_maximum_changed)
 
+var is_dead: bool:
+	get:
+		if not health:
+			return true
+		return health.is_dead
+
 ## The actions that the unit can take.
 ## Units typically have a move action and ways to attack.
 ## An action can be to move, use an item, use an ability.
@@ -79,7 +86,7 @@ var actions: Array[UnitAction]:
 		actions = val
 		emit_changed()
 
-var action_points_current: int = 0
+var action_points_current: int
 
 var cell: BattleGridCell:
 	set(new_cell):
@@ -98,7 +105,6 @@ var cell: BattleGridCell:
 		# Add self to new cell
 		cell.unit = self
 		moved_to.emit(cell)
-
 
 var team: Team:
 	set(new_value):
@@ -282,3 +288,80 @@ func spend_action_points(ap_cost: int):
 		"Unable to afford AP cost. Validate before calling spend_action_points"
 	)
 	action_points_current -= ap_cost
+
+
+func can_act() -> bool:
+	return action_points_current > 0 and health and not health.is_dead
+
+
+func get_reachable_cells() -> Array[BattleGridCell]:
+	return movement.get_reachable_cells(self, cell.grid)
+
+
+func can_reach_cell(target_cell: BattleGridCell) -> bool:
+	return target_cell in get_reachable_cells()
+
+
+func get_adjacent_cells() -> Array[BattleGridCell]:
+	return cell.get_adjacent_cells()
+
+
+## Get the distance to a target cell in terms of moves
+func get_move_distance_to_cell(target_cell: BattleGridCell) -> int:
+	if not target_cell or not cell:
+		return -1
+	var path = cell.grid.get_movement_path(cell, target_cell, movement.method)
+	if path:
+		return path.move_count
+	return -1
+
+
+func get_closest_cell_in_move_range(
+	available_destinations: Array[BattleGridCell]
+) -> BattleGridCell:
+	if not cell or not available_destinations:
+		return null
+
+	var closest_cell: BattleGridCell = null
+	var closest_distance: float = INF
+
+	for destination in available_destinations:
+		var distance = get_move_distance_to_cell(destination)
+		if distance < closest_distance:
+			closest_distance = distance
+			closest_cell = destination
+
+	return closest_cell
+
+
+func get_closest_enemy() -> Unit:
+	if not cell or not cell.grid:
+		return null
+
+	var closest_enemy: Unit = null
+	var closest_distance: float = INF
+
+	for enemy_cell in cell.grid.cells.values():
+		if enemy_cell.unit and enemy_cell.unit.team != team:
+			var unit = enemy_cell.unit
+			# Technically, should consider adjacent tiles.
+			var move_distance = get_move_distance_to_cell(enemy_cell)
+			if move_distance < closest_distance:
+				closest_distance = move_distance
+				closest_enemy = unit
+	return closest_enemy
+
+
+func can_move_adjacent_to(target_cell: BattleGridCell) -> bool:
+	if not target_cell or not cell:
+		return false
+	var adjacent_cells = target_cell.get_adjacent_cells()
+	var reachable_cells = get_reachable_cells()
+	var grid_cells_overlap = BattleGridCell.grid_cells_overlap(adjacent_cells, reachable_cells)
+	return grid_cells_overlap
+
+
+func get_valid_adjacent_move_targets(target_unit: Unit) -> Array[BattleGridCell]:
+	var valid_move_targets: Array[BattleGridCell] = get_reachable_cells()
+	var cells_adjacent_to_target: Array[BattleGridCell] = target_unit.get_adjacent_cells()
+	return BattleGridCell.get_overlapping_grid_cells(valid_move_targets, cells_adjacent_to_target)
