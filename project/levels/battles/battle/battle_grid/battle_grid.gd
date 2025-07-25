@@ -65,7 +65,7 @@ func force_set_unit(cell_pos: Vector2i, unit: Unit) -> bool:
 func _load_battlefield_tiles(battlefield: Battlefield):
 	if not battlefield:
 		return
-	var tiles := battlefield.get_tile_data()
+	var tiles: Dictionary[Vector2i, BattleGridCell.TileType] = battlefield.get_tile_data()
 	for tile_pos in tiles.keys():
 		var cell = _create_or_get_cell(tile_pos)
 		cell.type = tiles[tile_pos]
@@ -86,7 +86,7 @@ func _load_grid_object_layout_tiles(layout: GridObjectLayout):
 
 func _create_or_get_cell(pos: Vector2i) -> BattleGridCell:
 	if not cells.has(pos):
-		cells[pos] = BattleGridCell.new(pos)
+		cells[pos] = BattleGridCell.new(self, pos)
 	return cells[pos]
 
 
@@ -112,3 +112,22 @@ func get_movement_path(
 		_:
 			assert(false, "MovementMethod not implemented: %s" % movement_method)
 			return null
+
+
+func get_adjacent_cells(cell: BattleGridCell) -> Array[BattleGridCell]:
+	var coords = cell.position
+	var adjacent_cells: Array[BattleGridCell] = []
+
+	var adjacent_positions = [
+		coords + Vector2i(0, 1),
+		coords + Vector2i(0, -1),
+		coords + Vector2i(1, 0),
+		coords + Vector2i(-1, 0)
+	]
+
+	for pos in adjacent_positions:
+		var adjacent_cell = get_cell(pos)
+		if adjacent_cell:
+			adjacent_cells.append(adjacent_cell)
+
+	return adjacent_cells

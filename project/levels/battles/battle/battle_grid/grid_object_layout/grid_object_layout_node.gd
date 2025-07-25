@@ -9,12 +9,14 @@ const TIME_BETWEEN_SYNCS = 10
 
 @export_custom(PROPERTY_HINT_NONE, "", 2) var tile_data: Dictionary[Vector2i, ObjectLayoutCell]
 @export_tool_button("Sync TileData") var sync_tile_data_tool_button = _on_tiles_changed
+@export var grid_object_layout: GridObjectLayout
 
 var time_since_sync: float
 var tooltip_warnings: Array[String]
 
 @onready var units: TileMapLayer = $Units
 @onready var effects: Node2D = $Effects
+
 
 func _ready() -> void:
 	# contrary to the documentation, the changed signal doesnt trigger when the tilemap is updated
@@ -38,6 +40,8 @@ func _on_tiles_changed():
 	print("Updating GridObjectLayout tiles data")
 	tile_data = {}
 	tooltip_warnings = []
+	if not grid_object_layout:
+		grid_object_layout = GridObjectLayout.new()
 
 	for cell_pos in units.get_used_cells():
 		var data = units.get_cell_tile_data(cell_pos)
@@ -46,6 +50,8 @@ func _on_tiles_changed():
 		update_effects_layer(effects_layer)
 
 	print("Total populated cells: ", len(tile_data))
+	grid_object_layout.tile_data = tile_data
+	#ResourceSaver.save(grid_object_layout)
 	update_configuration_warnings()
 
 
@@ -90,10 +96,14 @@ func create_or_get_cell(pos: Vector2i):
 ## Ensure that the data in the custom layer is actually a reference to a Unit
 func validate_unit(pos: Vector2i, data: Variant) -> bool:
 	if data == null:
-		tooltip_warnings.append("The painted cell at %d,%d does not have a reference to a Unit" % [pos.x, pos.y])
+		tooltip_warnings.append(
+			"The painted cell at %d,%d does not have a reference to a Unit" % [pos.x, pos.y]
+		)
 		return false
 	if data is not Unit:
-		tooltip_warnings.append("The painted cell at %d,%d is not a reference to a Unit" % [pos.x, pos.y])
+		tooltip_warnings.append(
+			"The painted cell at %d,%d is not a reference to a Unit" % [pos.x, pos.y]
+		)
 		return false
 	return true
 

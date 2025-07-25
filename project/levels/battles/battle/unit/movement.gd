@@ -1,7 +1,7 @@
 class_name Movement
 extends Resource
 
-enum MovementMethod {WALK, FLY, JUMP}
+enum MovementMethod { WALK, FLY, JUMP }
 
 @export var movement_points_per_ap: int = 2
 @export var method: MovementMethod = MovementMethod.WALK
@@ -59,3 +59,58 @@ func purchase_movement(tiles_to_move: int) -> int:
 
 func reset_movement_points():
 	_movement_points = 0
+
+
+## Get all cells that this unit can move to given current action points and movement constraints
+## Requires access to the unit's current position and the battle grid for pathfinding
+func get_reachable_cells(unit: Unit, battle_grid: BattleGrid) -> Array[BattleGridCell]:
+	if not unit or not unit.cell or not battle_grid:
+		return []
+
+	var reachable_cells: Array[BattleGridCell] = []
+	var max_movement_distance = max_move_count(unit.action_points_current)
+
+	if max_movement_distance <= 0:
+		return []
+
+	var start_position = unit.cell.position
+
+	# Get the appropriate navigation layer based on movement method
+	var navigation_layer: NavigationLayer
+	match method:
+		MovementMethod.WALK:
+			navigation_layer = battle_grid.walk_navigation
+		MovementMethod.FLY:
+			navigation_layer = battle_grid.fly_navigation
+		_:
+			# Default to walk navigation if method not implemented
+			navigation_layer = battle_grid.walk_navigation
+
+	if not navigation_layer:
+		return []
+
+	# Check all cells in the battle grid
+	for target_position in battle_grid.cells.keys():
+		var target_cell = battle_grid.cells[target_position]
+
+		# Skip the unit's current position
+		if target_position == start_position:
+			continue
+
+		# Check if the cell is movable to
+		if not battle_grid.is_cell_movable_to(target_position, method):
+			continue
+
+		# Get the movement path to this cell
+		var path = navigation_layer.get_movement_path(start_position, target_position)
+
+		# If we can path to this cell and it's within our movement range
+		if path and path.move_count <= max_movement_distance:
+			# Calculate the AP cost to reach this cell
+			var required_ap = get_required_ap_to_move(path.move_count)
+
+			# If we can afford to move there with current AP
+			if required_ap <= unit.action_points_current:
+				reachable_cells.append(target_cell)
+
+	return reachable_cells

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="GridObjectLayout" load_steps=7 format=3 uid="uid://dh8wdi6hiu4ut"]
+
+[ext_resource type="Script" uid="uid://bi1g3t40pyhyp" path="res://levels/battles/battle/battle_grid/grid_object_layout/grid_object_layout.gd" id="1_c4ltl"]
+[ext_resource type="Script" uid="uid://csr3qmm41n0pg" path="res://levels/battles/battle/battle_grid/grid_object_layout/grid_object_cell.gd" id="2_w3slq"]
+[ext_resource type="Resource" uid="uid://cdcfvr8yx37yy" path="res://levels/battles/battle/unit/resources/unit_skeleton.tres" id="3_ram37"]
+[ext_resource type="Resource" uid="uid://74vp14p65w0j" path="res://levels/battles/battle/unit/resources/unit_rogue.tres" id="4_usm7v"]
+
+[sub_resource type="Resource" id="Resource_c4ltl"]
+script = ExtResource("2_w3slq")
+unit = ExtResource("4_usm7v")
+effect = Array[int]([])
+team_index = 0
+
+[sub_resource type="Resource" id="Resource_w3slq"]
+script = ExtResource("2_w3slq")
+unit = ExtResource("3_ram37")
+effect = Array[int]([])
+team_index = 1
+
+[resource]
+script = ExtResource("1_c4ltl")
+tile_data = Dictionary[Vector2i, ExtResource("2_w3slq")]({
+Vector2i(9, 1): SubResource("Resource_w3slq"),
+Vector2i(13, 1): SubResource("Resource_c4ltl")
+})

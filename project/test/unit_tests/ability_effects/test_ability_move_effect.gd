@@ -25,11 +25,12 @@ func test_get_duration_instant_movement() -> void:
 ## Test apply method with valid movement
 func test_apply_valid_movement() -> void:
 	var effect: AbilityMoveEffect = AbilityMoveEffect.new()
+	var battle_grid: BattleGrid = BattleGrid.new()
 
 	# Given there is a unit, starting, target, and command
 	var unit: Unit = Unit.new()
-	var start_cell: BattleGridCell = BattleGridCell.new()
-	var target_cell: BattleGridCell = BattleGridCell.new()
+	var start_cell: BattleGridCell = BattleGridCell.new(battle_grid)
+	var target_cell: BattleGridCell = BattleGridCell.new(battle_grid)
 	var command: ActionExecutionCommand = ActionExecutionCommand.new()
 
 	# And we set up the scenario
@@ -51,12 +52,13 @@ func test_apply_valid_movement() -> void:
 ## Test apply method with occupied target cell
 func test_apply_occupied_target_cell() -> void:
 	var effect: AbilityMoveEffect = AbilityMoveEffect.new()
+	var battle_grid: BattleGrid = BattleGrid.new()
 
 	# When we have a unit, other unit, start and end cells and execution order...
 	var unit: Unit = Unit.new()
 	var other_unit: Unit = Unit.new()
-	var start_cell: BattleGridCell = BattleGridCell.new()
-	var target_cell: BattleGridCell = BattleGridCell.new()
+	var start_cell: BattleGridCell = BattleGridCell.new(battle_grid)
+	var target_cell: BattleGridCell = BattleGridCell.new(battle_grid)
 	var command: ActionExecutionCommand = ActionExecutionCommand.new()
 
 	# And we have a grid with occupied an target
