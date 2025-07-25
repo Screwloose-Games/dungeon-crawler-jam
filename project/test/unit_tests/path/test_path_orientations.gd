@@ -117,5 +117,5 @@ func check_path(
 func create_path_from_positions(positions: Array[Vector2i]) -> MovementPath:
 	var cells: Array[BattleGridCell] = []
 	for position in positions:
-		cells.append(BattleGridCell.new(position))
+		cells.append(BattleGridCell.new(null, position))
 	return MovementPath.new(cells)
