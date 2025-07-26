@@ -26,24 +26,27 @@ func initialize(battle: Battle):
 	self.battle = battle
 
 
-func _process(_delta: float):
-	_handle_mouse_input()
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouse:
+		var mouse_event = event as InputEventMouse
+		_handle_mouse_input(mouse_event)
 
 
-func _handle_mouse_input():
+func _handle_mouse_input(event: InputEventMouse):
 	var mouse_position := get_global_mouse_position()
 	var cell_coords = battle_grid_node.global_position_to_cell_coords(mouse_position)
 	var cell = battle_grid_node.battle_grid.get_cell(cell_coords)
 
-	if Input.is_action_just_pressed("left_click"):
+	if event.button_mask & MOUSE_BUTTON_MASK_LEFT > 0:
 		_select_cell(cell)
-	elif Input.is_action_just_pressed("right_click"):
+	elif event.button_mask & MOUSE_BUTTON_RIGHT > 0:
 		_target_cell(cell)
 	else:
 		_hover_cell(cell)
 
 
 func _select_cell(cell: BattleGridCell) -> void:
+	print("Select cell")
 	if input_locked:
 		return
 	if not cell:
@@ -53,6 +56,7 @@ func _select_cell(cell: BattleGridCell) -> void:
 
 
 func _target_cell(cell: BattleGridCell):
+	print("Target cell")
 	if not cell or input_locked:
 		return
 	if targetted_cells.find(cell) < 0:
@@ -69,6 +73,7 @@ func _target_cell(cell: BattleGridCell):
 
 
 func _hover_cell(cell: BattleGridCell):
+	print("Hover cell")
 	if hovered_cell == cell or input_locked:
 		return
 
@@ -131,15 +136,15 @@ func _update_action_execution_command(temp_target: BattleGridCell = null) -> boo
 	if not action_execution_command.is_complete():
 		return false
 
-	var result = action_execution_command.validate()
+	var preview = action_execution_command.preview()
 
-	if not result.valid:
-		for error in result.get_error_reasons():
+	if not preview.valid:
+		for error in preview.get_error_reasons():
 			print(error)
 		return false
 
-	previous_action_preview = result
-	GlobalSignalBus.action_preview_requested.emit(result)
+	previous_action_preview = preview
+	GlobalSignalBus.action_preview_requested.emit(preview)
 	action_execution_command.targets = prev_targets
 	return true
 

@@ -7,6 +7,7 @@ extends Resource
 signal died
 signal moved_to(new_cell: BattleGridCell)
 signal move_started(callback: ReturnSignal, new_cell: BattleGridCell)
+signal action_points_changed
 signal did_action(action: UnitAction)
 
 @export var name: String:
@@ -88,7 +89,12 @@ var actions: Array[UnitAction]:
 		actions = val
 		emit_changed()
 
-var action_points_current: int
+var action_points_current: int:
+	get:
+		return action_points_current
+	set(value):
+		action_points_current = value
+		action_points_changed.emit()
 
 var cell: BattleGridCell:
 	set(new_cell):

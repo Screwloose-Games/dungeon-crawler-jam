@@ -92,7 +92,7 @@ func test_rogue_unit_spends_correct_ap_when_acting():
 	)
 
 	# The command IS valid
-	var preview = command.validate()
+	var preview = command.preview()
 	assert_bool(preview.valid).is_true()
 
 	# When the action is executed

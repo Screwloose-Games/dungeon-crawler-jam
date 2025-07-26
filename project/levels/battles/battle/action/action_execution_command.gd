@@ -32,6 +32,16 @@ func _init(
 	team = commander.team if commander else null
 
 
+func clone() -> ActionExecutionCommand:
+	return ActionExecutionCommand.new(
+		unit,
+		commander,
+		battle_grid,
+		action,
+		targets
+	)
+
+
 func is_on_same_team(commander: Commander, unit: Unit) -> bool:
 	return commander and unit and commander.team == unit.team
 
@@ -42,7 +52,7 @@ func can_command_unit(unit: Unit) -> bool:
 
 
 func execute(callback: Callable) -> bool:
-	var preview_data = validate()
+	var preview_data = preview()
 	if not preview_data.valid:
 		callback.call(false)
 		return false
@@ -51,7 +61,7 @@ func execute(callback: Callable) -> bool:
 	return true
 
 
-func validate() -> ActionPreviewData:
+func preview() -> ActionPreviewData:
 	if not is_complete():
 		return null
 
@@ -60,7 +70,7 @@ func validate() -> ActionPreviewData:
 	assert(action, "Action is not set")
 
 	var result = ActionPreviewData.new()
-	result = action.validate(self)
+	result = action.preview(self)
 
 	return result
 

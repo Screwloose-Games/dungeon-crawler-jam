@@ -26,6 +26,7 @@ func _ready() -> void:
 func _on_player_hud_unit_selected(unit: Unit) -> void:
 	if not unit.changed.is_connected(_on_unit_changed):
 		unit.changed.connect(_on_unit_changed)
+		unit.action_points_changed.connect(_on_unit_changed)
 	current_unit = unit
 	_on_unit_changed()
 

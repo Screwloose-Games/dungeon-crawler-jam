@@ -59,7 +59,7 @@ func test_skeleton_unit_can_move_on_grid():
 	assert_object(move_command.targets[0]).is_equal(target_cell)
 
 	# Get the action preview information
-	var preview = move_command.validate()
+	var preview = move_command.preview()
 
 	# Check cost affordability
 	assert_bool(preview.valid).is_true()

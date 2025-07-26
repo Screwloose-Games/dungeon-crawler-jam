@@ -9,6 +9,10 @@ extends AbilityEffect
 @export var effect: AbilityEffect
 
 
+func preview(command: ActionExecutionCommand, preview: ActionPreviewData):
+	pass
+
+
 ## Applies the wrapped effect to all tiles in the defined area. [br]
 ## Each tile position is calculated as target position plus each offset. [br]
 func apply(_order: ActionExecutionCommand, _return_signal: ReturnSignal):

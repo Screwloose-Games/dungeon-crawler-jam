@@ -24,10 +24,10 @@ func get_minimum_ap_cost():
 	return ability.get_minimum_ap_cost()
 
 
-func validate(command: ActionExecutionCommand) -> ActionPreviewData:
+func preview(command: ActionExecutionCommand) -> ActionPreviewData:
 	var result = ActionPreviewData.new()
 
-	check_target_constraints(command, result)
+	preview_target_constraints(command, result)
 	if not result.valid:
 		return result
 

@@ -11,4 +11,4 @@ extends Resource
 ## [br]
 ## [param preview] should be updated with the details of the validation
 func validate(_command: ActionExecutionCommand, _preview: ActionPreviewData):
-	return true
+	pass

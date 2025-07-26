@@ -20,8 +20,8 @@ func _init(
 	super (_name, _description, 0, tile_constraints)
 
 
-func validate(command: ActionExecutionCommand) -> ActionPreviewData:
-	var result = super.validate(command)
+func preview(command: ActionExecutionCommand) -> ActionPreviewData:
+	var result = super.preview(command)
 
 	if not result.valid:
 		return result
@@ -38,7 +38,7 @@ func validate(command: ActionExecutionCommand) -> ActionPreviewData:
 
 
 func execute(command: ActionExecutionCommand, callback: Callable):
-	var preview = validate(command)
+	var preview = preview(command)
 
 	var path = get_movement_path(command)
 	assert(path != null, "Invalid path")

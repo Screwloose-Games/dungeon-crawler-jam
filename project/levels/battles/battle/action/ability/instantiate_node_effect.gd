@@ -7,6 +7,10 @@ extends AbilityEffect
 @export var node_to_create: PackedScene
 
 
+func validate(command: ActionExecutionCommand, preview: ActionPreviewData):
+	pass
+
+
 ## Instantiates the specified node at the target tile position. [br]
 func apply(_order: ActionExecutionCommand, _return_signal: ReturnSignal):
 	pass
