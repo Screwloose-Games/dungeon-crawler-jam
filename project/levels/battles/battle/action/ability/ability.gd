@@ -39,6 +39,8 @@ func _init(
 func validate(command: ActionExecutionCommand) -> ActionPreviewData:
 	var result = ActionPreviewData.new()
 	result.action_point_cost += base_cost
+	for stage in stages:
+		stage.validate(command)
 
 	if len(command.targets) < number_of_targets:
 		highlight_targetable(command, result)
