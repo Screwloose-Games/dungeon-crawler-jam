@@ -1,11 +1,11 @@
 extends MarginContainer
 
 # Just have hp/ap count hardcoded for now
-const hp_segments: int = 30
-const hp_size: int = 3
-const hp_first_offset: int = 1 # First and last HP segments are 1 pixel larger
-const ap_segments: int = 10
-const ap_size: int = 10
+const HP_SEGMENTS: int = 30
+const HP_SIZE: int = 3
+const HP_FIRST_OFFSET: int = 1 # First and last HP segments are 1 pixel larger
+const AP_SEGMENTS: int = 10
+const AP_SIZE: int = 10
 
 var hp_width: int
 var ap_width: int
@@ -39,7 +39,7 @@ func _on_unit_changed():
 
 
 func _set_hp_bar_for_unit(unit: Unit):
-	var hp_bar_width = hp_first_offset + unit.health_points * hp_size
+	var hp_bar_width = HP_FIRST_OFFSET + unit.health_points * HP_SIZE
 	var hp_bar_height = hp_clip_area.get_rect().size.y
 	if unit.health_points == 0:
 		hp_bar_width = 0
@@ -47,12 +47,12 @@ func _set_hp_bar_for_unit(unit: Unit):
 
 
 func _set_ap_bar_for_unit(unit: Unit):
-	var ap_bar_width = unit.action_points_current * ap_size
+	var ap_bar_width = unit.action_points_current * AP_SIZE
 	ap_clip_area.offset_right = ap_bar_width
 
 
 func _show_ap_cost(cost: int):
-	var width: int = cost * ap_size
+	var width: int = cost * AP_SIZE
 	ap_usage.offset_left = - width
 
 
