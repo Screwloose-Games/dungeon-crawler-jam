@@ -42,6 +42,11 @@ static var highlight_color_alternative: Dictionary[HighlightColor, int] = {
 @export var type: Type
 
 
+func _init(color: HighlightColor = HighlightColor.WHITE, type: Type = Type.OUTLINE):
+	self.color = color
+	self.type = type
+
+
 func set_on_tile_map(tile_map_layer: TileMapLayer, cell_position: Vector2i):
 	var tile_data = highlight_tile_lookup[type]
 	var source = tile_data["source"]

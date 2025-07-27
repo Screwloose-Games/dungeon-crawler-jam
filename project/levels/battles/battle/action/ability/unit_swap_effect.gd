@@ -5,10 +5,6 @@ class_name UnitSwapEffect
 extends AbilityEffect
 
 
-func validate(command: ActionExecutionCommand, preview: ActionPreviewData):
-	pass
-
-
 ## Swaps the positions of units between two tiles on the battlefield. [br]
 func apply(_order: ActionExecutionCommand, _return_signal: ReturnSignal):
 	pass

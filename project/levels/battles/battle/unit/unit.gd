@@ -22,7 +22,6 @@ signal did_action(action: UnitAction)
 @export var abilities: Array[Ability] = []:
 	set(val):
 		if val != abilities:
-			emit_changed()
 			abilities = val
 			init_actions()
 @export var movement: Movement
@@ -87,7 +86,6 @@ var is_dead: bool:
 var actions: Array[UnitAction]:
 	set(val):
 		actions = val
-		emit_changed()
 
 var action_points_current: int:
 	get:
@@ -172,12 +170,10 @@ func _init(
 
 
 func init_actions():
-	var new_actions = init_ability_actions()
-	if new_actions.size() > 0:
-		for action in new_actions:
-			if action not in actions:
-				actions.append(action)
+	print(name, " ", movement)
+	actions = []
 	init_move_action()
+	init_ability_actions()
 
 
 func init_move_action():
@@ -191,7 +187,7 @@ func init_ability_actions() -> Array[AbilityAction]:
 	var ability_actions: Array[AbilityAction] = []
 	for ability in abilities:
 		var action = AbilityAction.new(ability)
-		ability_actions.append(action)
+		actions.append(action)
 	return ability_actions
 
 
@@ -199,6 +195,13 @@ func add_action(action: UnitAction) -> void:
 	if action not in actions:
 		actions.append(action)
 		emit_changed()
+
+
+func add_ability(ability: Ability) -> void:
+	if ability in abilities:
+		return
+	abilities.append(ability)
+	init_actions()
 
 
 ## Return all the actions this unit can execute.[br]
@@ -217,7 +220,6 @@ func get_available_actions() -> Array[UnitAction]:
 ## Returns the move action
 func get_move_action() -> MoveAction:
 	for action in actions:
-		# if action is AbilityAction and (action as AbilityAction).ability is MoveAbility:
 		if action is MoveAction:
 			return action
 	return null

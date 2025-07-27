@@ -16,7 +16,6 @@ func _init(
 
 
 func _on_battle_turn_started(battle_team: Team):
-	print("battle turn started")
 	if battle_team != self.team:
 		return
 	start_turn.call_deferred() # wait for units to get ready. :/
@@ -107,8 +106,7 @@ func move_unit_to_cell(unit: Unit, target_cell: BattleGridCell):
 
 	var command = ActionExecutionCommand.new(unit, self, battle_grid, move_action, [target_cell])
 
-	var preview = command.preview()
-	if preview.valid:
+	if command.validate():
 		command.execute(func(): print("Move completed for ", unit.name))
 	else:
 		print("Move command invalid for unit ", unit.name)

@@ -10,5 +10,15 @@ extends Resource
 ## Override this method in derived classes to implement specific constraint logic. [br]
 ## [br]
 ## [param preview] should be updated with the details of the validation
-func validate(_command: ActionExecutionCommand, _preview: ActionPreviewData):
-	pass
+func validate(command: ActionExecutionCommand) -> bool:
+	for target in command.targets:
+		if not _validate_cell(command, target):
+			return false
+	return true
+
+
+## Validates whether a specific cell satisfies the [TargetTileConstraint]
+## Ignores any targets set on the command
+## This function must be overriden on child classes
+func _validate_cell(_command: ActionExecutionCommand, _cell: BattleGridCell) -> bool:
+	return true

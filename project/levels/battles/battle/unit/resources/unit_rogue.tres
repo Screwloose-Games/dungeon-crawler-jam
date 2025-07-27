@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Unit" load_steps=17 format=3 uid="uid://74vp14p65w0j"]
 
 [ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/action/ability/ability.gd" id="1_f6vnl"]
-[ext_resource type="Script" uid="uid://v50hixevnupe" path="res://levels/battles/battle/action/tile_constraint/tile_constraint.gd" id="2_5h84q"]
+[ext_resource type="Script" uid="uid://wu0ky8ts37sk" path="res://levels/battles/battle/action/tile_constraint/target_tile_constraint.gd" id="2_tmujv"]
 [ext_resource type="Script" uid="uid://brp5ns0pmjttu" path="res://levels/battles/battle/unit/movement.gd" id="3_5h84q"]
 [ext_resource type="Script" uid="uid://bx0imn0mnt3xt" path="res://levels/battles/battle/action/tile_constraint/unit_present_tile_constraint.gd" id="3_51t4j"]
 [ext_resource type="Script" uid="uid://ct8umold07eie" path="res://levels/battles/battle/action/ability/ability_stage.gd" id="3_bpqw7"]
@@ -34,14 +34,14 @@ script = ExtResource("1_f6vnl")
 name = "Melee Attack"
 description = "Attack an adjacent enemy unit."
 number_of_targets = 1
-constraints = Array[ExtResource("2_5h84q")]([SubResource("Resource_cn5wt")])
+constraints = Array[ExtResource("2_tmujv")]([SubResource("Resource_cn5wt")])
 stages = Array[ExtResource("3_bpqw7")]([SubResource("Resource_23lcu")])
 base_cost = 0
 metadata/_custom_type_script = "uid://bnkmedconmppg"
 
-[sub_resource type="Resource" id="Resource_lxlmf"]
+[sub_resource type="Resource" id="Resource_tmujv"]
 script = ExtResource("3_5h84q")
-movement_points_per_ap = 2
+movement_points_per_ap = 1
 method = 0
 metadata/_custom_type_script = "uid://brp5ns0pmjttu"
 
@@ -50,7 +50,7 @@ script = ExtResource("5_4q6pk")
 name = "Puck"
 description = "An adventurous fellow! Quick and sharp."
 abilities = Array[ExtResource("1_f6vnl")]([SubResource("Resource_4q6pk"), ExtResource("7_tmujv")])
-movement = SubResource("Resource_lxlmf")
+movement = SubResource("Resource_tmujv")
 action_points_max = 10
 sprite_frames = ExtResource("7_pkt0h")
 portrait = ExtResource("6_a8b0y")

@@ -8,8 +8,6 @@ extends TargetTileConstraint
 
 
 ## Validates that the unit on the target tile has the required status effect.
-func validate(
-	_command: ActionExecutionCommand,
-	_preview: ActionPreviewData,
-):
-	pass
+func _validate_cell(_command: ActionExecutionCommand, _cell: BattleGridCell) -> bool:
+	assert(false, "UnitStatusEffectConstraint not implemented")
+	return true

@@ -38,7 +38,7 @@ func clone() -> ActionExecutionCommand:
 		commander,
 		battle_grid,
 		action,
-		targets
+		targets.duplicate()
 	)
 
 
@@ -52,11 +52,6 @@ func can_command_unit(unit: Unit) -> bool:
 
 
 func execute(callback: Callable) -> bool:
-	var preview_data = preview()
-	if not preview_data.valid:
-		callback.call(false)
-		return false
-
 	action.execute(self, callback)
 	return true
 
@@ -75,5 +70,19 @@ func preview() -> ActionPreviewData:
 	return result
 
 
+## Validate the tile constraints and AP cost
+func validate() -> bool:
+	return action.validate(self)
+
+
 func is_complete():
 	return unit and commander and action
+
+
+## determine if the unit can afford the action
+func can_unit_afford() -> bool:
+	return unit.action_points_current >= action.get_ap_cost(self)
+
+
+func get_targetable_highlights() -> Dictionary[Vector2i, CellHighlight]:
+	return action.get_targetable_highlights(self)

@@ -34,6 +34,8 @@ func _on_player_hud_unit_selected(unit: Unit) -> void:
 func _on_unit_changed():
 	_set_hp_bar_for_unit(current_unit)
 	_set_ap_bar_for_unit(current_unit)
+	character_name.text = current_unit.name
+	character_portrait.texture = current_unit.portrait
 
 
 func _set_hp_bar_for_unit(unit: Unit):

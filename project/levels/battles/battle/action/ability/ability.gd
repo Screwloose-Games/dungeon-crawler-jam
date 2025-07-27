@@ -36,53 +36,30 @@ func _init(
 	self.base_cost = base_cost
 
 
-func validate(command: ActionExecutionCommand) -> ActionPreviewData:
-	var result = ActionPreviewData.new()
-	result.action_point_cost += base_cost
+## Get the data for the predicted outcome of the ability
+func preview(command: ActionExecutionCommand) -> ActionPreviewData:
+	var preview = ActionPreviewData.new()
 	for stage in stages:
-		stage.validate(command)
-
-	if len(command.targets) < number_of_targets:
-		highlight_targetable(command, result)
-	return result
+		stage.preview(command, preview)
+	return preview
 
 
+## Execute the command. The function will call the callback once all effects have completed
 func execute(command: ActionExecutionCommand, callback: Callable):
 	var return_signal = ReturnSignal.new(callback)
 	for stage in stages:
-		stage.apply(command, return_signal)
+		stage.execute(command, return_signal)
 	return_signal.all_participants_registered()
 
 
+## The minimum possible ap cost when using this [Ability]
 func get_minimum_ap_cost():
 	return base_cost
 
 
-func highlight_targetable(
-	command: ActionExecutionCommand,
-	preview: ActionPreviewData
-):
-	var targetable = get_targetable_cells(command)
-	for cell in targetable:
-		preview.highlighted_cells[cell.position] = targettable_highlight
-
-
-func get_targetable_cells(command: ActionExecutionCommand) -> Array[BattleGridCell]:
-	var cells = command.battle_grid.get_cells()
-	var valid_cells: Array[BattleGridCell] = []
-
-	var tile_command = command.clone()
-	var tile_preview = ActionPreviewData.new()
-
-	for cell in cells:
-		var valid = true
-		tile_command.targets = [cell]
-		for constraint in constraints:
-			tile_preview.clear()
-			constraint.validate(command, tile_preview)
-			if not tile_preview.valid:
-				valid = false
-				break
-		if valid:
-			valid_cells.append(cell)
-	return valid_cells
+## The actual AP cost for this given [ActionExecutionCommand]
+func get_ap_cost(command: ActionExecutionCommand) -> int:
+	var total: int = base_cost
+	for stage in stages:
+		stage.get_additional_ap_cost(command)
+	return total

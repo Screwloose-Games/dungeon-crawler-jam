@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Ability" load_steps=17 format=3 uid="uid://brtm76gfkuuda"]
 
-[ext_resource type="Script" uid="uid://v50hixevnupe" path="res://levels/battles/battle/action/tile_constraint/tile_constraint.gd" id="1_miwbj"]
+[ext_resource type="Script" uid="uid://wu0ky8ts37sk" path="res://levels/battles/battle/action/tile_constraint/target_tile_constraint.gd" id="1_e10pk"]
 [ext_resource type="Script" uid="uid://ytbm8nx37wfm" path="res://levels/battles/battle/action/tile_constraint/direct_line_constraint.gd" id="2_np8ph"]
 [ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/action/ability/ability.gd" id="2_unxx4"]
 [ext_resource type="Script" uid="uid://ttosjyfsopkv" path="res://levels/battles/battle/action/tile_constraint/range_constraint.gd" id="3_aajdq"]
@@ -51,10 +51,10 @@ metadata/_custom_type_script = "uid://nismy8hccyyv"
 
 [resource]
 script = ExtResource("2_unxx4")
-name = ""
+name = "Volley"
 description = "Shoot a volley of arrows, affecting an area"
 number_of_targets = 1
-constraints = Array[ExtResource("1_miwbj")]([SubResource("Resource_aajdq"), SubResource("Resource_3b53w")])
+constraints = Array[ExtResource("1_e10pk")]([SubResource("Resource_aajdq"), SubResource("Resource_3b53w")])
 stages = Array[ExtResource("3_np8ph")]([SubResource("Resource_e10pk")])
 base_cost = 5
 targettable_highlight = SubResource("Resource_2m457")

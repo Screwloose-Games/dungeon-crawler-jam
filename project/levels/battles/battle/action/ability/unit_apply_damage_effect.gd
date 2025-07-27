@@ -4,6 +4,8 @@
 class_name UnitApplyDamageEffect
 extends AbilityEffect
 
+signal damage_applied(health: Health, damage: int)
+
 @export var base_damage: int
 
 var damage: int:
@@ -15,7 +17,7 @@ func _init(_base_damage: int = 0) -> void:
 	self.base_damage = _base_damage
 
 
-func validate(command: ActionExecutionCommand, preview: ActionPreviewData):
+func preview(command: ActionExecutionCommand, preview: ActionPreviewData):
 	pass
 
 
@@ -29,7 +31,7 @@ func apply(command: ActionExecutionCommand, _return_signal: ReturnSignal):
 func apply_damage_to_health(health: Health, damage: int) -> void:
 	if health:
 		health.damage(damage)
-		emit_signal("damage_applied", health, damage)
+		damage_applied.emit(health, damage)
 
 
 func apply_damage_to_unit(unit: Unit, damage: int) -> void:

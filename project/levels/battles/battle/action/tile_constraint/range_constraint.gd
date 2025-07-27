@@ -4,20 +4,9 @@ extends TargetTileConstraint
 @export var min_range: int
 @export var max_range: int
 
-
-func validate(
-	command: ActionExecutionCommand,
-	preview: ActionPreviewData
-):
-	for target in command.targets:
-		if not is_target_valid(command.unit, target):
-			preview.add_error(tr("out_of_range"))
-			return
-
-
-func is_target_valid(unit: Unit, target: BattleGridCell) -> bool:
-	var from = unit.cell.position
-	var to = target.position
+func _validate_cell(command: ActionExecutionCommand, cell: BattleGridCell) -> bool:
+	var from = command.unit.cell.position
+	var to = cell.position
 
 	# Manhattan distance
 	var distance = abs(from.y - to.y) + abs(from.x - to.x)

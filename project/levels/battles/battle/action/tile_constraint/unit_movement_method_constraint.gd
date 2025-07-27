@@ -9,13 +9,8 @@ extends TargetTileConstraint
 
 
 ## Validates that the unit on the target tile has the required movement method.
-func validate(
-	command: ActionExecutionCommand,
-	preview: ActionPreviewData,
-):
-	for target in command.targets:
-		if target.unit.movement.method != movement_method:
-			preview.add_error(get_error_message(movement_method))
+func _validate_cell(command: ActionExecutionCommand, cell: BattleGridCell) -> bool:
+	return cell.unit.movement.method == movement_method
 
 
 func get_error_message(method: Movement.MovementMethod) -> String:

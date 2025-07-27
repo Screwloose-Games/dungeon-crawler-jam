@@ -8,7 +8,7 @@
 [node name="TestFullBattleUi" type="Node2D"]
 
 [node name="BattleTemplate" parent="." instance=ExtResource("1_j8gee")]
-position = Vector2(-199, -74)
+position = Vector2(-164, -89)
 battle_scenario = ExtResource("2_pmadr")
 
 [node name="Camera2D" type="Camera2D" parent="."]

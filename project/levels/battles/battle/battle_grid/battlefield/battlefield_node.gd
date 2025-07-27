@@ -63,7 +63,7 @@ func _on_action_preview_requested(preview_data: ActionPreviewData) -> void:
 func _display_highlights(highlights: Dictionary[Vector2i, CellHighlight]):
 	for cell_position in highlights.keys():
 		var highlight = highlights[cell_position]
-		highlight.set_highlight_on_tile_map(highlight_tile_map, cell_position)
+		highlight.set_on_tile_map(highlight_tile_map, cell_position)
 
 
 func _on_action_preview_cancelled(_preview_data: ActionPreviewData):

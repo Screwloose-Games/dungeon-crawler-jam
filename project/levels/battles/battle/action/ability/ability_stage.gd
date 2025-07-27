@@ -5,8 +5,6 @@
 class_name AbilityStage
 extends Resource
 
-signal complete
-
 @export var name: String
 @export_multiline var description: String
 
@@ -20,6 +18,17 @@ var duration: float:
 		)
 
 
+func _init(name: String = "", description: String = "", effects: Array[AbilityEffect] = []) -> void:
+	self.name = name
+	self.description = description
+	self.effects = effects
+
+
+func preview(command: ActionExecutionCommand, preview: ActionPreviewData):
+	for effect in effects:
+		effect.preview(command, preview)
+
+
 ## Executes all effects in this stage of the ability. [br]
 ## Effects are applied in sequence, each receiving the target tile and casting unit context. [br]
 ## [br]
@@ -29,7 +38,8 @@ func execute(command: ActionExecutionCommand, return_signal: ReturnSignal):
 		effect.apply(command, return_signal)
 
 
-func _init(name: String = "", description: String = "", effects: Array[AbilityEffect] = []) -> void:
-	self.name = name
-	self.description = description
-	self.effects = effects
+func get_additional_ap_cost(command: ActionExecutionCommand) -> int:
+	var total: int = 0
+	for effect in effects:
+		total += effect.get_additional_ap_cost(command)
+	return total

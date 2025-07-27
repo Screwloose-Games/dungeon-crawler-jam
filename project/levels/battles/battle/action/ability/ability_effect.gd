@@ -19,5 +19,9 @@ func apply(_order: ActionExecutionCommand, _return_signal: ReturnSignal):
 	pass
 
 
+func get_additional_ap_cost(_command: ActionExecutionCommand) -> int:
+	return 0
+
+
 func get_duration() -> float:
 	return 0.0

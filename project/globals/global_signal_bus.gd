@@ -37,27 +37,37 @@ signal battle_turn_started(team: Team)
 signal battle_turn_ended(team: Team)
 signal level_reset
 
-# Commander
-signal action_preview_requested(preview_data: ActionPreviewData)
-signal action_preview_cancelled(preview_data: ActionPreviewData)
+# Player input
 signal player_selected_unit(unit: Unit)
 signal player_unselected_unit(unit: Unit)
+signal player_selected_action(unit_action: UnitAction)
+signal player_unselected_action(unit_action: UnitAction)
+
+# Action previews/highlights
+signal action_preview_requested(preview_data: ActionPreviewData)
+signal action_preview_cancelled(preview_data: ActionPreviewData)
 
 
 func _init() -> void:
 	unit_removed_from_team.connect(_on_unit_removed_from_team)
 	unit_added_to_team.connect(_on_unit_added_to_team)
+
 	team_ended_turn.connect(_on_team_ended_turn)
+
 	battle_started.connect(_on_battle_started)
 	battle_ended.connect(_on_battle_ended)
 	battle_round_started.connect(_on_battle_round_started)
 	battle_round_ended.connect(_on_battle_round_ended)
 	battle_turn_started.connect(_on_battle_turn_started)
 	battle_turn_ended.connect(_on_battle_turn_ended)
-	action_preview_requested.connect(_on_action_preview_requested)
-	action_preview_cancelled.connect(_on_action_preview_cancelled)
+
 	player_selected_unit.connect(_on_player_selected_unit)
 	player_unselected_unit.connect(_on_player_unselected_unit)
+	player_selected_action.connect(_on_player_selected_action)
+	player_unselected_action.connect(_on_player_unselected_action)
+
+	action_preview_requested.connect(_on_action_preview_requested)
+	action_preview_cancelled.connect(_on_action_preview_cancelled)
 
 
 func _on_unit_selected(unit: Unit, commander: Commander):
@@ -101,11 +111,13 @@ func _on_battle_turn_ended(_team: Team):
 
 
 func _on_action_preview_requested(_preview_data: ActionPreviewData):
-	print("action_preview_requested")
+	pass
+	#print("action_preview_requested")
 
 
 func _on_action_preview_cancelled(_preview_data: ActionPreviewData):
-	print("action_preview_cancelled")
+	pass
+	#print("action_preview_cancelled")
 
 
 func _on_player_selected_unit(unit: Unit):
@@ -114,3 +126,11 @@ func _on_player_selected_unit(unit: Unit):
 
 func _on_player_unselected_unit(unit: Unit):
 	print("player_unselected_unit: %s" % unit.name)
+
+
+func _on_player_selected_action(action: UnitAction):
+	print("player_selected_action: %s" % action.name)
+
+
+func _on_player_unselected_action(action: UnitAction):
+	print("player_unselected_action: %s" % action.name)
