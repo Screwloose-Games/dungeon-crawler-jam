@@ -123,8 +123,7 @@ func attack_enemy(unit: Unit, target_enemy: Unit, melee_attack_action: AbilityAc
 		unit, self, battle_grid, melee_attack_action, [target_enemy.cell]
 	)
 
-	var preview = command.preview()
-	if preview.valid:
+	if command.validate():
 		command.execute(func(): print("Attack completed by ", unit.name))
 	else:
 		print("Attack command invalid for unit ", unit.name)

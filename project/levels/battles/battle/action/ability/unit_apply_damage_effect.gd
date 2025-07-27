@@ -18,7 +18,11 @@ func _init(_base_damage: int = 0) -> void:
 
 
 func preview(command: ActionExecutionCommand, preview: ActionPreviewData):
-	pass
+	for target in command.targets:
+		preview.highlighted_cells[target.position] = CellHighlight.new(
+			CellHighlight.HighlightColor.BLUE,
+			CellHighlight.Type.CONFIRM
+		)
 
 
 ## Applies the specified damage to the unit on the target tile. [br]
