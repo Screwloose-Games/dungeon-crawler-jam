@@ -6,10 +6,10 @@ var selected_unit: Unit:
 		if new_unit == selected_unit:
 			return
 		if selected_unit:
-			GlobalSignalBus.player_unselected_unit.emit(selected_unit)
+			_on_unit_unselected(selected_unit)
 		selected_unit = new_unit
 		if new_unit:
-			GlobalSignalBus.player_selected_unit.emit(selected_unit)
+			_on_unit_selected(selected_unit)
 		_update_action_execution_command()
 
 var selected_action: UnitAction:
@@ -30,6 +30,7 @@ var hovered_cell: BattleGridCell:
 
 var battle: Battle
 var input_locked: bool
+var running_command: ActionExecutionCommand
 
 # Command data
 var targetted_cells: Array[BattleGridCell]
@@ -45,6 +46,8 @@ func initialize(battle: Battle):
 	self.battle = battle
 	GlobalSignalBus.player_selected_action.connect(_on_player_selected_action)
 	GlobalSignalBus.player_unselected_action.connect(_on_player_unselected_action)
+	GlobalSignalBus.command_started.connect(_on_command_started)
+	GlobalSignalBus.command_completed.connect(_on_command_completed)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -69,7 +72,6 @@ func _handle_mouse_input(event: InputEventMouse):
 func _select_cell(cell: BattleGridCell) -> void:
 	if input_locked:
 		return
-	print("Select cell")
 	if not cell:
 		selected_unit = null
 	else:
@@ -79,13 +81,12 @@ func _select_cell(cell: BattleGridCell) -> void:
 func _target_cell(cell: BattleGridCell):
 	if not cell or input_locked:
 		return
-	print("Target cell")
 	if targetted_cells.find(cell) < 0:
 		targetted_cells.append(cell)
 
 	if _update_action_execution_command(true):
 		input_locked = true
-		print("Attempting command execution")
+		print("input locked")
 		action_execution_command.execute(_on_action_completed)
 	targetted_cells = []
 
@@ -93,7 +94,6 @@ func _target_cell(cell: BattleGridCell):
 func _hover_cell(cell: BattleGridCell):
 	if hovered_cell == cell or input_locked:
 		return
-	print("Hover cell")
 
 	hovered_cell = cell
 
@@ -123,6 +123,15 @@ func _clear_action_preview():
 
 func _update_action_execution_command(ignore_hover: bool = false) -> bool:
 	_clear_action_preview()
+
+	if running_command:
+		return false
+
+	if not selected_unit:
+		return false
+
+	if selected_unit.team != Player.commander.team:
+		return false
 
 	action_execution_command = ActionExecutionCommand.new(
 		selected_unit,
@@ -164,6 +173,8 @@ func _on_action_completed():
 	targetted_cells.clear()
 	_clear_action_preview()
 	input_locked = false
+	print("input unlocked")
+	_update_action_execution_command()
 
 
 func _on_player_selected_action(action: UnitAction):
@@ -172,3 +183,31 @@ func _on_player_selected_action(action: UnitAction):
 
 func _on_player_unselected_action(_action: UnitAction):
 	selected_action = null
+
+
+func _on_unit_selected(unit: Unit):
+	assert(unit, "Tried to select null unit")
+	GlobalSignalBus.player_selected_unit.emit(selected_unit)
+	if not unit.died.is_connected(_on_unit_died):
+		unit.died.connect(_on_unit_died)
+
+
+func _on_unit_unselected(unit: Unit):
+	assert(selected_unit, "Tried to unselect unit, but no unit was selected")
+
+	GlobalSignalBus.player_unselected_unit.emit(selected_unit)
+	if unit.died.is_connected(_on_unit_died):
+		unit.died.disconnect(_on_unit_died)
+
+
+func _on_unit_died():
+	selected_unit = null
+
+
+func _on_command_started(command: ActionExecutionCommand):
+	running_command = command
+
+
+func _on_command_completed(command: ActionExecutionCommand):
+	running_command = null
+	_update_action_execution_command()

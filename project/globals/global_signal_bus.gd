@@ -38,6 +38,8 @@ signal battle_round_ended
 signal battle_turn_started(team: Team)
 signal battle_turn_ended(team: Team)
 signal level_reset
+signal command_started(command: ActionExecutionCommand)
+signal command_completed(command: ActionExecutionCommand)
 
 # Player input
 signal player_selected_unit(unit: Unit)
@@ -63,6 +65,10 @@ func _init() -> void:
 	battle_round_ended.connect(_on_battle_round_ended)
 	battle_turn_started.connect(_on_battle_turn_started)
 	battle_turn_ended.connect(_on_battle_turn_ended)
+
+	level_reset.connect(_on_level_reset)
+	command_started.connect(_on_command_started)
+	command_completed.connect(_on_command_completed)
 
 	player_selected_unit.connect(_on_player_selected_unit)
 	player_unselected_unit.connect(_on_player_unselected_unit)
@@ -117,6 +123,18 @@ func _on_battle_turn_started(team: Team):
 
 func _on_battle_turn_ended(_team: Team):
 	print("battle_turn_ended")
+
+
+func _on_level_reset():
+	print("level_reset")
+
+
+func _on_command_started(_command: ActionExecutionCommand):
+	print("on_command_started")
+
+
+func _on_command_completed(_command: ActionExecutionCommand):
+	print("on_command_completed")
 
 
 func _on_action_preview_requested(_preview_data: ActionPreviewData):

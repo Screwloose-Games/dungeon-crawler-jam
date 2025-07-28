@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/action/ability/ability.gd" id="1_e4jav"]
 [ext_resource type="Script" uid="uid://c1n1gnpms4ens" path="res://levels/battles/battle/unit/unit.gd" id="1_y6s5j"]
 [ext_resource type="Script" uid="uid://brp5ns0pmjttu" path="res://levels/battles/battle/unit/movement.gd" id="2_jj6w5"]
-[ext_resource type="Script" path="res://levels/battles/battle/action/tile_constraint/target_tile_constraint.gd" id="2_m56jr"]
+[ext_resource type="Script" uid="uid://wu0ky8ts37sk" path="res://levels/battles/battle/action/tile_constraint/target_tile_constraint.gd" id="2_m56jr"]
 [ext_resource type="Texture2D" uid="uid://caqfq5wc6ptgv" path="res://assets/art/character/npc/skeleton/skeleton_portrait.png" id="2_nw4pq"]
 [ext_resource type="Script" uid="uid://b27e04h7l1su3" path="res://levels/battles/battle/action/tile_constraint/unit_team_relation_constraint.gd" id="3_qqv34"]
 [ext_resource type="Script" uid="uid://ct8umold07eie" path="res://levels/battles/battle/action/ability/ability_stage.gd" id="4_theot"]

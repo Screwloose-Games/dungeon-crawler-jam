@@ -40,18 +40,22 @@ var selected_action: UnitAction:
 		if new_action:
 			GlobalSignalBus.player_selected_action.emit(selected_action)
 
+
 var shown: bool
 
 @onready var enemy_panel_root: Control = %EnemyPanelRoot
 @onready var player_info_panel: PanelContainer = %PlayerInfoPanel
 @onready var status_panel: MarginContainer = $PlayerInfoPanel/InfoPanelMargin/VerticalPanes/StatusPanel
 @onready var action_list: ItemList = $PlayerInfoPanel/InfoPanelMargin/VerticalPanes/ActionPane/ActionList
+@onready var end_turn_button: TextureButton = %EndTurnButton
 
 
 func _ready() -> void:
 	GlobalSignalBus.battle_turn_started.connect(_on_turn_started)
 	GlobalSignalBus.player_selected_unit.connect(_on_unit_selected)
 	GlobalSignalBus.player_unselected_unit.connect(_on_unit_unselected)
+	GlobalSignalBus.command_started.connect(_on_command_started)
+	GlobalSignalBus.command_completed.connect(_on_command_completed)
 	action_list.item_selected.connect(_on_action_list_item_selected)
 
 	# Start with hidden panel
@@ -134,3 +138,11 @@ func update_actions(unit: Unit):
 
 func _on_action_list_item_selected(index: int):
 	selected_action = selected_unit.actions[index]
+
+
+func _on_command_started(_command: ActionExecutionCommand):
+	end_turn_button.disabled = true
+
+
+func _on_command_completed(_command: ActionExecutionCommand):
+	end_turn_button.disabled = false

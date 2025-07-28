@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="Ability" load_steps=17 format=3 uid="uid://brtm76gfkuuda"]
 
-[ext_resource type="Script" path="res://levels/battles/battle/action/tile_constraint/target_tile_constraint.gd" id="1_e10pk"]
-[ext_resource type="Script" path="res://levels/battles/battle/action/tile_constraint/direct_line_constraint.gd" id="2_np8ph"]
+[ext_resource type="Script" uid="uid://wu0ky8ts37sk" path="res://levels/battles/battle/action/tile_constraint/target_tile_constraint.gd" id="1_e10pk"]
+[ext_resource type="Script" uid="uid://ytbm8nx37wfm" path="res://levels/battles/battle/action/tile_constraint/direct_line_constraint.gd" id="2_np8ph"]
 [ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/action/ability/ability.gd" id="2_unxx4"]
-[ext_resource type="Script" path="res://levels/battles/battle/action/tile_constraint/range_constraint.gd" id="3_aajdq"]
+[ext_resource type="Script" uid="uid://ttosjyfsopkv" path="res://levels/battles/battle/action/tile_constraint/range_constraint.gd" id="3_aajdq"]
 [ext_resource type="Script" uid="uid://ct8umold07eie" path="res://levels/battles/battle/action/ability/ability_stage.gd" id="3_np8ph"]
 [ext_resource type="Script" uid="uid://c3xgtp8yeabd8" path="res://levels/battles/battle/action/ability/ability_effect.gd" id="6_3b53w"]
-[ext_resource type="Script" path="res://levels/battles/battle/battle_grid/cell_highlight.gd" id="7_dtsyq"]
+[ext_resource type="Script" uid="uid://nismy8hccyyv" path="res://levels/battles/battle/battle_grid/cell_highlight.gd" id="7_dtsyq"]
 [ext_resource type="Script" uid="uid://bdh8268nm1op" path="res://levels/battles/battle/action/ability/unit_apply_damage_effect.gd" id="7_e10pk"]
 [ext_resource type="Script" uid="uid://bl1ai1ynjdg4f" path="res://levels/battles/battle/action/ability/area_ability_effect.gd" id="8_2m457"]
 

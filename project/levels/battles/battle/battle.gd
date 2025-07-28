@@ -24,7 +24,7 @@ func create_from_scenario(scenario: BattleScenario) -> void:
 	teams = scenario.teams
 	end_conditions = scenario.end_conditions
 	_create_battle_grid(scenario)
-	#_set_team_relationships(scenario.team_relationships)
+	_set_team_relationships(scenario.team_relationships)
 	for team in teams:
 		team.initialize(battle_grid)
 

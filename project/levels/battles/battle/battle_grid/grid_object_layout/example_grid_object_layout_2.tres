@@ -5,37 +5,37 @@
 [ext_resource type="Resource" uid="uid://cdcfvr8yx37yy" path="res://levels/battles/battle/unit/resources/unit_skeleton.tres" id="3_5ello"]
 [ext_resource type="Resource" uid="uid://74vp14p65w0j" path="res://levels/battles/battle/unit/resources/unit_rogue.tres" id="4_unyrl"]
 
-[sub_resource type="Resource" id="Resource_8a3sa"]
+[sub_resource type="Resource" id="Resource_bvoyl"]
 script = ExtResource("2_cysc8")
 unit = ExtResource("3_5ello")
 effect = Array[int]([])
 team_index = 0
 
-[sub_resource type="Resource" id="Resource_tbadn"]
+[sub_resource type="Resource" id="Resource_cysc8"]
 script = ExtResource("2_cysc8")
 unit = ExtResource("3_5ello")
 effect = Array[int]([])
 team_index = 0
 
-[sub_resource type="Resource" id="Resource_d3irb"]
+[sub_resource type="Resource" id="Resource_5ello"]
 script = ExtResource("2_cysc8")
 unit = ExtResource("3_5ello")
 effect = Array[int]([])
 team_index = 0
 
-[sub_resource type="Resource" id="Resource_pmgb7"]
+[sub_resource type="Resource" id="Resource_unyrl"]
 script = ExtResource("2_cysc8")
 unit = ExtResource("4_unyrl")
 effect = Array[int]([])
 team_index = 0
 
-[sub_resource type="Resource" id="Resource_645nf"]
+[sub_resource type="Resource" id="Resource_vbo4m"]
 script = ExtResource("2_cysc8")
 unit = ExtResource("3_5ello")
 effect = Array[int]([])
 team_index = 1
 
-[sub_resource type="Resource" id="Resource_ldaq4"]
+[sub_resource type="Resource" id="Resource_e2od4"]
 script = ExtResource("2_cysc8")
 unit = ExtResource("3_5ello")
 effect = Array[int]([])
@@ -44,10 +44,10 @@ team_index = 0
 [resource]
 script = ExtResource("1_bvoyl")
 tile_data = Dictionary[Vector2i, ExtResource("2_cysc8")]({
-Vector2i(2, 1): SubResource("Resource_8a3sa"),
-Vector2i(10, -10): SubResource("Resource_tbadn"),
-Vector2i(11, -1): SubResource("Resource_d3irb"),
-Vector2i(11, 1): SubResource("Resource_pmgb7"),
-Vector2i(13, 1): SubResource("Resource_645nf"),
-Vector2i(19, 5): SubResource("Resource_ldaq4")
+Vector2i(2, 1): SubResource("Resource_bvoyl"),
+Vector2i(10, -10): SubResource("Resource_cysc8"),
+Vector2i(11, -1): SubResource("Resource_5ello"),
+Vector2i(11, 1): SubResource("Resource_unyrl"),
+Vector2i(13, 1): SubResource("Resource_vbo4m"),
+Vector2i(19, 5): SubResource("Resource_e2od4")
 })

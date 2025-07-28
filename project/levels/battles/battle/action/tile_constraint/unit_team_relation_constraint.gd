@@ -11,15 +11,5 @@ func _init(team_relation: Team.Relationship = Team.Relationship.ENEMY_TEAM) -> v
 ## The team relation that the target unit must have with the unit performing the action. [br]
 func _validate_cell(command: ActionExecutionCommand, cell: BattleGridCell) -> bool:
 	if not cell.unit:
-		push_error("No Unit in target Cell. TeamRelationConstraint requires a Unit")
 		return false
-	var result = (
-		cell.unit.team and cell.unit.team.has_relationship(command.unit.team, team_relation)
-	)
-	if result:
-		return true
-	push_error(
-		"UnitTeamRelationConstraint failed. Required team relation: ",
-		str(Team.Relationship.keys()[team_relation])
-	)
-	return false
+	return cell.unit.team and cell.unit.team.has_relationship(command.unit.team, team_relation)

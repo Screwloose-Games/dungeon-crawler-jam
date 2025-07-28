@@ -77,9 +77,7 @@ func _display_path(path: Dictionary[Vector2i, MovementPath.Orientation]) -> void
 
 
 func _draw_path_orientation(tile_position: Vector2i, orientation: MovementPath.Orientation) -> void:
-	if not PathTileData.orientation_lookup.has(orientation):
-		assert(false, "Unexpected orientation: %s" % orientation)
-		return
+	assert(PathTileData.orientation_lookup.has(orientation), "Unexpected orientation: %s" % orientation)
 	var path_data = PathTileData.orientation_lookup[orientation]
 	path_tile_map.set_cell(
 		tile_position,
