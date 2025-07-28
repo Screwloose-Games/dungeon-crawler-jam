@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/action/ability/ability.gd" id="1_e4jav"]
 [ext_resource type="Script" uid="uid://c1n1gnpms4ens" path="res://levels/battles/battle/unit/unit.gd" id="1_y6s5j"]
-[ext_resource type="Script" uid="uid://v50hixevnupe" path="res://levels/battles/battle/action/tile_constraint/tile_constraint.gd" id="2_13j3v"]
 [ext_resource type="Script" uid="uid://brp5ns0pmjttu" path="res://levels/battles/battle/unit/movement.gd" id="2_jj6w5"]
+[ext_resource type="Script" uid="uid://wu0ky8ts37sk" path="res://levels/battles/battle/action/tile_constraint/target_tile_constraint.gd" id="2_m56jr"]
 [ext_resource type="Texture2D" uid="uid://caqfq5wc6ptgv" path="res://assets/art/character/npc/skeleton/skeleton_portrait.png" id="2_nw4pq"]
 [ext_resource type="Script" uid="uid://b27e04h7l1su3" path="res://levels/battles/battle/action/tile_constraint/unit_team_relation_constraint.gd" id="3_qqv34"]
 [ext_resource type="Script" uid="uid://ct8umold07eie" path="res://levels/battles/battle/action/ability/ability_stage.gd" id="4_theot"]
@@ -35,7 +35,7 @@ script = ExtResource("1_e4jav")
 name = "Melee Attack"
 description = ""
 number_of_targets = 1
-constraints = Array[ExtResource("2_13j3v")]([SubResource("Resource_m56jr")])
+constraints = Array[ExtResource("2_m56jr")]([SubResource("Resource_m56jr")])
 stages = Array[ExtResource("4_theot")]([SubResource("Resource_t3lpx")])
 base_cost = 0
 metadata/_custom_type_script = "uid://bnkmedconmppg"
@@ -64,7 +64,7 @@ movement = SubResource("Resource_8mvjk")
 name = "Walk"
 description = "Walk to a ground tile"
 number_of_targets = 1
-constraints = Array[ExtResource("2_13j3v")]([SubResource("Resource_chwk7")])
+constraints = Array[ExtResource("2_m56jr")]([SubResource("Resource_chwk7")])
 stages = Array[ExtResource("4_theot")]([SubResource("Resource_kgjua")])
 base_cost = 0
 metadata/_custom_type_script = "uid://vp2dh6n2rqv2"
@@ -86,5 +86,5 @@ sprite_frames = ExtResource("5_jj6w5")
 portrait = ExtResource("2_nw4pq")
 move_speed = 2.0
 health_point_max = 10
-health_points = 10
+health_points = 0
 metadata/_custom_type_script = "uid://c1n1gnpms4ens"

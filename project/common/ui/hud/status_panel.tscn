@@ -1,0 +1,109 @@
+[gd_scene load_steps=9 format=3 uid="uid://cp2h8nnlfk0e3"]
+
+[ext_resource type="Texture2D" uid="uid://bjaxqpheom0jf" path="res://assets/art/ui/character_status_panel/character_pane.png" id="1_eo55m"]
+[ext_resource type="Script" uid="uid://csperson2hpry" path="res://common/ui/hud/status_panel.gd" id="1_u4chb"]
+[ext_resource type="Texture2D" uid="uid://vgqindt5p4s1" path="res://assets/art/character/player/paladin/paladin_portrait.png" id="2_u4chb"]
+[ext_resource type="Texture2D" uid="uid://cud6hg5ct2fju" path="res://assets/art/ui/character_status_panel/HPSegments.png" id="3_jaonq"]
+[ext_resource type="Texture2D" uid="uid://cfngm4ambcigy" path="res://assets/art/ui/character_status_panel/APSegments.png" id="4_gau31"]
+[ext_resource type="Theme" uid="uid://cpwb870aw2anb" path="res://common/ui/themes/panel_theme_1.tres" id="5_vu3nl"]
+[ext_resource type="FontFile" uid="uid://ctd87wi76m7ah" path="res://common/fonts/nmestis.ttf" id="6_c4ury"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4chb"]
+bg_color = Color(0.231373, 0.129412, 1, 1)
+
+[node name="CharacterPane" type="MarginContainer"]
+offset_right = -186.24
+offset_bottom = -103.68
+size_flags_vertical = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("1_u4chb")
+
+[node name="CharacterPaneBack" type="Panel" parent="."]
+layout_mode = 2
+theme = ExtResource("5_vu3nl")
+
+[node name="CharacterPortrait" type="TextureRect" parent="CharacterPaneBack"]
+layout_mode = 2
+offset_left = 15.0
+offset_top = 13.0
+offset_right = 74.0
+offset_bottom = 73.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("2_u4chb")
+stretch_mode = 2
+
+[node name="HPClipArea" type="Control" parent="CharacterPaneBack"]
+clip_children = 1
+clip_contents = true
+anchors_preset = 0
+offset_left = 83.0
+offset_top = 17.0
+offset_right = 174.0
+offset_bottom = 23.0
+
+[node name="HPSegments" type="TextureRect" parent="CharacterPaneBack/HPClipArea"]
+layout_mode = 0
+offset_right = 91.0
+offset_bottom = 6.0
+texture = ExtResource("3_jaonq")
+stretch_mode = 2
+
+[node name="AP" type="Control" parent="CharacterPaneBack"]
+anchors_preset = 0
+offset_left = 80.0
+offset_top = 30.0
+offset_right = 175.0
+offset_bottom = 35.0
+
+[node name="APClipArea" type="Control" parent="CharacterPaneBack/AP"]
+clip_children = 1
+clip_contents = true
+layout_mode = 1
+anchors_preset = 0
+offset_right = 95.0
+offset_bottom = 5.0
+
+[node name="APSegments" type="TextureRect" parent="CharacterPaneBack/AP/APClipArea"]
+clip_contents = true
+layout_mode = 1
+offset_right = 95.0
+offset_bottom = 5.0
+texture = ExtResource("4_gau31")
+stretch_mode = 2
+
+[node name="APUsage" type="PanelContainer" parent="CharacterPaneBack/AP/APClipArea"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_bottom = 5.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_u4chb")
+
+[node name="CharaterNameMargin" type="MarginContainer" parent="CharacterPaneBack"]
+clip_contents = true
+layout_mode = 0
+offset_left = 11.0
+offset_top = 79.0
+offset_right = 78.0
+offset_bottom = 94.0
+
+[node name="CharacterName" type="RichTextLabel" parent="CharacterPaneBack/CharaterNameMargin"]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("5_vu3nl")
+theme_override_colors/default_color = Color(0.501961, 0.482353, 0.478431, 1)
+theme_override_fonts/normal_font = ExtResource("6_c4ury")
+text = "Jerimoth"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatusBox" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_eo55m")

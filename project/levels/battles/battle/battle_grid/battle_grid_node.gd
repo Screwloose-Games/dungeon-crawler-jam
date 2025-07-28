@@ -16,7 +16,7 @@ func initialize(battle_grid: BattleGrid):
 		await ready
 	if !battlefield_node.is_node_ready():
 		await battlefield_node.ready
-	ground_tile_map_layer = battlefield_node.floors
+	ground_tile_map_layer = battlefield_node.floor_tile_map
 	_create_unit_nodes()
 
 

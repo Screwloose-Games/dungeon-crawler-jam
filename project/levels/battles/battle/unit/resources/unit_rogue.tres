@@ -1,26 +1,47 @@
-[gd_resource type="Resource" script_class="Unit" load_steps=10 format=3 uid="uid://74vp14p65w0j"]
+[gd_resource type="Resource" script_class="Unit" load_steps=17 format=3 uid="uid://74vp14p65w0j"]
 
 [ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/action/ability/ability.gd" id="1_f6vnl"]
-[ext_resource type="Script" uid="uid://v50hixevnupe" path="res://levels/battles/battle/action/tile_constraint/tile_constraint.gd" id="2_5h84q"]
+[ext_resource type="Script" uid="uid://wu0ky8ts37sk" path="res://levels/battles/battle/action/tile_constraint/target_tile_constraint.gd" id="2_tmujv"]
 [ext_resource type="Script" uid="uid://brp5ns0pmjttu" path="res://levels/battles/battle/unit/movement.gd" id="3_5h84q"]
+[ext_resource type="Script" uid="uid://bx0imn0mnt3xt" path="res://levels/battles/battle/action/tile_constraint/unit_present_tile_constraint.gd" id="3_51t4j"]
 [ext_resource type="Script" uid="uid://ct8umold07eie" path="res://levels/battles/battle/action/ability/ability_stage.gd" id="3_bpqw7"]
 [ext_resource type="Script" uid="uid://c1n1gnpms4ens" path="res://levels/battles/battle/unit/unit.gd" id="5_4q6pk"]
+[ext_resource type="Script" uid="uid://c3xgtp8yeabd8" path="res://levels/battles/battle/action/ability/ability_effect.gd" id="5_tmujv"]
+[ext_resource type="Script" uid="uid://bdh8268nm1op" path="res://levels/battles/battle/action/ability/unit_apply_damage_effect.gd" id="6_2lpmp"]
 [ext_resource type="Texture2D" uid="uid://4ioyf8c5qq6q" path="res://assets/art/character/player/rogue/rogue_portrait.png" id="6_a8b0y"]
 [ext_resource type="SpriteFrames" uid="uid://ct5k4kn2rghg0" path="res://assets/art/character/player/rogue/rogue.res" id="7_pkt0h"]
+[ext_resource type="Resource" uid="uid://brtm76gfkuuda" path="res://levels/battles/battle/action/ability/resources/volley.tres" id="7_tmujv"]
+
+[sub_resource type="Resource" id="Resource_cn5wt"]
+script = ExtResource("3_51t4j")
+invert = false
+metadata/_custom_type_script = "uid://bx0imn0mnt3xt"
+
+[sub_resource type="Resource" id="Resource_5gawd"]
+script = ExtResource("6_2lpmp")
+base_damage = 3
+metadata/_custom_type_script = "uid://bdh8268nm1op"
+
+[sub_resource type="Resource" id="Resource_23lcu"]
+script = ExtResource("3_bpqw7")
+name = "Damage"
+description = ""
+effects = Array[ExtResource("5_tmujv")]([SubResource("Resource_5gawd")])
+metadata/_custom_type_script = "uid://ct8umold07eie"
 
 [sub_resource type="Resource" id="Resource_4q6pk"]
 script = ExtResource("1_f6vnl")
 name = "Melee Attack"
 description = "Attack an adjacent enemy unit."
 number_of_targets = 1
-constraints = Array[ExtResource("2_5h84q")]([null])
-stages = Array[ExtResource("3_bpqw7")]([])
+constraints = Array[ExtResource("2_tmujv")]([SubResource("Resource_cn5wt")])
+stages = Array[ExtResource("3_bpqw7")]([SubResource("Resource_23lcu")])
 base_cost = 0
 metadata/_custom_type_script = "uid://bnkmedconmppg"
 
-[sub_resource type="Resource" id="Resource_lxlmf"]
+[sub_resource type="Resource" id="Resource_tmujv"]
 script = ExtResource("3_5h84q")
-movement_points_per_ap = 2
+movement_points_per_ap = 1
 method = 0
 metadata/_custom_type_script = "uid://brp5ns0pmjttu"
 
@@ -28,8 +49,8 @@ metadata/_custom_type_script = "uid://brp5ns0pmjttu"
 script = ExtResource("5_4q6pk")
 name = "Puck"
 description = "An adventurous fellow! Quick and sharp."
-abilities = Array[ExtResource("1_f6vnl")]([SubResource("Resource_4q6pk")])
-movement = SubResource("Resource_lxlmf")
+abilities = Array[ExtResource("1_f6vnl")]([SubResource("Resource_4q6pk"), ExtResource("7_tmujv")])
+movement = SubResource("Resource_tmujv")
 action_points_max = 10
 sprite_frames = ExtResource("7_pkt0h")
 portrait = ExtResource("6_a8b0y")

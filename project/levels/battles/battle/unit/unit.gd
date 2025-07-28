@@ -7,6 +7,7 @@ extends Resource
 signal died
 signal moved_to(new_cell: BattleGridCell)
 signal move_started(callback: ReturnSignal, new_cell: BattleGridCell)
+signal action_points_changed
 signal did_action(action: UnitAction)
 
 @export var name: String:
@@ -21,7 +22,6 @@ signal did_action(action: UnitAction)
 @export var abilities: Array[Ability] = []:
 	set(val):
 		if val != abilities:
-			emit_changed()
 			abilities = val
 			init_actions()
 @export var movement: Movement
@@ -51,12 +51,14 @@ signal did_action(action: UnitAction)
 			health.maximum = health_point_max
 			emit_changed()
 
-@export var health_points: int = 10:
+@export var health_points: int:
 	set(new_value):
 		if health_points != new_value:
 			health_points = new_value
 			health.current = health_points
 			emit_changed()
+	get:
+		return health.current
 
 var health: Health:
 	set(new_health):
@@ -84,9 +86,13 @@ var is_dead: bool:
 var actions: Array[UnitAction]:
 	set(val):
 		actions = val
-		emit_changed()
 
-var action_points_current: int
+var action_points_current: int:
+	get:
+		return action_points_current
+	set(value):
+		action_points_current = value
+		action_points_changed.emit()
 
 var cell: BattleGridCell:
 	set(new_cell):
@@ -119,6 +125,7 @@ var team: Team:
 
 func _on_health_health_changed(new_health: int):
 	health_points = new_health
+	emit_changed()
 
 
 func _on_health_maximum_changed(new_maximum: int):
@@ -163,12 +170,10 @@ func _init(
 
 
 func init_actions():
-	var new_actions = init_ability_actions()
-	if new_actions.size() > 0:
-		for action in new_actions:
-			if action not in actions:
-				actions.append(action)
+	print(name, " ", movement)
+	actions = []
 	init_move_action()
+	init_ability_actions()
 
 
 func init_move_action():
@@ -182,7 +187,7 @@ func init_ability_actions() -> Array[AbilityAction]:
 	var ability_actions: Array[AbilityAction] = []
 	for ability in abilities:
 		var action = AbilityAction.new(ability)
-		ability_actions.append(action)
+		actions.append(action)
 	return ability_actions
 
 
@@ -190,6 +195,13 @@ func add_action(action: UnitAction) -> void:
 	if action not in actions:
 		actions.append(action)
 		emit_changed()
+
+
+func add_ability(ability: Ability) -> void:
+	if ability in abilities:
+		return
+	abilities.append(ability)
+	init_actions()
 
 
 ## Return all the actions this unit can execute.[br]
@@ -208,7 +220,6 @@ func get_available_actions() -> Array[UnitAction]:
 ## Returns the move action
 func get_move_action() -> MoveAction:
 	for action in actions:
-		# if action is AbilityAction and (action as AbilityAction).ability is MoveAbility:
 		if action is MoveAction:
 			return action
 	return null
@@ -288,6 +299,7 @@ func spend_action_points(ap_cost: int):
 		"Unable to afford AP cost. Validate before calling spend_action_points"
 	)
 	action_points_current -= ap_cost
+	emit_changed()
 
 
 func can_act() -> bool:

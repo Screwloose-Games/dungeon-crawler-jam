@@ -53,7 +53,7 @@ func test_rogue_unit_spends_correct_ap_when_acting():
 	Team.set_team_relationship(player_team, enemy_team, Team.Relationship.ENEMY_TEAM)
 
 	# And the target unit is in a battle grid with a cell at (0, 0)
-	var battle_grid_cell: BattleGridCell = BattleGridCell.new()
+	var battle_grid_cell: BattleGridCell = BattleGridCell.new(battle_grid)
 	battle_grid_cell.unit = target_unit
 
 	# And the unit has 5 action points
@@ -92,7 +92,7 @@ func test_rogue_unit_spends_correct_ap_when_acting():
 	)
 
 	# The command IS valid
-	var preview = command.validate()
+	var preview = command.preview()
 	assert_bool(preview.valid).is_true()
 
 	# When the action is executed

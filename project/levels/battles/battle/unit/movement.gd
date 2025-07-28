@@ -1,7 +1,7 @@
 class_name Movement
 extends Resource
 
-enum MovementMethod { WALK, FLY, JUMP }
+enum MovementMethod {WALK, FLY, JUMP}
 
 @export var movement_points_per_ap: int = 2
 @export var method: MovementMethod = MovementMethod.WALK
@@ -24,16 +24,16 @@ func max_move_count(current_ap: int) -> int:
 
 ## Determine the number of AP required to move [param tiles_to_move] tiles
 ## Takes into account any purchased movement points
-func get_required_ap_to_move(tiles_to_move: int) -> int:
+func get_ap_required_to_move(tiles_to_move: int) -> int:
 	var move_count_short: int = tiles_to_move - _movement_points
-	print("currently have ", _movement_points, " movement points to move ", tiles_to_move, " tiles")
+	# print("currently have ", _movement_points, " movement points to move ", tiles_to_move, " tiles")
 	if move_count_short <= 0:
 		return 0
-	print("short ", move_count_short, " movement points")
+	# print("short ", move_count_short, " movement points")
 	var fractional_ap_required: float = float(move_count_short) / movement_points_per_ap
 	# Round up to get actual AP needed
 	var ap_required: int = int(ceil(fractional_ap_required))
-	print("Need ", ap_required, " more AP to cover the difference")
+	# print("Need ", ap_required, " more AP to cover the difference")
 	return ap_required
 
 
@@ -42,7 +42,7 @@ func get_required_ap_to_move(tiles_to_move: int) -> int:
 ## It is assumed that it has already been validated the unit can afford the move
 ## and that the required AP will be removed outside of this function
 func purchase_movement(tiles_to_move: int) -> int:
-	var required_ap = get_required_ap_to_move(tiles_to_move)
+	var required_ap = get_ap_required_to_move(tiles_to_move)
 
 	# purchase movement points
 	print(required_ap * movement_points_per_ap, " movement points purchased")
@@ -107,7 +107,7 @@ func get_reachable_cells(unit: Unit, battle_grid: BattleGrid) -> Array[BattleGri
 		# If we can path to this cell and it's within our movement range
 		if path and path.move_count <= max_movement_distance:
 			# Calculate the AP cost to reach this cell
-			var required_ap = get_required_ap_to_move(path.move_count)
+			var required_ap = get_ap_required_to_move(path.move_count)
 
 			# If we can afford to move there with current AP
 			if required_ap <= unit.action_points_current:

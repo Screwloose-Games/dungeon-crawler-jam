@@ -36,7 +36,7 @@ func get_movement_path(from: Vector2i, to: Vector2i) -> MovementPath:
 	var occupied_cells = _get_occupied_cells(from)
 	_set_points_disabled(true, occupied_cells)
 
-	var id_path = get_id_path(from_id, to_id)
+	var id_path = get_id_path(from_id, to_id, true)
 
 	# Re-enable occupied cells now that we have the path
 	_set_points_disabled(false, occupied_cells)

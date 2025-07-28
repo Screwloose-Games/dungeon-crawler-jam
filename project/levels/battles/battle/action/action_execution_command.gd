@@ -32,6 +32,16 @@ func _init(
 	team = commander.team if commander else null
 
 
+func clone() -> ActionExecutionCommand:
+	return ActionExecutionCommand.new(
+		unit,
+		commander,
+		battle_grid,
+		action,
+		targets.duplicate()
+	)
+
+
 func is_on_same_team(commander: Commander, unit: Unit) -> bool:
 	return commander and unit and commander.team == unit.team
 
@@ -42,21 +52,37 @@ func can_command_unit(unit: Unit) -> bool:
 
 
 func execute(callback: Callable) -> bool:
-	var preview_data = validate()
-	if not preview_data.valid:
-		callback.call(false)
-		return false
-
 	action.execute(self, callback)
 	return true
 
 
-func validate() -> ActionPreviewData:
+func preview() -> ActionPreviewData:
+	if not is_complete():
+		return null
+
 	assert(unit, "Unit is not set")
 	assert(commander, "Commander is not set")
 	assert(action, "Action is not set")
 
 	var result = ActionPreviewData.new()
-	result = action.validate(self)
+	result = action.preview(self)
 
 	return result
+
+
+## Validate the tile constraints and AP cost
+func validate() -> bool:
+	return action.validate(self)
+
+
+func is_complete():
+	return unit and commander and action
+
+
+## determine if the unit can afford the action
+func can_unit_afford() -> bool:
+	return unit.action_points_current >= action.get_ap_cost(self)
+
+
+func get_targetable_highlights() -> Dictionary[Vector2i, CellHighlight]:
+	return action.get_targetable_highlights(self)

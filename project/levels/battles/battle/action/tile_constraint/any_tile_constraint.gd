@@ -9,22 +9,8 @@ extends TargetTileConstraint
 @export var constraints: Array[TargetTileConstraint]
 
 
-## Validates that at least one of the member constraints is satisfied. [br]
-## updates [param preview] with the result
-func validate(
-	command: ActionExecutionCommand,
-	preview: ActionPreviewData,
-):
-	var results: Array[ActionPreviewData] = []
+func validate(command: ActionExecutionCommand) -> bool:
 	for constraint in constraints:
-		# Temp preview data to get result from tile constraint
-		var constraint_result = ActionPreviewData.new()
-		constraint.validate(command, constraint_result)
-		results.append(constraint_result)
-		if constraint_result.valid:
-			return
-
-	# None of the constraints were valid, so let's add all as errors
-	for result in results:
-		for error in result.get_error_reasons():
-			preview.add_error(error)
+		if constraint.validate(command):
+			return true
+	return false

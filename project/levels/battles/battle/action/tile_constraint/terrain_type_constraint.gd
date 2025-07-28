@@ -8,10 +8,5 @@ extends TargetTileConstraint
 
 
 ## Validates that the target tile matches the required terrain type.
-func validate(
-	command: ActionExecutionCommand,
-	preview: ActionPreviewData,
-):
-	for target in command.targets:
-		if valid_types.find(target.type) < 0:
-			preview.add_error(tr("no_valid_terrain"))
+func _validate_cell(_command: ActionExecutionCommand, cell: BattleGridCell) -> bool:
+	return valid_types.find(cell.type) >= 0

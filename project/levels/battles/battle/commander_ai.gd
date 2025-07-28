@@ -11,15 +11,14 @@ func _init(
 	_type: CommanderType = CommanderType.AI,
 	commander_team: Team = null
 ):
-	super(commander_name, commander_description, CommanderType.AI, commander_team)
+	super (commander_name, commander_description, CommanderType.AI, commander_team)
 	GlobalSignalBus.battle_turn_started.connect(_on_battle_turn_started)
 
 
 func _on_battle_turn_started(battle_team: Team):
-	print("battle turn started")
 	if battle_team != self.team:
 		return
-	start_turn.call_deferred()  # wait for units to get ready. :/
+	start_turn.call_deferred() # wait for units to get ready. :/
 
 
 func start_turn():
@@ -107,8 +106,7 @@ func move_unit_to_cell(unit: Unit, target_cell: BattleGridCell):
 
 	var command = ActionExecutionCommand.new(unit, self, battle_grid, move_action, [target_cell])
 
-	var preview = command.validate()
-	if preview.valid:
+	if command.validate():
 		command.execute(func(): print("Move completed for ", unit.name))
 	else:
 		print("Move command invalid for unit ", unit.name)
@@ -125,8 +123,7 @@ func attack_enemy(unit: Unit, target_enemy: Unit, melee_attack_action: AbilityAc
 		unit, self, battle_grid, melee_attack_action, [target_enemy.cell]
 	)
 
-	var preview = command.validate()
-	if preview.valid:
+	if command.validate():
 		command.execute(func(): print("Attack completed by ", unit.name))
 	else:
 		print("Attack command invalid for unit ", unit.name)

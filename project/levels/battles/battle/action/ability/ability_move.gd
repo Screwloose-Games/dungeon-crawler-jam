@@ -1,4 +1,4 @@
-class_name MoveAbility
+class_name AbilityMove
 extends Ability
 ## A special movement ability that allows units to move on the battlefield. [br]
 ## Extends the base Ability class with specific movement mechanics.

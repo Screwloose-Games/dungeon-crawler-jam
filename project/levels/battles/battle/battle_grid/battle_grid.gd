@@ -131,3 +131,7 @@ func get_adjacent_cells(cell: BattleGridCell) -> Array[BattleGridCell]:
 			adjacent_cells.append(adjacent_cell)
 
 	return adjacent_cells
+
+
+func get_cells() -> Array[BattleGridCell]:
+	return cells.values()

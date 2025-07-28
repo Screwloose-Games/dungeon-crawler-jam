@@ -13,6 +13,10 @@ extends Resource
 @export var minimum_ap_cost: int
 @export var tile_constraints: Array[TargetTileConstraint]
 
+var targettable_highlight = CellHighlight.new(
+	CellHighlight.HighlightColor.RED,
+	CellHighlight.Type.OUTLINE
+)
 
 ## Note: Will be Overridden later by any @export values set.
 func _init(
@@ -27,42 +31,76 @@ func _init(
 	self.tile_constraints = tile_constraints
 
 
-func get_minimum_ap_cost() -> int:
-	return minimum_ap_cost
+func get_targetable_highlights(
+	command: ActionExecutionCommand
+) -> Dictionary[Vector2i, CellHighlight]:
+	var highlights: Dictionary[Vector2i, CellHighlight] = {}
+
+	var targetable = get_targetable_cells(command)
+	for cell in targetable:
+		highlights[cell.position] = get_targetable_highlight(command, cell)
+
+	return highlights
 
 
-## Validate whether or not an action is possible
-## If possible, the ActionPreviewData returned should include any data needed to preview
-## the result, such as highlighted and targetted tiles, AP cost, path
-## If not possible, the ActionPreviewData should include a reason, and may optionally provide
-## other preview data to be displayed if desired
-func validate(command: ActionExecutionCommand) -> ActionPreviewData:
+## Get any data needed to preview the result, such as highlighted and targetted tiles, AP cost, path
+func preview(command: ActionExecutionCommand) -> ActionPreviewData:
 	var result = ActionPreviewData.new()
-	result.action_point_cost = get_minimum_ap_cost()
-
-	check_unit_ap(command, result)
-	check_target_constraints(command, result)
+	result.action_point_cost = get_ap_cost(command)
 
 	return result
 
 
-func execute(command: ActionExecutionCommand, callback: Callable):
-	var preview = validate(command)
-	if preview.valid:
-		command.unit.spend_action_points(preview.action_point_cost)
-		callback.call()
+## Execute the command given the [param command].
+## The unit's AP will be spent, and the [param callback] will be called up completion
+func execute(_command: ActionExecutionCommand, _callback: Callable):
+	assert(false, "child class must implement execute")
 
 
-## Check TileTargetConstraints, update [param preview_data] with any errors
-func check_target_constraints(
-	command: ActionExecutionCommand,
-	preview_data: ActionPreviewData,
-):
+## Validate that target constraints and ap cost are satisfied
+func validate(command: ActionExecutionCommand) -> bool:
 	for constraint in tile_constraints:
-		constraint.validate(command, preview_data)
+		if not constraint.validate(command):
+			return false
+
+	# If constraints are satisfied, check ap
+	return command.can_unit_afford()
 
 
-# Check if unit can afford the ap cost
-func check_unit_ap(command: ActionExecutionCommand, preview_data: ActionPreviewData):
-	if command.unit.action_points_current < preview_data.action_point_cost:
-		preview_data.add_error(tr("cannot_afford"))
+## The actual AP cost of this action given the [param command]
+func get_ap_cost(_command: ActionExecutionCommand) -> int:
+	assert(false, "child class must implement get_ap_cost")
+	return 0
+
+
+## The minimum required AP to use this action
+func get_minimum_ap_cost() -> int:
+	return minimum_ap_cost
+
+
+## Determine which cells are targetable
+## Takes into consideration which cells are already targetted by this command
+func get_targetable_cells(command: ActionExecutionCommand) -> Array[BattleGridCell]:
+	var cells = command.battle_grid.get_cells()
+	var valid_cells: Array[BattleGridCell] = []
+
+	# copy of the current command so we can mutate
+	# the targets without worrying about side effects
+	var mock_command = command.clone()
+
+	for cell in cells:
+		mock_command.targets.clear()
+		mock_command.targets.append(cell)
+		if validate(mock_command):
+			valid_cells.append(cell)
+
+	return valid_cells
+
+
+## Get the cell highlight for the [param cell]
+## Can be overriden by children classes to provide custom targetable visuals
+func get_targetable_highlight(
+	_command: ActionExecutionCommand,
+	_cell: BattleGridCell
+) -> CellHighlight:
+	return targettable_highlight

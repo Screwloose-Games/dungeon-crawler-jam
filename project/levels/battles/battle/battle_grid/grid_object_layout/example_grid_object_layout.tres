@@ -5,17 +5,17 @@
 [ext_resource type="Resource" uid="uid://cdcfvr8yx37yy" path="res://levels/battles/battle/unit/resources/unit_skeleton.tres" id="3_ram37"]
 [ext_resource type="Resource" uid="uid://74vp14p65w0j" path="res://levels/battles/battle/unit/resources/unit_rogue.tres" id="4_usm7v"]
 
-[sub_resource type="Resource" id="Resource_c4ltl"]
-script = ExtResource("2_w3slq")
-unit = ExtResource("4_usm7v")
-effect = Array[int]([])
-team_index = 0
-
 [sub_resource type="Resource" id="Resource_w3slq"]
 script = ExtResource("2_w3slq")
 unit = ExtResource("3_ram37")
 effect = Array[int]([])
 team_index = 1
+
+[sub_resource type="Resource" id="Resource_c4ltl"]
+script = ExtResource("2_w3slq")
+unit = ExtResource("4_usm7v")
+effect = Array[int]([])
+team_index = 0
 
 [resource]
 script = ExtResource("1_c4ltl")

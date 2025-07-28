@@ -17,6 +17,7 @@ extends Resource
 ## The cost in Action Points (AP) to execute this ability
 ## This is the base cost before any modifications from effects or conditions
 @export_range(0, 20, 1) var base_cost: int
+@export var targettable_highlight: CellHighlight
 
 
 func _init(
@@ -35,13 +36,15 @@ func _init(
 	self.base_cost = base_cost
 
 
-func validate(_command: ActionExecutionCommand) -> ActionPreviewData:
-	var result = ActionPreviewData.new()
-	result.valid = true
-	result.action_point_cost = self.base_cost
-	return result
+## Get the data for the predicted outcome of the ability
+func preview(command: ActionExecutionCommand) -> ActionPreviewData:
+	var preview = ActionPreviewData.new()
+	for stage in stages:
+		stage.preview(command, preview)
+	return preview
 
 
+## Execute the command. The function will call the callback once all effects have completed
 func execute(command: ActionExecutionCommand, callback: Callable):
 	var return_signal = ReturnSignal.new(callback)
 	for stage in stages:
@@ -49,5 +52,14 @@ func execute(command: ActionExecutionCommand, callback: Callable):
 	return_signal.all_participants_registered()
 
 
+## The minimum possible ap cost when using this [Ability]
 func get_minimum_ap_cost():
 	return base_cost
+
+
+## The actual AP cost for this given [ActionExecutionCommand]
+func get_ap_cost(command: ActionExecutionCommand) -> int:
+	var total: int = base_cost
+	for stage in stages:
+		stage.get_additional_ap_cost(command)
+	return total
