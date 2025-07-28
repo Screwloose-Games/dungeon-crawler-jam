@@ -138,6 +138,7 @@ func _on_health_died():
 
 func die():
 	died.emit()
+	GlobalSignalBus.unit_died.emit(self)
 	cell = null
 	team = null
 
@@ -263,6 +264,7 @@ func max_tile_move_count() -> int:
 
 func move_along_path(movement_path: MovementPath, callback: Callable) -> void:
 	if movement_path.move_count <= 0:
+		callback.call()
 		return
 
 	_move_path_part(movement_path, 1, callback)

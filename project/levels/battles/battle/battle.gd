@@ -16,6 +16,10 @@ var end_conditions: Array[BattleEndCondition]
 var battle_round: BattleRound
 
 
+func _init():
+	GlobalSignalBus.battle_end_conditions_met.connect(_on_battle_end_conditions_met)
+
+
 func create_from_scenario(scenario: BattleScenario) -> void:
 	teams = scenario.teams
 	end_conditions = scenario.end_conditions
@@ -34,6 +38,10 @@ func _create_battle_grid(scenario: BattleScenario):
 
 	var battlefield = scenario.battlefield
 	battle_grid = BattleGrid.new(battlefield, chosen_layout, teams)
+
+
+func _on_battle_end_conditions_met():
+	check_end_condition()
 
 
 func check_end_condition():

@@ -7,6 +7,7 @@ signal unit_health_changed(unit: Unit, new_health: float)
 signal unit_hurt(unit: Unit, amount: float)
 signal unit_healed(unit: Unit, amount: float)
 signal unit_died(unit: Unit)
+signal team_eliminated(team: Team)
 signal commander_turn_started(commander: Commander)
 signal unit_removed_from_team(unit: Unit, team: Team)
 signal unit_added_to_team(unit: Unit, team: Team)
@@ -30,12 +31,15 @@ signal start_level_requested(level_num: int)
 
 # Battles
 signal battle_started(battle: Battle)
+signal battle_end_conditions_met
 signal battle_ended(result: BattleResult)
 signal battle_round_started
 signal battle_round_ended
 signal battle_turn_started(team: Team)
 signal battle_turn_ended(team: Team)
 signal level_reset
+signal command_started(command: ActionExecutionCommand)
+signal command_completed(command: ActionExecutionCommand)
 
 # Player input
 signal player_selected_unit(unit: Unit)
@@ -51,6 +55,7 @@ signal action_preview_cancelled(preview_data: ActionPreviewData)
 func _init() -> void:
 	unit_removed_from_team.connect(_on_unit_removed_from_team)
 	unit_added_to_team.connect(_on_unit_added_to_team)
+	unit_died.connect(_on_unit_died)
 
 	team_ended_turn.connect(_on_team_ended_turn)
 
@@ -61,6 +66,10 @@ func _init() -> void:
 	battle_turn_started.connect(_on_battle_turn_started)
 	battle_turn_ended.connect(_on_battle_turn_ended)
 
+	level_reset.connect(_on_level_reset)
+	command_started.connect(_on_command_started)
+	command_completed.connect(_on_command_completed)
+
 	player_selected_unit.connect(_on_player_selected_unit)
 	player_unselected_unit.connect(_on_player_unselected_unit)
 	player_selected_action.connect(_on_player_selected_action)
@@ -68,6 +77,12 @@ func _init() -> void:
 
 	action_preview_requested.connect(_on_action_preview_requested)
 	action_preview_cancelled.connect(_on_action_preview_cancelled)
+
+
+func _on_unit_died(unit: Unit):
+	var remaining_units = unit.team.units.filter(func(u): u != unit)
+	if remaining_units.size() == 0:
+		team_eliminated.emit(unit.team)
 
 
 func _on_unit_selected(unit: Unit, commander: Commander):
@@ -108,6 +123,18 @@ func _on_battle_turn_started(team: Team):
 
 func _on_battle_turn_ended(_team: Team):
 	print("battle_turn_ended")
+
+
+func _on_level_reset():
+	print("level_reset")
+
+
+func _on_command_started(_command: ActionExecutionCommand):
+	print("on_command_started")
+
+
+func _on_command_completed(_command: ActionExecutionCommand):
+	print("on_command_completed")
 
 
 func _on_action_preview_requested(_preview_data: ActionPreviewData):

@@ -11,12 +11,14 @@ extends Resource
 ## The base cost required to execute this action. [br]
 ## Used as part of the calculation for cost, [member cost].
 @export var minimum_ap_cost: int
-@export var tile_constraints: Array[TargetTileConstraint]
+
+var tile_constraints: Array[TargetTileConstraint]:
+	get = get_tile_constraints
 
 var targettable_highlight = CellHighlight.new(
-	CellHighlight.HighlightColor.RED,
-	CellHighlight.Type.OUTLINE
+	CellHighlight.HighlightColor.RED, CellHighlight.Type.OUTLINE
 )
+
 
 ## Note: Will be Overridden later by any @export values set.
 func _init(
@@ -29,6 +31,10 @@ func _init(
 	self.description = description
 	self.minimum_ap_cost = minimum_ap_cost
 	self.tile_constraints = tile_constraints
+
+
+func get_tile_constraints() -> Array[TargetTileConstraint]:
+	return []
 
 
 func get_targetable_highlights(
@@ -100,7 +106,6 @@ func get_targetable_cells(command: ActionExecutionCommand) -> Array[BattleGridCe
 ## Get the cell highlight for the [param cell]
 ## Can be overriden by children classes to provide custom targetable visuals
 func get_targetable_highlight(
-	_command: ActionExecutionCommand,
-	_cell: BattleGridCell
+	_command: ActionExecutionCommand, _cell: BattleGridCell
 ) -> CellHighlight:
 	return targettable_highlight

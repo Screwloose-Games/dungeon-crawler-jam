@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Turn Based Dungeon Crawler"
-run/main_scene="uid://bl2uosxojajej"
+run/main_scene="uid://prvi2hqwbi62"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -27,6 +27,7 @@ SceneManager="*res://globals/scene_manager.gd"
 SceneTransitionManager="*res://globals/scene_transition_manager.gd"
 SoundManager="*res://globals/sound_manager/sound_manager.tscn"
 Player="*res://globals/player.gd"
+InvalidStateWatcher="*res://common/util/invalid_state_watcher.gd"
 
 [debug]
 

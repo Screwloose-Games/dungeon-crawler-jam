@@ -4,6 +4,10 @@
 class_name ActionExecutionCommand
 extends Resource
 
+signal completed
+
+static var running_command: ActionExecutionCommand
+
 @export var unit: Unit
 @export var commander: Commander
 @export var action: UnitAction
@@ -42,18 +46,24 @@ func clone() -> ActionExecutionCommand:
 	)
 
 
-func is_on_same_team(commander: Commander, unit: Unit) -> bool:
-	return commander and unit and commander.team == unit.team
+func execute(callback: Callable):
+	assert(not running_command, "Already running a different command")
+
+	running_command = self
+	GlobalSignalBus.command_started.emit(self)
+	action.execute(self, _on_command_completed.bind(callback))
+	running_command = null
 
 
-func can_command_unit(unit: Unit) -> bool:
-	# Check if the commander can command the unit
-	return commander and is_on_same_team(commander, unit)
+func execute_and_wait():
+	var completed_flag: Array[bool] = [false]
+	execute(func(): completed_flag[0] = true)
 
+	# Catch if command is completed immediately
+	if completed_flag[0]:
+		return
 
-func execute(callback: Callable) -> bool:
-	action.execute(self, callback)
-	return true
+	await completed
 
 
 func preview() -> ActionPreviewData:
@@ -75,6 +85,12 @@ func validate() -> bool:
 	return action.validate(self)
 
 
+func _on_command_completed(callback: Callable):
+	GlobalSignalBus.command_completed.emit(self)
+	callback.call()
+	completed.emit()
+
+
 func is_complete():
 	return unit and commander and action
 
@@ -86,3 +102,12 @@ func can_unit_afford() -> bool:
 
 func get_targetable_highlights() -> Dictionary[Vector2i, CellHighlight]:
 	return action.get_targetable_highlights(self)
+
+
+func is_on_same_team(commander: Commander, unit: Unit) -> bool:
+	return commander and unit and commander.team == unit.team
+
+
+func can_command_unit(unit: Unit) -> bool:
+	# Check if the commander can command the unit
+	return commander and is_on_same_team(commander, unit)

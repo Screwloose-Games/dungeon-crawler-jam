@@ -12,7 +12,4 @@ func _init(team_relation: Team.Relationship = Team.Relationship.ENEMY_TEAM) -> v
 func _validate_cell(command: ActionExecutionCommand, cell: BattleGridCell) -> bool:
 	if not cell.unit:
 		return false
-	return (
-		cell.unit.team and
-		cell.unit.team.has_relationship(command.unit.team, team_relation)
-	)
+	return cell.unit.team and cell.unit.team.has_relationship(command.unit.team, team_relation)

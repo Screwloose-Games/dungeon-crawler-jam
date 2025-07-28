@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://prvi2hqwbi62"]
+[gd_scene load_steps=6 format=3 uid="uid://prvi2hqwbi62"]
 
 [ext_resource type="PackedScene" uid="uid://bl2uosxojajej" path="res://common/ui/hud/hud.tscn" id="1_55s5x"]
 [ext_resource type="PackedScene" uid="uid://b4msrqbohquak" path="res://levels/battles/battle_template.tscn" id="1_j8gee"]
 [ext_resource type="Resource" uid="uid://dj46ja1socuji" path="res://levels/battles/example_scenario.tres" id="2_pmadr"]
 [ext_resource type="Script" path="res://components/pannable.gd" id="3_6w6gb"]
+[ext_resource type="PackedScene" uid="uid://bnrifgfngatkk" path="res://common/ui/hud/battle_result_canvas_layer.tscn" id="5_8uoyc"]
 
 [node name="TestFullBattleUi" type="Node2D"]
 
@@ -29,3 +30,5 @@ mouse_filter = 2
 
 [node name="PlayerHudScreen" parent="CanvasLayer/Control" instance=ExtResource("1_55s5x")]
 layout_mode = 1
+
+[node name="BattleResultCanvasLayer" parent="CanvasLayer" instance=ExtResource("5_8uoyc")]

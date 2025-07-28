@@ -2,6 +2,14 @@ class_name LastStandingEndCondition
 extends BattleEndCondition
 
 
+func _init() -> void:
+	GlobalSignalBus.team_eliminated.connect(_on_team_eliminated)
+
+
+func _on_team_eliminated(_team: Team):
+	GlobalSignalBus.battle_end_conditions_met.emit.call_deferred()
+
+
 func check_condition(battle: Battle) -> BattleResult:
 	var winning_teams = battle.teams.duplicate()
 
