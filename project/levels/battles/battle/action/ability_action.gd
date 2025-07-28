@@ -8,6 +8,11 @@ const DEFAULT_DESCRIPTION = "Execute a specific ability."
 ## The specific ability that this action will execute when performed
 @export var ability: Ability
 
+
+func get_tile_constraints() -> Array[TargetTileConstraint]:
+	return ability.constraints
+
+
 ## Note: Will be Overridden later by any @export values set.
 func _init(
 	_ability: Ability,
@@ -24,7 +29,7 @@ func _init(
 	if _description == DEFAULT_DESCRIPTION and _ability and _ability.description:
 		_description = _ability.description
 
-	super (_name, _description, 0, ability.constraints)
+	super(_name, _description, 0, ability.constraints)
 
 
 func preview(command: ActionExecutionCommand) -> ActionPreviewData:

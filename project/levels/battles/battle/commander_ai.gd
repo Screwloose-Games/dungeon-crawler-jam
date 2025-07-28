@@ -11,14 +11,14 @@ func _init(
 	_type: CommanderType = CommanderType.AI,
 	commander_team: Team = null
 ):
-	super (commander_name, commander_description, CommanderType.AI, commander_team)
+	super(commander_name, commander_description, CommanderType.AI, commander_team)
 	GlobalSignalBus.battle_turn_started.connect(_on_battle_turn_started)
 
 
 func _on_battle_turn_started(battle_team: Team):
 	if battle_team != self.team:
 		return
-	start_turn.call_deferred() # wait for units to get ready. :/
+	start_turn.call_deferred()  # wait for units to get ready. :/
 
 
 func start_turn():
@@ -145,4 +145,4 @@ func take_actions_for_unit(unit: Unit):
 		print("Unit ", unit.name, " cannot move adjacent to enemy ", closest_enemy.name)
 		return
 
-	move_to_melee_and_attack(unit, closest_enemy, melee_attack_action)
+	#move_to_melee_and_attack(unit, closest_enemy, melee_attack_action)

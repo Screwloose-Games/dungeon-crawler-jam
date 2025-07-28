@@ -7,6 +7,7 @@ signal unit_health_changed(unit: Unit, new_health: float)
 signal unit_hurt(unit: Unit, amount: float)
 signal unit_healed(unit: Unit, amount: float)
 signal unit_died(unit: Unit)
+signal team_eliminated(team: Team)
 signal commander_turn_started(commander: Commander)
 signal unit_removed_from_team(unit: Unit, team: Team)
 signal unit_added_to_team(unit: Unit, team: Team)
@@ -30,6 +31,7 @@ signal start_level_requested(level_num: int)
 
 # Battles
 signal battle_started(battle: Battle)
+signal battle_end_conditions_met
 signal battle_ended(result: BattleResult)
 signal battle_round_started
 signal battle_round_ended
@@ -51,6 +53,7 @@ signal action_preview_cancelled(preview_data: ActionPreviewData)
 func _init() -> void:
 	unit_removed_from_team.connect(_on_unit_removed_from_team)
 	unit_added_to_team.connect(_on_unit_added_to_team)
+	unit_died.connect(_on_unit_died)
 
 	team_ended_turn.connect(_on_team_ended_turn)
 
@@ -68,6 +71,12 @@ func _init() -> void:
 
 	action_preview_requested.connect(_on_action_preview_requested)
 	action_preview_cancelled.connect(_on_action_preview_cancelled)
+
+
+func _on_unit_died(unit: Unit):
+	var remaining_units = unit.team.units.filter(func(u): u != unit)
+	if remaining_units.size() == 0:
+		team_eliminated.emit(unit.team)
 
 
 func _on_unit_selected(unit: Unit, commander: Commander):

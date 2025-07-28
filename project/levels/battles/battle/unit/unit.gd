@@ -138,6 +138,7 @@ func _on_health_died():
 
 func die():
 	died.emit()
+	GlobalSignalBus.unit_died.emit(self)
 	cell = null
 	team = null
 
