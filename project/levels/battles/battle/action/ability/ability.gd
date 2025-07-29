@@ -17,7 +17,7 @@ extends Resource
 ## The cost in Action Points (AP) to execute this ability
 ## This is the base cost before any modifications from effects or conditions
 @export_range(0, 20, 1) var base_cost: int
-@export var targettable_highlight: CellHighlight
+@export var targetable_highlight: CellHighlight
 
 
 func _init(

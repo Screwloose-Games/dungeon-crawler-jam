@@ -21,7 +21,7 @@ func _init(
 
 	super (_name, _description, 0)
 
-	targettable_highlight = CellHighlight.new(
+	targetable_highlight = CellHighlight.new(
 		CellHighlight.HighlightColor.WHITE,
 		CellHighlight.Type.CORNER
 	)

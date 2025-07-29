@@ -15,7 +15,7 @@ extends Resource
 var tile_constraints: Array[TargetTileConstraint]:
 	get = get_tile_constraints
 
-var targettable_highlight = CellHighlight.new(
+var targetable_highlight = CellHighlight.new(
 	CellHighlight.HighlightColor.RED,
 	CellHighlight.Type.FULL,
 )
@@ -112,7 +112,7 @@ func _attempt_cell_derivation(command: ActionExecutionCommand) -> Variant:
 func get_targetable_highlight(
 	_command: ActionExecutionCommand, _cell: BattleGridCell
 ) -> CellHighlight:
-	return targettable_highlight
+	return targetable_highlight
 
 
 ## The actual AP cost of this action given the [param command]

@@ -31,6 +31,7 @@ var hovered_cell: BattleGridCell:
 var battle: Battle
 var input_locked: bool
 var running_command: ActionExecutionCommand
+var hide_preview: bool
 
 # Command data
 var targetted_cells: Array[BattleGridCell]
@@ -48,6 +49,7 @@ func initialize(battle: Battle):
 	GlobalSignalBus.player_unselected_action.connect(_on_player_unselected_action)
 	GlobalSignalBus.command_started.connect(_on_command_started)
 	GlobalSignalBus.command_completed.connect(_on_command_completed)
+	GlobalSignalBus.battle_turn_started.connect(_on_battle_turn_started)
 	battle.battle_grid.changed.connect(_on_battlegrid_changed)
 
 
@@ -123,10 +125,10 @@ func _clear_action_preview():
 
 
 func _update_action_execution_command(ignore_hover: bool = false) -> bool:
-	_clear_action_preview()
-
 	if running_command:
 		return false
+
+	_clear_action_preview()
 
 	if not selected_unit:
 		return false
@@ -154,15 +156,15 @@ func _update_action_execution_command(ignore_hover: bool = false) -> bool:
 
 
 func try_show_command_preview(command: ActionExecutionCommand):
+	if hide_preview:
+		return
+
 	var highlights = command.get_targetable_highlights()
 	var preview = ActionPreviewData.new()
 
 	var action_preview = command.preview()
 	if action_preview and command.validate():
 		preview = action_preview
-
-	if Input.is_action_pressed("ui_accept"):
-		pass
 
 	preview.highlighted_cells = highlights.merged(preview.highlighted_cells, true)
 
@@ -209,9 +211,15 @@ func _on_command_started(command: ActionExecutionCommand):
 	running_command = command
 
 
-func _on_command_completed(command: ActionExecutionCommand):
+func _on_command_completed(_command: ActionExecutionCommand):
 	running_command = null
+	_update_action_execution_command()
 
 
 func _on_battlegrid_changed():
+	_update_action_execution_command()
+
+
+func _on_battle_turn_started(team: Team):
+	hide_preview = team != Player.commander.team
 	_update_action_execution_command()
