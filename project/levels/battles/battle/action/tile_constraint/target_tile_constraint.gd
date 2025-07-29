@@ -41,4 +41,8 @@ func derive_cells(_command: ActionExecutionCommand) -> Variant:
 ## For example a range constraint with range of 2 might return .05, as most of the map has been ruled out
 ## This function should return 1.0 for functions without a derivation implementation
 func get_derivation_heuristic() -> float:
-	return 1
+	return 1.0
+
+
+static func rank_heuristics(a: TargetTileConstraint, b: TargetTileConstraint) -> bool:
+	return a.get_derivation_heuristic() < b.get_derivation_heuristic()

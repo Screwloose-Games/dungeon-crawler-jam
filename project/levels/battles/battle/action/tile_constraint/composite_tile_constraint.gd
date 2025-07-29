@@ -16,7 +16,11 @@ func validate(command: ActionExecutionCommand) -> bool:
 
 func derive_cells(command: ActionExecutionCommand) -> Variant:
 	var cells: Array[BattleGridCell] = []
+	if len(constraints) == 0:
+		return cells
 
+	constraints.sort_custom(TargetTileConstraint.rank_heuristics)
+	cells = constraints.front().derive_cells()
 
 	return cells
 

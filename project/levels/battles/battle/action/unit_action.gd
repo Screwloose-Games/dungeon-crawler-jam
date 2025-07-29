@@ -100,11 +100,12 @@ func get_targetable_cells(command: ActionExecutionCommand) -> Array[BattleGridCe
 ## Given the constraints of this action, derive the potential list of cells
 ## Returns null if no cells can be derived
 func _attempt_cell_derivation(command: ActionExecutionCommand) -> Variant:
-	for constraint in tile_constraints:
-		var derived_cells = constraint.derive_cells(command)
-		if derived_cells:
-			return derived_cells
-	return null
+	if len(tile_constraints) == 0:
+		return null
+
+	var constraints = get_tile_constraints().duplicate()
+	constraints.sort_custom(TargetTileConstraint.rank_heuristics)
+	return constraints.front().derive_cells(command)
 
 
 ## Get the cell highlight for the [param cell]
