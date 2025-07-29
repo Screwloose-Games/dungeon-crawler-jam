@@ -27,6 +27,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 2
 script = ExtResource("1_5qx2s")
+slide_duration = null
 
 [node name="PlayerInfoPanel" type="PanelContainer" parent="PlayerHud"]
 unique_name_in_owner = true

@@ -28,6 +28,8 @@ enum TileType {
 			val.cell = self
 		unit = val
 		updated.emit()
+		if grid:
+			grid.changed.emit()
 
 var effects: Array[EffectType]
 var type: TileType

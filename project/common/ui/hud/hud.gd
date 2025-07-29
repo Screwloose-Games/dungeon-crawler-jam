@@ -125,6 +125,10 @@ func slide_to(
 
 func update_actions(unit: Unit):
 	print("update actions")
+	action_list.clear()
+	if unit.team != Player.commander.team:
+		return
+
 	action_list.item_count = len(unit.actions)
 	for i in len(unit.actions):
 		var action = unit.actions[i]

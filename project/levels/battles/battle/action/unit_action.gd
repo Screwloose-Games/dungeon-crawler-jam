@@ -15,8 +15,9 @@ extends Resource
 var tile_constraints: Array[TargetTileConstraint]:
 	get = get_tile_constraints
 
-var targettable_highlight = CellHighlight.new(
-	CellHighlight.HighlightColor.RED, CellHighlight.Type.OUTLINE
+var targetable_highlight = CellHighlight.new(
+	CellHighlight.HighlightColor.RED,
+	CellHighlight.Type.FULL,
 )
 
 
@@ -24,13 +25,11 @@ var targettable_highlight = CellHighlight.new(
 func _init(
 	name: String = "",
 	description: String = "",
-	minimum_ap_cost: int = 0,
-	tile_constraints: Array[TargetTileConstraint] = []
+	minimum_ap_cost: int = 0
 ) -> void:
 	self.name = name
 	self.description = description
 	self.minimum_ap_cost = minimum_ap_cost
-	self.tile_constraints = tile_constraints
 
 
 func get_tile_constraints() -> Array[TargetTileConstraint]:
@@ -73,22 +72,17 @@ func validate(command: ActionExecutionCommand) -> bool:
 	return command.can_unit_afford()
 
 
-## The actual AP cost of this action given the [param command]
-func get_ap_cost(_command: ActionExecutionCommand) -> int:
-	assert(false, "child class must implement get_ap_cost")
-	return 0
-
-
-## The minimum required AP to use this action
-func get_minimum_ap_cost() -> int:
-	return minimum_ap_cost
-
-
 ## Determine which cells are targetable
 ## Takes into consideration which cells are already targetted by this command
 func get_targetable_cells(command: ActionExecutionCommand) -> Array[BattleGridCell]:
-	var cells = command.battle_grid.get_cells()
+	var cells: Array[BattleGridCell]
 	var valid_cells: Array[BattleGridCell] = []
+
+	var derived_cells = _attempt_cell_derivation(command)
+	if derived_cells:
+		cells = derived_cells
+	else:
+		cells = command.battle_grid.get_cells()
 
 	# copy of the current command so we can mutate
 	# the targets without worrying about side effects
@@ -103,9 +97,31 @@ func get_targetable_cells(command: ActionExecutionCommand) -> Array[BattleGridCe
 	return valid_cells
 
 
+## Given the constraints of this action, derive the potential list of cells
+## Returns null if no cells can be derived
+func _attempt_cell_derivation(command: ActionExecutionCommand) -> Variant:
+	if len(tile_constraints) == 0:
+		return null
+
+	var constraints = get_tile_constraints().duplicate()
+	constraints.sort_custom(TargetTileConstraint.rank_heuristics)
+	return constraints.front().derive_cells(command)
+
+
 ## Get the cell highlight for the [param cell]
 ## Can be overriden by children classes to provide custom targetable visuals
 func get_targetable_highlight(
 	_command: ActionExecutionCommand, _cell: BattleGridCell
 ) -> CellHighlight:
-	return targettable_highlight
+	return targetable_highlight
+
+
+## The actual AP cost of this action given the [param command]
+func get_ap_cost(_command: ActionExecutionCommand) -> int:
+	assert(false, "child class must implement get_ap_cost")
+	return 0
+
+
+## The minimum required AP to use this action
+func get_minimum_ap_cost() -> int:
+	return minimum_ap_cost

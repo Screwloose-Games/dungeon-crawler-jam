@@ -6,6 +6,9 @@
 class_name TargetTileConstraint
 extends Resource
 
+## The maximum possible range an attack can have
+const MAX_RANGE: int = 15
+
 ## Validates whether the target tiles in [param _command] is valid for an ability or action. [br]
 ## Override this method in derived classes to implement specific constraint logic. [br]
 ## [br]
@@ -22,3 +25,24 @@ func validate(command: ActionExecutionCommand) -> bool:
 ## This function must be overriden on child classes
 func _validate_cell(_command: ActionExecutionCommand, _cell: BattleGridCell) -> bool:
 	return true
+
+
+## If possible, provide a list of cells that satisfy the constraint
+## Children classes should implement this when the code to do so is trivial
+## This is usedas a shortcut so not every cell on the map has to be checked
+## If null is returned, cells cannot be derived, otherwise return Array[BattleGridCell]
+func derive_cells(_command: ActionExecutionCommand) -> Variant:
+	return null
+
+
+## Get the heuristic that approximates how well the derive_cells function will work
+## in terms of narrowing down the search field. The lower the number the better.
+## The returned number should approximate the percent of tiles in the map that will meet the tile validation
+## For example a range constraint with range of 2 might return .05, as most of the map has been ruled out
+## This function should return 1.0 for functions without a derivation implementation
+func get_derivation_heuristic() -> float:
+	return 1.0
+
+
+static func rank_heuristics(a: TargetTileConstraint, b: TargetTileConstraint) -> bool:
+	return a.get_derivation_heuristic() < b.get_derivation_heuristic()

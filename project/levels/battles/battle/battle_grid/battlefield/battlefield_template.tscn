@@ -6,6 +6,7 @@
 [ext_resource type="TileSet" uid="uid://bneuixcnymqe4" path="res://levels/battles/battle/battle_grid/battlefield/path_tileset.tres" id="4_kxbdv"]
 
 [node name="Battlefield" type="Node2D"]
+z_index = -1
 script = ExtResource("1_d0g36")
 tile_data = Dictionary[Vector2i, int]({
 Vector2i(-3, -2): 0,
