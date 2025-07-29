@@ -75,7 +75,7 @@ func get_movement_path(command: ActionExecutionCommand) -> MovementPath:
 func get_targetable_cells(command: ActionExecutionCommand) -> Array[BattleGridCell]:
 	var derived_cells = _attempt_cell_derivation(command)
 	assert(
-		derived_cells,
+		derived_cells != null,
 		"Derived cells expected for move_action. NavigableConstraint should provide an accurate result"
 	)
 	return derived_cells

@@ -28,6 +28,8 @@ func derive_cells(command: ActionExecutionCommand) -> Variant:
 		func(cell: BattleGridCell):
 			return cell.unit == null or cell.unit == unit
 	)
+	# Cannot move to own cell
+	cells_within_distance.erase(unit.cell)
 	return cells_within_distance
 
 

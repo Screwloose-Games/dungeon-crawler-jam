@@ -73,6 +73,10 @@ func get_cells_within_distance(
 		var cell_id = next.x
 		var distance_left = next.y
 
+		var cell = id_to_cell[cell_id]
+		if not cell_check.call(cell):
+			continue
+
 		if visited.has(cell_id):
 			continue
 
@@ -81,9 +85,6 @@ func get_cells_within_distance(
 		if distance_left <= 0:
 			continue
 
-		var cell = id_to_cell[cell_id]
-		if not cell_check.call(cell):
-			continue
 
 		var connections = get_point_connections(cell_id)
 		for connected_id in connections:
