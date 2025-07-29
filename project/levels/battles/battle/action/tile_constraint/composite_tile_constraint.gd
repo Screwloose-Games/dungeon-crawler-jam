@@ -20,7 +20,7 @@ func derive_cells(command: ActionExecutionCommand) -> Variant:
 		return cells
 
 	constraints.sort_custom(TargetTileConstraint.rank_heuristics)
-	cells = constraints.front().derive_cells()
+	cells = constraints.front().derive_cells(command)
 
 	return cells
 
