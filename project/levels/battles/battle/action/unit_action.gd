@@ -88,16 +88,11 @@ func get_targetable_cells(command: ActionExecutionCommand) -> Array[BattleGridCe
 	# the targets without worrying about side effects
 	var mock_command = command.clone()
 
-	var checks: int = 0
-
 	for cell in cells:
 		mock_command.targets.clear()
 		mock_command.targets.append(cell)
-		checks += 1
 		if validate(mock_command):
 			valid_cells.append(cell)
-
-	print("checked %d cells" % checks)
 
 	return valid_cells
 
@@ -106,10 +101,8 @@ func get_targetable_cells(command: ActionExecutionCommand) -> Array[BattleGridCe
 ## Returns null if no cells can be derived
 func _attempt_cell_derivation(command: ActionExecutionCommand) -> Variant:
 	for constraint in tile_constraints:
-		print("Checking if %s has derived cells" % constraint)
 		var derived_cells = constraint.derive_cells(command)
 		if derived_cells:
-			print("Got derived cells")
 			return derived_cells
 	return null
 

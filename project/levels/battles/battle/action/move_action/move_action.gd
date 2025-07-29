@@ -70,6 +70,17 @@ func get_movement_path(command: ActionExecutionCommand) -> MovementPath:
 	return path
 
 
+# Overriding the function here to avoid revalidating the resulting targetable cells
+# The pathfinding is too expensive to revalidate all derived cells!
+func get_targetable_cells(command: ActionExecutionCommand) -> Array[BattleGridCell]:
+	var derived_cells = _attempt_cell_derivation(command)
+	assert(
+		derived_cells,
+		"Derived cells expected for move_action. NavigableConstraint should provide an accurate result"
+	)
+	return derived_cells
+
+
 func get_ap_cost(command: ActionExecutionCommand) -> int:
 	var movement_path = get_movement_path(command)
 	return get_ap_cost_from_path(command, movement_path)

@@ -116,13 +116,14 @@ func get_adjacent_cells(cell: BattleGridCell) -> Array[BattleGridCell]:
 func get_cells_within_distance(
 	from_cell: BattleGridCell,
 	distance: int,
-	movement_method: Movement.MovementMethod
+	movement_method: Movement.MovementMethod,
+	cell_check: Callable,
 ) -> Array[BattleGridCell]:
 	match movement_method:
 		Movement.MovementMethod.WALK:
-			return walk_navigation.get_cells_within_distance(from_cell, distance)
+			return walk_navigation.get_cells_within_distance(from_cell, distance, cell_check)
 		Movement.MovementMethod.FLY:
-			return fly_navigation.get_cells_within_distance(from_cell, distance)
+			return fly_navigation.get_cells_within_distance(from_cell, distance, cell_check)
 	return []
 
 

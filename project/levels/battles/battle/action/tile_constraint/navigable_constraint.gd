@@ -24,9 +24,10 @@ func derive_cells(command: ActionExecutionCommand) -> Variant:
 	var cells_within_distance = command.battle_grid.get_cells_within_distance(
 		unit.cell,
 		max_distance,
-		unit.movement.method
+		unit.movement.method,
+		func(cell: BattleGridCell):
+			return cell.unit == null or cell.unit == unit
 	)
-	print(len(cells_within_distance))
 	return cells_within_distance
 
 

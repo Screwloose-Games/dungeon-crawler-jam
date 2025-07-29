@@ -51,7 +51,11 @@ func get_movement_path(from: Vector2i, to: Vector2i) -> MovementPath:
 	return movement_path
 
 
-func get_cells_within_distance(from_cell: BattleGridCell, distance: int) -> Array[BattleGridCell]:
+func get_cells_within_distance(
+	from_cell: BattleGridCell,
+	distance: int,
+	cell_check: Callable
+) -> Array[BattleGridCell]:
 	if not cell_ids.has(from_cell.position):
 		return []
 
@@ -64,7 +68,6 @@ func get_cells_within_distance(from_cell: BattleGridCell, distance: int) -> Arra
 	var start_cell_id = cell_ids[from_cell.position]
 	to_visit_queue.append(Vector2i(start_cell_id, distance))
 
-
 	while len(to_visit_queue) > 0:
 		var next = to_visit_queue.pop_front()
 		var cell_id = next.x
@@ -76,6 +79,10 @@ func get_cells_within_distance(from_cell: BattleGridCell, distance: int) -> Arra
 		visited[cell_id] = true
 
 		if distance_left <= 0:
+			continue
+
+		var cell = id_to_cell[cell_id]
+		if not cell_check.call(cell):
 			continue
 
 		var connections = get_point_connections(cell_id)
