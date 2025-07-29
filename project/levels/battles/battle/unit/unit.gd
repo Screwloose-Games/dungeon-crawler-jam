@@ -309,7 +309,15 @@ func can_act() -> bool:
 
 
 func get_reachable_cells() -> Array[BattleGridCell]:
-	return movement.get_reachable_cells(self, cell.grid)
+	if not cell:
+		return []
+	var move_range: int = movement.max_move_count(action_points_current)
+	return cell.grid.get_cells_within_distance(
+		cell,
+		move_range,
+		movement.method,
+		func(cell: BattleGridCell): return cell.unit == null or cell.unit == self
+	)
 
 
 func can_reach_cell(target_cell: BattleGridCell) -> bool:
