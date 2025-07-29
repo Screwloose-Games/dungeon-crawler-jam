@@ -48,6 +48,7 @@ func initialize(battle: Battle):
 	GlobalSignalBus.player_unselected_action.connect(_on_player_unselected_action)
 	GlobalSignalBus.command_started.connect(_on_command_started)
 	GlobalSignalBus.command_completed.connect(_on_command_completed)
+	battle.battle_grid.changed.connect(_on_battlegrid_changed)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -160,7 +161,7 @@ func try_show_command_preview(command: ActionExecutionCommand):
 	if action_preview and command.validate():
 		preview = action_preview
 
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_pressed("ui_accept"):
 		pass
 
 	preview.highlighted_cells = highlights.merged(preview.highlighted_cells, true)
@@ -210,4 +211,7 @@ func _on_command_started(command: ActionExecutionCommand):
 
 func _on_command_completed(command: ActionExecutionCommand):
 	running_command = null
+
+
+func _on_battlegrid_changed():
 	_update_action_execution_command()

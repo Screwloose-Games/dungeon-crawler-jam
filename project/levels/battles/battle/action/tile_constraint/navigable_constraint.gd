@@ -16,3 +16,19 @@ func _validate_cell(
 	if not path:
 		return false
 	return true
+
+
+func derive_cells(command: ActionExecutionCommand) -> Variant:
+	var unit = command.unit
+	var max_distance = unit.movement.max_move_count(unit.action_points_current)
+	var cells_within_distance = command.battle_grid.get_cells_within_distance(
+		unit.cell,
+		max_distance,
+		unit.movement.method
+	)
+	print(len(cells_within_distance))
+	return cells_within_distance
+
+
+func get_derivation_heuristic() -> float:
+	return .3

@@ -51,6 +51,41 @@ func get_movement_path(from: Vector2i, to: Vector2i) -> MovementPath:
 	return movement_path
 
 
+func get_cells_within_distance(from_cell: BattleGridCell, distance: int) -> Array[BattleGridCell]:
+	if not cell_ids.has(from_cell.position):
+		return []
+
+	# Performs flood-fill algorithm to find all connected cells within the given distance
+	# cell IDs that we have already visited
+	var visited: Dictionary[int, bool] = {}
+	# Positions that we will visit next. X component is cell id, Y component is remaining distance left
+	var to_visit_queue: Array[Vector2i] = []
+
+	var start_cell_id = cell_ids[from_cell.position]
+	to_visit_queue.append(Vector2i(start_cell_id, distance))
+
+
+	while len(to_visit_queue) > 0:
+		var next = to_visit_queue.pop_front()
+		var cell_id = next.x
+		var distance_left = next.y
+
+		if visited.has(cell_id):
+			continue
+
+		visited[cell_id] = true
+
+		if distance_left <= 0:
+			continue
+
+		var connections = get_point_connections(cell_id)
+		for connected_id in connections:
+			if not visited.has(connected_id):
+				to_visit_queue.push_back(Vector2i(connected_id, distance_left - 1))
+
+	return _ids_to_cells(visited.keys())
+
+
 func _get_occupied_cells(ignore_cell: Vector2i) -> Array[int]:
 	var points_to_disable: Array[int] = []
 
@@ -94,3 +129,10 @@ func _position_id(position: Vector2i) -> int:
 	if not cell_ids.has(position):
 		cell_ids[position] = get_available_point_id()
 	return cell_ids[position]
+
+
+func _ids_to_cells(ids: Array[int]) -> Array[BattleGridCell]:
+	var cells: Array[BattleGridCell] = []
+	for id in ids:
+		cells.append(id_to_cell[id])
+	return cells

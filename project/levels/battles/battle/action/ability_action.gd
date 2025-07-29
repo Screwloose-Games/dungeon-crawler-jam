@@ -29,7 +29,7 @@ func _init(
 	if _description == DEFAULT_DESCRIPTION and _ability and _ability.description:
 		_description = _ability.description
 
-	super(_name, _description, 0, ability.constraints)
+	super (_name, _description, 0)
 
 
 func preview(command: ActionExecutionCommand) -> ActionPreviewData:

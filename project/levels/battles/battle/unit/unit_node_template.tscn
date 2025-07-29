@@ -14,6 +14,7 @@ unit = ExtResource("2_ghkny")
 
 [node name="SelectionSprite" type="AnimatedSprite2D" parent="."]
 visible = false
+z_index = -1
 sprite_frames = ExtResource("3_xefp7")
 animation = &"sel_confirm"
 

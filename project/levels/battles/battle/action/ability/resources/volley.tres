@@ -1,46 +1,55 @@
-[gd_resource type="Resource" script_class="Ability" load_steps=17 format=3 uid="uid://brtm76gfkuuda"]
+[gd_resource type="Resource" script_class="Ability" load_steps=18 format=3 uid="uid://brtm76gfkuuda"]
 
 [ext_resource type="Script" uid="uid://wu0ky8ts37sk" path="res://levels/battles/battle/action/tile_constraint/target_tile_constraint.gd" id="1_e10pk"]
-[ext_resource type="Script" uid="uid://ytbm8nx37wfm" path="res://levels/battles/battle/action/tile_constraint/direct_line_constraint.gd" id="2_np8ph"]
 [ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/action/ability/ability.gd" id="2_unxx4"]
 [ext_resource type="Script" uid="uid://ttosjyfsopkv" path="res://levels/battles/battle/action/tile_constraint/range_constraint.gd" id="3_aajdq"]
 [ext_resource type="Script" uid="uid://ct8umold07eie" path="res://levels/battles/battle/action/ability/ability_stage.gd" id="3_np8ph"]
 [ext_resource type="Script" uid="uid://c3xgtp8yeabd8" path="res://levels/battles/battle/action/ability/ability_effect.gd" id="6_3b53w"]
+[ext_resource type="Script" uid="uid://bx0imn0mnt3xt" path="res://levels/battles/battle/action/tile_constraint/unit_present_tile_constraint.gd" id="7_2m457"]
 [ext_resource type="Script" uid="uid://nismy8hccyyv" path="res://levels/battles/battle/battle_grid/cell_highlight.gd" id="7_dtsyq"]
-[ext_resource type="Script" uid="uid://bdh8268nm1op" path="res://levels/battles/battle/action/ability/unit_apply_damage_effect.gd" id="7_e10pk"]
-[ext_resource type="Script" uid="uid://bl1ai1ynjdg4f" path="res://levels/battles/battle/action/ability/area_ability_effect.gd" id="8_2m457"]
-
-[sub_resource type="Resource" id="Resource_aajdq"]
-script = ExtResource("2_np8ph")
-metadata/_custom_type_script = "uid://ytbm8nx37wfm"
-
-[sub_resource type="Resource" id="Resource_3b53w"]
-script = ExtResource("3_aajdq")
-min_range = 2
-max_range = 6
-metadata/_custom_type_script = "uid://ttosjyfsopkv"
+[ext_resource type="Script" uid="uid://bdh8268nm1op" path="res://levels/battles/battle/action/ability/unit_apply_damage_effect.gd" id="8_blgxj"]
+[ext_resource type="Script" uid="uid://bl1ai1ynjdg4f" path="res://levels/battles/battle/action/ability/area_ability_effect.gd" id="9_p0ha8"]
 
 [sub_resource type="Resource" id="Resource_blgxj"]
-script = ExtResource("7_e10pk")
-base_damage = 3
-metadata/_custom_type_script = "uid://bdh8268nm1op"
-
-[sub_resource type="Resource" id="Resource_p0ha8"]
-script = ExtResource("7_e10pk")
-base_damage = 1
-metadata/_custom_type_script = "uid://bdh8268nm1op"
+script = ExtResource("3_aajdq")
+min_range = 1
+max_range = 1
+type = 1
+metadata/_custom_type_script = "uid://ttosjyfsopkv"
 
 [sub_resource type="Resource" id="Resource_4yflr"]
-script = ExtResource("8_2m457")
+script = ExtResource("7_2m457")
+invert = false
+metadata/_custom_type_script = "uid://bx0imn0mnt3xt"
+
+[sub_resource type="Resource" id="Resource_ydo8o"]
+script = ExtResource("8_blgxj")
+base_damage = 1
+constraint = SubResource("Resource_4yflr")
+metadata/_custom_type_script = "uid://bdh8268nm1op"
+
+[sub_resource type="Resource" id="Resource_tths4"]
+script = ExtResource("9_p0ha8")
 tile_offsets = Array[Vector2i]([Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)])
-effect = SubResource("Resource_p0ha8")
+effect = SubResource("Resource_ydo8o")
 metadata/_custom_type_script = "uid://bl1ai1ynjdg4f"
+
+[sub_resource type="Resource" id="Resource_4hb4f"]
+script = ExtResource("7_2m457")
+invert = false
+metadata/_custom_type_script = "uid://bx0imn0mnt3xt"
+
+[sub_resource type="Resource" id="Resource_t3cu0"]
+script = ExtResource("8_blgxj")
+base_damage = 3
+constraint = SubResource("Resource_4hb4f")
+metadata/_custom_type_script = "uid://bdh8268nm1op"
 
 [sub_resource type="Resource" id="Resource_e10pk"]
 script = ExtResource("3_np8ph")
 name = ""
 description = ""
-effects = Array[ExtResource("6_3b53w")]([SubResource("Resource_blgxj"), SubResource("Resource_4yflr")])
+effects = Array[ExtResource("6_3b53w")]([SubResource("Resource_tths4"), SubResource("Resource_t3cu0")])
 metadata/_custom_type_script = "uid://ct8umold07eie"
 
 [sub_resource type="Resource" id="Resource_2m457"]
@@ -54,7 +63,7 @@ script = ExtResource("2_unxx4")
 name = "Volley"
 description = "Shoot a volley of arrows, affecting an area"
 number_of_targets = 1
-constraints = Array[ExtResource("1_e10pk")]([SubResource("Resource_aajdq"), SubResource("Resource_3b53w")])
+constraints = Array[ExtResource("1_e10pk")]([SubResource("Resource_blgxj")])
 stages = Array[ExtResource("3_np8ph")]([SubResource("Resource_e10pk")])
 base_cost = 5
 targettable_highlight = SubResource("Resource_2m457")

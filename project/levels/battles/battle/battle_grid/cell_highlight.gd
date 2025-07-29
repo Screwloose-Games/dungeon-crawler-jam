@@ -6,6 +6,7 @@ enum Type
 	OUTLINE,
 	CORNER,
 	CONFIRM,
+	FULL,
 }
 
 enum HighlightColor
@@ -28,6 +29,10 @@ static var highlight_tile_lookup: Dictionary[Type, Dictionary] = {
 	Type.CONFIRM: {
 		"source": 0,
 		"coords": Vector2i(0, 0),
+	},
+	Type.FULL: {
+		"source": 0,
+		"coords": Vector2i(0, 3),
 	}
 }
 

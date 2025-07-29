@@ -48,20 +48,6 @@ func is_cell_movable_to(cell_pos: Vector2i, movement_method: Movement.MovementMe
 			return movement_method == Movement.MovementMethod.FLY
 
 
-func try_set_unit(cell_pos: Vector2i, unit: Unit) -> bool:
-	if not is_cell_movable_to(cell_pos, unit.movement.method):
-		return false
-	cells[cell_pos].unit = unit
-	return true
-
-
-func force_set_unit(cell_pos: Vector2i, unit: Unit) -> bool:
-	if not cells.has(cell_pos):
-		return false
-	cells[cell_pos].unit = unit
-	return true
-
-
 func _load_battlefield_tiles(battlefield: Battlefield):
 	if not battlefield:
 		return
@@ -82,12 +68,6 @@ func _load_grid_object_layout_tiles(layout: GridObjectLayout):
 			cell.unit = layout_tile.unit.duplicate()
 			cell.unit.team = teams[layout_tile.team_index]
 		cell.effects = layout_tile.effect
-
-
-func _create_or_get_cell(pos: Vector2i) -> BattleGridCell:
-	if not cells.has(pos):
-		cells[pos] = BattleGridCell.new(self, pos)
-	return cells[pos]
 
 
 func _construct_navigation():
@@ -133,5 +113,38 @@ func get_adjacent_cells(cell: BattleGridCell) -> Array[BattleGridCell]:
 	return adjacent_cells
 
 
+func get_cells_within_distance(
+	from_cell: BattleGridCell,
+	distance: int,
+	movement_method: Movement.MovementMethod
+) -> Array[BattleGridCell]:
+	match movement_method:
+		Movement.MovementMethod.WALK:
+			return walk_navigation.get_cells_within_distance(from_cell, distance)
+		Movement.MovementMethod.FLY:
+			return fly_navigation.get_cells_within_distance(from_cell, distance)
+	return []
+
+
+func try_set_unit(cell_pos: Vector2i, unit: Unit) -> bool:
+	if not is_cell_movable_to(cell_pos, unit.movement.method):
+		return false
+	cells[cell_pos].unit = unit
+	return true
+
+
+func force_set_unit(cell_pos: Vector2i, unit: Unit) -> bool:
+	if not cells.has(cell_pos):
+		return false
+	cells[cell_pos].unit = unit
+	return true
+
+
 func get_cells() -> Array[BattleGridCell]:
 	return cells.values()
+
+
+func _create_or_get_cell(pos: Vector2i) -> BattleGridCell:
+	if not cells.has(pos):
+		cells[pos] = BattleGridCell.new(self, pos)
+	return cells[pos]

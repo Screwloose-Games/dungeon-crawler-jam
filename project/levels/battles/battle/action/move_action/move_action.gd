@@ -6,6 +6,8 @@ extends UnitAction
 
 ## The movement capabilities and constraints for this movement action
 @export var movement: Movement
+var _tile_constraints: Array[TargetTileConstraint]
+
 
 func _init(
 	_name: String = "Move",
@@ -13,11 +15,11 @@ func _init(
 	_movement: Movement = null,
 	_tile_constraints: Array[TargetTileConstraint] = []
 ):
-	var unit_present_constraint = UnitPresentTargetTileConstraint.new(true)
-	var navigable_constraint = NavigableConstraint.new()
-	tile_constraints = [unit_present_constraint, navigable_constraint]
+	var unit_not_present = UnitPresentTargetTileConstraint.new(true)
+	var navigable = NavigableConstraint.new()
+	self._tile_constraints = [unit_not_present, navigable]
 
-	super (_name, _description, 0, tile_constraints)
+	super (_name, _description, 0)
 
 	targettable_highlight = CellHighlight.new(
 		CellHighlight.HighlightColor.WHITE,
@@ -49,7 +51,9 @@ func execute(command: ActionExecutionCommand, callback: Callable):
 
 func validate(command: ActionExecutionCommand) -> bool:
 	var path = get_movement_path(command)
-	if not path:
+	if not path or len(path.cell_path) == 0:
+		return false
+	if path.cell_path[-1] != command.targets[0]:
 		return false
 
 	return super.validate(command)
@@ -80,3 +84,17 @@ func get_ap_cost_from_path(command: ActionExecutionCommand, movement_path: Movem
 	if not movement_path:
 		return 0
 	return command.unit.movement.get_ap_required_to_move(movement_path.move_count)
+
+
+func get_targetable_highlight(
+	_command: ActionExecutionCommand,
+	_cell: BattleGridCell
+) -> CellHighlight:
+	return CellHighlight.new(
+		CellHighlight.HighlightColor.GREEN,
+		CellHighlight.Type.FULL
+	)
+
+
+func get_tile_constraints() -> Array[TargetTileConstraint]:
+	return _tile_constraints
