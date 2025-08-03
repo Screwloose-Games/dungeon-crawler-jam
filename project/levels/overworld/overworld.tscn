@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmyvsbdrmrcrf"]
+
+[ext_resource type="PackedScene" uid="uid://by2307iknv60" path="res://levels/overworld/overworld_map_node.tscn" id="1_gfxx5"]
+[ext_resource type="PackedScene" uid="uid://dxgx8bqpj3kle" path="res://levels/battles/floor_01/01_battle.tscn" id="2_umo1d"]
+
+[node name="Overworld" type="Node2D"]
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(208, 175, 308, 175, 408, 175)
+width = 1.0
+default_color = Color(0.8, 0.8, 0.8, 1)
+
+[node name="OverworldMapNode" parent="." instance=ExtResource("1_gfxx5")]
+offset_left = 200.0
+offset_top = 167.0
+offset_right = 216.0
+offset_bottom = 183.0
+scene_to_load = ExtResource("2_umo1d")
+
+[node name="OverworldMapNode2" parent="." instance=ExtResource("1_gfxx5")]
+offset_left = 300.0
+offset_top = 167.0
+offset_right = 316.0
+offset_bottom = 183.0
+scene_to_load = ExtResource("2_umo1d")
+
+[node name="OverworldMapNode3" parent="." instance=ExtResource("1_gfxx5")]
+offset_left = 400.0
+offset_top = 167.0
+offset_right = 416.0
+offset_bottom = 183.0
+scene_to_load = ExtResource("2_umo1d")
