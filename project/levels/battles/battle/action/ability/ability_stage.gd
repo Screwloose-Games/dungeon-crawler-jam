@@ -17,6 +17,9 @@ var duration: float:
 			func(accum: float, effect: AbilityEffect): return max(accum, effect.get_duration()), 0
 		)
 
+var does_damage: bool:
+	get = get_does_damage
+
 
 func _init(name: String = "", description: String = "", effects: Array[AbilityEffect] = []) -> void:
 	self.name = name
@@ -27,6 +30,10 @@ func _init(name: String = "", description: String = "", effects: Array[AbilityEf
 func preview(command: ActionExecutionCommand, preview: ActionPreviewData):
 	for effect in effects:
 		effect.preview(command, preview)
+
+
+func get_does_damage():
+	return effects.any(func(effect: AbilityEffect): return effect.does_damage)
 
 
 ## Executes all effects in this stage of the ability. [br]

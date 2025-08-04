@@ -1,0 +1,53 @@
+[gd_scene load_steps=11 format=3 uid="uid://1glmmlranebt"]
+
+[ext_resource type="Script" uid="uid://cpkol7vqc7vre" path="res://tools/ability_designer/ability_designer.gd" id="1_5v1ir"]
+[ext_resource type="Script" uid="uid://byny05v221o5s" path="res://tools/ability_designer/ability_node.gd" id="2_ok0nj"]
+[ext_resource type="Texture2D" uid="uid://uhbll5o8osua" path="res://tools/ability_designer/targetable_tile.png" id="3_ijqos"]
+[ext_resource type="Script" uid="uid://wu0ky8ts37sk" path="res://levels/battles/battle/action/tile_constraint/target_tile_constraint.gd" id="3_k8k01"]
+[ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/action/ability/ability.gd" id="4_1guyr"]
+[ext_resource type="Script" uid="uid://ct8umold07eie" path="res://levels/battles/battle/action/ability/ability_stage.gd" id="5_6swa4"]
+
+[sub_resource type="Resource" id="Resource_xq57w"]
+script = ExtResource("3_k8k01")
+metadata/_custom_type_script = "uid://v50hixevnupe"
+
+[sub_resource type="Resource" id="Resource_j3aw5"]
+script = ExtResource("4_1guyr")
+name = ""
+description = ""
+number_of_targets = 1
+constraints = Array[ExtResource("3_k8k01")]([SubResource("Resource_xq57w"), null])
+stages = Array[ExtResource("5_6swa4")]([])
+base_cost = 0
+metadata/_custom_type_script = "uid://bnkmedconmppg"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cj8av"]
+texture = ExtResource("3_ijqos")
+texture_region_size = Vector2i(32, 16)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ok0nj"]
+tile_shape = 1
+tile_layout = 4
+tile_size = Vector2i(32, 16)
+sources/0 = SubResource("TileSetAtlasSource_cj8av")
+
+[node name="AbilityDesigner" type="Node2D"]
+editor_description = "This helps design and preview abilities:
+* Targetable area
+* AOE
+* Damage
+* Effects
+"
+script = ExtResource("1_5v1ir")
+
+[node name="AbilityNode" type="Node2D" parent="."]
+position = Vector2(325, 165)
+script = ExtResource("2_ok0nj")
+ability = SubResource("Resource_j3aw5")
+
+[node name="Targetable" type="Node2D" parent="AbilityNode"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="AbilityNode/Targetable"]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_set = SubResource("TileSet_ok0nj")

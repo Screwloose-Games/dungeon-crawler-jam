@@ -1,0 +1,41 @@
+animations:
+  - name: move-right_down
+    description: Generic move for the unit.
+  - name: move-right_up
+    description: Generic move for the unit.
+  - name: move-left_down
+    description: Generic move for the unit.
+  - name: move-left_up
+    description: Generic move for the unit.
+  - name: attack-right_down
+    description: ""
+  - name: attack-right_up
+    description: ""
+  - name: attack-left_down
+    description: ""
+  - name: attack-left_up
+    description: ""
+  - name: death-right_down
+    description: ""
+  - name: death-right_up
+    description: ""
+  - name: death-left_down
+    description: ""
+  - name: death-left_up
+    description: ""
+  - name: idle-right_down
+    description: ""
+  - name: idle-right_up
+    description: ""
+  - name: idle-left_down
+    description: ""
+  - name: idle-left_up
+    description: ""
+  - name: hit_react-right_down
+    description: ""
+  - name: hit_react-right_up
+    description: ""
+  - name: hit_react-left_down
+    description: ""
+  - name: hit_react-left_up
+    description: ""

@@ -2,24 +2,24 @@
 
 [ext_resource type="Script" uid="uid://bi1g3t40pyhyp" path="res://levels/battles/battle/battle_grid/grid_object_layout/grid_object_layout.gd" id="1_bvoyl"]
 [ext_resource type="Script" uid="uid://csr3qmm41n0pg" path="res://levels/battles/battle/battle_grid/grid_object_layout/grid_object_cell.gd" id="2_cysc8"]
-[ext_resource type="Resource" uid="uid://cdcfvr8yx37yy" path="res://levels/battles/battle/unit/resources/unit_skeleton.tres" id="3_5ello"]
-[ext_resource type="Resource" path="res://levels/battles/battle/unit/resources/unit_rogue.tres" id="4_unyrl"]
+[ext_resource type="Resource" uid="uid://cdcfvr8yx37yy" path="res://levels/battles/battle/unit/resources/unit_skeleton_knight.tres" id="3_bvoyl"]
+[ext_resource type="Resource" uid="uid://74vp14p65w0j" path="res://levels/battles/battle/unit/resources/unit_rogue.tres" id="4_unyrl"]
 
 [sub_resource type="Resource" id="Resource_bvoyl"]
 script = ExtResource("2_cysc8")
-unit = ExtResource("3_5ello")
+unit = ExtResource("3_bvoyl")
 effect = Array[int]([])
 team_index = 0
 
 [sub_resource type="Resource" id="Resource_cysc8"]
 script = ExtResource("2_cysc8")
-unit = ExtResource("3_5ello")
+unit = ExtResource("3_bvoyl")
 effect = Array[int]([])
 team_index = 0
 
 [sub_resource type="Resource" id="Resource_5ello"]
 script = ExtResource("2_cysc8")
-unit = ExtResource("3_5ello")
+unit = ExtResource("3_bvoyl")
 effect = Array[int]([])
 team_index = 0
 
@@ -31,13 +31,13 @@ team_index = 0
 
 [sub_resource type="Resource" id="Resource_vbo4m"]
 script = ExtResource("2_cysc8")
-unit = ExtResource("3_5ello")
+unit = ExtResource("3_bvoyl")
 effect = Array[int]([])
 team_index = 1
 
 [sub_resource type="Resource" id="Resource_e2od4"]
 script = ExtResource("2_cysc8")
-unit = ExtResource("3_5ello")
+unit = ExtResource("3_bvoyl")
 effect = Array[int]([])
 team_index = 0
 

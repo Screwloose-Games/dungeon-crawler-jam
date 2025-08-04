@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Unit" load_steps=9 format=3 uid="uid://bbrh2ene7emiw"]
+
+[ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/action/ability/ability.gd" id="1_j84nd"]
+[ext_resource type="Resource" uid="uid://i7qgqyttpma3" path="res://levels/battles/battle/action/ability/resources/skeleton_bow_attack.tres" id="2_ova60"]
+[ext_resource type="Resource" uid="uid://dixwnevlk6vne" path="res://levels/battles/battle/action/ability/resources/skeleton_archer_move_ability.tres" id="3_tbvyu"]
+[ext_resource type="Script" uid="uid://brp5ns0pmjttu" path="res://levels/battles/battle/unit/movement.gd" id="7_0ludt"]
+[ext_resource type="Texture2D" uid="uid://dh70uf8xj4swa" path="res://assets/art/character/npc/skeleton_archer/skeleton_archer_portrait.png" id="9_j84nd"]
+[ext_resource type="Script" uid="uid://c1n1gnpms4ens" path="res://levels/battles/battle/unit/unit.gd" id="10_bgkdb"]
+[ext_resource type="SpriteFrames" uid="uid://bx4v64drc6cbs" path="res://assets/art/character/npc/skeleton_archer/skeleton_archer.res" id="11_j84nd"]
+
+[sub_resource type="Resource" id="Resource_3v7oy"]
+script = ExtResource("7_0ludt")
+movement_points_per_ap = 2
+method = 0
+metadata/_custom_type_script = "uid://brp5ns0pmjttu"
+
+[resource]
+script = ExtResource("10_bgkdb")
+name = "Skeleton Archer"
+description = "Boney simple ranged unit"
+abilities = Array[ExtResource("1_j84nd")]([ExtResource("2_ova60"), ExtResource("3_tbvyu")])
+movement = SubResource("Resource_3v7oy")
+action_points_max = 8
+sprite_frames = ExtResource("11_j84nd")
+portrait = ExtResource("9_j84nd")
+move_speed = 2.0
+health_point_max = 6
+health_points = 10
+metadata/_custom_type_script = "uid://c1n1gnpms4ens"

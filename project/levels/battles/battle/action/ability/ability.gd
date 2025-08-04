@@ -19,6 +19,13 @@ extends Resource
 @export_range(0, 20, 1) var base_cost: int
 @export var targetable_highlight: CellHighlight
 
+var min_range: int:
+	get = get_min_range
+var max_range: int:
+	get = get_max_range
+var does_damage: bool:
+	get = get_does_damage
+
 
 func _init(
 	name: String = "",
@@ -63,3 +70,44 @@ func get_ap_cost(command: ActionExecutionCommand) -> int:
 	for stage in stages:
 		stage.get_additional_ap_cost(command)
 	return total
+
+
+func get_range_constraint() -> RangeConstraint:
+	var range_constraints: Array[RangeConstraint] = []
+	var constraints: Array[TargetTileConstraint] = constraints.filter(
+		func(constraint: TargetTileConstraint): return constraint is RangeConstraint
+	)
+	range_constraints.append_array(constraints)
+	if range_constraints.size() > 1:
+		push_error("Should only have 1 range constraint")
+	elif range_constraints.size() == 1:
+		return range_constraints[0]
+	return null
+
+
+func get_max_range() -> int:
+	var range_constraint: RangeConstraint = get_range_constraint()
+	if range_constraint:
+		return range_constraint.max_range
+	return 0
+
+
+func get_min_range() -> int:
+	var range_constraint: RangeConstraint = get_range_constraint()
+	if range_constraint:
+		return range_constraint.min_range
+	return 0
+
+
+func get_can_target_enemies():
+	return constraints.any(
+		func(constraint: TargetTileConstraint):
+			if constraint is UnitTeamRelationConstraint:
+				if constraint.is_enemy:
+					return true
+			return false
+	)
+
+
+func get_does_damage():
+	return stages.any(func(stage: AbilityStage): return stage.does_damage)
