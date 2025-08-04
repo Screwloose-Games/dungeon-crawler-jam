@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxgx8bqpj3kle"]
+
+[ext_resource type="PackedScene" uid="uid://b4msrqbohquak" path="res://levels/battles/battle_template.tscn" id="1_5tqgd"]
+[ext_resource type="Resource" uid="uid://dj46ja1socuji" path="res://levels/battles/example_scenario.tres" id="2_6ivxv"]
+[ext_resource type="Script" path="res://components/pannable.gd" id="3_st5n4"]
+[ext_resource type="PackedScene" uid="uid://bl2uosxojajej" path="res://common/ui/hud/hud.tscn" id="4_l8mo6"]
+[ext_resource type="PackedScene" uid="uid://bnrifgfngatkk" path="res://common/ui/hud/battle_result_canvas_layer.tscn" id="5_gj1lr"]
+
+[node name="TestFullBattleUi" type="Node2D"]
+
+[node name="BattleTemplate" parent="." instance=ExtResource("1_5tqgd")]
+position = Vector2(-164, -89)
+battle_scenario = ExtResource("2_6ivxv")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Pannable" type="Node" parent="Camera2D"]
+script = ExtResource("3_st5n4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PlayerHudScreen" parent="CanvasLayer/Control" instance=ExtResource("4_l8mo6")]
+layout_mode = 1
+
+[node name="BattleResultCanvasLayer" parent="CanvasLayer" instance=ExtResource("5_gj1lr")]
+
+[connection signal="battle_end_acknowledged" from="CanvasLayer/BattleResultCanvasLayer" to="BattleTemplate" method="_on_battle_end_acknowledged"]

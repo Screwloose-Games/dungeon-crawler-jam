@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://by2307iknv60"]
+
+[ext_resource type="Texture2D" uid="uid://b8qsfmsyqhobk" path="res://common/images/square.png" id="1_c0g2d"]
+[ext_resource type="Script" uid="uid://dktcv2gwfmhxa" path="res://levels/overworld/overworld_map_node.gd" id="2_ldy1g"]
+
+[node name="OverworldMapNode" type="TextureRect"]
+modulate = Color(0.43, 0.43, 0.43, 1)
+texture = ExtResource("1_c0g2d")
+script = ExtResource("2_ldy1g")

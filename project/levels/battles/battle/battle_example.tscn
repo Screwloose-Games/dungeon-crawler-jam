@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://vpgut26v8bd2"]
+[gd_scene load_steps=3 format=3 uid="uid://po062wp2w2qv"]
 
 [ext_resource type="PackedScene" uid="uid://b4msrqbohquak" path="res://levels/battles/battle_template.tscn" id="1_ylo2p"]
 [ext_resource type="Resource" uid="uid://dj46ja1socuji" path="res://levels/battles/example_scenario.tres" id="2_fmilv"]

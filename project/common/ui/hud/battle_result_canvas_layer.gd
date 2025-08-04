@@ -1,4 +1,5 @@
 extends CanvasLayer
+signal battle_end_acknowledged
 
 @export var result: BattleResult:
 	set(val):
@@ -28,4 +29,4 @@ func _on_battle_ended(battle_result: BattleResult):
 
 
 func _on_ok_pressed():
-	get_tree().reload_current_scene()
+	battle_end_acknowledged.emit()
