@@ -126,12 +126,12 @@ func sprite_to_polygons() -> Array[CollisionPolygon2D]:
 
 func start_moving_right():
 	transform.x.x = 1.0
-	animated_sprite_2d.play("move_right")
+	animated_sprite_2d.play("move-right_down")
 
 
 func start_moving_left():
 	transform.x.x = -1.0
-	animated_sprite_2d.play("move_right")
+	animated_sprite_2d.play("move-left_down")
 
 
 func _on_player_selected_unit(unit: Unit):

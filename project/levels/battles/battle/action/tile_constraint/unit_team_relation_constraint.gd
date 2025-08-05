@@ -3,6 +3,14 @@ extends TargetTileConstraint
 
 @export var team_relation: Team.Relationship
 
+var is_enemy: bool:
+	get:
+		return team_relation == Team.Relationship.ENEMY_TEAM
+
+var is_ally: bool:
+	get:
+		return team_relation == Team.Relationship.ALLY_TEAM
+
 
 func _init(team_relation: Team.Relationship = Team.Relationship.ENEMY_TEAM) -> void:
 	self.team_relation = team_relation

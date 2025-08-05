@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://d305pthutlppf"
+path="res://.godot/imported/targetable_tile.aseprite-3c7d9109c3fffe177a2031ef99479615.res"
+
+[deps]
+
+source_file="res://tools/ability_designer/targetable_tile.aseprite"
+dest_files=["res://.godot/imported/targetable_tile.aseprite-3c7d9109c3fffe177a2031ef99479615.res"]
+
+[params]
+

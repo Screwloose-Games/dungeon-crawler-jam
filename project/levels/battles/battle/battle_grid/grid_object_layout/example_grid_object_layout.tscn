@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cvo0q7cgahf8r" path="res://levels/battles/battle/battle_grid/grid_object_layout/grid_object_layout_node.gd" id="1_5m2eb"]
 [ext_resource type="TileSet" uid="uid://d14815kbba136" path="res://levels/battles/battle/battle_grid/grid_object_layout/grid_object_tileset.tres" id="2_356e3"]
 [ext_resource type="Script" uid="uid://csr3qmm41n0pg" path="res://levels/battles/battle/battle_grid/grid_object_layout/grid_object_cell.gd" id="2_8510w"]
-[ext_resource type="Resource" uid="uid://cdcfvr8yx37yy" path="res://levels/battles/battle/unit/resources/unit_skeleton.tres" id="4_6ss3o"]
+[ext_resource type="Resource" uid="uid://cdcfvr8yx37yy" path="res://levels/battles/battle/unit/resources/unit_skeleton_knight.tres" id="4_6ss3o"]
 [ext_resource type="Resource" uid="uid://74vp14p65w0j" path="res://levels/battles/battle/unit/resources/unit_rogue.tres" id="4_8a3sa"]
 [ext_resource type="Resource" uid="uid://c6va2fxocsa61" path="res://levels/battles/battle/battle_grid/grid_object_layout/example_grid_object_layout_2.tres" id="5_8a3sa"]
 

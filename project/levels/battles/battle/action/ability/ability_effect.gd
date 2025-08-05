@@ -8,6 +8,8 @@ extends Resource
 ## Optional constraint that determines if this effect should be applied to the target
 @export var constraint: TargetTileConstraint
 
+var does_damage: bool = false
+
 
 func preview(_command: ActionExecutionCommand, _preview: ActionPreviewData):
 	pass

@@ -88,8 +88,6 @@ var actions: Array[UnitAction]:
 		actions = val
 
 var action_points_current: int:
-	get:
-		return action_points_current
 	set(value):
 		action_points_current = value
 		action_points_changed.emit()
@@ -309,9 +307,13 @@ func can_act() -> bool:
 
 
 func get_reachable_cells() -> Array[BattleGridCell]:
+	return get_cells_within_ap_budget(action_points_current)
+
+
+func get_cells_within_ap_budget(ap_buget: int) -> Array[BattleGridCell]:
 	if not cell:
 		return []
-	var move_range: int = movement.max_move_count(action_points_current)
+	var move_range: int = movement.max_move_count(ap_buget)
 	return cell.grid.get_cells_within_distance(
 		cell,
 		move_range,
@@ -363,11 +365,11 @@ func get_closest_enemy() -> Unit:
 	var closest_enemy: Unit = null
 	var closest_distance: float = INF
 
-	for enemy_cell in cell.grid.cells.values():
-		if enemy_cell.unit and enemy_cell.unit.team != team:
-			var unit = enemy_cell.unit
+	#var units: Array[Unit] = cell.grid.get_units()
+	for unit: Unit in cell.grid.get_units():
+		if unit.team != team:
 			# Technically, should consider adjacent tiles.
-			var move_distance = get_move_distance_to_cell(enemy_cell)
+			var move_distance = get_move_distance_to_cell(unit.cell)
 			if move_distance < closest_distance:
 				closest_distance = move_distance
 				closest_enemy = unit
@@ -387,3 +389,30 @@ func get_valid_adjacent_move_targets(target_unit: Unit) -> Array[BattleGridCell]
 	var valid_move_targets: Array[BattleGridCell] = get_reachable_cells()
 	var cells_adjacent_to_target: Array[BattleGridCell] = target_unit.get_adjacent_cells()
 	return BattleGridCell.get_overlapping_grid_cells(valid_move_targets, cells_adjacent_to_target)
+
+
+func get_first_ranged_attack_action() -> AbilityAction:
+	var ability_actions: Array[AbilityAction]
+	var actions: Array[UnitAction] = actions.filter(
+		func(action: UnitAction): return action is AbilityAction
+	)
+	ability_actions.append_array(actions)
+	var ranged_ability_actions: Array[AbilityAction] = ability_actions.filter(
+		func(action: AbilityAction): return action.ability.max_range > 1
+	)
+	#var ranged_abilities: Array[Ability] = abilities.filter(func(ability: Ability): return ability.min_range > 1)
+	#var ranged_that_do_damage: Array[Ability] = abilities.filter(func(ability: Ability): return ability.does_damage)
+	var ranged_ability_actions_that_do_damage: Array[AbilityAction] = ranged_ability_actions.filter(
+		func(action: AbilityAction): return action.ability.does_damage
+	)
+	if ranged_ability_actions_that_do_damage.size() > 0:
+		return ranged_ability_actions_that_do_damage[0]
+	return null
+
+
+func has_ranged_attack() -> bool:
+	return get_first_ranged_attack_action() != null
+
+
+func is_enemy_of(unit: Unit):
+	return self.team.has_relationship(unit.team, Team.Relationship.ENEMY_TEAM)

@@ -4,13 +4,13 @@
 [ext_resource type="Script" uid="uid://c1n1gnpms4ens" path="res://levels/battles/battle/unit/unit.gd" id="1_y6s5j"]
 [ext_resource type="Script" uid="uid://brp5ns0pmjttu" path="res://levels/battles/battle/unit/movement.gd" id="2_jj6w5"]
 [ext_resource type="Script" uid="uid://wu0ky8ts37sk" path="res://levels/battles/battle/action/tile_constraint/target_tile_constraint.gd" id="2_m56jr"]
-[ext_resource type="Texture2D" uid="uid://caqfq5wc6ptgv" path="res://assets/art/character/npc/skeleton/skeleton_portrait.png" id="2_nw4pq"]
 [ext_resource type="Script" uid="uid://b27e04h7l1su3" path="res://levels/battles/battle/action/tile_constraint/unit_team_relation_constraint.gd" id="3_qqv34"]
 [ext_resource type="Script" uid="uid://ct8umold07eie" path="res://levels/battles/battle/action/ability/ability_stage.gd" id="4_theot"]
-[ext_resource type="SpriteFrames" uid="uid://dfq76jptl8yqn" path="res://assets/art/character/npc/skeleton/skeleton.res" id="5_jj6w5"]
 [ext_resource type="Script" uid="uid://c3xgtp8yeabd8" path="res://levels/battles/battle/action/ability/ability_effect.gd" id="5_theot"]
 [ext_resource type="Script" uid="uid://bdh8268nm1op" path="res://levels/battles/battle/action/ability/unit_apply_damage_effect.gd" id="6_theot"]
 [ext_resource type="Script" uid="uid://vp2dh6n2rqv2" path="res://levels/battles/battle/action/ability/ability_move.gd" id="8_theot"]
+[ext_resource type="Texture2D" uid="uid://bolrm8fx43e3p" path="res://assets/art/character/npc/skeleton_knight/skeleton_knight_portrait.png" id="9_2akid"]
+[ext_resource type="SpriteFrames" uid="uid://bldux5hin6unb" path="res://assets/art/character/npc/skeleton_knight/skeleton_knight.res" id="11_2akid"]
 
 [sub_resource type="Resource" id="Resource_m56jr"]
 script = ExtResource("3_qqv34")
@@ -69,8 +69,8 @@ description = "Boney simple melee unit"
 abilities = Array[ExtResource("1_e4jav")]([SubResource("Resource_buu0w"), SubResource("Resource_5vwhy")])
 movement = SubResource("Resource_lxlmf")
 action_points_max = 8
-sprite_frames = ExtResource("5_jj6w5")
-portrait = ExtResource("2_nw4pq")
+sprite_frames = ExtResource("11_2akid")
+portrait = ExtResource("9_2akid")
 move_speed = 2.0
 health_point_max = 10
 health_points = 10

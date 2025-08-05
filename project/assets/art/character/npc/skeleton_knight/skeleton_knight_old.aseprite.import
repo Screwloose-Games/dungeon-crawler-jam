@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c0jxja7kbxkhu"
+path="res://.godot/imported/skeleton_knight_old.aseprite-7f71a3dbb327de3718c1f50171ed144f.res"
+
+[deps]
+
+source_file="res://assets/art/character/npc/skeleton_knight/skeleton_knight_old.aseprite"
+dest_files=["res://.godot/imported/skeleton_knight_old.aseprite-7f71a3dbb327de3718c1f50171ed144f.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://u7ao1a1w1hig"
+path="res://.godot/imported/skeleton_archer_bu.aseprite-6330ee65fd901caf41fe2aa0aa0b634b.res"
+
+[deps]
+
+source_file="res://assets/art/character/npc/skeleton_archer/skeleton_archer_bu.aseprite"
+dest_files=["res://.godot/imported/skeleton_archer_bu.aseprite-6330ee65fd901caf41fe2aa0aa0b634b.res"]
+
+[params]
+

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://o8ll87nb3ty1"]
 
 [ext_resource type="Script" uid="uid://ycye2pxe3lrk" path="res://levels/battles/battle/unit/unit_node.gd" id="1_ilobj"]
-[ext_resource type="Resource" uid="uid://cdcfvr8yx37yy" path="res://levels/battles/battle/unit/resources/unit_skeleton.tres" id="2_ghkny"]
+[ext_resource type="Resource" uid="uid://cdcfvr8yx37yy" path="res://levels/battles/battle/unit/resources/unit_skeleton_knight.tres" id="2_ghkny"]
 [ext_resource type="SpriteFrames" uid="uid://dfq76jptl8yqn" path="res://assets/art/character/npc/skeleton/skeleton.res" id="3_ir3g3"]
 [ext_resource type="SpriteFrames" uid="uid://bcbjci3g0cbqg" path="res://assets/art/environment/tile_selection.res" id="3_xefp7"]
 [ext_resource type="Script" uid="uid://b4cp7k0nkvh7o" path="res://components/clickable_static_body_2d.gd" id="4_ghkny"]

@@ -149,3 +149,15 @@ func _create_or_get_cell(pos: Vector2i) -> BattleGridCell:
 	if not cells.has(pos):
 		cells[pos] = BattleGridCell.new(self, pos)
 	return cells[pos]
+
+
+func get_units() -> Array[Unit]:
+	var units: Array[Unit] = []
+	var temp_units = (
+		cells
+		. values()
+		. filter(func(cell: BattleGridCell): return cell.unit != null)
+		. map(func(cell: BattleGridCell): return cell.unit)
+	)
+	units.append_array(temp_units)
+	return units

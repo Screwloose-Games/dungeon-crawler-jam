@@ -15,13 +15,17 @@ var damage: int:
 
 func _init(_base_damage: int = 0) -> void:
 	self.base_damage = _base_damage
+	self.does_damage = true
 
 
 func preview(command: ActionExecutionCommand, preview: ActionPreviewData):
 	for target in command.targets:
-		preview.highlighted_cells[target.position] = CellHighlight.new(
-			CellHighlight.HighlightColor.BLUE,
-			CellHighlight.Type.CONFIRM,
+		preview.highlighted_cells[target.position] = (
+			CellHighlight
+			. new(
+				CellHighlight.HighlightColor.BLUE,
+				CellHighlight.Type.CONFIRM,
+			)
 		)
 
 

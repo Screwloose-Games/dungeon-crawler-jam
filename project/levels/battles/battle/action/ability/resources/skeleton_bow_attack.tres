@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=14 format=3 uid="uid://i7qgqyttpma3"]
+
+[ext_resource type="Script" uid="uid://wu0ky8ts37sk" path="res://levels/battles/battle/action/tile_constraint/target_tile_constraint.gd" id="1_73p54"]
+[ext_resource type="Script" uid="uid://b27e04h7l1su3" path="res://levels/battles/battle/action/tile_constraint/unit_team_relation_constraint.gd" id="2_odv3y"]
+[ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/action/ability/ability.gd" id="3_atyjj"]
+[ext_resource type="Script" uid="uid://ytbm8nx37wfm" path="res://levels/battles/battle/action/tile_constraint/direct_line_constraint.gd" id="3_odv3y"]
+[ext_resource type="Script" uid="uid://ttosjyfsopkv" path="res://levels/battles/battle/action/tile_constraint/range_constraint.gd" id="4_atyjj"]
+[ext_resource type="Script" uid="uid://ct8umold07eie" path="res://levels/battles/battle/action/ability/ability_stage.gd" id="4_vkm3o"]
+[ext_resource type="Script" uid="uid://c3xgtp8yeabd8" path="res://levels/battles/battle/action/ability/ability_effect.gd" id="5_w34vr"]
+[ext_resource type="Script" uid="uid://bdh8268nm1op" path="res://levels/battles/battle/action/ability/unit_apply_damage_effect.gd" id="6_o8p3n"]
+
+[sub_resource type="Resource" id="Resource_m56jr"]
+script = ExtResource("2_odv3y")
+team_relation = 3
+metadata/_custom_type_script = "uid://b27e04h7l1su3"
+
+[sub_resource type="Resource" id="Resource_atyjj"]
+script = ExtResource("3_odv3y")
+metadata/_custom_type_script = "uid://ytbm8nx37wfm"
+
+[sub_resource type="Resource" id="Resource_vkm3o"]
+script = ExtResource("4_atyjj")
+min_range = 0
+max_range = 6
+type = 0
+metadata/_custom_type_script = "uid://ttosjyfsopkv"
+
+[sub_resource type="Resource" id="Resource_644i4"]
+script = ExtResource("6_o8p3n")
+base_damage = 2
+metadata/_custom_type_script = "uid://bdh8268nm1op"
+
+[sub_resource type="Resource" id="Resource_t3lpx"]
+script = ExtResource("4_vkm3o")
+name = "Apply damage"
+description = ""
+effects = Array[ExtResource("5_w34vr")]([SubResource("Resource_644i4")])
+metadata/_custom_type_script = "uid://ct8umold07eie"
+
+[resource]
+script = ExtResource("3_atyjj")
+name = "Bow Attack"
+description = ""
+number_of_targets = 1
+constraints = Array[ExtResource("1_73p54")]([SubResource("Resource_m56jr"), SubResource("Resource_atyjj"), SubResource("Resource_vkm3o")])
+stages = Array[ExtResource("4_vkm3o")]([SubResource("Resource_t3lpx")])
+base_cost = 4
+metadata/_custom_type_script = "uid://bnkmedconmppg"
