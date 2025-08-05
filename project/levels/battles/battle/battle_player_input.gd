@@ -91,7 +91,7 @@ func _target_cell(cell: BattleGridCell):
 		input_locked = true
 		print("input locked")
 		action_execution_command.execute(_on_action_completed)
-	targetted_cells = []
+		targetted_cells = []
 
 
 func _hover_cell(cell: BattleGridCell):
@@ -150,7 +150,8 @@ func _update_action_execution_command(ignore_hover: bool = false) -> bool:
 	if not action_execution_command.is_complete():
 		return false
 
-	try_show_command_preview(action_execution_command)
+	if not ignore_hover or action_execution_command.target_count_satisfied():
+		try_show_command_preview(action_execution_command)
 
 	return action_execution_command.validate()
 

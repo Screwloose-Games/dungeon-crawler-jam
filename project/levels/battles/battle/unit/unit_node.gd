@@ -77,6 +77,8 @@ func _on_unit_changed():
 		unit.move_started.connect(_on_unit_move_started)
 	if not unit.died.is_connected(queue_free):
 		unit.died.connect(queue_free)
+	if not unit.curse_changed.is_connected(_on_unit_curse_changed):
+		unit.curse_changed.connect(_on_unit_curse_changed)
 	animated_sprite_2d.sprite_frames = unit.sprite_frames
 	init_dynamic_collision_poly()
 
@@ -91,25 +93,49 @@ func init_position():
 func _on_unit_move_started(
 	return_signal: ReturnSignal,
 	cell: BattleGridCell,
-	move_type: Movement.Type
+	move_method: Movement.Method
 ):
 	var grid_transform = Transform2D(Vector2(16, 8), Vector2(-16, 8), Vector2(16, 8))
 	var target_position = grid_transform * Vector2(cell.position)
 
-	if move_type == Movement.Type.TELEPORTED:
+	if move_method == Movement.Method.TELEPORT:
 		position = target_position
 		return
 
+	var distance = (target_position - position).length()
 	# Inform unit that we are animating the movement,
 	# and it should wait until we are done to complete the move
 	return_signal.register_blocker()
-	var tween = get_tree().create_tween()
 
-	tween.tween_property(self, "position", target_position, 1.0 / unit.move_speed)
+	var update_facing: bool
+	var duration: float
+
+	match move_method:
+		Movement.Method.WALK:
+			update_facing = true
+			duration = 1.0 / unit.move_speed
+		Movement.Method.FLY:
+			update_facing = true
+			duration = 1.0 / unit.move_speed
+		Movement.Method.JUMP_GROUND:
+			update_facing = true
+			duration = distance * 0.5 / unit.move_speed
+		Movement.Method.JUMP_AIR:
+			update_facing = true
+			duration = distance * 0.5 / unit.move_speed
+		Movement.Method.SLIDE:
+			update_facing = false
+			duration = 0.5
+		_:
+			assert(false, "Movement method not implemented: %d" % move_method)
+			update_facing = true
+			duration = 0
+
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "position", target_position, duration)
 	var prev_position = position
 
-	# If moving on own accord, update sprite
-	if move_type == Movement.Type.SELF_DIRECTED:
+	if update_facing:
 		if target_position.x > prev_position.x:
 			start_moving_right()
 		elif target_position.x < prev_position.x:
@@ -154,3 +180,10 @@ func _on_player_selected_unit(unit: Unit):
 func _on_player_unselected_unit(unit: Unit):
 	if self.unit == unit:
 		selection_sprite.visible = false
+
+
+func _on_unit_curse_changed(cursed: bool):
+	if cursed:
+		animated_sprite_2d.modulate = Color.PURPLE
+	else:
+		animated_sprite_2d.modulate = Color.WHITE

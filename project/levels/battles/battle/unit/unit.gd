@@ -6,9 +6,10 @@ extends Resource
 
 signal died
 signal moved_to(new_cell: BattleGridCell)
-signal move_started(callback: ReturnSignal, new_cell: BattleGridCell, move_type: Movement.Type)
+signal move_started(callback: ReturnSignal, new_cell: BattleGridCell, move_method: Movement.Method)
 signal action_points_changed
 signal did_action(action: UnitAction)
+signal curse_changed(is_cursed: bool)
 
 @export var name: String:
 	set(new_value):
@@ -120,6 +121,13 @@ var team: Team:
 		if team:
 			GlobalSignalBus.unit_added_to_team.emit(self, team)
 
+var is_cursed: bool:
+	set(new_val):
+		if new_val == is_cursed:
+			return
+		is_cursed = new_val
+		curse_changed.emit(new_val)
+
 
 func _on_health_health_changed(new_health: int):
 	health_points = new_health
@@ -169,7 +177,6 @@ func _init(
 
 
 func init_actions():
-	print(name, " ", movement)
 	actions = []
 	init_move_action()
 	init_ability_actions()
@@ -262,33 +269,34 @@ func max_tile_move_count() -> int:
 
 func move_along_path(
 	movement_path: MovementPath,
-	move_type: Movement.Type,
 	callback: Callable,
 ) -> void:
+	print("move along path")
 	if movement_path.move_count < 1:
 		callback.call()
 		return
 
-	_move_path_part(movement_path, move_type, callback, 1)
+	_move_path_part(movement_path, callback, 1)
 
 
 func _move_path_part(
 	movement_path: MovementPath,
-	move_type: Movement.Type,
 	callback: Callable,
 	part: int,
 ) -> void:
 	var next_cell = movement_path.cell_path[part]
 	var move_complete_signal := ReturnSignal.new(
 		func():
-			self.cell = next_cell
+			if not move_to_cell(next_cell):
+				callback.call()
+				return
 			var next_move: int = part + 1
 			if next_move < len(movement_path.cell_path):
-				_move_path_part(movement_path, move_type, callback, next_move)
+				_move_path_part(movement_path, callback, next_move)
 			else:
 				callback.call()
 	)
-	move_started.emit(move_complete_signal, next_cell, move_type)
+	move_started.emit(move_complete_signal, next_cell, movement_path.move_method)
 	move_complete_signal.all_participants_registered()
 
 

@@ -106,6 +106,11 @@ func is_complete():
 	return unit and commander and action
 
 
+## determine if the target count meets the required number
+func target_count_satisfied() -> bool:
+	return len(targets) == action.get_target_count()
+
+
 ## determine if the unit can afford the action
 func can_unit_afford() -> bool:
 	return unit.action_points_current >= action.get_ap_cost(self)

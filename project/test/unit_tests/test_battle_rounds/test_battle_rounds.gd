@@ -1,7 +1,7 @@
 class_name BattleRoundsTest
 extends GdUnitTestSuite
 
-const UNIT_SKELETON := preload("res://levels/battles/battle/unit/resources/unit_skeleton.tres")
+const UNIT_SKELETON := preload("res://levels/battles/battle/unit/resources/unit_skeleton_knight.tres")
 const UNIT_ROGUE := preload("res://levels/battles/battle/unit/resources/unit_rogue.tres")
 
 

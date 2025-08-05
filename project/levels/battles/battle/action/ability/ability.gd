@@ -9,7 +9,7 @@ extends Resource
 ## Detailed description of what the ability does and how it works
 @export_multiline var description: String
 ## How many individual targets can be selected for this ability
-@export var number_of_targets: int
+@export var number_of_targets: int = 1
 ## Rules that determine which tiles can be targeted by this ability
 @export var constraints: Array[TargetTileConstraint]
 ## Sequential phases of execution that define the ability's complete effect over time
@@ -18,6 +18,7 @@ extends Resource
 ## This is the base cost before any modifications from effects or conditions
 @export_range(0, 20, 1) var base_cost: int
 @export var targetable_highlight: CellHighlight
+@export var targetted_highlight: CellHighlight
 
 var min_range: int:
 	get = get_min_range
@@ -53,6 +54,7 @@ func preview(command: ActionExecutionCommand) -> ActionPreviewData:
 
 ## Execute the command. The function will call the callback once all effects have completed
 func execute(command: ActionExecutionCommand, callback: Callable):
+	print("Executing ability")
 	var return_signal = ReturnSignal.new(callback)
 	for stage in stages:
 		stage.execute(command, return_signal)

@@ -35,7 +35,21 @@ func _init(
 func preview(command: ActionExecutionCommand) -> ActionPreviewData:
 	var preview = ability.preview(command)
 	preview.action_point_cost = get_ap_cost(command)
+	preview.highlighted_cells = get_targetted_highlights(command)
+
 	return preview
+
+
+func get_targetted_highlights(command: ActionExecutionCommand) -> Dictionary[Vector2i, CellHighlight]:
+	var targetted_highlights: Dictionary[Vector2i, CellHighlight] = {}
+
+	if not ability.targetted_highlight:
+		return targetted_highlights
+
+	for target in command.targets:
+		targetted_highlights.set(target.position, ability.targetted_highlight)
+
+	return targetted_highlights
 
 
 func execute(command: ActionExecutionCommand, callback: Callable):
@@ -53,3 +67,7 @@ func get_ap_cost(command: ActionExecutionCommand) -> int:
 
 func get_minimum_ap_cost() -> int:
 	return ability.get_minimum_ap_cost()
+
+
+func get_target_count() -> int:
+	return ability.number_of_targets

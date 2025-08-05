@@ -22,7 +22,7 @@ func preview(command: ActionExecutionCommand, preview: ActionPreviewData):
 	for target in command.targets:
 		preview.highlighted_cells[target.position] = (
 			CellHighlight
-			. new(
+			.new(
 				CellHighlight.HighlightColor.BLUE,
 				CellHighlight.Type.CONFIRM,
 			)

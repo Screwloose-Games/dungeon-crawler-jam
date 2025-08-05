@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="GridObjectLayout" load_steps=9 format=3 uid="uid://dh8wdi6hiu4ut"]
+[gd_resource type="Resource" script_class="GridObjectLayout" load_steps=11 format=3 uid="uid://dh8wdi6hiu4ut"]
 
 [ext_resource type="Script" uid="uid://bi1g3t40pyhyp" path="res://levels/battles/battle/battle_grid/grid_object_layout/grid_object_layout.gd" id="1_c4ltl"]
 [ext_resource type="Script" uid="uid://csr3qmm41n0pg" path="res://levels/battles/battle/battle_grid/grid_object_layout/grid_object_cell.gd" id="2_w3slq"]
-[ext_resource type="Resource" uid="uid://cdcfvr8yx37yy" path="res://levels/battles/battle/unit/resources/unit_skeleton_knight.tres" id="3_c4ltl"]
 [ext_resource type="Resource" uid="uid://74vp14p65w0j" path="res://levels/battles/battle/unit/resources/unit_rogue.tres" id="4_usm7v"]
+[ext_resource type="Resource" uid="uid://cdcfvr8yx37yy" path="res://levels/battles/battle/unit/resources/unit_skeleton_knight.tres" id="4_w3slq"]
 [ext_resource type="Resource" uid="uid://bbrh2ene7emiw" path="res://levels/battles/battle/unit/resources/unit_skeleton_archer.tres" id="5_w3slq"]
+[ext_resource type="Resource" uid="uid://ck1o7ddt8xi5p" path="res://levels/battles/battle/unit/resources/unit_warlock.tres" id="6_ram37"]
 
 [sub_resource type="Resource" id="Resource_ram37"]
 script = ExtResource("2_w3slq")
@@ -15,7 +16,7 @@ metadata/_custom_type_script = "uid://csr3qmm41n0pg"
 
 [sub_resource type="Resource" id="Resource_w3slq"]
 script = ExtResource("2_w3slq")
-unit = ExtResource("3_c4ltl")
+unit = ExtResource("4_w3slq")
 effect = Array[int]([])
 team_index = 1
 
@@ -25,10 +26,18 @@ unit = ExtResource("4_usm7v")
 effect = Array[int]([])
 team_index = 0
 
+[sub_resource type="Resource" id="Resource_magkq"]
+script = ExtResource("2_w3slq")
+unit = ExtResource("6_ram37")
+effect = Array[int]([])
+team_index = 0
+metadata/_custom_type_script = "uid://csr3qmm41n0pg"
+
 [resource]
 script = ExtResource("1_c4ltl")
 tile_data = Dictionary[Vector2i, ExtResource("2_w3slq")]({
 Vector2i(7, 0): SubResource("Resource_ram37"),
 Vector2i(9, 1): SubResource("Resource_w3slq"),
-Vector2i(13, 0): SubResource("Resource_usm7v")
+Vector2i(13, 0): SubResource("Resource_usm7v"),
+Vector2i(14, 0): SubResource("Resource_magkq")
 })
