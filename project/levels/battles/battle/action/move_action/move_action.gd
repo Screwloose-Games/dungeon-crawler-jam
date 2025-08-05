@@ -46,7 +46,7 @@ func execute(command: ActionExecutionCommand, callback: Callable):
 	var ap_cost = get_ap_cost_from_path(command, path)
 	unit.spend_action_points(ap_cost)
 	unit.movement.purchase_movement(path.move_count)
-	command.unit.move_along_path(path, callback)
+	command.unit.move_along_path(path, Movement.Type.SELF_DIRECTED, callback)
 
 
 func validate(command: ActionExecutionCommand) -> bool:

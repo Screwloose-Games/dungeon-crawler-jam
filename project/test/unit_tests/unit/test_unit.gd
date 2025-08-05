@@ -93,7 +93,7 @@ func test_rogue_unit_spends_correct_ap_when_acting():
 
 	# The command IS valid
 	var preview = command.preview()
-	assert_bool(preview.valid).is_true()
+	assert_bool(command.validate()).is_true()
 
 	# When the action is executed
 	var callback_called: Array[bool] = [false]

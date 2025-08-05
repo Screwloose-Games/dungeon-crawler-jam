@@ -5,6 +5,20 @@
 class_name BattleGrid
 extends Resource
 
+static var cardinal_directions: Array[Vector2i] = [
+	Vector2i(1, 0),
+	Vector2i(0, 1),
+	Vector2i(-1, 0),
+	Vector2i(0, -1),
+]
+
+static var diagonal_directions: Array[Vector2i] = [
+	Vector2i(1, 1),
+	Vector2i(-1, 1),
+	Vector2i(-1, -1),
+	Vector2i(1, -1),
+]
+
 ## Dictionary mapping grid coordinates to their corresponding cell data and occupants
 @export var cells: Dictionary[Vector2i, BattleGridCell]
 
@@ -27,13 +41,32 @@ func _init(
 	print("%d cells loaded" % len(cells))
 
 
+## Get the normalized direction vector, snapped to the four cardinal directions
+## If [param allow_diagonals] is set, then the four diagonal directions are allowed
+static func get_snapped_direction(position: Vector2, allow_diagonals: bool) -> Vector2:
+	var directions: Array[Vector2i] = cardinal_directions
+	if allow_diagonals:
+		directions.append_array(diagonal_directions)
+
+	var best_similarity := 0.0
+	var best_direction := Vector2.ZERO
+	for dir in directions:
+		var normalized_dir = Vector2(dir).normalized()
+		var similarity = normalized_dir.dot(position)
+		if similarity > best_similarity:
+			best_similarity = similarity
+			best_direction = normalized_dir
+
+	return best_direction
+
+
 func get_cell(tile_position: Vector2i) -> BattleGridCell:
 	if not cells.has(tile_position):
 		return
 	return cells[tile_position]
 
 
-func is_cell_movable_to(cell_pos: Vector2i, movement_method: Movement.MovementMethod):
+func is_cell_movable_to(cell_pos: Vector2i, movement_method: Movement.Method):
 	if not cells.has(cell_pos):
 		return false
 	var cell = cells[cell_pos]
@@ -45,7 +78,7 @@ func is_cell_movable_to(cell_pos: Vector2i, movement_method: Movement.MovementMe
 		BattleGridCell.TileType.GROUND:
 			return true
 		BattleGridCell.TileType.PIT:
-			return movement_method == Movement.MovementMethod.FLY
+			return movement_method == Movement.Method.FLY
 
 
 func _load_battlefield_tiles(battlefield: Battlefield):
@@ -82,12 +115,12 @@ func _construct_navigation():
 
 
 func get_movement_path(
-	from: BattleGridCell, to: BattleGridCell, movement_method: Movement.MovementMethod
+	from: BattleGridCell, to: BattleGridCell, movement_method: Movement.Method
 ) -> MovementPath:
 	match movement_method:
-		Movement.MovementMethod.WALK:
+		Movement.Method.WALK:
 			return walk_navigation.get_movement_path(from.position, to.position)
-		Movement.MovementMethod.FLY:
+		Movement.Method.FLY:
 			return fly_navigation.get_movement_path(from.position, to.position)
 		_:
 			assert(false, "MovementMethod not implemented: %s" % movement_method)
@@ -116,13 +149,13 @@ func get_adjacent_cells(cell: BattleGridCell) -> Array[BattleGridCell]:
 func get_cells_within_distance(
 	from_cell: BattleGridCell,
 	distance: int,
-	movement_method: Movement.MovementMethod,
+	movement_method: Movement.Method,
 	cell_check: Callable,
 ) -> Array[BattleGridCell]:
 	match movement_method:
-		Movement.MovementMethod.WALK:
+		Movement.Method.WALK:
 			return walk_navigation.get_cells_within_distance(from_cell, distance, cell_check)
-		Movement.MovementMethod.FLY:
+		Movement.Method.FLY:
 			return fly_navigation.get_cells_within_distance(from_cell, distance, cell_check)
 	return []
 

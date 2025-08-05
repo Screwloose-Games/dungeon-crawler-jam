@@ -12,7 +12,19 @@ static var running_command: ActionExecutionCommand
 @export var commander: Commander
 @export var action: UnitAction
 @export var targets: Array[BattleGridCell]
+
+## Where the command originated from
+## Almost always the position of the unit, but can be overriden with override_origin()
+var origin_position: Vector2i:
+	get:
+		if _overriden_origin == null:
+			if unit and unit.cell:
+				return unit.cell.position
+			return Vector2i.ZERO
+		return _overriden_origin
+
 var battle_grid: BattleGrid
+var _overriden_origin: Variant = null
 
 var team: Team:
 	set(new_value):
@@ -26,7 +38,7 @@ func _init(
 	commander: Commander = null,
 	battle_grid: BattleGrid = null,
 	action: UnitAction = null,
-	targets: Array[BattleGridCell] = []
+	targets: Array[BattleGridCell] = [],
 ) -> void:
 	self.unit = unit
 	self.commander = commander
@@ -111,3 +123,7 @@ func is_on_same_team(commander: Commander, unit: Unit) -> bool:
 func can_command_unit(unit: Unit) -> bool:
 	# Check if the commander can command the unit
 	return commander and is_on_same_team(commander, unit)
+
+
+func override_origin(new_origin: Vector2i) -> void:
+	_overriden_origin = new_origin

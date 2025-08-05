@@ -49,7 +49,7 @@ metadata/_custom_type_script = "uid://bnkmedconmppg"
 
 [sub_resource type="Resource" id="Resource_tmujv"]
 script = ExtResource("3_5h84q")
-movement_points_per_ap = 1
+movement_points_per_ap = 3
 method = 0
 metadata/_custom_type_script = "uid://brp5ns0pmjttu"
 

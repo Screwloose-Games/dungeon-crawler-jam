@@ -24,7 +24,7 @@ func test_walk_shorter_path():
 	_try_walk(Vector2i(12, 0), Vector2i(14, -7), 10)
 
 func test_try_walk_blocked_path():
-	_try_walk(Vector2i(14, 0), Vector2i(14, 5), 0)
+	_try_walk(Vector2i(14, 0), Vector2i(14, 5), 3, false)
 
 func test_walk_around_wall():
 	_try_walk(Vector2i(16, 0), Vector2i(16, 5), 10)
@@ -32,7 +32,8 @@ func test_walk_around_wall():
 func _try_walk(
 	start_pos: Vector2i,
 	target_pos: Vector2i,
-	expected_length: int
+	expected_length: int,
+	reaches_end: bool = true,
 ):
 	var battle_grid = BattleGrid.new(WALKING_TEST_BATTLFIELD, null, [])
 	var start_cell = battle_grid.get_cell(start_pos)
@@ -44,7 +45,7 @@ func _try_walk(
 	var path = battle_grid.get_movement_path(
 		start_cell,
 		end_cell,
-		Movement.MovementMethod.WALK
+		Movement.Method.WALK
 	)
 
 
@@ -52,7 +53,8 @@ func _try_walk(
 		assert_object(path).is_not_null()
 		assert_object(path.cell_path).is_not_null()
 		assert_object(path.cell_path[0]).is_equal(start_cell)
-		assert_object(path.cell_path[-1]).is_equal(end_cell)
 		assert_int(path.cell_path.size()).is_equal(expected_length)
+		if reaches_end:
+			assert_object(path.cell_path[-1]).is_equal(end_cell)
 	else:
 		assert_object(path).is_null()

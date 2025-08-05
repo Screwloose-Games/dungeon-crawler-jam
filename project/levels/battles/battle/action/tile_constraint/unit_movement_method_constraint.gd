@@ -5,7 +5,7 @@ class_name UnitMovementMethodConstraint
 extends TargetTileConstraint
 
 ## The required movement method that the target unit must have
-@export var movement_method: Movement.MovementMethod
+@export var movement_method: Movement.Method
 
 
 ## Validates that the unit on the target tile has the required movement method.
@@ -13,13 +13,13 @@ func _validate_cell(_command: ActionExecutionCommand, cell: BattleGridCell) -> b
 	return cell.unit.movement.method == movement_method
 
 
-func get_error_message(method: Movement.MovementMethod) -> String:
+func get_error_message(method: Movement.Method) -> String:
 	match method:
-		Movement.MovementMethod.FLY:
+		Movement.Method.FLY:
 			return tr("not_flying")
-		Movement.MovementMethod.WALK:
+		Movement.Method.WALK:
 			return tr("not_walking")
-		Movement.MovementMethod.JUMP:
+		Movement.Method.JUMP:
 			return tr("not_jumping")
 		_:
 			assert(false, "Movement method not implemented")

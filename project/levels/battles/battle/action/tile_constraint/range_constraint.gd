@@ -12,7 +12,7 @@ enum RangeType
 @export var type: RangeType
 
 func _validate_cell(command: ActionExecutionCommand, cell: BattleGridCell) -> bool:
-	var from = command.unit.cell.position
+	var from = command.origin_position
 	var to = cell.position
 	var distance: int = 0
 
@@ -60,7 +60,7 @@ func derive_cells(command: ActionExecutionCommand) -> Variant:
 
 	var cells: Array[BattleGridCell] = []
 	for position in positions:
-		var cell = command.battle_grid.get_cell(position + command.unit.cell.position)
+		var cell = command.battle_grid.get_cell(position + command.origin_position)
 		if cell:
 			cells.append(cell)
 

@@ -7,6 +7,7 @@ extends RefCounted
 
 var _pending_count: int
 var _on_complete: Callable
+var _all_registered: bool
 
 func _init(on_complete: Callable):
 	_pending_count = 0
@@ -15,6 +16,7 @@ func _init(on_complete: Callable):
 
 ## Must be called once it is ensured that all participants have registered
 func all_participants_registered():
+	_all_registered = true
 	if _pending_count == 0:
 		_execute()
 
@@ -25,7 +27,7 @@ func register_blocker():
 
 func complete_blocker():
 	_pending_count -= 1
-	if is_complete():
+	if _all_registered and is_complete():
 		_execute()
 
 
