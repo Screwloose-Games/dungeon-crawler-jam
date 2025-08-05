@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=13 format=3 uid="uid://ddoweur3grrh7"]
+
+[ext_resource type="Script" uid="uid://wu0ky8ts37sk" path="res://levels/battles/battle/action/tile_constraint/target_tile_constraint.gd" id="1_utlck"]
+[ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/action/ability/ability.gd" id="2_uikfk"]
+[ext_resource type="Script" uid="uid://d2ecdvqe0kaf3" path="res://levels/battles/battle/action/tile_constraint/unit_cursed_tile_constraint.gd" id="2_wjvir"]
+[ext_resource type="Script" uid="uid://ct8umold07eie" path="res://levels/battles/battle/action/ability/ability_stage.gd" id="3_iuwpc"]
+[ext_resource type="Script" uid="uid://nismy8hccyyv" path="res://levels/battles/battle/battle_grid/cell_highlight.gd" id="5_iuwpc"]
+[ext_resource type="Script" uid="uid://c3xgtp8yeabd8" path="res://levels/battles/battle/action/ability/ability_effect.gd" id="5_wjvir"]
+[ext_resource type="Script" uid="uid://chotiqr7ijeld" path="res://levels/battles/battle/action/ability/unit_swap_effect.gd" id="6_gbhiu"]
+
+[sub_resource type="Resource" id="Resource_4utic"]
+script = ExtResource("2_wjvir")
+invert = false
+metadata/_custom_type_script = "uid://d2ecdvqe0kaf3"
+
+[sub_resource type="Resource" id="Resource_qn60h"]
+script = ExtResource("6_gbhiu")
+metadata/_custom_type_script = "uid://chotiqr7ijeld"
+
+[sub_resource type="Resource" id="Resource_koshy"]
+script = ExtResource("3_iuwpc")
+name = ""
+description = ""
+effects = Array[ExtResource("5_wjvir")]([SubResource("Resource_qn60h")])
+metadata/_custom_type_script = "uid://ct8umold07eie"
+
+[sub_resource type="Resource" id="Resource_wjvir"]
+script = ExtResource("5_iuwpc")
+color = 2
+type = 1
+metadata/_custom_type_script = "uid://nismy8hccyyv"
+
+[sub_resource type="Resource" id="Resource_gbhiu"]
+script = ExtResource("5_iuwpc")
+color = 3
+type = 2
+metadata/_custom_type_script = "uid://nismy8hccyyv"
+
+[resource]
+script = ExtResource("2_uikfk")
+name = "Curse swap"
+description = ""
+number_of_targets = 2
+constraints = Array[ExtResource("1_utlck")]([SubResource("Resource_4utic")])
+stages = Array[ExtResource("3_iuwpc")]([SubResource("Resource_koshy")])
+base_cost = 0
+targetable_highlight = SubResource("Resource_wjvir")
+targetted_highlight = SubResource("Resource_gbhiu")
+metadata/_custom_type_script = "uid://bnkmedconmppg"

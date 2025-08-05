@@ -26,8 +26,8 @@ var teams: Array[Team]
 var battlefield: Battlefield
 
 ## Store graph information
-var fly_navigation: NavigationLayer
-var walk_navigation: NavigationLayer
+var air_navigation: NavigationLayer
+var ground_navigation: NavigationLayer
 
 
 func _init(
@@ -108,23 +108,30 @@ func _construct_navigation():
 	if len(keys) == 0:
 		return
 
-	walk_navigation = NavigationLayer.new(cells, [BattleGridCell.TileType.GROUND])
-	fly_navigation = NavigationLayer.new(
+	ground_navigation = NavigationLayer.new(cells, [BattleGridCell.TileType.GROUND])
+	air_navigation = NavigationLayer.new(
 		cells, [BattleGridCell.TileType.GROUND, BattleGridCell.TileType.PIT]
 	)
 
 
 func get_movement_path(
-	from: BattleGridCell, to: BattleGridCell, movement_method: Movement.Method
+	from: BattleGridCell, to: BattleGridCell, move_method: Movement.Method
 ) -> MovementPath:
-	match movement_method:
+	var path: MovementPath = null
+
+	match move_method:
 		Movement.Method.WALK:
-			return walk_navigation.get_movement_path(from.position, to.position)
+			path = ground_navigation.get_movement_path(from.position, to.position)
 		Movement.Method.FLY:
-			return fly_navigation.get_movement_path(from.position, to.position)
+			path = air_navigation.get_movement_path(from.position, to.position)
 		_:
-			assert(false, "MovementMethod not implemented: %s" % movement_method)
+			assert(false, "MovementMethod not implemented: %s" % move_method)
 			return null
+	if not path:
+		return null
+
+	path.move_method = move_method
+	return path
 
 
 func get_adjacent_cells(cell: BattleGridCell) -> Array[BattleGridCell]:
@@ -154,9 +161,9 @@ func get_cells_within_distance(
 ) -> Array[BattleGridCell]:
 	match movement_method:
 		Movement.Method.WALK:
-			return walk_navigation.get_cells_within_distance(from_cell, distance, cell_check)
+			return ground_navigation.get_cells_within_distance(from_cell, distance, cell_check)
 		Movement.Method.FLY:
-			return fly_navigation.get_cells_within_distance(from_cell, distance, cell_check)
+			return air_navigation.get_cells_within_distance(from_cell, distance, cell_check)
 	return []
 
 
@@ -188,9 +195,9 @@ func get_units() -> Array[Unit]:
 	var units: Array[Unit] = []
 	var temp_units = (
 		cells
-		. values()
-		. filter(func(cell: BattleGridCell): return cell.unit != null)
-		. map(func(cell: BattleGridCell): return cell.unit)
+		.values()
+		.filter(func(cell: BattleGridCell): return cell.unit != null)
+		.map(func(cell: BattleGridCell): return cell.unit)
 	)
 	units.append_array(temp_units)
 	return units

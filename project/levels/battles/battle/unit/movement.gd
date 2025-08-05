@@ -1,14 +1,19 @@
 class_name Movement
 extends Resource
 
-enum Method {WALK, FLY, JUMP}
-enum Type {
-	## Use the assigned movement method to move
-	SELF_DIRECTED,
-	## Pushed by some external force
-	PUSHED,
-	## Teleported to a new location
-	TELEPORTED,
+enum Method {
+	## Fly to another ground cell, obey unit/wall collision
+	WALK,
+	## Fly to another cell, obey unit/wall collision
+	FLY,
+	## Jump to any clear ground cell, ignore unit collision along the way, obey wall collision
+	JUMP_GROUND,
+	## Jump to any clear cell, ignoring unit collision along the way, obey wall collision
+	JUMP_AIR,
+	## Slide to any clear cell, obey unit/wall collision
+	SLIDE,
+	## Teleport to any clear cell
+	TELEPORT,
 }
 
 @export var movement_points_per_ap: int = 2

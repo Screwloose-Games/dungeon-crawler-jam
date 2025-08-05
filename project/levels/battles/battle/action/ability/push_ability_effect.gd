@@ -44,7 +44,6 @@ func _apply_to_target(
 	return_signal.register_blocker()
 	target_unit.move_along_path(
 		path,
-		Movement.Type.PUSHED,
 		func(): return_signal.complete_blocker()
 	)
 	return_signal.all_participants_registered()
@@ -65,25 +64,23 @@ func get_path_from_offsets(
 		var next_cell = command.battle_grid.get_cell(position)
 		if not next_cell or next_cell.unit:
 			# Unit was pushed into a non-existing or ocucpied cell. Exit early
-			return MovementPath.new(path_cells)
+			return MovementPath.new(path_cells, Movement.Method.SLIDE)
 		path_cells.append(next_cell)
-	return MovementPath.new(path_cells)
+
+	return MovementPath.new(path_cells, Movement.Method.SLIDE)
 
 
 func _reorient_offsets(target_offset: Vector2i) -> Array[Vector2i]:
 	var casting_direction = BattleGrid.get_snapped_direction(Vector2(target_offset), true)
-	print("casting_direction: ", casting_direction)
 
 	var rotation_amount = atan2(casting_direction.y, casting_direction.x)
 	# Correct rotation to be relative to y axis
 	rotation_amount -= PI * 0.5
-	print("rotation_amount: ", rotation_amount)
 	var rotation_transform = Transform2D(rotation_amount, Vector2.ZERO)
 
 	var new_offsets: Array[Vector2i] = []
 	for offset in push_offsets:
 		var rotated_offset = rotation_transform * Vector2(offset).normalized()
 		new_offsets.append(Vector2i(rotated_offset.round()))
-		print("new_offset: ", Vector2i(rotated_offset.round()))
 
 	return new_offsets

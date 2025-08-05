@@ -12,6 +12,7 @@ extends Resource
 ## Used as part of the calculation for cost, [member cost].
 @export var minimum_ap_cost: int
 
+
 var tile_constraints: Array[TargetTileConstraint]:
 	get = get_tile_constraints
 
@@ -48,10 +49,17 @@ func get_targetable_highlights(
 	return highlights
 
 
+func get_targetted_highlights(
+	_command: ActionExecutionCommand
+) -> Dictionary[Vector2i, CellHighlight]:
+	return {}
+
+
 ## Get any data needed to preview the result, such as highlighted and targetted tiles, AP cost, path
 func preview(command: ActionExecutionCommand) -> ActionPreviewData:
 	var result = ActionPreviewData.new()
 	result.action_point_cost = get_ap_cost(command)
+	result.highlighted_cells = get_targetted_highlights(command)
 
 	return result
 
@@ -63,13 +71,19 @@ func execute(_command: ActionExecutionCommand, _callback: Callable):
 
 
 ## Validate that target constraints and ap cost are satisfied
-func validate(command: ActionExecutionCommand) -> bool:
+func validate(command: ActionExecutionCommand, ignore_target_count: bool = false) -> bool:
 	for constraint in tile_constraints:
 		if not constraint.validate(command):
 			return false
 
 	# If constraints are satisfied, check ap
-	return command.can_unit_afford()
+	if not command.can_unit_afford():
+		return false
+
+	if not ignore_target_count and len(command.targets) != get_target_count():
+		return false
+
+	return true
 
 
 ## Determine which cells are targetable
@@ -91,7 +105,7 @@ func get_targetable_cells(command: ActionExecutionCommand) -> Array[BattleGridCe
 	for cell in cells:
 		mock_command.targets.clear()
 		mock_command.targets.append(cell)
-		if validate(mock_command):
+		if validate(mock_command, true):
 			valid_cells.append(cell)
 
 	return valid_cells
@@ -125,3 +139,8 @@ func get_ap_cost(_command: ActionExecutionCommand) -> int:
 ## The minimum required AP to use this action
 func get_minimum_ap_cost() -> int:
 	return minimum_ap_cost
+
+
+## The number of targets that can be selected by this action
+func get_target_count() -> int:
+	return 1
