@@ -13,6 +13,7 @@ static var running_command: ActionExecutionCommand
 @export var action: UnitAction
 @export var targets: Array[BattleGridCell]
 
+var battle_grid: BattleGrid
 ## Where the command originated from
 ## Almost always the position of the unit, but can be overriden with override_origin()
 var origin_position: Vector2i:
@@ -23,14 +24,12 @@ var origin_position: Vector2i:
 			return Vector2i.ZERO
 		return _overriden_origin
 
-var battle_grid: BattleGrid
-var _overriden_origin: Variant = null
-
 var team: Team:
 	set(new_value):
 		if team != new_value:
 			team = new_value
 			emit_changed()
+var _overriden_origin: Variant = null
 
 
 func _init(
