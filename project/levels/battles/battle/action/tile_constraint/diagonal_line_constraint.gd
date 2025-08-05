@@ -9,7 +9,7 @@ const OFFSETS: Array[Vector2i] = [
 ]
 
 func _validate_cell(command: ActionExecutionCommand, cell: BattleGridCell) -> bool:
-	var from = command.unit.cell.position
+	var from = command.origin_position
 	var to = cell.position
 
 	var dx = abs(from.x - to.x)
@@ -22,7 +22,7 @@ func derive_cells(command: ActionExecutionCommand) -> Variant:
 	var cells: Array[BattleGridCell] = []
 	cells.append(command.unit.cell)
 
-	var start_pos = command.unit.cell.position
+	var start_pos = command.origin_position
 
 	for neighbor in OFFSETS:
 		for i in range(1, MAX_RANGE + 1):

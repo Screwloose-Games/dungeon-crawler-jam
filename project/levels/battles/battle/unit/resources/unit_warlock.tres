@@ -1,0 +1,136 @@
+[gd_resource type="Resource" script_class="Unit" load_steps=33 format=3 uid="uid://ck1o7ddt8xi5p"]
+
+[ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/action/ability/ability.gd" id="1_os58n"]
+[ext_resource type="Script" uid="uid://wu0ky8ts37sk" path="res://levels/battles/battle/action/tile_constraint/target_tile_constraint.gd" id="2_hgr53"]
+[ext_resource type="Script" uid="uid://c1n1gnpms4ens" path="res://levels/battles/battle/unit/unit.gd" id="2_omb5b"]
+[ext_resource type="Script" uid="uid://ct8umold07eie" path="res://levels/battles/battle/action/ability/ability_stage.gd" id="3_01vu5"]
+[ext_resource type="Script" uid="uid://ytbm8nx37wfm" path="res://levels/battles/battle/action/tile_constraint/direct_line_constraint.gd" id="3_mipss"]
+[ext_resource type="Script" uid="uid://ttosjyfsopkv" path="res://levels/battles/battle/action/tile_constraint/range_constraint.gd" id="4_s8bqk"]
+[ext_resource type="Script" uid="uid://c3xgtp8yeabd8" path="res://levels/battles/battle/action/ability/ability_effect.gd" id="6_ebfpy"]
+[ext_resource type="Script" uid="uid://brp5ns0pmjttu" path="res://levels/battles/battle/unit/movement.gd" id="6_s8bqk"]
+[ext_resource type="Texture2D" uid="uid://cc78025ka8rxu" path="res://assets/art/character/player/warlock/warlock_portrait.png" id="7_1ksvu"]
+[ext_resource type="Script" uid="uid://bdh8268nm1op" path="res://levels/battles/battle/action/ability/unit_apply_damage_effect.gd" id="7_pcuy7"]
+[ext_resource type="Script" uid="uid://nismy8hccyyv" path="res://levels/battles/battle/battle_grid/cell_highlight.gd" id="7_sg5ra"]
+[ext_resource type="SpriteFrames" uid="uid://ct5k4kn2rghg0" path="res://assets/art/character/player/rogue/rogue.res" id="8_0m0p2"]
+[ext_resource type="Script" uid="uid://cuqon0a334be8" path="res://levels/battles/battle/action/ability/push_ability_effect.gd" id="8_pcuy7"]
+[ext_resource type="Script" uid="uid://cifa1ws4q2vri" path="res://levels/battles/battle/action/tile_constraint/diagonal_line_constraint.gd" id="10_h8hyf"]
+[ext_resource type="Script" uid="uid://c1myk48y70xto" path="res://levels/battles/battle/action/tile_constraint/any_tile_constraint.gd" id="11_js4n2"]
+[ext_resource type="Script" uid="uid://bl1ai1ynjdg4f" path="res://levels/battles/battle/action/ability/area_ability_effect.gd" id="12_vkgy5"]
+
+[sub_resource type="Resource" id="Resource_0m0p2"]
+script = ExtResource("3_mipss")
+target_through_units = false
+metadata/_custom_type_script = "uid://ytbm8nx37wfm"
+
+[sub_resource type="Resource" id="Resource_1ksvu"]
+script = ExtResource("4_s8bqk")
+min_range = 1
+max_range = 8
+type = 0
+metadata/_custom_type_script = "uid://ttosjyfsopkv"
+
+[sub_resource type="Resource" id="Resource_js4n2"]
+script = ExtResource("7_pcuy7")
+base_damage = 1
+metadata/_custom_type_script = "uid://bdh8268nm1op"
+
+[sub_resource type="Resource" id="Resource_vkgy5"]
+script = ExtResource("3_01vu5")
+name = ""
+description = ""
+effects = Array[ExtResource("6_ebfpy")]([SubResource("Resource_js4n2")])
+metadata/_custom_type_script = "uid://ct8umold07eie"
+
+[sub_resource type="Resource" id="Resource_tgxrs"]
+script = ExtResource("8_pcuy7")
+push_offsets = Array[Vector2i]([Vector2i(0, 1)])
+reorient = true
+metadata/_custom_type_script = "uid://cuqon0a334be8"
+
+[sub_resource type="Resource" id="Resource_h8hyf"]
+script = ExtResource("3_01vu5")
+name = ""
+description = ""
+effects = Array[ExtResource("6_ebfpy")]([SubResource("Resource_tgxrs")])
+metadata/_custom_type_script = "uid://ct8umold07eie"
+
+[sub_resource type="Resource" id="Resource_yt1eb"]
+script = ExtResource("7_sg5ra")
+color = 3
+type = 3
+metadata/_custom_type_script = "uid://nismy8hccyyv"
+
+[sub_resource type="Resource" id="Resource_mipss"]
+script = ExtResource("1_os58n")
+name = "Force Bolt"
+description = ""
+number_of_targets = 1
+constraints = Array[ExtResource("2_hgr53")]([SubResource("Resource_0m0p2"), SubResource("Resource_1ksvu")])
+stages = Array[ExtResource("3_01vu5")]([SubResource("Resource_vkgy5"), SubResource("Resource_h8hyf")])
+base_cost = 1
+targetable_highlight = SubResource("Resource_yt1eb")
+metadata/_custom_type_script = "uid://bnkmedconmppg"
+
+[sub_resource type="Resource" id="Resource_kqks5"]
+script = ExtResource("10_h8hyf")
+metadata/_custom_type_script = "uid://cifa1ws4q2vri"
+
+[sub_resource type="Resource" id="Resource_q17kr"]
+script = ExtResource("3_mipss")
+target_through_units = false
+metadata/_custom_type_script = "uid://ytbm8nx37wfm"
+
+[sub_resource type="Resource" id="Resource_vmvay"]
+script = ExtResource("11_js4n2")
+constraints = Array[ExtResource("2_hgr53")]([SubResource("Resource_kqks5"), SubResource("Resource_q17kr")])
+metadata/_custom_type_script = "uid://c1myk48y70xto"
+
+[sub_resource type="Resource" id="Resource_revjl"]
+script = ExtResource("8_pcuy7")
+push_offsets = Array[Vector2i]([Vector2i(0, 1)])
+reorient = true
+metadata/_custom_type_script = "uid://cuqon0a334be8"
+
+[sub_resource type="Resource" id="Resource_andux"]
+script = ExtResource("12_vkgy5")
+tile_offsets = Array[Vector2i]([Vector2i(1, 0), Vector2i(1, 1), Vector2i(0, 1), Vector2i(-1, 1), Vector2i(-1, 0), Vector2i(-1, -1), Vector2i(0, -1), Vector2i(1, -1)])
+effect = SubResource("Resource_revjl")
+override_origin = true
+metadata/_custom_type_script = "uid://bl1ai1ynjdg4f"
+
+[sub_resource type="Resource" id="Resource_agqnn"]
+script = ExtResource("3_01vu5")
+name = ""
+description = ""
+effects = Array[ExtResource("6_ebfpy")]([SubResource("Resource_andux")])
+metadata/_custom_type_script = "uid://ct8umold07eie"
+
+[sub_resource type="Resource" id="Resource_iehyx"]
+script = ExtResource("1_os58n")
+name = "Force Blast"
+description = ""
+number_of_targets = 0
+constraints = Array[ExtResource("2_hgr53")]([SubResource("Resource_vmvay")])
+stages = Array[ExtResource("3_01vu5")]([SubResource("Resource_agqnn")])
+base_cost = 3
+metadata/_custom_type_script = "uid://bnkmedconmppg"
+
+[sub_resource type="Resource" id="Resource_rw0du"]
+script = ExtResource("6_s8bqk")
+movement_points_per_ap = 2
+method = 0
+metadata/_custom_type_script = "uid://brp5ns0pmjttu"
+
+[resource]
+script = ExtResource("2_omb5b")
+name = "Xiola"
+description = ""
+abilities = Array[ExtResource("1_os58n")]([SubResource("Resource_mipss"), SubResource("Resource_iehyx")])
+movement = SubResource("Resource_rw0du")
+action_points_max = 10
+sprite_frames = ExtResource("8_0m0p2")
+portrait = ExtResource("7_1ksvu")
+move_speed = 3.0
+health_point_max = 8
+health_points = 10
+metadata/_custom_type_script = "uid://c1n1gnpms4ens"

@@ -41,7 +41,7 @@ func test_skeleton_unit_can_move_on_grid():
 
 	# Should have the ground move method
 	assert_object(skeleton_unit.movement).is_not_null()
-	assert_int(skeleton_unit.movement.method).is_equal(Movement.MovementMethod.WALK)
+	assert_int(skeleton_unit.movement.method).is_equal(Movement.Method.WALK)
 
 	# And the unit can execute the move action
 	assert_bool(skeleton_unit.can_afford_action(move_action)).is_true()
@@ -62,7 +62,7 @@ func test_skeleton_unit_can_move_on_grid():
 	var preview = move_command.preview()
 
 	# Check cost affordability
-	assert_bool(preview.valid).is_true()
+	assert_bool(move_command.validate()).is_true()
 
 	# When we execute the command (spending AP)
 	var initial_ap = skeleton_unit.action_points_current

@@ -1,3 +1,5 @@
+## A list of [BattleGridCell]s and associated [Orientation]s that represent a path to move along
+## Start and end point should be included
 class_name MovementPath
 extends Resource
 
@@ -51,10 +53,15 @@ var cell_path: Array[BattleGridCell]
 var move_count: int:
 	get:
 		return len(cell_path) - 1
+var move_type: Movement.Type
 
-func _init(cell_path: Array[BattleGridCell] = []):
+func _init(
+	cell_path: Array[BattleGridCell] = [],
+	movement_type: Movement.Type = Movement.Type.SELF_DIRECTED
+):
 	self.cell_path = cell_path
 	self.move_count = len(cell_path) - 1
+	self.move_type = movement_type
 
 
 ## Convert the path into a list of path orientations,

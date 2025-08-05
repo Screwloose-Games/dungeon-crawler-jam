@@ -6,7 +6,7 @@ extends Resource
 
 signal died
 signal moved_to(new_cell: BattleGridCell)
-signal move_started(callback: ReturnSignal, new_cell: BattleGridCell)
+signal move_started(callback: ReturnSignal, new_cell: BattleGridCell, move_type: Movement.Type)
 signal action_points_changed
 signal did_action(action: UnitAction)
 
@@ -260,27 +260,36 @@ func max_tile_move_count() -> int:
 	return movement.max_move_count(action_points_current)
 
 
-func move_along_path(movement_path: MovementPath, callback: Callable) -> void:
-	if movement_path.move_count <= 0:
+func move_along_path(
+	movement_path: MovementPath,
+	move_type: Movement.Type,
+	callback: Callable,
+) -> void:
+	if movement_path.move_count < 1:
 		callback.call()
 		return
 
-	_move_path_part(movement_path, 1, callback)
+	_move_path_part(movement_path, move_type, callback, 1)
 
 
-func _move_path_part(movement_path: MovementPath, part: int, callback: Callable) -> void:
+func _move_path_part(
+	movement_path: MovementPath,
+	move_type: Movement.Type,
+	callback: Callable,
+	part: int,
+) -> void:
 	var next_cell = movement_path.cell_path[part]
-	var return_signal := ReturnSignal.new(
+	var move_complete_signal := ReturnSignal.new(
 		func():
 			self.cell = next_cell
 			var next_move: int = part + 1
 			if next_move < len(movement_path.cell_path):
-				_move_path_part(movement_path, next_move, callback)
+				_move_path_part(movement_path, move_type, callback, next_move)
 			else:
 				callback.call()
 	)
-	move_started.emit(return_signal, next_cell)
-	return_signal.all_participants_registered()
+	move_started.emit(move_complete_signal, next_cell, move_type)
+	move_complete_signal.all_participants_registered()
 
 
 func _on_battle_turn_started(team: Team):

@@ -7,6 +7,8 @@ extends AbilityEffect
 @export var tile_offsets: Array[Vector2i]
 ## The effect to apply to each tile in the defined area
 @export var effect: AbilityEffect
+## Whether to override the origin position of the effect when applying to all the tiles
+@export var override_origin: bool
 
 
 func preview(command: ActionExecutionCommand, preview: ActionPreviewData):
@@ -26,6 +28,10 @@ func get_new_command(command: ActionExecutionCommand) -> ActionExecutionCommand:
 	sub_command.targets.clear()
 
 	for target in command.targets:
+		# Overwrite the origin position to be the AOE center
+		if override_origin:
+			sub_command.override_origin(target.position)
+
 		for offset in tile_offsets:
 			var new_target_position = target.position + offset
 			var new_target_cell = command.battle_grid.get_cell(new_target_position)

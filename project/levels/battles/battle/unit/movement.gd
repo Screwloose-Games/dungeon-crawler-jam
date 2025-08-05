@@ -1,10 +1,18 @@
 class_name Movement
 extends Resource
 
-enum MovementMethod {WALK, FLY, JUMP}
+enum Method {WALK, FLY, JUMP}
+enum Type {
+	## Use the assigned movement method to move
+	SELF_DIRECTED,
+	## Pushed by some external force
+	PUSHED,
+	## Teleported to a new location
+	TELEPORTED,
+}
 
 @export var movement_points_per_ap: int = 2
-@export var method: MovementMethod = MovementMethod.WALK
+@export var method: Method = Method.WALK
 
 var can_move: bool:
 	get:

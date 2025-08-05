@@ -88,21 +88,33 @@ func init_position():
 	position = grid_transform * Vector2(unit.cell.position)
 
 
-func _on_unit_move_started(return_signal: ReturnSignal, cell: BattleGridCell):
-	var tween = get_tree().create_tween()
+func _on_unit_move_started(
+	return_signal: ReturnSignal,
+	cell: BattleGridCell,
+	move_type: Movement.Type
+):
+	var grid_transform = Transform2D(Vector2(16, 8), Vector2(-16, 8), Vector2(16, 8))
+	var target_position = grid_transform * Vector2(cell.position)
+
+	if move_type == Movement.Type.TELEPORTED:
+		position = target_position
+		return
 
 	# Inform unit that we are animating the movement,
 	# and it should wait until we are done to complete the move
 	return_signal.register_blocker()
+	var tween = get_tree().create_tween()
 
-	var grid_transform = Transform2D(Vector2(16, 8), Vector2(-16, 8), Vector2(16, 8))
-	var target_position = grid_transform * Vector2(cell.position)
 	tween.tween_property(self, "position", target_position, 1.0 / unit.move_speed)
 	var prev_position = position
-	if target_position.x > prev_position.x:
-		start_moving_right()
-	elif target_position.x < prev_position.x:
-		start_moving_left()
+
+	# If moving on own accord, update sprite
+	if move_type == Movement.Type.SELF_DIRECTED:
+		if target_position.x > prev_position.x:
+			start_moving_right()
+		elif target_position.x < prev_position.x:
+			start_moving_left()
+
 	await tween.finished
 	return_signal.complete_blocker()
 

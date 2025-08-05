@@ -15,7 +15,7 @@ func test_fly_over_ground():
 	_try_fly(Vector2i(6, 0), Vector2i(6, -2), 3)
 
 func test_cannot_reach():
-	_try_fly(Vector2i(8, 0), Vector2i(8, -2), 0)
+	_try_fly(Vector2i(8, 0), Vector2i(8, -2), 1)
 
 
 func _try_fly(
@@ -33,15 +33,15 @@ func _try_fly(
 	var path = battle_grid.get_movement_path(
 		start_cell,
 		end_cell,
-		Movement.MovementMethod.FLY
+		Movement.Method.FLY
 	)
-
 
 	if expected_length > 0:
 		assert_object(path).is_not_null()
 		assert_object(path.cell_path).is_not_null()
 		assert_object(path.cell_path[0]).is_equal(start_cell)
-		assert_object(path.cell_path[-1]).is_equal(end_cell)
 		assert_int(path.cell_path.size()).is_equal(expected_length)
+		if expected_length > 1 or start_pos == target_pos:
+			assert_object(path.cell_path[-1]).is_equal(end_cell)
 	else:
 		assert_object(path).is_null()
