@@ -187,6 +187,7 @@ func _on_player_selected_action(action: UnitAction):
 
 func _on_player_unselected_action(_action: UnitAction):
 	selected_action = null
+	targetted_cells.clear()
 
 
 func _on_unit_selected(unit: Unit):

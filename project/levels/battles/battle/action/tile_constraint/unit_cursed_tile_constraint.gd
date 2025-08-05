@@ -15,8 +15,7 @@ func _validate_cell(_command: ActionExecutionCommand, cell: BattleGridCell) -> b
 
 
 func derive_cells(command: ActionExecutionCommand) -> Variant:
-	@warning_ignore("standalone_expression")
-	var cursed_units = command.battle_grid.get_units().filter(func(unit): unit.is_cursed)
+	var cursed_units = command.battle_grid.get_units().filter(func(unit): return unit.is_cursed)
 	var cells: Array[BattleGridCell]
 
 	for unit in cursed_units:
