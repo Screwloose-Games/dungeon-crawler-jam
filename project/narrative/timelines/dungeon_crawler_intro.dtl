@@ -1,0 +1,26 @@
+[style]
+
+narrator: Alone in the dark you wake, with bated breath you rise from the floor in search of equilibrium.
+narrator: Your surroundings escape you as you reach through darkness for anything tangible.
+narrator: You take a step forward, but something catches your boot. Is that a…body? No…multiple bodies.
+narrator: You reach out to turn the closest one over but are shocked to find the bones immediately scatter into ashes…
+
+narrator: You look at your arm which emanates a blue-ish hue and recoil.
+[style name="portrait_in_boxes"]
+
+join jerimoth rightmost [animation="Slide In Right" wait="true" mirrored="true"]
+
+jerimoth: Wha-
+[style]
+
+narrator: The room flashes in a spark. Torches alight, demystifying the room and its contents.
+narrator: For a brief moment a vision of a woman enters your mind like a painful headache spreading across your temples, blurring your vision.
+[style name="portrait_in_boxes"]
+
+jerimoth: L-Layla?…
+[style]
+
+narrator: Your vision clears as two glowing hues of blue, not dissimilar to your own, seem to emanate from across the room.
+narrator: You make haste in an attempt to investigate…
+
+[end_timeline]
