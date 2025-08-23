@@ -30,6 +30,7 @@ Player="*res://globals/player.gd"
 InvalidStateWatcher="*res://common/util/invalid_state_watcher.gd"
 SFXController="*res://globals/sfx/sfx_controller.tscn"
 MusicController="*res://globals/music/music_controller.tscn"
+Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [debug]
 
@@ -37,8 +38,41 @@ gdscript/warnings/shadowed_variable=0
 
 [dialogic]
 
-directories/dch_directory={}
-directories/dtl_directory={}
+directories/dch_directory={
+"jerimoth": "res://narrative/characters/jerimoth.dch",
+"narrator": "res://narrative/characters/narrator.dch",
+"puck": "res://narrative/characters/puck.dch",
+"xiola": "res://narrative/characters/xiola.dch"
+}
+directories/dtl_directory={
+"dungeon_crawler_intro": "res://narrative/timelines/dungeon_crawler_intro.dtl"
+}
+extensions_folder="res://addons/dialogic_additions"
+text/letter_speed=0.01
+text/initial_text_reveal_skippable=true
+text/text_reveal_skip_delay=0.1
+text/advance_delay=0.1
+text/autoadvance_per_character_delay=0.1
+text/autoadvance_ignored_characters_enabled=true
+audio/max_channels=4.0
+animations/join_default_length=0.5
+animations/join_default_wait=true
+animations/leave_default_length=0.5
+animations/leave_default_wait=true
+animations/cross_fade_default_length=0.5
+choices/autofocus_first=true
+choices/delay=0.2
+choices/reveal_delay=0
+choices/reveal_by_input=false
+save/autosave_delay=60.0
+save/encryption_on_exports_only=true
+text/autopauses={}
+layout/style_list=["res://narrative/styles/portrait_in_boxes.tres"]
+layout/default_style=""
+animations/join_default="Instant In"
+animations/leave_default="Instant Out"
+variables={}
+glossary/default_case_sensitive=true
 
 [display]
 
@@ -51,7 +85,7 @@ window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/create_png/plugin.cfg", "res://addons/gdUnit4/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/create_png/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/gdUnit4/plugin.cfg")
 
 [input]
 
