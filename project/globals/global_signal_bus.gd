@@ -40,7 +40,7 @@ signal battle_turn_ended(team: Team)
 signal level_reset
 signal command_started(command: ActionExecutionCommand)
 signal command_completed(command: ActionExecutionCommand)
-signal set_action_panel_open(is_open: bool)
+signal action_panel_opened(is_open: bool)
 
 # Player input
 signal player_selected_unit(unit: Unit)
@@ -78,6 +78,8 @@ func _init() -> void:
 
 	action_preview_requested.connect(_on_action_preview_requested)
 	action_preview_cancelled.connect(_on_action_preview_cancelled)
+
+	action_panel_opened.connect(_on_action_panel_opened)
 
 	unit_selected.connect(_on_unit_selected)
 
@@ -164,3 +166,7 @@ func _on_player_selected_action(action: UnitAction):
 
 func _on_player_unselected_action(action: UnitAction):
 	print("player_unselected_action: %s" % action.name)
+
+
+func _on_action_panel_opened(is_open: bool):
+	print("action_panel_opened: %s" % is_open)

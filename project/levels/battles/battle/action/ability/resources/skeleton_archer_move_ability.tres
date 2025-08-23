@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="AbilityMove" load_steps=6 format=3 uid="uid://dixwnevlk6vne"]
 
-[ext_resource type="Script" uid="uid://wu0ky8ts37sk" path="res://levels/battles/battle/action/tile_constraint/target_tile_constraint.gd" id="1_w8guq"]
+[ext_resource type="Script" path="res://levels/battles/battle/action/tile_constraint/target_tile_constraint.gd" id="1_w8guq"]
 [ext_resource type="Script" uid="uid://brp5ns0pmjttu" path="res://levels/battles/battle/unit/movement.gd" id="2_wxwrc"]
-[ext_resource type="Script" uid="uid://vp2dh6n2rqv2" path="res://levels/battles/battle/action/ability/ability_move.gd" id="3_2sx03"]
+[ext_resource type="Script" path="res://levels/battles/battle/action/ability/ability_move.gd" id="3_2sx03"]
 [ext_resource type="Script" uid="uid://ct8umold07eie" path="res://levels/battles/battle/action/ability/ability_stage.gd" id="4_hvsq2"]
 
 [sub_resource type="Resource" id="Resource_affl1"]

@@ -15,7 +15,7 @@ func _ready() -> void:
 	GlobalSignalBus.game_unpaused.connect(_end_pause)
 	GlobalSignalBus.battle_turn_ended.connect(_on_end_turn)
 	GlobalSignalBus.player_selected_unit.connect(_player_selected_unit)
-	GlobalSignalBus.set_action_panel_open.connect(_set_action_panel_open)
+	GlobalSignalBus.action_panel_opened.connect(_set_action_panel_open)
 
 func _start_pause():
 	SoundManager.play_ui_sound(pause_sound)
@@ -27,19 +27,14 @@ func _on_end_turn(_team: Team):
 	SoundManager.play_ui_sound(end_turn_sound)
 
 func _player_selected_unit(unit: Unit):
-	if not is_action_panel_open:
-		SoundManager.play_ui_sound(open_action_menu_sound)
-	else:
-		select()
+	select()
 
 func _set_action_panel_open(is_open: bool):
-	is_action_panel_open = is_open
-	if is_action_panel_open:
-		print("is action panel open: true")
+	if is_open:
+		SoundManager.play_ui_sound(open_action_menu_sound)
 	else:
-		print("is action panel open: false")
+		SoundManager.play_ui_sound(select_sound)
 
 func select() -> void:
 	var player = SoundManager.play_ui_sound(select_sound)
 	player.volume_linear = 0.8
-	

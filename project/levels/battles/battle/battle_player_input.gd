@@ -7,9 +7,13 @@ var selected_unit: Unit:
 			return
 		if selected_unit:
 			_on_unit_unselected(selected_unit)
+		else:
+			GlobalSignalBus.action_panel_opened.emit(true)
 		selected_unit = new_unit
 		if new_unit:
 			_on_unit_selected(selected_unit)
+		else:
+			GlobalSignalBus.action_panel_opened.emit(false)
 		_update_action_execution_command()
 
 var selected_action: UnitAction:

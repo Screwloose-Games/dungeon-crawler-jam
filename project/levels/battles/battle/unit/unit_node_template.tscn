@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://o8ll87nb3ty1"]
+[gd_scene load_steps=6 format=3 uid="uid://uxmxkf465km0"]
 
 [ext_resource type="Script" uid="uid://ycye2pxe3lrk" path="res://levels/battles/battle/unit/unit_node.gd" id="1_ilobj"]
 [ext_resource type="Resource" uid="uid://cdcfvr8yx37yy" path="res://levels/battles/battle/unit/resources/unit_skeleton_knight.tres" id="2_ghkny"]
