@@ -16,7 +16,7 @@ func apply(
 		return
 
 	if len(command.targets) == 1:
-		_apply_swap(command.unit.unit, command.targets[0].unit, wait_request)
+		_apply_swap(command.unit, command.targets[0].unit, wait_request)
 	elif len(command.targets) == 2:
 		_apply_swap(command.targets[0].unit, command.targets[1].unit, wait_request)
 	else:
@@ -39,8 +39,8 @@ func _apply_swap(unit_a: Unit, unit_b: Unit, wait_request: WaitRequest):
 
 	var callback = func(): wait_request.complete_blocker()
 
-	unit_a.move_along_path(path_a, callback)
-	unit_b.move_along_path(path_b, callback)
+	unit_a.move_along_path(path_a, callback, true)
+	unit_b.move_along_path(path_b, callback, true)
 
 
 func _ensure_targets_are_units(command: ActionExecutionCommand) -> bool:

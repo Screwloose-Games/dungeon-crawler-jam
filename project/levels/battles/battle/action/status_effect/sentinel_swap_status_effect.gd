@@ -1,8 +1,7 @@
 class_name SentinelSwapStatusEffect
 extends StatusEffect
 
-@export var swap_action: UnitAction
-@export var counterattack_action: UnitAction
+@export var counter_attack_damage: int
 var sentinel_unit: Unit
 
 func apply(unit: Unit, command: ActionExecutionCommand = null):
@@ -22,12 +21,12 @@ func _on_before_unit_damage_applied(
 	cancel_flag.cancel = true
 
 	print("adding reaction callback")
-	var reaction_callback = _on_process_reaction.bind(affected_unit, attacking_unit, sentinel_unit)
+	var reaction_callback = _on_process_reaction.bind(attacking_unit, sentinel_unit)
 	reactions.append(reaction_callback)
 
 
-func _is_attacking_unit_ajacent(attacking_unit) -> bool:
-	var diff: Vector2i = attacking_unit.cell.position - affected_unit.cell.position
+func _is_unit_adjacent_to_sentinel(unit) -> bool:
+	var diff: Vector2i = unit.cell.position - sentinel_unit.cell.position
 	return abs(diff.x) + abs(diff.y) == 1
 
 
@@ -35,6 +34,11 @@ func _create_swap_command(
 	sentinel_unit: Unit,
 	attacked_unit: Unit
 ) -> ActionExecutionCommand:
+	var swap_ability_effect = UnitSwapEffect.new()
+	var swap_ability_stage = AbilityStage.new("", "", [swap_ability_effect])
+	var swap_ability = Ability.new("Swap", "", 1, [], [swap_ability_stage])
+	var swap_action = AbilityAction.new(swap_ability)
+
 	return ActionExecutionCommand.new(
 		sentinel_unit,
 		sentinel_unit.team.commander,
@@ -49,6 +53,12 @@ func _create_counterattack_command(
 	sentinel_unit: Unit,
 	attacking_unit: Unit,
 ) -> ActionExecutionCommand:
+	var counterattack_ability_effect = UnitApplyDamageEffect.new()
+	counterattack_ability_effect.base_damage = counter_attack_damage
+	var counterattack_ability_stage = AbilityStage.new("", "", [counterattack_ability_effect])
+	var counterattack_ability = Ability.new("Counterattack", "", 1, [], [counterattack_ability_stage])
+	var counterattack_action = AbilityAction.new(counterattack_ability)
+
 	return ActionExecutionCommand.new(
 		sentinel_unit,
 		sentinel_unit.team.commander,
@@ -61,7 +71,6 @@ func _create_counterattack_command(
 
 func _on_process_reaction(
 	wait_request: WaitRequest,
-	affected_unit: Unit,
 	attacking_unit: Unit,
 	sentinel_unit: Unit,
 ) -> void:
@@ -72,8 +81,7 @@ func _on_process_reaction(
 
 	if (
 		not attacking_unit or
-		not counterattack_action or
-		not _is_attacking_unit_ajacent(attacking_unit)
+		not _is_unit_adjacent_to_sentinel(attacking_unit)
 	):
 		return
 

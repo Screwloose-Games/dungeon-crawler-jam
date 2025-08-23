@@ -235,11 +235,12 @@ func can_afford_action(action: UnitAction) -> bool:
 
 
 ## Does not have complete validation, specifically considering movement type
-func move_to_cell(target_cell: BattleGridCell) -> bool:
+func move_to_cell(target_cell: BattleGridCell, force: bool = false) -> bool:
 	if not target_cell:
 		return false
 
-	if target_cell.unit and target_cell.unit != self:
+
+	if not force and target_cell.unit and target_cell.unit != self:
 		return false
 
 	if cell:
@@ -277,9 +278,9 @@ func damage(
 	command: ActionExecutionCommand = null,
 	reactions: Array[Callable] = []
 ) -> void:
-	print("damaging unit")
+	print("damaging unit %d health" % amount)
 	var cancel_flag = CancelFlag.new()
-	before_damage_applied.emit(amount, self, cancel_flag, reactions)
+	before_damage_applied.emit(amount, command.unit, cancel_flag, reactions)
 	if cancel_flag.cancel:
 		return
 
@@ -300,28 +301,30 @@ func max_tile_move_count() -> int:
 func move_along_path(
 	movement_path: MovementPath,
 	callback: Callable,
+	force: bool = false
 ) -> void:
 	if movement_path.move_count < 1:
 		callback.call()
 		return
 
-	_move_path_part(movement_path, callback, 1)
+	_move_path_part(movement_path, callback, 1, force)
 
 
 func _move_path_part(
 	movement_path: MovementPath,
 	callback: Callable,
 	part: int,
+	force: bool = false
 ) -> void:
 	var next_cell = movement_path.cell_path[part]
 	var move_complete_signal := WaitRequest.new(
 		func():
-			if not move_to_cell(next_cell):
+			if not move_to_cell(next_cell, force):
 				callback.call()
 				return
 			var next_move: int = part + 1
 			if next_move < len(movement_path.cell_path):
-				_move_path_part(movement_path, callback, next_move)
+				_move_path_part(movement_path, callback, next_move, force)
 			else:
 				callback.call()
 	)
