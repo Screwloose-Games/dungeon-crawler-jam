@@ -55,10 +55,15 @@ func preview(command: ActionExecutionCommand) -> ActionPreviewData:
 ## Execute the command. The function will call the callback once all effects have completed
 func execute(command: ActionExecutionCommand, callback: Callable):
 	print("Executing ability")
-	var return_signal = ReturnSignal.new(callback)
+	var wait_request = WaitRequest.new(callback)
+
+	var reactions: Array[Callable] = []
+
 	for stage in stages:
-		stage.execute(command, return_signal)
-	return_signal.all_participants_registered()
+		stage.execute(command, wait_request, reactions)
+	wait_request.all_participants_registered()
+
+	await process_reactions(reactions)
 
 
 ## The minimum possible ap cost when using this [Ability]
@@ -113,3 +118,15 @@ func get_can_target_enemies():
 
 func get_does_damage():
 	return stages.any(func(stage: AbilityStage): return stage.does_damage)
+
+
+func process_reactions(reactions: Array[Callable]):
+	print("ability processing %d reactions" % len(reactions))
+	var wait_request = WaitRequest.new(func(): )
+
+	for reaction in reactions:
+		reaction.call(wait_request)
+
+	wait_request.all_participants_registered()
+	await wait_request.wait_until_complete()
+	print("all abiltiy reactions processed")

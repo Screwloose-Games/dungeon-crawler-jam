@@ -1,0 +1,159 @@
+[gd_resource type="Resource" script_class="Unit" load_steps=35 format=3 uid="uid://b6c5msarqgxw5"]
+
+[ext_resource type="Script" uid="uid://bnkmedconmppg" path="res://levels/battles/battle/action/ability/ability.gd" id="1_vudla"]
+[ext_resource type="Script" uid="uid://wu0ky8ts37sk" path="res://levels/battles/battle/action/tile_constraint/target_tile_constraint.gd" id="2_suh1i"]
+[ext_resource type="Script" uid="uid://bx0imn0mnt3xt" path="res://levels/battles/battle/action/tile_constraint/unit_present_tile_constraint.gd" id="3_a5ehg"]
+[ext_resource type="Script" uid="uid://ttosjyfsopkv" path="res://levels/battles/battle/action/tile_constraint/range_constraint.gd" id="4_b3qjf"]
+[ext_resource type="Script" uid="uid://ct8umold07eie" path="res://levels/battles/battle/action/ability/ability_stage.gd" id="5_k2rk8"]
+[ext_resource type="Script" uid="uid://c3xgtp8yeabd8" path="res://levels/battles/battle/action/ability/ability_effect.gd" id="6_lc0s3"]
+[ext_resource type="Script" uid="uid://bdh8268nm1op" path="res://levels/battles/battle/action/ability/unit_apply_damage_effect.gd" id="7_a5ehg"]
+[ext_resource type="Script" uid="uid://dvejriam7fruj" path="res://levels/battles/battle/action/ability/add_status_ability_effect.gd" id="7_o4m2a"]
+[ext_resource type="Texture2D" uid="uid://b8qsfmsyqhobk" path="res://common/images/square.png" id="8_8dnp0"]
+[ext_resource type="Script" uid="uid://cupjv5wybclic" path="res://levels/battles/battle/action/status_effect/sentinel_swap_status_effect.gd" id="8_yyuyx"]
+[ext_resource type="Script" uid="uid://b7usw2bxm6mck" path="res://levels/battles/battle/action/ability_action.gd" id="9_a5ehg"]
+[ext_resource type="Script" uid="uid://chotiqr7ijeld" path="res://levels/battles/battle/action/ability/unit_swap_effect.gd" id="11_r6whj"]
+[ext_resource type="Script" uid="uid://nismy8hccyyv" path="res://levels/battles/battle/battle_grid/cell_highlight.gd" id="11_yei11"]
+[ext_resource type="Script" uid="uid://brp5ns0pmjttu" path="res://levels/battles/battle/unit/movement.gd" id="15_lbyr3"]
+[ext_resource type="Texture2D" uid="uid://bimt12s8f278y" path="res://assets/art/ui/jerimoth_portrait.png" id="16_njipw"]
+[ext_resource type="Script" uid="uid://c1n1gnpms4ens" path="res://levels/battles/battle/unit/unit.gd" id="17_rxulv"]
+[ext_resource type="SpriteFrames" uid="uid://ct5k4kn2rghg0" path="res://assets/art/character/player/rogue/rogue.res" id="18_pnb7i"]
+
+[sub_resource type="Resource" id="Resource_r6whj"]
+script = ExtResource("3_a5ehg")
+invert = false
+metadata/_custom_type_script = "uid://bx0imn0mnt3xt"
+
+[sub_resource type="Resource" id="Resource_j0x4p"]
+script = ExtResource("4_b3qjf")
+min_range = 1
+max_range = -1
+type = 0
+metadata/_custom_type_script = "uid://ttosjyfsopkv"
+
+[sub_resource type="Resource" id="Resource_ailam"]
+script = ExtResource("7_a5ehg")
+base_damage = 3
+metadata/_custom_type_script = "uid://bdh8268nm1op"
+
+[sub_resource type="Resource" id="Resource_nwnya"]
+script = ExtResource("5_k2rk8")
+name = ""
+description = ""
+effects = Array[ExtResource("6_lc0s3")]([SubResource("Resource_ailam")])
+does_process_reactions = false
+metadata/_custom_type_script = "uid://ct8umold07eie"
+
+[sub_resource type="Resource" id="Resource_njipw"]
+script = ExtResource("1_vudla")
+name = ""
+description = ""
+number_of_targets = 1
+constraints = Array[ExtResource("2_suh1i")]([])
+stages = Array[ExtResource("5_k2rk8")]([SubResource("Resource_nwnya")])
+base_cost = 0
+metadata/_custom_type_script = "uid://bnkmedconmppg"
+
+[sub_resource type="Resource" id="Resource_ubgb1"]
+script = ExtResource("9_a5ehg")
+ability = SubResource("Resource_njipw")
+name = ""
+description = ""
+minimum_ap_cost = 0
+metadata/_custom_type_script = "uid://b7usw2bxm6mck"
+
+[sub_resource type="Resource" id="Resource_48v7f"]
+script = ExtResource("11_r6whj")
+metadata/_custom_type_script = "uid://chotiqr7ijeld"
+
+[sub_resource type="Resource" id="Resource_bsm1n"]
+script = ExtResource("5_k2rk8")
+name = ""
+description = ""
+effects = Array[ExtResource("6_lc0s3")]([SubResource("Resource_48v7f")])
+does_process_reactions = false
+metadata/_custom_type_script = "uid://ct8umold07eie"
+
+[sub_resource type="Resource" id="Resource_vp1pf"]
+script = ExtResource("1_vudla")
+name = ""
+description = ""
+number_of_targets = 1
+constraints = Array[ExtResource("2_suh1i")]([])
+stages = Array[ExtResource("5_k2rk8")]([SubResource("Resource_bsm1n")])
+base_cost = 0
+metadata/_custom_type_script = "uid://bnkmedconmppg"
+
+[sub_resource type="Resource" id="Resource_nc75a"]
+script = ExtResource("9_a5ehg")
+ability = SubResource("Resource_vp1pf")
+name = ""
+description = ""
+minimum_ap_cost = 0
+metadata/_custom_type_script = "uid://b7usw2bxm6mck"
+
+[sub_resource type="Resource" id="Resource_k5fo6"]
+script = ExtResource("8_yyuyx")
+swap_action = SubResource("Resource_nc75a")
+counterattack_action = SubResource("Resource_ubgb1")
+name = ""
+icon = ExtResource("8_8dnp0")
+description = ""
+turn_duration = 0
+metadata/_custom_type_script = "uid://cupjv5wybclic"
+
+[sub_resource type="Resource" id="Resource_fy6b4"]
+script = ExtResource("11_yei11")
+color = 3
+type = 2
+metadata/_custom_type_script = "uid://nismy8hccyyv"
+
+[sub_resource type="Resource" id="Resource_xjs3w"]
+script = ExtResource("7_o4m2a")
+status_effect = SubResource("Resource_k5fo6")
+target_highlight = SubResource("Resource_fy6b4")
+metadata/_custom_type_script = "uid://dvejriam7fruj"
+
+[sub_resource type="Resource" id="Resource_84qpa"]
+script = ExtResource("5_k2rk8")
+name = ""
+description = ""
+effects = Array[ExtResource("6_lc0s3")]([SubResource("Resource_xjs3w")])
+does_process_reactions = false
+metadata/_custom_type_script = "uid://ct8umold07eie"
+
+[sub_resource type="Resource" id="Resource_ofobc"]
+script = ExtResource("11_yei11")
+color = 0
+type = 2
+metadata/_custom_type_script = "uid://nismy8hccyyv"
+
+[sub_resource type="Resource" id="Resource_3mfgi"]
+script = ExtResource("1_vudla")
+name = "Protect"
+description = ""
+number_of_targets = 1
+constraints = Array[ExtResource("2_suh1i")]([SubResource("Resource_r6whj"), SubResource("Resource_j0x4p")])
+stages = Array[ExtResource("5_k2rk8")]([SubResource("Resource_84qpa")])
+base_cost = 2
+targetted_highlight = SubResource("Resource_ofobc")
+metadata/_custom_type_script = "uid://bnkmedconmppg"
+
+[sub_resource type="Resource" id="Resource_rw0du"]
+script = ExtResource("15_lbyr3")
+movement_points_per_ap = 2
+method = 0
+metadata/_custom_type_script = "uid://brp5ns0pmjttu"
+
+[resource]
+script = ExtResource("17_rxulv")
+name = "Jerimoth"
+description = ""
+abilities = Array[ExtResource("1_vudla")]([SubResource("Resource_3mfgi")])
+movement = SubResource("Resource_rw0du")
+action_points_max = 10
+sprite_frames = ExtResource("18_pnb7i")
+portrait = ExtResource("16_njipw")
+move_speed = 1.0
+health_point_max = 10
+health_points = 10
+metadata/_custom_type_script = "uid://c1n1gnpms4ens"

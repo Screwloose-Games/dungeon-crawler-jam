@@ -10,6 +10,7 @@ extends Resource
 
 ## The effects to apply during this stage of the ability
 @export var effects: Array[AbilityEffect]
+@export var does_process_reactions: bool
 
 var duration: float:
 	get:
@@ -40,9 +41,17 @@ func get_does_damage():
 ## Effects are applied in sequence, each receiving the target tile and casting unit context. [br]
 ## [br]
 ## [param _command] The action execution order containing target and caster context
-func execute(command: ActionExecutionCommand, return_signal: ReturnSignal):
+func execute(command: ActionExecutionCommand, wait_request: WaitRequest, reactions: Array[Callable]):
+	# If this individual stage processes reactions, ignore passed reaction array and use a new array
+	# Otherwise reactions will be appended to the passed array
+	if does_process_reactions:
+		reactions = []
+
 	for effect in effects:
-		effect.apply(command, return_signal)
+		effect.apply(command, wait_request, reactions)
+
+	if does_process_reactions:
+		await process_reactions(reactions)
 
 
 func get_additional_ap_cost(command: ActionExecutionCommand) -> int:
@@ -50,3 +59,15 @@ func get_additional_ap_cost(command: ActionExecutionCommand) -> int:
 	for effect in effects:
 		total += effect.get_additional_ap_cost(command)
 	return total
+
+
+func process_reactions(reactions: Array[Callable]):
+	print("ability stage processing %d reactions" % len(reactions))
+	var wait_request = WaitRequest.no_callback
+
+	for reaction in reactions:
+		reaction.call(wait_request)
+
+	wait_request.all_participants_registered()
+	await wait_request.wait_until_complete()
+	print("all ability stage reactions processed")

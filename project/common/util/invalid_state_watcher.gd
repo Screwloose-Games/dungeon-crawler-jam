@@ -17,6 +17,8 @@ func _ready():
 
 
 func _on_command_started(command: ActionExecutionCommand):
+	if command.is_reaction:
+		return
 	assert(
 		running_command == null,
 		"A different command was already running! Was the callback waited for?"
@@ -25,6 +27,8 @@ func _on_command_started(command: ActionExecutionCommand):
 
 
 func _on_command_completed(command: ActionExecutionCommand):
+	if command.is_reaction:
+		return
 	assert(
 		running_command,
 		"Unexpected call to command_completed when no command was running"

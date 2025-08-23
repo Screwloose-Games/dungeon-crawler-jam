@@ -18,9 +18,9 @@ func preview(command: ActionExecutionCommand, preview: ActionPreviewData):
 
 ## Applies the wrapped effect to all tiles in the defined area. [br]
 ## Each tile position is calculated as target position plus each offset. [br]
-func apply(command: ActionExecutionCommand, return_signal: ReturnSignal):
+func apply(command: ActionExecutionCommand, wait_request: WaitRequest, reactions: Array[Callable]):
 	var sub_command = get_new_command(command)
-	effect.apply(sub_command, return_signal)
+	effect.apply(sub_command, wait_request, reactions)
 
 
 func get_new_command(command: ActionExecutionCommand) -> ActionExecutionCommand:

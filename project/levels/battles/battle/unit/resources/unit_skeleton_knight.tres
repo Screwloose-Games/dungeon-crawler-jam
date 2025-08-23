@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://b27e04h7l1su3" path="res://levels/battles/battle/action/tile_constraint/unit_team_relation_constraint.gd" id="3_qqv34"]
 [ext_resource type="Script" uid="uid://ct8umold07eie" path="res://levels/battles/battle/action/ability/ability_stage.gd" id="4_theot"]
 [ext_resource type="Script" uid="uid://c3xgtp8yeabd8" path="res://levels/battles/battle/action/ability/ability_effect.gd" id="5_theot"]
-[ext_resource type="Script" uid="uid://bdh8268nm1op" path="res://levels/battles/battle/action/ability/unit_apply_damage_effect.gd" id="6_theot"]
+[ext_resource type="Script" uid="uid://bdh8268nm1op" path="res://levels/battles/battle/action/ability/unit_apply_damage_effect.gd" id="6_2akid"]
 [ext_resource type="Script" uid="uid://vp2dh6n2rqv2" path="res://levels/battles/battle/action/ability/ability_move.gd" id="8_theot"]
 [ext_resource type="Texture2D" uid="uid://bolrm8fx43e3p" path="res://assets/art/character/npc/skeleton_knight/skeleton_knight_portrait.png" id="9_2akid"]
 [ext_resource type="SpriteFrames" uid="uid://bldux5hin6unb" path="res://assets/art/character/npc/skeleton_knight/skeleton_knight.res" id="11_2akid"]
@@ -17,25 +17,26 @@ script = ExtResource("3_qqv34")
 team_relation = 3
 metadata/_custom_type_script = "uid://b27e04h7l1su3"
 
-[sub_resource type="Resource" id="Resource_644i4"]
-script = ExtResource("6_theot")
-base_damage = 2
+[sub_resource type="Resource" id="Resource_jkal1"]
+script = ExtResource("6_2akid")
+base_damage = 1
 metadata/_custom_type_script = "uid://bdh8268nm1op"
 
-[sub_resource type="Resource" id="Resource_t3lpx"]
+[sub_resource type="Resource" id="Resource_in02c"]
 script = ExtResource("4_theot")
 name = ""
 description = ""
-effects = Array[ExtResource("5_theot")]([SubResource("Resource_644i4")])
+effects = Array[ExtResource("5_theot")]([SubResource("Resource_jkal1")])
+does_process_reactions = true
 metadata/_custom_type_script = "uid://ct8umold07eie"
 
-[sub_resource type="Resource" id="Resource_buu0w"]
+[sub_resource type="Resource" id="Resource_llorc"]
 script = ExtResource("1_e4jav")
 name = "Melee Attack"
 description = ""
 number_of_targets = 1
 constraints = Array[ExtResource("2_m56jr")]([SubResource("Resource_m56jr")])
-stages = Array[ExtResource("4_theot")]([SubResource("Resource_t3lpx")])
+stages = Array[ExtResource("4_theot")]([SubResource("Resource_in02c")])
 base_cost = 4
 metadata/_custom_type_script = "uid://bnkmedconmppg"
 
@@ -66,7 +67,7 @@ metadata/_custom_type_script = "uid://brp5ns0pmjttu"
 script = ExtResource("1_y6s5j")
 name = "Skeleton"
 description = "Boney simple melee unit"
-abilities = Array[ExtResource("1_e4jav")]([SubResource("Resource_buu0w"), SubResource("Resource_5vwhy")])
+abilities = Array[ExtResource("1_e4jav")]([SubResource("Resource_llorc"), SubResource("Resource_5vwhy")])
 movement = SubResource("Resource_lxlmf")
 action_points_max = 8
 sprite_frames = ExtResource("11_2akid")

@@ -174,8 +174,9 @@ func _test_push(
 
 	# Execute the command
 	var returned: Array[bool] = [false]
-	var return_signal = ReturnSignal.new(func(): returned[0] = true)
-	effect.apply(command, return_signal)
+	var wait_request = WaitRequest.new(func(): returned[0] = true)
+	var reactions: Array[Callable] = []
+	effect.apply(command, wait_request, reactions)
 
 	# Ensure unit was pushed
 	assert_vector(target.cell.position).is_equal(expected_landing)

@@ -8,5 +8,9 @@ extends AbilityEffect
 
 
 ## Instantiates the specified node at the target tile position. [br]
-func apply(_order: ActionExecutionCommand, _return_signal: ReturnSignal):
+func apply(
+	command: ActionExecutionCommand,
+	_wait_request: WaitRequest,
+	_reactions: Array[Callable]
+):
 	pass

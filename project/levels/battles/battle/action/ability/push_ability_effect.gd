@@ -17,16 +17,20 @@ func preview(_command: ActionExecutionCommand, _preview: ActionPreviewData):
 	pass
 
 
-func apply(command: ActionExecutionCommand, return_signal: ReturnSignal):
+func apply(
+	command: ActionExecutionCommand,
+	wait_request: WaitRequest,
+	_reactions: Array[Callable]
+):
 	for target in command.targets:
 		if target.unit:
-			_apply_to_target(command, target.unit, return_signal)
+			_apply_to_target(command, target.unit, wait_request)
 
 
 func _apply_to_target(
 	command: ActionExecutionCommand,
 	target_unit: Unit,
-	return_signal: ReturnSignal
+	wait_request: WaitRequest
 ):
 	if not target_unit.cell:
 		return
@@ -41,12 +45,12 @@ func _apply_to_target(
 
 	var path = get_path_from_offsets(command, target_unit, offsets)
 
-	return_signal.register_blocker()
+	wait_request.register_blocker()
 	target_unit.move_along_path(
 		path,
-		func(): return_signal.complete_blocker()
+		func(): wait_request.complete_blocker()
 	)
-	return_signal.all_participants_registered()
+	wait_request.all_participants_registered()
 
 
 func get_path_from_offsets(
