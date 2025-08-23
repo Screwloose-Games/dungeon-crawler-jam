@@ -78,6 +78,8 @@ func _init() -> void:
 	action_preview_requested.connect(_on_action_preview_requested)
 	action_preview_cancelled.connect(_on_action_preview_cancelled)
 
+	unit_selected.connect(_on_unit_selected)
+
 
 func _on_unit_died(unit: Unit):
 	var remaining_units = unit.team.units.filter(func(u): u != unit)
@@ -102,23 +104,23 @@ func _on_team_ended_turn(team: Team):
 
 
 func _on_battle_started(_battle: Battle):
-	print("battle_started")
+	print("====battle_started====")
 
 
 func _on_battle_ended(result: BattleResult):
-	print("battle_ended: %s" % result.explanation_text)
+	print("====battle_ended: %s====" % result.explanation_text)
 
 
 func _on_battle_round_started():
-	print("battle_round_started")
+	print("===battle_round_started===")
 
 
 func _on_battle_round_ended():
-	print("battle_round_ended")
+	print("===battle_round_ended===")
 
 
 func _on_battle_turn_started(team: Team):
-	print("battle_turn_started: %s" % team.name)
+	print("==battle_turn_started: %s==" % team.name)
 
 
 func _on_battle_turn_ended(_team: Team):

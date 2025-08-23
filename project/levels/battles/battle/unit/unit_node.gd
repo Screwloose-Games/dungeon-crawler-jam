@@ -14,6 +14,7 @@ signal selected
 @onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
 @onready var clickable_static_body_2d: ClickableStaticBody2D = $ClickableStaticBody2D
 @onready var selection_sprite: AnimatedSprite2D = $SelectionSprite
+var signal_tracker: SignalTracker = SignalTracker.new()
 
 
 func _ready():
@@ -68,19 +69,18 @@ func _on_resource_updated():
 
 
 func _on_unit_changed():
+	signal_tracker.disconnect_all_signals()
+
 	if !is_node_ready():
 		await ready
 	name = "Unit_" + unit.name
-	if not unit.changed.is_connected(_on_unit_changed):
-		unit.changed.connect(_on_unit_changed)
-	if not unit.move_started.is_connected(_on_unit_move_started):
-		unit.move_started.connect(_on_unit_move_started)
-	if not unit.died.is_connected(queue_free):
-		unit.died.connect(queue_free)
-	if not unit.status_effect_added.is_connected(_on_unit_status_effect_added):
-		unit.status_effect_added.connect(_on_unit_status_effect_added)
-	if not unit.status_effect_removed.is_connected(_on_unit_status_effect_removed):
-		unit.status_effect_removed.connect(_on_unit_status_effect_removed)
+	signal_tracker.add_signal(unit.changed, _on_unit_changed)
+	signal_tracker.add_signal(unit.move_started, _on_unit_move_started)
+	signal_tracker.add_signal(unit.died, queue_free)
+	signal_tracker.add_signal(unit.status_effect_added, _on_unit_status_effect_added)
+	signal_tracker.add_signal(unit.status_effect_removed, _on_unit_status_effect_removed)
+	signal_tracker.add_signal(unit.animation_played, _on_unit_animation_played)
+
 	animated_sprite_2d.sprite_frames = unit.sprite_frames
 	init_dynamic_collision_poly()
 
@@ -192,3 +192,14 @@ func _on_unit_status_effect_added(status_effect: StatusEffect):
 func _on_unit_status_effect_removed(status_effect: StatusEffect):
 	if typeof(status_effect) == typeof(CurseStatusEffect):
 		animated_sprite_2d.modulate = Color.WHITE
+
+
+func _on_unit_animation_played(name: String, wait_request: WaitRequest = null):
+	if not wait_request:
+		animated_sprite_2d.play(name)
+		return
+
+	wait_request.register_blocker()
+	animated_sprite_2d.play(name)
+	await animated_sprite_2d.animation_finished
+	wait_request.complete_blocker()

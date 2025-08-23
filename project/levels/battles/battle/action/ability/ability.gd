@@ -54,16 +54,14 @@ func preview(command: ActionExecutionCommand) -> ActionPreviewData:
 
 ## Execute the command. The function will call the callback once all effects have completed
 func execute(command: ActionExecutionCommand, callback: Callable):
-	print("Executing ability")
-	var wait_request = WaitRequest.new(callback)
-
+	print("=Executing ability=")
 	var reactions: Array[Callable] = []
 
 	for stage in stages:
-		stage.execute(command, wait_request, reactions)
-	wait_request.all_participants_registered()
+		await stage.execute(command, reactions)
 
 	await process_reactions(reactions)
+	callback.call()
 
 
 ## The minimum possible ap cost when using this [Ability]
