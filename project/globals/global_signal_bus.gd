@@ -40,6 +40,7 @@ signal battle_turn_ended(team: Team)
 signal level_reset
 signal command_started(command: ActionExecutionCommand)
 signal command_completed(command: ActionExecutionCommand)
+signal set_action_panel_open(is_open: bool)
 
 # Player input
 signal player_selected_unit(unit: Unit)
