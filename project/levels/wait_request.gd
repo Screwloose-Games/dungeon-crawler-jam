@@ -2,9 +2,15 @@
 ## Participants must register themselves with register_blocker()
 ## Once they are ready, they should call complete_blocker()
 ## The callable will only ever be called once
-class_name ReturnSignal
+class_name WaitRequest
 extends RefCounted
 
+# For cases where callback behaviour is not needed
+static var no_callback: WaitRequest:
+	get:
+		return WaitRequest.new(func(): )
+
+var is_cancelled: bool
 var _pending_count: int
 var _on_complete: Callable
 var _all_registered: bool
@@ -33,6 +39,11 @@ func complete_blocker():
 
 func is_complete() -> bool:
 	return _pending_count == 0
+
+
+func wait_until_complete():
+	while not is_complete():
+		await Engine.get_main_loop().process_frame
 
 
 func _execute():

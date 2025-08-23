@@ -7,9 +7,10 @@ extends Resource
 
 ## Optional constraint that determines if this effect should be applied to the target
 @export var constraint: TargetTileConstraint
+@export var target_highlight: CellHighlight
 
 var does_damage: bool = false
-
+var reactions: Array[Callable] = []
 
 func preview(_command: ActionExecutionCommand, _preview: ActionPreviewData):
 	pass
@@ -17,7 +18,7 @@ func preview(_command: ActionExecutionCommand, _preview: ActionPreviewData):
 
 ## Applies this effect to the [BattleGridCell] or [Unit]. [br]
 ## Override this method in derived classes to implement specific effect behavior. [br]
-func apply(_order: ActionExecutionCommand, _return_signal: ReturnSignal):
+func apply(_order: ActionExecutionCommand, _wait_request: WaitRequest, _reactions: Array[Callable]):
 	pass
 
 
@@ -27,3 +28,8 @@ func get_additional_ap_cost(_command: ActionExecutionCommand) -> int:
 
 func get_duration() -> float:
 	return 0.0
+
+
+func _process_reactions():
+	for reaction in reactions:
+		reaction.call()

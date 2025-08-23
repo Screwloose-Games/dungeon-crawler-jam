@@ -77,8 +77,10 @@ func _on_unit_changed():
 		unit.move_started.connect(_on_unit_move_started)
 	if not unit.died.is_connected(queue_free):
 		unit.died.connect(queue_free)
-	if not unit.curse_changed.is_connected(_on_unit_curse_changed):
-		unit.curse_changed.connect(_on_unit_curse_changed)
+	if not unit.status_effect_added.is_connected(_on_unit_status_effect_added):
+		unit.status_effect_added.connect(_on_unit_status_effect_added)
+	if not unit.status_effect_removed.is_connected(_on_unit_status_effect_removed):
+		unit.status_effect_removed.connect(_on_unit_status_effect_removed)
 	animated_sprite_2d.sprite_frames = unit.sprite_frames
 	init_dynamic_collision_poly()
 
@@ -91,7 +93,7 @@ func init_position():
 
 
 func _on_unit_move_started(
-	return_signal: ReturnSignal,
+	wait_request: WaitRequest,
 	cell: BattleGridCell,
 	move_method: Movement.Method
 ):
@@ -105,7 +107,7 @@ func _on_unit_move_started(
 	var distance = (target_position - position).length()
 	# Inform unit that we are animating the movement,
 	# and it should wait until we are done to complete the move
-	return_signal.register_blocker()
+	wait_request.register_blocker()
 
 	var update_facing: bool
 	var duration: float
@@ -142,7 +144,7 @@ func _on_unit_move_started(
 			start_moving_left()
 
 	await tween.finished
-	return_signal.complete_blocker()
+	wait_request.complete_blocker()
 
 
 func sprite_to_polygons() -> Array[CollisionPolygon2D]:
@@ -182,8 +184,11 @@ func _on_player_unselected_unit(unit: Unit):
 		selection_sprite.visible = false
 
 
-func _on_unit_curse_changed(cursed: bool):
-	if cursed:
+func _on_unit_status_effect_added(status_effect: StatusEffect):
+	if typeof(status_effect) == typeof(CurseStatusEffect):
 		animated_sprite_2d.modulate = Color.PURPLE
-	else:
+
+
+func _on_unit_status_effect_removed(status_effect: StatusEffect):
+	if typeof(status_effect) == typeof(CurseStatusEffect):
 		animated_sprite_2d.modulate = Color.WHITE

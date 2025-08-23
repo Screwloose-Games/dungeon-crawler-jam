@@ -20,28 +20,16 @@ func _init(_base_damage: int = 0) -> void:
 
 func preview(command: ActionExecutionCommand, preview: ActionPreviewData):
 	for target in command.targets:
-		preview.highlighted_cells[target.position] = (
-			CellHighlight
-			.new(
-				CellHighlight.HighlightColor.BLUE,
-				CellHighlight.Type.CONFIRM,
-			)
-		)
+		preview.highlighted_cells[target.position] = target_highlight
 
 
 ## Applies the specified damage to the unit on the target tile. [br]
-func apply(command: ActionExecutionCommand, _return_signal: ReturnSignal):
+func apply(
+	command: ActionExecutionCommand,
+	_wait_request: WaitRequest,
+	reactions: Array[Callable],
+):
 	for target in command.targets:
 		if target.unit:
-			apply_damage_to_unit(target.unit, base_damage)
-
-
-func apply_damage_to_health(health: Health, damage: int) -> void:
-	if health:
-		health.damage(damage)
-		damage_applied.emit(health, damage)
-
-
-func apply_damage_to_unit(unit: Unit, damage: int) -> void:
-	if unit:
-		apply_damage_to_health(unit.health, damage)
+			print("calling unit damage")
+			target.unit.damage(damage, command, reactions)

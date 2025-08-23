@@ -29,8 +29,8 @@ var team: Team:
 		if team != new_value:
 			team = new_value
 			emit_changed()
+var is_reaction: bool
 var _overriden_origin: Variant = null
-
 
 func _init(
 	unit: Unit = null,
@@ -38,6 +38,7 @@ func _init(
 	battle_grid: BattleGrid = null,
 	action: UnitAction = null,
 	targets: Array[BattleGridCell] = [],
+	is_reaction: bool = false
 ) -> void:
 	self.unit = unit
 	self.commander = commander
@@ -45,6 +46,7 @@ func _init(
 	self.targets = targets
 	self.battle_grid = battle_grid
 	team = commander.team if commander else null
+	self.is_reaction = is_reaction
 
 
 func clone() -> ActionExecutionCommand:
@@ -58,12 +60,16 @@ func clone() -> ActionExecutionCommand:
 
 
 func execute(callback: Callable):
-	assert(not running_command, "Already running a different command")
+	assert(not running_command or is_reaction, "Already running a different command")
 
-	running_command = self
+	if not is_reaction:
+		running_command = self
+
 	GlobalSignalBus.command_started.emit(self)
 	action.execute(self, _on_command_completed.bind(callback))
-	running_command = null
+
+	if not is_reaction:
+		running_command = null
 
 
 func execute_and_wait():

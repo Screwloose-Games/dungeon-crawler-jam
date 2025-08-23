@@ -11,14 +11,14 @@ func _init(
 	_type: CommanderType = CommanderType.AI,
 	commander_team: Team = null
 ):
-	super(commander_name, commander_description, CommanderType.AI, commander_team)
+	super (commander_name, commander_description, CommanderType.AI, commander_team)
 	GlobalSignalBus.battle_turn_started.connect(_on_battle_turn_started)
 
 
 func _on_battle_turn_started(battle_team: Team):
 	if battle_team != self.team:
 		return
-	start_turn.call_deferred()  # wait for units to get ready. :/
+	start_turn.call_deferred() # wait for units to get ready. :/
 
 
 func start_turn():
@@ -27,9 +27,8 @@ func start_turn():
 	var units: Array[Unit] = get_units()
 
 	for unit in units:
-		print("Checking unit: ", unit)
+		print("Checking unit: ", unit.name)
 		var took_action = await take_actions_for_unit(unit)
-		print("took action:", took_action)
 
 	print("All units have finished acting")
 	end_turn.call_deferred()

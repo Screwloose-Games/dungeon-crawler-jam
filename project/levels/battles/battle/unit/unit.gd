@@ -6,10 +6,13 @@ extends Resource
 
 signal died
 signal moved_to(new_cell: BattleGridCell)
-signal move_started(callback: ReturnSignal, new_cell: BattleGridCell, move_method: Movement.Method)
+signal move_started(callback: WaitRequest, new_cell: BattleGridCell, move_method: Movement.Method)
 signal action_points_changed
+signal before_damage_applied(damage_amount: int, unit: Unit, cancel_flag: CancelFlag, reactions: Array[Callable])
 signal did_action(action: UnitAction)
-signal curse_changed(is_cursed: bool)
+signal status_effect_added(status_effect: StatusEffect)
+signal status_effect_removed(status_effect: StatusEffect)
+signal turn_started
 
 @export var name: String:
 	set(new_value):
@@ -121,12 +124,7 @@ var team: Team:
 		if team:
 			GlobalSignalBus.unit_added_to_team.emit(self, team)
 
-var is_cursed: bool:
-	set(new_val):
-		if new_val == is_cursed:
-			return
-		is_cursed = new_val
-		curse_changed.emit(new_val)
+var status_effects: Array[StatusEffect]
 
 
 func _on_health_health_changed(new_health: int):
@@ -237,11 +235,12 @@ func can_afford_action(action: UnitAction) -> bool:
 
 
 ## Does not have complete validation, specifically considering movement type
-func move_to_cell(target_cell: BattleGridCell) -> bool:
+func move_to_cell(target_cell: BattleGridCell, force: bool = false) -> bool:
 	if not target_cell:
 		return false
 
-	if target_cell.unit and target_cell.unit != self:
+
+	if not force and target_cell.unit and target_cell.unit != self:
 		return false
 
 	if cell:
@@ -252,7 +251,39 @@ func move_to_cell(target_cell: BattleGridCell) -> bool:
 	return true
 
 
-func damage(amount: int) -> void:
+func add_status_effect(status_effect: StatusEffect):
+	if status_effects.find(status_effect) < 0:
+		status_effects.append(status_effect)
+		status_effect_added.emit(status_effect)
+
+
+func remove_status_effect(status_effect: StatusEffect):
+	if status_effects.find(status_effect) > 0:
+		status_effects.erase(status_effect)
+		status_effect_removed.emit(status_effect)
+
+
+func has_status_effect_type(status_effect_type: int):
+	return status_effects.any(func(s) -> bool: return typeof(s) == status_effect_type)
+
+
+func remove_status_effect_type(status_effect_type: int):
+	for status_effect in status_effects:
+		if typeof(status_effect) == status_effect_type:
+			status_effect.remove_from_unit()
+
+
+func damage(
+	amount: int,
+	command: ActionExecutionCommand = null,
+	reactions: Array[Callable] = []
+) -> void:
+	print("damaging unit %d health" % amount)
+	var cancel_flag = CancelFlag.new()
+	before_damage_applied.emit(amount, command.unit, cancel_flag, reactions)
+	if cancel_flag.cancel:
+		return
+
 	if health:
 		health.damage(amount)
 
@@ -270,29 +301,30 @@ func max_tile_move_count() -> int:
 func move_along_path(
 	movement_path: MovementPath,
 	callback: Callable,
+	force: bool = false
 ) -> void:
-	print("move along path")
 	if movement_path.move_count < 1:
 		callback.call()
 		return
 
-	_move_path_part(movement_path, callback, 1)
+	_move_path_part(movement_path, callback, 1, force)
 
 
 func _move_path_part(
 	movement_path: MovementPath,
 	callback: Callable,
 	part: int,
+	force: bool = false
 ) -> void:
 	var next_cell = movement_path.cell_path[part]
-	var move_complete_signal := ReturnSignal.new(
+	var move_complete_signal := WaitRequest.new(
 		func():
-			if not move_to_cell(next_cell):
+			if not move_to_cell(next_cell, force):
 				callback.call()
 				return
 			var next_move: int = part + 1
 			if next_move < len(movement_path.cell_path):
-				_move_path_part(movement_path, callback, next_move)
+				_move_path_part(movement_path, callback, next_move, force)
 			else:
 				callback.call()
 	)
@@ -305,6 +337,7 @@ func _on_battle_turn_started(team: Team):
 		return
 	action_points_current = action_points_max
 	movement.reset_movement_points()
+	turn_started.emit()
 
 
 ## Spend [param ap_cost] action points

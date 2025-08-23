@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SentinelSwapStatusEffect" load_steps=3 format=3 uid="uid://ck7pwrneb0rck"]
+
+[ext_resource type="Texture2D" uid="uid://xp88of3580u4" path="res://assets/art/ui/character_status_panel/protected_status_effect_icon.png" id="1_dy4wn"]
+[ext_resource type="Script" uid="uid://cupjv5wybclic" path="res://levels/battles/battle/action/status_effect/sentinel_swap_status_effect.gd" id="2_v2at8"]
+
+[resource]
+script = ExtResource("2_v2at8")
+name = "Protected"
+icon = ExtResource("1_dy4wn")
+description = "Under the protection of another unit"
+turn_duration = 0
+metadata/_custom_type_script = "uid://cupjv5wybclic"
