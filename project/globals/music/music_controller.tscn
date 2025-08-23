@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://dht5lwkmw57nu"]
+[gd_scene load_steps=4 format=3 uid="uid://dht5lwkmw57nu"]
 
-[ext_resource type="Script" uid="uid://djfdn7g087l3t" path="res://global_scripts/music/music_controller.gd" id="1_ui40s"]
-[ext_resource type="AudioStream" uid="uid://cca0bnoa8rccm" path="res://common/audio/music/aud_dungeon_music.wav" id="2_yunea"]
+[ext_resource type="Script" uid="uid://djfdn7g087l3t" path="res://globals/music/music_controller.gd" id="1_ui40s"]
+[ext_resource type="AudioStream" uid="uid://dkhmhmsqlxwwp" path="res://assets/sound/music/Combat.wav" id="2_ba060"]
+[ext_resource type="AudioStream" uid="uid://cbaw3crhbv2bl" path="res://assets/sound/music/Nmestis.wav" id="2_mjynu"]
 
 [node name="music_controller" type="Node"]
 process_mode = 3
 script = ExtResource("1_ui40s")
-music = ExtResource("2_yunea")
+title_music = ExtResource("2_mjynu")
+combat_music = ExtResource("2_ba060")
 
 [node name="music_player" type="AudioStreamPlayer" parent="."]
 volume_db = -7.5

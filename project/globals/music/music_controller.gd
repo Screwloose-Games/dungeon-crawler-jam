@@ -1,6 +1,7 @@
 extends Node
 
-@export var music: AudioStream
+@export var title_music: AudioStream
+@export var combat_music: AudioStream
 @onready var music_player: AudioStreamPlayer = $music_player
 
 
@@ -8,7 +9,7 @@ extends Node
 func _ready() -> void:
 	GlobalSignalBus.game_paused.connect(_on_start_pause)
 	GlobalSignalBus.game_unpaused.connect(_on_stop_pause)
-	music_player.stream = music
+	music_player.stream = title_music
 	music_player.play(0.0)
 
 

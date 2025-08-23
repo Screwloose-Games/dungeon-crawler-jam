@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://daabskcdhrpea"]
+[gd_scene load_steps=39 format=4 uid="uid://daabskcdhrpea"]
 
 [ext_resource type="Theme" uid="uid://cpwb870aw2anb" path="res://common/ui/themes/panel_theme_1.tres" id="1_mqx1g"]
 [ext_resource type="Script" uid="uid://drkkac24eh0sl" path="res://common/ui/viewport_container.gd" id="2_d26fo"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://bbffeeruv7sea" path="res://common/ui/main_menu/SFX/main_menu_audio.gd" id="7_oty5u"]
 [ext_resource type="PackedScene" uid="uid://6hew771j0nd" path="res://levels/level_test.tscn" id="8_8wlla"]
 [ext_resource type="Texture2D" uid="uid://dem1frhak01ta" path="res://assets/art/ui/title_clean.png" id="8_kjcgm"]
+
+[sub_resource type="AudioStream" id="AudioStream_8wlla"]
 
 [sub_resource type="Theme" id="Theme_kjcgm"]
 
@@ -736,6 +738,11 @@ script = ExtResource("7_oty5u")
 navigate_sound = ExtResource("3_8wlla")
 open_sound = ExtResource("4_kjcgm")
 close_sound = ExtResource("4_kjcgm")
+hover_time = 100.0
+
+[node name="hover_player" type="AudioStreamPlayer" parent="Audio Control"]
+stream = SubResource("AudioStream_8wlla")
+volume_db = -14.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -966,6 +973,7 @@ tree_root = SubResource("AnimationNodeStateMachine_11wmy")
 advance_expression_base_node = NodePath("../Main Menu/Menu Control")
 anim_player = NodePath("../AnimationPlayer")
 
+[connection signal="focus_entered" from="Main Menu/MarginContainer/VButtonList" to="Audio Control" method="_on_v_button_list_focus_entered"]
 [connection signal="mouse_entered" from="Main Menu/MarginContainer/VButtonList/ContinueButton" to="Audio Control" method="_on_hover"]
 [connection signal="pressed" from="Main Menu/MarginContainer/VButtonList/ContinueButton" to="Audio Control" method="_on_open"]
 [connection signal="mouse_entered" from="Main Menu/MarginContainer/VButtonList/StartButton" to="Audio Control" method="_on_hover"]
