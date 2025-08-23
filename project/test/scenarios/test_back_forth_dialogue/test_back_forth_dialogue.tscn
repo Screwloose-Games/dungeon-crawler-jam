@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp2q2hrr2e8b"]
+
+[ext_resource type="Script" uid="uid://db3pdld2h2faq" path="res://test/scenarios/test_back_forth_dialogue/test_back_forth_dialogue.gd" id="1_enq73"]
+
+[node name="TestBackForthDialogue" type="Node2D"]
+script = ExtResource("1_enq73")
