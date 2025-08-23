@@ -28,6 +28,8 @@ SceneTransitionManager="*res://globals/scene_transition_manager.gd"
 SoundManager="*res://globals/sound_manager/sound_manager.tscn"
 Player="*res://globals/player.gd"
 InvalidStateWatcher="*res://common/util/invalid_state_watcher.gd"
+SFXController="*res://globals/sfx/sfx_controller.tscn"
+MusicController="*res://globals/music/music_controller.tscn"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [debug]

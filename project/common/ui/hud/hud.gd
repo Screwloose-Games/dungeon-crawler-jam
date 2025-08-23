@@ -142,6 +142,7 @@ func update_actions(unit: Unit):
 
 func _on_action_list_item_selected(index: int):
 	selected_action = selected_unit.actions[index]
+	SFXController.select()
 
 
 func _on_command_started(_command: ActionExecutionCommand):

@@ -29,4 +29,3 @@ metadata/_edit_use_anchors_ = true
 
 [node name="PlayerHud" parent="CanvasLayer/Control" instance=ExtResource("2_tbph3")]
 layout_mode = 1
-mouse_filter = 2

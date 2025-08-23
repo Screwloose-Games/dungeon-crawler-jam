@@ -1,29 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4heslgl37c23"]
+[gd_scene load_steps=8 format=3 uid="uid://b4heslgl37c23"]
 
-[ext_resource type="Script" uid="uid://dxoeja3g8lvrm" path="res://global_scripts/sfx/sfx_controller.gd" id="1_blxng"]
+[ext_resource type="Script" uid="uid://dxoeja3g8lvrm" path="res://globals/sfx/sfx_controller.gd" id="1_blxng"]
 [ext_resource type="AudioStream" uid="uid://dut1pv7h2sg0q" path="res://common/audio/sfx/ui/aud_ui_pause.wav" id="2_e2wi4"]
 [ext_resource type="AudioStream" uid="uid://dtps0jhr605ob" path="res://common/audio/sfx/ui/aud_ui_unpause.wav" id="3_opy6g"]
-[ext_resource type="AudioStream" uid="uid://dpa2yo15sljgr" path="res://common/audio/sfx/ui/aud_coin_collect.wav" id="4_2xa8b"]
+[ext_resource type="AudioStream" uid="uid://b1sutrri7qtya" path="res://assets/sound/sfx/ui_select.wav" id="4_5ie0p"]
+[ext_resource type="AudioStream" uid="uid://dnvnncg52tnrm" path="res://assets/sound/sfx/ui_open_action_menu.wav" id="5_a1sch"]
+[ext_resource type="AudioStream" uid="uid://cnrcryww685vf" path="res://assets/sound/sfx/ui_end_turn.wav" id="5_bm6io"]
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2xa8b"]
-random_volume_offset_db = 0.5
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5ie0p"]
+random_pitch = 1.05
+random_volume_offset_db = 1.0
 streams_count = 1
-stream_0/stream = ExtResource("4_2xa8b")
+stream_0/stream = ExtResource("4_5ie0p")
 
 [node name="sfx_controller" type="Node"]
 script = ExtResource("1_blxng")
 pause_sound = ExtResource("2_e2wi4")
 unpause_sound = ExtResource("3_opy6g")
-coin_collect_sound = SubResource("AudioStreamRandomizer_2xa8b")
+select_sound = SubResource("AudioStreamRandomizer_5ie0p")
+open_action_menu_sound = ExtResource("5_a1sch")
+end_turn_sound = ExtResource("5_bm6io")
 
 [node name="coin_player_0" type="AudioStreamPlayer" parent="."]
-volume_db = -13.0
-bus = &"SFX"
-
-[node name="coin_player_1" type="AudioStreamPlayer" parent="."]
-volume_db = -13.0
-bus = &"SFX"
-
-[node name="coin_player_2" type="AudioStreamPlayer" parent="."]
 volume_db = -13.0
 bus = &"SFX"
