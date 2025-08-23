@@ -41,17 +41,20 @@ func get_does_damage():
 ## Effects are applied in sequence, each receiving the target tile and casting unit context. [br]
 ## [br]
 ## [param _command] The action execution order containing target and caster context
-func execute(command: ActionExecutionCommand, wait_request: WaitRequest, reactions: Array[Callable]):
+func execute(command: ActionExecutionCommand, reactions: Array[Callable]):
 	# If this individual stage processes reactions, ignore passed reaction array and use a new array
 	# Otherwise reactions will be appended to the passed array
 	if does_process_reactions:
 		reactions = []
+	var wait_request = WaitRequest.no_callback
 
 	for effect in effects:
 		effect.apply(command, wait_request, reactions)
 
 	if does_process_reactions:
 		await process_reactions(reactions)
+
+	await wait_request.wait_until_complete()
 
 
 func get_additional_ap_cost(command: ActionExecutionCommand) -> int:

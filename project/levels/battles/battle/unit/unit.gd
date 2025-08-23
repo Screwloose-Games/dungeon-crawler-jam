@@ -13,6 +13,7 @@ signal did_action(action: UnitAction)
 signal status_effect_added(status_effect: StatusEffect)
 signal status_effect_removed(status_effect: StatusEffect)
 signal turn_started
+signal animation_played(name: String, wait_request: WaitRequest)
 
 @export var name: String:
 	set(new_value):
@@ -296,6 +297,10 @@ func heal(amount: int) -> void:
 ## The maximum number of tiles it is possible for this unit to move
 func max_tile_move_count() -> int:
 	return movement.max_move_count(action_points_current)
+
+
+func play_animation(name: String, wait_request: WaitRequest = null):
+	animation_played.emit(name, wait_request)
 
 
 func move_along_path(
