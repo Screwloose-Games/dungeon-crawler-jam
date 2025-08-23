@@ -26,10 +26,9 @@ func preview(command: ActionExecutionCommand, preview: ActionPreviewData):
 ## Applies the specified damage to the unit on the target tile. [br]
 func apply(
 	command: ActionExecutionCommand,
-	wait_request: WaitRequest,
+	_wait_request: WaitRequest,
 	reactions: Array[Callable],
 ):
-	var attacking_unit = command.unit
 	for target in command.targets:
 		if target.unit:
 			print("calling unit damage")

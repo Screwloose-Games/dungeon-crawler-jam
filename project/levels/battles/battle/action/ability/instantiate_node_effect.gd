@@ -9,7 +9,7 @@ extends AbilityEffect
 
 ## Instantiates the specified node at the target tile position. [br]
 func apply(
-	command: ActionExecutionCommand,
+	_command: ActionExecutionCommand,
 	_wait_request: WaitRequest,
 	_reactions: Array[Callable]
 ):
