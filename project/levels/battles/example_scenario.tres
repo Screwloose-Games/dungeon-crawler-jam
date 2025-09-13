@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BattleScenario" load_steps=17 format=3 uid="uid://dj46ja1socuji"]
 
+[ext_resource type="Resource" uid="uid://twsbiysupw1s" path="res://levels/battles/battle/battle_grid/battlefield/resources/battlefield_level1_tiles.tres" id="1_b27e1"]
 [ext_resource type="Script" uid="uid://djddfblilmucd" path="res://levels/battles/battle/end_condition/battle_end_condition.gd" id="1_haqrg"]
-[ext_resource type="Resource" uid="uid://8wmb58hkxvmc" path="res://levels/battles/battle/battle_grid/battlefield/resources/battlefield_simple.tres" id="1_ks5kt"]
 [ext_resource type="Script" uid="uid://sr2agdyju43u" path="res://levels/battles/battle/battle_scenario.gd" id="2_haqrg"]
 [ext_resource type="Script" uid="uid://div78sfeq8md1" path="res://levels/battles/battle/end_condition/last_standing_end_condition.gd" id="3_b27e1"]
 [ext_resource type="Script" uid="uid://csttd1rppjnco" path="res://levels/battles/battle/team.gd" id="3_q642w"]
@@ -53,6 +53,6 @@ script = ExtResource("2_haqrg")
 teams = Array[ExtResource("3_q642w")]([SubResource("Resource_83wba"), SubResource("Resource_qksev")])
 team_relationships = Array[ExtResource("6_ks5kt")]([SubResource("Resource_s70j8")])
 end_conditions = Array[ExtResource("1_haqrg")]([SubResource("Resource_yt8yx")])
-battlefield = ExtResource("1_ks5kt")
+battlefield = ExtResource("1_b27e1")
 grid_object_layouts = Array[ExtResource("6_wl414")]([ExtResource("4_16dw0")])
 metadata/_custom_type_script = "uid://sr2agdyju43u"
