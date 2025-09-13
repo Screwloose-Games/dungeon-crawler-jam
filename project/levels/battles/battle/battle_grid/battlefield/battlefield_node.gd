@@ -10,8 +10,8 @@ var tile_data: Dictionary[Vector2i, BattleGridCell.TileType]
 @export var battlefield: Battlefield:
 	set(val):
 		battlefield = val
-		#if val:
-		#initialize(val)
+		if val:
+			initialize(val)
 
 @export_tool_button("Save TileData") var sync_tile_data_tool_button = save_tile_data
 
