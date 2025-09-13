@@ -1,3 +1,4 @@
+@tool
 class_name BattlePlayerInput
 extends Node2D
 
@@ -19,14 +20,12 @@ var selected_action: UnitAction:
 		selected_action = new_action
 		_update_action_execution_command()
 
-
 var hovered_cell: BattleGridCell:
 	set(new_cell):
 		if hovered_cell == new_cell:
 			return
 		hovered_cell = new_cell
 		_update_action_execution_command()
-
 
 var battle: Battle
 var input_locked: bool
@@ -136,12 +135,15 @@ func _update_action_execution_command(ignore_hover: bool = false) -> bool:
 	if selected_unit.team != Player.commander.team:
 		return false
 
-	action_execution_command = ActionExecutionCommand.new(
-		selected_unit,
-		Player.commander,
-		battle.battle_grid,
-		selected_action,
-		targetted_cells.duplicate(),
+	action_execution_command = (
+		ActionExecutionCommand
+		. new(
+			selected_unit,
+			Player.commander,
+			battle.battle_grid,
+			selected_action,
+			targetted_cells.duplicate(),
+		)
 	)
 
 	if not ignore_hover and hovered_cell:

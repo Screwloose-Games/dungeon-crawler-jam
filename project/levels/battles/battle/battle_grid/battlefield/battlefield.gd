@@ -1,3 +1,4 @@
+@tool
 ## Represents the physical environment where a [Battle] takes place. [br]
 ## Defines the terrain layout, tile types, and environmental conditions that affect gameplay. [br]
 ## Used by [Commander] units to make tactical decisions about [Unit] positioning and movement. [br]

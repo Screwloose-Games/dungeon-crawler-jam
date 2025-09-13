@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://c3xgtp8yeabd8" path="res://levels/battles/battle/action/ability/ability_effect.gd" id="6_ebfpy"]
 [ext_resource type="Script" uid="uid://brp5ns0pmjttu" path="res://levels/battles/battle/unit/movement.gd" id="6_s8bqk"]
 [ext_resource type="Texture2D" uid="uid://cc78025ka8rxu" path="res://assets/art/character/player/warlock/warlock_portrait.png" id="7_1ksvu"]
-[ext_resource type="Script" uid="uid://dvejriam7fruj" path="res://levels/battles/battle/action/ability/add_status_ability_effect.gd" id="7_js4n2"]
+[ext_resource type="Script" path="res://levels/battles/battle/action/ability/add_status_ability_effect.gd" id="7_js4n2"]
 [ext_resource type="Script" uid="uid://nismy8hccyyv" path="res://levels/battles/battle/battle_grid/cell_highlight.gd" id="7_sg5ra"]
 [ext_resource type="SpriteFrames" uid="uid://ct5k4kn2rghg0" path="res://assets/art/character/player/rogue/rogue.res" id="8_0m0p2"]
 [ext_resource type="Texture2D" uid="uid://b8qsfmsyqhobk" path="res://common/images/square.png" id="8_kqks5"]

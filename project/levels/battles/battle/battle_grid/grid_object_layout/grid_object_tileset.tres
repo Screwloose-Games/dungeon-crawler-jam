@@ -1,8 +1,11 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://d14815kbba136"]
+[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://d14815kbba136"]
 
 [ext_resource type="Resource" uid="uid://cdcfvr8yx37yy" path="res://levels/battles/battle/unit/resources/unit_skeleton_knight.tres" id="1_vmdla"]
 [ext_resource type="Resource" uid="uid://74vp14p65w0j" path="res://levels/battles/battle/unit/resources/unit_rogue.tres" id="2_vmdla"]
 [ext_resource type="Texture2D" uid="uid://43v5p4gwg8lx" path="res://assets/art/character/npc/unit_tileset_atlas.png" id="2_y5sqp"]
+[ext_resource type="Resource" uid="uid://bbrh2ene7emiw" path="res://levels/battles/battle/unit/resources/unit_skeleton_archer.tres" id="3_qecne"]
+[ext_resource type="Resource" uid="uid://b1kyik0bsjfow" path="res://levels/battles/battle/unit/resources/unit_viscera.tres" id="4_gxpui"]
+[ext_resource type="Resource" uid="uid://b6c5msarqgxw5" path="res://levels/battles/battle/unit/resources/unit_paladin.tres" id="4_ijrhb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vmdla"]
 texture = ExtResource("2_y5sqp")
@@ -10,14 +13,15 @@ texture_region_size = Vector2i(32, 64)
 0:0/0 = 0
 0:0/0/custom_data_0 = ExtResource("1_vmdla")
 1:0/0 = 0
-1:0/0/custom_data_0 = ExtResource("1_vmdla")
+1:0/0/custom_data_0 = ExtResource("3_qecne")
 1:0/0/custom_data_2 = 1
 2:0/0 = 0
-2:0/0/custom_data_0 = ExtResource("1_vmdla")
+2:0/0/custom_data_0 = ExtResource("4_gxpui")
 2:0/0/custom_data_2 = 1
 0:1/0 = 0
 0:1/0/custom_data_0 = ExtResource("2_vmdla")
 1:1/0 = 0
+1:1/0/custom_data_0 = ExtResource("4_ijrhb")
 2:1/0 = 0
 0:2/0 = 0
 1:2/0 = 0

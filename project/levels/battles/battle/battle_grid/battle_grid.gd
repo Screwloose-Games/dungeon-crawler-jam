@@ -1,3 +1,4 @@
+@tool
 ## Manages the spatial grid system for a [Battle] on a [Battlefield]. [br]
 ## Combines terrain information from the [Battlefield] with unit and object placement. [br]
 ## Used by [Commander] units to determine valid positions and execute [UnitAction] commands. [br]
@@ -195,9 +196,9 @@ func get_units() -> Array[Unit]:
 	var units: Array[Unit] = []
 	var temp_units = (
 		cells
-		.values()
-		.filter(func(cell: BattleGridCell): return cell.unit != null)
-		.map(func(cell: BattleGridCell): return cell.unit)
+		. values()
+		. filter(func(cell: BattleGridCell): return cell.unit != null)
+		. map(func(cell: BattleGridCell): return cell.unit)
 	)
 	units.append_array(temp_units)
 	return units

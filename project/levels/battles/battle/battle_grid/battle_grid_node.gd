@@ -1,3 +1,4 @@
+@tool
 class_name BattleGridNode
 extends Node2D
 
@@ -10,7 +11,7 @@ var ground_tile_map_layer: TileMapLayer
 
 func initialize(battle_grid: BattleGrid):
 	self.battle_grid = battle_grid
-
+	battlefield_node.battlefield = battle_grid.battlefield
 	battlefield_node.initialize(battle_grid.battlefield)
 	if !is_node_ready():
 		await ready

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BattleScenario" load_steps=20 format=3 uid="uid://mcgeqyy3p35x"]
 
-[ext_resource type="Resource" uid="uid://twsbiysupw1s" path="res://levels/battles/battle/battle_grid/battlefield/resources/battlefield_level1_tiles.tres" id="1_k1mf4"]
+[ext_resource type="Resource" uid="uid://di4ocdm82xfem" path="res://levels/battles/battle/battle_grid/battlefield/resources/battlefield_level3_tiles.tres" id="1_k1mf4"]
 [ext_resource type="Script" uid="uid://djddfblilmucd" path="res://levels/battles/battle/end_condition/battle_end_condition.gd" id="2_6du2l"]
 [ext_resource type="Script" uid="uid://div78sfeq8md1" path="res://levels/battles/battle/end_condition/last_standing_end_condition.gd" id="3_tcjn5"]
 [ext_resource type="Script" uid="uid://bi1g3t40pyhyp" path="res://levels/battles/battle/battle_grid/grid_object_layout/grid_object_layout.gd" id="4_fjcbp"]

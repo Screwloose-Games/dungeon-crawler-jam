@@ -1,3 +1,4 @@
+@tool
 ## Represents a tactical combat encounter on a [Battlefield] between multiple [Commander] units. [br]
 ## Coordinates turn-based gameplay where [Commander] units take actions through [UnitAction] commands. [br]
 ## Handles battle initialization, progression, and end conditions.

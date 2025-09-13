@@ -7,8 +7,13 @@ const TIME_BETWEEN_SYNCS = 10
 
 @export_custom(PROPERTY_HINT_NONE, "", 2)
 var tile_data: Dictionary[Vector2i, BattleGridCell.TileType]
-@export var battlefield: Battlefield
-@export_tool_button("Sync TileData") var sync_tile_data_tool_button = _on_tile_map_changed
+@export var battlefield: Battlefield:
+	set(val):
+		battlefield = val
+		#if val:
+		#initialize(val)
+
+@export_tool_button("Save TileData") var sync_tile_data_tool_button = save_tile_data
 
 var time_since_sync: float = 0
 
@@ -16,29 +21,31 @@ var time_since_sync: float = 0
 @onready var path_tile_map: TileMapLayer = $Paths
 @onready var highlight_tile_map: TileMapLayer = $Highlights
 
+
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		time_since_sync += delta
 		if time_since_sync >= TIME_BETWEEN_SYNCS:
 			time_since_sync = 0
-			_on_tile_map_changed()
 
 
 func _ready() -> void:
-	floor_tile_map.changed.connect(_on_tile_map_changed)
 	if Engine.is_editor_hint():
 		return
 
 
 func initialize(battlefield: Battlefield):
 	if battlefield:
-		floor_tile_map.tile_set = battlefield.tile_set
-		floor_tile_map.tile_map_data = battlefield.tile_map_data
-	GlobalSignalBus.action_preview_requested.connect(_on_action_preview_requested)
-	GlobalSignalBus.action_preview_cancelled.connect(_on_action_preview_cancelled)
+		if floor_tile_map:
+			floor_tile_map.tile_set = battlefield.tile_set
+			floor_tile_map.tile_map_data = battlefield.tile_map_data
+	if not GlobalSignalBus.action_preview_requested.is_connected(_on_action_preview_requested):
+		GlobalSignalBus.action_preview_requested.connect(_on_action_preview_requested)
+	if not GlobalSignalBus.action_preview_cancelled.is_connected(_on_action_preview_cancelled):
+		GlobalSignalBus.action_preview_cancelled.connect(_on_action_preview_cancelled)
 
 
-func _on_tile_map_changed():
+func save_tile_data():
 	if battlefield:
 		battlefield.tile_data = {}
 		for cell_pos in floor_tile_map.get_used_cells():
@@ -77,13 +84,12 @@ func _display_path(path: Dictionary[Vector2i, MovementPath.Orientation]) -> void
 
 
 func _draw_path_orientation(tile_position: Vector2i, orientation: MovementPath.Orientation) -> void:
-	assert(PathTileData.orientation_lookup.has(orientation), "Unexpected orientation: %s" % orientation)
+	assert(
+		PathTileData.orientation_lookup.has(orientation), "Unexpected orientation: %s" % orientation
+	)
 	var path_data = PathTileData.orientation_lookup[orientation]
 	path_tile_map.set_cell(
-		tile_position,
-		path_data.atlas_source,
-		path_data.atlas_position,
-		path_data.alternate_tile
+		tile_position, path_data.atlas_source, path_data.atlas_position, path_data.alternate_tile
 	)
 
 

@@ -9,6 +9,7 @@
 [sub_resource type="Resource" id="Resource_lxlmf"]
 script = ExtResource("2_m1sb7")
 movement_points_per_ap = 2
+method = 0
 metadata/_custom_type_script = "uid://brp5ns0pmjttu"
 
 [resource]
@@ -17,6 +18,10 @@ name = "Viscera"
 description = "Artillery"
 abilities = Array[ExtResource("1_sc0gg")]([])
 movement = SubResource("Resource_lxlmf")
+action_points_max = 0
 sprite_frames = ExtResource("5_sc0gg")
 portrait = ExtResource("3_fq4tn")
+move_speed = 3.0
+health_point_max = 10
+health_points = 10
 metadata/_custom_type_script = "uid://c1n1gnpms4ens"

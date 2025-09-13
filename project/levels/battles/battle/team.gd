@@ -1,3 +1,4 @@
+@tool
 ## Represents a group of allied [Unit] units controlled by a single [Commander]. [br]
 ## Teams define relationships between different groups. [br]
 ## Used to determine targeting rules, alliance behavior, and victory conditions in [Battle]. [br]
@@ -20,6 +21,7 @@ enum Relationship {
 
 var relationships: Dictionary[Team, Relationship] = {}
 var units: Array[Unit]
+
 
 static func set_team_relationship(team_a: Team, team_b: Team, relationship: Relationship) -> void:
 	if not team_a or not team_b:

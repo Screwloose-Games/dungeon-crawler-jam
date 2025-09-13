@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://ttosjyfsopkv" path="res://levels/battles/battle/action/tile_constraint/range_constraint.gd" id="4_b3qjf"]
 [ext_resource type="Script" uid="uid://ct8umold07eie" path="res://levels/battles/battle/action/ability/ability_stage.gd" id="5_k2rk8"]
 [ext_resource type="Script" uid="uid://c3xgtp8yeabd8" path="res://levels/battles/battle/action/ability/ability_effect.gd" id="6_lc0s3"]
-[ext_resource type="Script" uid="uid://dvejriam7fruj" path="res://levels/battles/battle/action/ability/add_status_ability_effect.gd" id="7_o4m2a"]
+[ext_resource type="Script" path="res://levels/battles/battle/action/ability/add_status_ability_effect.gd" id="7_o4m2a"]
 [ext_resource type="Texture2D" uid="uid://b8qsfmsyqhobk" path="res://common/images/square.png" id="8_8dnp0"]
 [ext_resource type="Script" uid="uid://cupjv5wybclic" path="res://levels/battles/battle/action/status_effect/sentinel_swap_status_effect.gd" id="8_yyuyx"]
 [ext_resource type="Script" uid="uid://nismy8hccyyv" path="res://levels/battles/battle/battle_grid/cell_highlight.gd" id="11_yei11"]

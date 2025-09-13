@@ -12,5 +12,8 @@ extends Resource
 @export var end_conditions: Array[BattleEndCondition]
 
 ## Where the battle takes place
-@export var battlefield: Battlefield
+@export var battlefield: Battlefield:
+	set(val):
+		battlefield = val
+		emit_changed()
 @export var grid_object_layouts: Array[GridObjectLayout]

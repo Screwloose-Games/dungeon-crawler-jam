@@ -1,0 +1,245 @@
+[gd_resource type="Resource" script_class="BattleScenario" load_steps=21 format=4 uid="uid://c8q4bhq37142w"]
+
+[ext_resource type="Script" uid="uid://kxw3kblmvh0b" path="res://levels/battles/battle/battle_grid/battlefield/battlefield.gd" id="1_ew621"]
+[ext_resource type="Script" uid="uid://djddfblilmucd" path="res://levels/battles/battle/end_condition/battle_end_condition.gd" id="2_uoprp"]
+[ext_resource type="Script" uid="uid://div78sfeq8md1" path="res://levels/battles/battle/end_condition/last_standing_end_condition.gd" id="3_3yo3x"]
+[ext_resource type="Script" uid="uid://bi1g3t40pyhyp" path="res://levels/battles/battle/battle_grid/grid_object_layout/grid_object_layout.gd" id="4_3hsw2"]
+[ext_resource type="Resource" uid="uid://c6va2fxocsa61" path="res://levels/battles/battle/battle_grid/grid_object_layout/example_grid_object_layout_2.tres" id="5_ew621"]
+[ext_resource type="Script" uid="uid://sr2agdyju43u" path="res://levels/battles/battle/battle_scenario.gd" id="6_fgog1"]
+[ext_resource type="Script" uid="uid://cgtgm81y0x2hq" path="res://levels/battles/battle/team_relationship_record.gd" id="7_ebwqf"]
+[ext_resource type="Script" uid="uid://dqy4vdo8hqsk5" path="res://levels/battles/battle/commander.gd" id="8_siibr"]
+[ext_resource type="Script" uid="uid://csttd1rppjnco" path="res://levels/battles/battle/team.gd" id="9_vnnt8"]
+[ext_resource type="Script" uid="uid://d1gqwnpkbs706" path="res://levels/battles/battle/commander_ai.gd" id="10_52li8"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_k86xy"]
+load_path = "res://.godot/imported/tiles.png-d1dbde8ca29db582d6784fd60d1d86c5.ctex"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ij4p8"]
+texture = SubResource("CompressedTexture2D_k86xy")
+texture_region_size = Vector2i(24, 48)
+4:0/0 = 0
+4:0/0/texture_origin = Vector2i(0, 9)
+5:0/0 = 0
+5:0/0/texture_origin = Vector2i(0, 9)
+6:0/0 = 0
+6:0/0/texture_origin = Vector2i(0, 9)
+6:0/0/custom_data_0 = 1
+7:0/0 = 0
+7:0/0/texture_origin = Vector2i(0, 9)
+7:0/0/custom_data_0 = 1
+0:0/next_alternative_id = 2
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 9)
+0:0/1 = 1
+0:0/1/texture_origin = Vector2i(0, 9)
+0:0/1/modulate = Color(1, 0.592157, 0.588235, 0.529412)
+0:0/1/custom_data_0 = 1
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, 9)
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, 9)
+3:0/0 = 0
+3:0/0/texture_origin = Vector2i(0, 9)
+8:0/0 = 0
+8:0/0/texture_origin = Vector2i(0, 9)
+8:0/0/custom_data_0 = 1
+9:0/next_alternative_id = 2
+9:0/0 = 0
+9:0/0/texture_origin = Vector2i(0, 9)
+9:0/0/custom_data_0 = 2
+
+[sub_resource type="TileSet" id="TileSet_gehiv"]
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(32, 16)
+custom_data_layer_0/name = "TileType"
+custom_data_layer_0/type = 2
+sources/1 = SubResource("TileSetAtlasSource_ij4p8")
+
+[sub_resource type="Resource" id="Resource_iuore"]
+script = ExtResource("1_ew621")
+tile_data = Dictionary[Vector2i, int]({
+Vector2i(4, -5): 1,
+Vector2i(4, -4): 1,
+Vector2i(4, -3): 1,
+Vector2i(4, -2): 1,
+Vector2i(5, -5): 1,
+Vector2i(5, -4): 0,
+Vector2i(5, -3): 0,
+Vector2i(5, -2): 1,
+Vector2i(5, -1): 1,
+Vector2i(5, 0): 1,
+Vector2i(6, -6): 1,
+Vector2i(6, -5): 1,
+Vector2i(6, -4): 0,
+Vector2i(6, -3): 0,
+Vector2i(6, -2): 0,
+Vector2i(6, -1): 0,
+Vector2i(6, 0): 1,
+Vector2i(6, 1): 1,
+Vector2i(6, 2): 1,
+Vector2i(6, 3): 1,
+Vector2i(6, 4): 1,
+Vector2i(7, -6): 1,
+Vector2i(7, -5): 0,
+Vector2i(7, -4): 0,
+Vector2i(7, -3): 0,
+Vector2i(7, -2): 0,
+Vector2i(7, -1): 0,
+Vector2i(7, 0): 0,
+Vector2i(7, 1): 0,
+Vector2i(7, 2): 0,
+Vector2i(7, 3): 0,
+Vector2i(7, 4): 1,
+Vector2i(8, -6): 1,
+Vector2i(8, -5): 0,
+Vector2i(8, -4): 0,
+Vector2i(8, -3): 1,
+Vector2i(8, -2): 0,
+Vector2i(8, -1): 0,
+Vector2i(8, 0): 0,
+Vector2i(8, 1): 1,
+Vector2i(8, 2): 0,
+Vector2i(8, 3): 0,
+Vector2i(8, 4): 1,
+Vector2i(8, 5): 1,
+Vector2i(9, -6): 1,
+Vector2i(9, -5): 0,
+Vector2i(9, -4): 0,
+Vector2i(9, -3): 0,
+Vector2i(9, -2): 1,
+Vector2i(9, -1): 0,
+Vector2i(9, 0): 0,
+Vector2i(9, 1): 0,
+Vector2i(9, 2): 1,
+Vector2i(9, 3): 0,
+Vector2i(9, 4): 0,
+Vector2i(9, 5): 1,
+Vector2i(10, -6): 1,
+Vector2i(10, -5): 0,
+Vector2i(10, -4): 0,
+Vector2i(10, -3): 0,
+Vector2i(10, -2): 0,
+Vector2i(10, -1): 1,
+Vector2i(10, 0): 0,
+Vector2i(10, 1): 0,
+Vector2i(10, 2): 1,
+Vector2i(10, 3): 0,
+Vector2i(10, 4): 0,
+Vector2i(10, 5): 1,
+Vector2i(11, -6): 1,
+Vector2i(11, -5): 1,
+Vector2i(11, -4): 0,
+Vector2i(11, -3): 0,
+Vector2i(11, -2): 0,
+Vector2i(11, -1): 0,
+Vector2i(11, 0): 0,
+Vector2i(11, 1): 0,
+Vector2i(11, 2): 1,
+Vector2i(11, 3): 0,
+Vector2i(11, 4): 0,
+Vector2i(11, 5): 1,
+Vector2i(12, -5): 1,
+Vector2i(12, -4): 0,
+Vector2i(12, -3): 0,
+Vector2i(12, -2): 2,
+Vector2i(12, -1): 0,
+Vector2i(12, 0): 0,
+Vector2i(12, 1): 0,
+Vector2i(12, 2): 1,
+Vector2i(12, 3): 1,
+Vector2i(12, 4): 0,
+Vector2i(12, 5): 1,
+Vector2i(13, -5): 1,
+Vector2i(13, -4): 0,
+Vector2i(13, -3): 0,
+Vector2i(13, -2): 0,
+Vector2i(13, -1): 0,
+Vector2i(13, 0): 0,
+Vector2i(13, 1): 0,
+Vector2i(13, 2): 0,
+Vector2i(13, 3): 1,
+Vector2i(13, 4): 1,
+Vector2i(13, 5): 1,
+Vector2i(14, -5): 1,
+Vector2i(14, -4): 0,
+Vector2i(14, -3): 0,
+Vector2i(14, -2): 0,
+Vector2i(14, -1): 0,
+Vector2i(14, 0): 0,
+Vector2i(14, 1): 0,
+Vector2i(14, 2): 0,
+Vector2i(14, 3): 0,
+Vector2i(14, 4): 1,
+Vector2i(15, -5): 1,
+Vector2i(15, -4): 0,
+Vector2i(15, -3): 0,
+Vector2i(15, -2): 0,
+Vector2i(15, -1): 0,
+Vector2i(15, 0): 0,
+Vector2i(15, 1): 0,
+Vector2i(15, 2): 0,
+Vector2i(15, 3): 0,
+Vector2i(15, 4): 1,
+Vector2i(16, -5): 1,
+Vector2i(16, -4): 1,
+Vector2i(16, -3): 1,
+Vector2i(16, -2): 1,
+Vector2i(16, -1): 1,
+Vector2i(16, 0): 1,
+Vector2i(16, 1): 1,
+Vector2i(16, 2): 1,
+Vector2i(16, 3): 1,
+Vector2i(16, 4): 1
+})
+tile_map_data = PackedByteArray("AAAHAAAAAQACAAAAAAAHAAEAAQACAAAAAAAHAAIAAQAAAAAAAAAIAP7/AQAFAAAAAAAIAP//AQADAAAAAAAIAAAAAQAFAAAAAAAIAAMAAQAFAAAAAAAJAP3/AQABAAAAAAAJAP7/AQAGAAAAAAAJAP//AQACAAAAAAAJAAAAAQAAAAAAAAAJAAEAAQABAAAAAAAJAAMAAQAAAAAAAAAKAP3/AQABAAAAAAAKAP7/AQADAAAAAAAKAAAAAQABAAAAAAAKAAEAAQADAAAAAAAKAAMAAQAFAAAAAAALAPz/AQAAAAAAAAALAP3/AQACAAAAAAALAP7/AQADAAAAAAALAP//AQAFAAAAAAALAAAAAQAAAAAAAAALAAEAAQAAAAAAAAALAAMAAQADAAAAAAAMAP3/AQACAAAAAAAMAP7/AQAJAAAAAAAMAP//AQAEAAAAAAAMAAAAAQABAAAAAAAMAAEAAQAAAAAAAAAMAAMAAQAAAAAAAQANAP3/AQABAAAAAAANAP7/AQAAAAAAAAANAP//AQAAAAAAAAANAAAAAQADAAAAAAANAAEAAQADAAAAAAANAAMAAQAAAAAAAQAOAAMAAQAAAAAAAAAMAAQAAQAAAAAAAAALAAQAAQAAAAAAAAAJAAQAAQABAAAAAAAIAAQAAQAAAAAAAQANAAQAAQAAAAAAAQAOAAQAAQAAAAAAAQAIAPz/AQABAAAAAAAJAPz/AQAFAAAAAAAKAPz/AQABAAAAAAAMAPz/AQAEAAAAAAANAPz/AQABAAAAAAAOAPz/AQABAAAAAAAOAP3/AQADAAAAAAAOAP7/AQAFAAAAAAAOAP//AQABAAAAAAAOAAAAAQAFAAAAAAAOAAEAAQABAAAAAAAOAAIAAQABAAAAAAANAAIAAQABAAAAAAAMAAIAAQAAAAAAAQALAAIAAQAAAAAAAQAKAAIAAQAAAAAAAQAJAAIAAQAAAAAAAQAIAAIAAQABAAAAAAAIAAEAAQAAAAAAAQAIAP3/AQAAAAAAAQAHAP7/AQABAAAAAAAHAP//AQABAAAAAAAPAAIAAQAAAAAAAAAPAAMAAQABAAAAAAAPAAEAAQADAAAAAAAPAAAAAQABAAAAAAAPAP//AQABAAAAAAAPAP7/AQAEAAAAAAAPAP3/AQABAAAAAAAPAPz/AQAAAAAAAAAHAP3/AQABAAAAAAAHAPz/AQABAAAAAAAGAP7/AQABAAAAAAAGAP3/AQAAAAAAAAAGAP//AQAAAAAAAAAFAP3/AQABAAAAAAAFAPz/AQADAAAAAAAGAPz/AQABAAAAAAAIAPv/AQAAAAAAAAAJAPv/AQAEAAAAAAAHAPv/AQABAAAAAAAKAPv/AQABAAAAAAAKAP//AQAAAAAAAQAPAAQAAQAAAAAAAQAQAAMAAQAAAAAAAQAQAAIAAQAAAAAAAQAQAAEAAQAAAAAAAQAQAAAAAQAAAAAAAQAQAP//AQAAAAAAAQAQAP7/AQAAAAAAAQAQAP3/AQAAAAAAAQAQAPz/AQAAAAAAAQAQAAQAAQAAAAAAAQAQAPv/AQAAAAAAAQAPAPv/AQAAAAAAAQAOAPv/AQAAAAAAAQANAPv/AQAAAAAAAQAMAPv/AQAAAAAAAQALAPv/AQAAAAAAAQALAPr/AQAAAAAAAQAKAPr/AQAAAAAAAQAJAPr/AQAAAAAAAQAIAPr/AQAAAAAAAQAHAPr/AQAAAAAAAQAGAPr/AQAAAAAAAQAGAPv/AQAAAAAAAQAFAPv/AQAAAAAAAQAEAPv/AQAAAAAAAQAEAPz/AQAAAAAAAQAEAP3/AQAAAAAAAQAEAP7/AQAAAAAAAQAFAP7/AQAAAAAAAQAFAP//AQAAAAAAAQAFAAAAAQAAAAAAAQAGAAAAAQAAAAAAAQAGAAEAAQAAAAAAAQAGAAIAAQAAAAAAAQAGAAMAAQAAAAAAAQAGAAQAAQAAAAAAAQAHAAQAAQAAAAAAAQAKAAUAAQAAAAAAAQALAAUAAQAAAAAAAQAMAAUAAQAAAAAAAQANAAUAAQAAAAAAAQAHAAMAAQADAAAAAAAKAAQAAQAAAAAAAAAJAAUAAQAAAAAAAQAIAAUAAQAAAAAAAQA=")
+tile_set = SubResource("TileSet_gehiv")
+metadata/_custom_type_script = "uid://kxw3kblmvh0b"
+
+[sub_resource type="Resource" id="Resource_yt8yx"]
+script = ExtResource("3_3yo3x")
+metadata/_custom_type_script = "uid://div78sfeq8md1"
+
+[sub_resource type="Resource" id="Resource_ks5kt"]
+script = ExtResource("8_siibr")
+name = "Player"
+description = "The player"
+type = 0
+team = null
+metadata/_custom_type_script = "uid://dqy4vdo8hqsk5"
+
+[sub_resource type="Resource" id="Resource_83wba"]
+script = ExtResource("9_vnnt8")
+commander = SubResource("Resource_ks5kt")
+name = "Player"
+metadata/_custom_type_script = "uid://csttd1rppjnco"
+
+[sub_resource type="Resource" id="Resource_h0d0n"]
+script = ExtResource("10_52li8")
+name = "Undead"
+description = ""
+type = 1
+team = null
+metadata/_custom_type_script = "uid://d1gqwnpkbs706"
+
+[sub_resource type="Resource" id="Resource_qksev"]
+script = ExtResource("9_vnnt8")
+commander = SubResource("Resource_h0d0n")
+name = "Undead"
+metadata/_custom_type_script = "uid://csttd1rppjnco"
+
+[sub_resource type="Resource" id="Resource_s70j8"]
+script = ExtResource("7_ebwqf")
+team_a = SubResource("Resource_83wba")
+team_b = SubResource("Resource_qksev")
+relationship = 3
+metadata/_custom_type_script = "uid://cgtgm81y0x2hq"
+
+[resource]
+script = ExtResource("6_fgog1")
+teams = Array[ExtResource("9_vnnt8")]([SubResource("Resource_83wba"), SubResource("Resource_qksev")])
+team_relationships = Array[ExtResource("7_ebwqf")]([SubResource("Resource_s70j8")])
+end_conditions = Array[ExtResource("2_uoprp")]([SubResource("Resource_yt8yx")])
+battlefield = SubResource("Resource_iuore")
+grid_object_layouts = Array[ExtResource("4_3hsw2")]([ExtResource("5_ew621")])
+metadata/_custom_type_script = "uid://sr2agdyju43u"

@@ -20,6 +20,7 @@ script = ExtResource("4_ledow")
 name = "Player"
 description = "The player"
 type = 0
+team = null
 metadata/_custom_type_script = "uid://dqy4vdo8hqsk5"
 
 [sub_resource type="Resource" id="Resource_83wba"]
@@ -33,6 +34,7 @@ script = ExtResource("9_83wba")
 name = "Undead"
 description = ""
 type = 1
+team = null
 metadata/_custom_type_script = "uid://d1gqwnpkbs706"
 
 [sub_resource type="Resource" id="Resource_qksev"]
